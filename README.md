@@ -18,4 +18,10 @@ Install grunt-cli
 $ npm install -g grunt-cli
 ```
 
+Install theme javascript dependencies:
+
+```
+$ npm install
+```
+
 Run `grunt` to watch for source changes.
