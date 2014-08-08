@@ -6,7 +6,7 @@ A WordPress theme to collect reviews on bike-friendly city spots
 
 ## Development
 
-This theme is built on [AngularJS](https://angularjs.org/) with [WP REST API](http://wp-api.org/) plugin.
+This theme turn WordPress into a SPA built on [AngularJS](https://angularjs.org/) with [WP REST API](http://wp-api.org/) plugin.
 
 ### Requirements
 
