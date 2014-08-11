@@ -1,0 +1,18 @@
+article.place.list-item(id="place-{{post.ID}}" ng-controller="PlaceController")
+	.image(ng-show="post.featured_image" style="background-image:url({{post.featured_image.attachment_meta.sizes.medium.url}});")
+	header.place-header
+		h2 {{post.title}}
+		p.address {{sanitizeAddress(post)}}
+	section.place-rating
+		p
+			span.label Review count
+			span.icon &nbsp;
+			span.count {{post.review_count}}
+		p
+			span.label Structure
+			span.icon &nbsp;
+			span.count {{post.scores.structure}}
+		p
+			span.label Kindness
+			span.icon &nbsp;
+			span.count {{post.scores.kindness}}

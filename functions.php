@@ -80,6 +80,7 @@ function bikeit_scripts() {
 		'name' => get_bloginfo('name'),
 		'url' => home_url(),
 		'templateUri' => get_template_directory_uri(),
+		'macroLocation' => 'São Paulo, Brasil',
 		'labels' => bikeit_labels()
 	));
 
@@ -90,4 +91,5 @@ add_action('wp_enqueue_scripts', 'bikeit_scripts');
  * BikeIT functions
  */
 
-require_once(TEMPLATEPATH . '/inc/places.php');
+require_once(TEMPLATEPATH . '/inc/place.php');
+require_once(TEMPLATEPATH . '/inc/review.php');
