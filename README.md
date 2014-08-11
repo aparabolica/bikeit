@@ -29,3 +29,5 @@ $ npm install
 ```
 
 Run `grunt` to watch for source changes. *LiveReload* support is enabled.
+
+Build source with minified javascript running `grunt build`.
