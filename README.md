@@ -8,6 +8,10 @@ A WordPress theme to collect reviews on bike-friendly city spots
 
 This theme turn WordPress into a [SPA](http://en.wikipedia.org/wiki/Single-page_application) built on [AngularJS](https://angularjs.org/) with [WP REST API](http://wp-api.org/) plugin.
 
+**JavaScript and views can be found at `src/` directory. Backend at `functions.php` and `inc/` directory.**
+
+*View `Gruntfile.js` to understand better the frontend file structure.*
+
 ### Requirements
 
  - npm
