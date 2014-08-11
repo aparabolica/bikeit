@@ -13,6 +13,7 @@
     "grunt-contrib-jade": "latest",
     "grunt-browserify": "latest",
     "grunt-contrib-uglify": "latest",
+    "grunt-contrib-copy": "latest",
     "grunt-contrib-watch": "latest"
   },
   "napa": {

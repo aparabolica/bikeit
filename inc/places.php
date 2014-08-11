@@ -52,22 +52,22 @@ class BikeIT_Places {
 	function register_taxonomies() {
 
 		$labels = array(
-			'name' => _x('Place categories', 'Place category general name', 'infoamazonia'),
-			'singular_name' => _x('Place category', 'Place category singular name', 'infoamazonia'),
-			'all_items' => __('All place categories', 'infoamazonia'),
-			'edit_item' => __('Edit place category', 'infoamazonia'),
-			'view_item' => __('View place category', 'infoamazonia'),
-			'update_item' => __('Update place category', 'infoamazonia'),
-			'add_new_item' => __('Add new place category', 'infoamazonia'),
-			'new_item_name' => __('New place category name', 'infoamazonia'),
-			'parent_item' => __('Parent place category', 'infoamazonia'),
-			'parent_item_colon' => __('Parent place category:', 'infoamazonia'),
-			'search_items' => __('Search place categories', 'infoamazonia'),
-			'popular_items' => __('Popular place categories', 'infoamazonia'),
-			'separate_items_with_commas' => __('Separate place categories with commas', 'infoamazonia'),
-			'add_or_remove_items' => __('Add or remove place categories', 'infoamazonia'),
-			'choose_from_most_used' => __('Choose from most used place categories', 'infoamazonia'),
-			'not_found' => __('No place categories found', 'infoamazonia')
+			'name' => _x('Place categories', 'Place category general name', 'bikeit'),
+			'singular_name' => _x('Place category', 'Place category singular name', 'bikeit'),
+			'all_items' => __('All place categories', 'bikeit'),
+			'edit_item' => __('Edit place category', 'bikeit'),
+			'view_item' => __('View place category', 'bikeit'),
+			'update_item' => __('Update place category', 'bikeit'),
+			'add_new_item' => __('Add new place category', 'bikeit'),
+			'new_item_name' => __('New place category name', 'bikeit'),
+			'parent_item' => __('Parent place category', 'bikeit'),
+			'parent_item_colon' => __('Parent place category:', 'bikeit'),
+			'search_items' => __('Search place categories', 'bikeit'),
+			'popular_items' => __('Popular place categories', 'bikeit'),
+			'separate_items_with_commas' => __('Separate place categories with commas', 'bikeit'),
+			'add_or_remove_items' => __('Add or remove place categories', 'bikeit'),
+			'choose_from_most_used' => __('Choose from most used place categories', 'bikeit'),
+			'not_found' => __('No place categories found', 'bikeit')
 		);
 
 		$args = array(

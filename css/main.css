@@ -1,3 +1,22 @@
+/*
+ * Less functions
+ */
+/*
+ * Base
+ */
+a,
+a:visited {
+  color: #ecb417;
+}
+a:hover,
+a:visited:hover,
+a:focus,
+a:visited:focus {
+  color: #e98918;
+}
+/*
+ * Map
+ */
 .leaflet-container {
   width: 100%;
   height: 400px;

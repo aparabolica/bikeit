@@ -42,6 +42,24 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		copy: {
+			build: {
+				files: [
+					{
+						cwd: 'src',
+						src: ['**', '!**/*.less', '!**/*.jade', '!**/*.js'],
+						dest: '.',
+						expand: true
+					},
+					{
+						cwd: 'node_modules/leaflet/dist',
+						src: ['**', '!**/*.js'],
+						dest: 'css',
+						expand: true
+					}
+				]
+			}
+		},
 		watch: {
 			options: {
 				livereload: true
@@ -57,6 +75,10 @@ module.exports = function(grunt) {
 				files: 'src/views/**/*.jade',
 				tasks: ['jade']
 			},
+			files: {
+				files: ['src/**/*', '!src/**/*.less', '!src/**/*.jade', '!src/**/*.js'],
+				tasks: ['copy']
+			},
 			scripts: {
 				files: 'src/js/**/*.js',
 				tasks: ['browserify']
@@ -68,6 +90,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jade');
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask(
@@ -85,7 +108,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'build',
 		'Compiles everything.',
-		['javascript', 'views']
+		['javascript', 'views', 'copy']
 	);
 
 	grunt.registerTask(

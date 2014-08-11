@@ -25,6 +25,16 @@
 </head>
 <body <?php body_class(get_bloginfo('language')); ?>>
 
+	<header id="masthead">
+
+		<div class="container">
+			<div class="three columns">
+				<h1><?php bloginfo('name'); ?></h1>
+			</div>
+		</div>
+
+	</header>
+
 	<div ui-view></div>
 
 	<?php wp_footer(); ?>

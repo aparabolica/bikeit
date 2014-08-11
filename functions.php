@@ -42,21 +42,45 @@ add_filter('acf/helpers/get_dir', 'bikeit_acf_dir');
 define('ACF_LITE', false);
 require_once(TEMPLATEPATH . '/inc/acf/acf.php');
 
+/* 
+ * Theme WP features
+ */
+
+add_theme_support('post-thumbnails');
+
+/*
+ * i18n labels
+ */
+
+function bikeit_labels() {
+
+	$labels = array(
+		'Viewing list of reviews' => __('Viewing list of reviews', 'bikeit'),
+		'featured' => __('Featured', 'bikeit')
+	);
+
+	return apply_filters('bikeit_labels', $labels);
+}
+
+
 /*
  * Scripts and styles
  */
 
 function bikeit_scripts() {
 
+	wp_enqueue_style('bikeit-base', get_template_directory_uri() . '/css/base.css');
+	wp_enqueue_style('bikeit-skeleton', get_template_directory_uri() . '/css/skeleton.css');
 	wp_enqueue_style('leaflet', get_template_directory_uri() . '/css/leaflet.css');
-	wp_enqueue_style('bikeit-main', get_template_directory_uri() . '/css/main.css');
-	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css');
+	wp_enqueue_style('bikeit-main', get_template_directory_uri() . '/css/main.css', array('bikeit-base', 'bikeit-skeleton'));
+	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 
 	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery'), '0.0.0');
 	wp_localize_script('bikeit-main', 'bikeit', array(
 		'name' => get_bloginfo('name'),
 		'url' => home_url(),
-		'templateUri' => get_template_directory_uri()
+		'templateUri' => get_template_directory_uri(),
+		'labels' => bikeit_labels()
 	));
 
 }

@@ -7,6 +7,7 @@ require('angular-leaflet/dist/angular-leaflet-directive');
  * Modules
  */
 
+require('./map');
 require('./home');
 
 /*
@@ -15,6 +16,7 @@ require('./home');
 
 angular.module('bikeit', [
 	'ui.router',
+	'bikeit.map',
 	'bikeit.home',
 	'leaflet-directive'
 ])
@@ -22,6 +24,7 @@ angular.module('bikeit', [
 .constant('baseUrl', window.bikeit.url.split(window.location.origin)[1])
 .constant('templatePath', window.bikeit.templateUri.split(window.location.origin)[1])
 .constant('siteName', window.bikeit.name)
+.constant('labels', window.bikeit.labels)
 
 .config([
 	'$locationProvider',
