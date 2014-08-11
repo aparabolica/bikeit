@@ -12,7 +12,8 @@ module.exports = function(grunt) {
 		uglify: {
 			build: {
 				options: {
-					mangle: false
+					mangle: true,
+					compress: true
 				},
 				files: {
 					'js/vendor.js': 'js/vendor.js',
