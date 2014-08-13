@@ -31,11 +31,21 @@
 			<div class="three columns">
 				<h1><?php bloginfo('name'); ?></h1>
 			</div>
+			<div class="three columns">
+				<div class="user" ng-controller="UserController" ng-init="getUser()" ng-show="loadedUser">
+					<div ng-show="user">
+						<p>Olá {{user.name}}</p>
+					</div>
+					<div ng-hide="user">
+						<p><a href="#">Entrar</a><a href="#">Cadastrar</a></p>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</header>
 
-	<div ui-view></div>
+	<div ui-view autoscroll="false"></div>
 
 	<?php wp_footer(); ?>
 

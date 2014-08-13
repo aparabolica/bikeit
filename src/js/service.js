@@ -5,10 +5,10 @@ module.exports = [
 	'$http',
 	'$q',
 	'$window',
-	'baseUrl',
-	function($rootScope, $http, $q, $window, baseUrl) {
+	'apiUrl',
+	function($rootScope, $http, $q, $window, apiUrl) {
 
-		var url = baseUrl + '/wp-json/posts';
+		var url = apiUrl + '/posts';
 
 		var load = function(query, cb) {
 
@@ -116,6 +116,27 @@ module.exports = [
 					}
 				});
 			},
+			getUser: function(userId) {
+
+				userId = userId || 'me';
+
+				var deferred = $q.defer();
+
+				jQuery.ajax({
+					url: apiUrl + '/users/' + userId,
+					dataType: 'json',
+					cache: true,
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text) {
+						deferred.reject(text);
+					}
+				});
+
+				return deferred.promise;
+
+			},
 			getPost: function(postId) {
 
 				var deferred = $q.defer();
@@ -125,9 +146,10 @@ module.exports = [
 					dataType: 'json',
 					cache: true,
 					success: function(data, text, xhr) {
-
 						deferred.resolve(data);
-
+					},
+					error: function(xhr, text) {
+						deferred.reject(text);
 					}
 				});
 

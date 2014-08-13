@@ -17,7 +17,8 @@
     "grunt-contrib-watch": "latest"
   },
   "napa": {
-    "angular-leaflet": "tombatossals/angular-leaflet-directive"
+    "angular-leaflet": "tombatossals/angular-leaflet-directive",
+    "angular-dialog": "likeastore/ngDialog"
   },
   "description": "Review brike friendly spots",
   "main": "Gruntfile.js",

@@ -1,12 +1,10 @@
-require('angular');
-require('ui-router');
-require('leaflet');
-require('angular-leaflet/dist/angular-leaflet-directive');
-
 /*
  * Modules
  */
 
+require('./auth');
+
+require('./user');
 require('./map');
 require('./home');
 require('./place');
@@ -16,13 +14,18 @@ require('./place');
  */
 
 angular.module('bikeit', [
+	'ngDialog',
 	'ui.router',
+	'bikeit.auth',
+	'bikeit.user',
 	'bikeit.map',
 	'bikeit.home',
 	'bikeit.place',
 	'leaflet-directive'
 ])
 
+.constant('apiUrl', window.bikeit.apiUrl)
+.constant('nonce', window.bikeit.nonce)
 .constant('baseUrl', window.bikeit.url.split(window.location.origin)[1])
 .constant('templatePath', window.bikeit.templateUri.split(window.location.origin)[1])
 .constant('siteName', window.bikeit.name)
@@ -40,5 +43,6 @@ angular.module('bikeit', [
 .factory('WPService', require('./service'));
 
 jQuery(document).ready(function() {
+	console.log(window.bikeit);
 	angular.bootstrap(document, ['bikeit']);
 });

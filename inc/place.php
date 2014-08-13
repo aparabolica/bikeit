@@ -13,6 +13,7 @@ class BikeIT_Places {
 		add_action('init', array($this, 'register_post_type'));
 		add_action('init', array($this, 'register_fields'));
 		add_action('save_post', array($this, 'save_post'));
+		add_filter('json_prepare_term', array($this, 'json_prepare_term'), 10, 2);
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
 
 	}
@@ -84,9 +85,23 @@ class BikeIT_Places {
 
 	}
 
+	function json_prepare_term($data, $term) {
+
+		if($term->taxonomy == 'place-category') {
+			$data['markers'] = array();
+			$data['markers']['approved'] = get_field('approved_marker', 'place-category_' . $data['ID'])['url'];
+			$data['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $data['ID'])['url'];
+			$data['markers']['position'] = get_field('marker_position', 'place-category_' . $data['ID']);
+		}
+
+		return $data;
+
+	}
+
 	function register_fields() {
 
 		if(function_exists("register_field_group")) {
+			// Place location
 			register_field_group(array (
 				'id' => 'acf_location',
 				'title' => __('Location', 'bikeit'),
@@ -123,6 +138,67 @@ class BikeIT_Places {
 				),
 				'menu_order' => 0,
 			));
+
+			// Place category markers
+			register_field_group(array (
+				'id' => 'acf_place-category-settings',
+				'title' => __('Place category settings', 'bikeit'),
+				'fields' => array (
+					array (
+						'key' => 'field_approved_marker',
+						'label' => __('Approved marker', 'bikeit'),
+						'name' => 'approved_marker',
+						'type' => 'image',
+						'save_format' => 'object',
+						'preview_size' => 'full',
+						'library' => 'all',
+					),
+					array (
+						'key' => 'field_unapproved_marker',
+						'label' => __('Unapproved marker', 'bikeit'),
+						'name' => 'unapproved_marker',
+						'type' => 'image',
+						'save_format' => 'object',
+						'preview_size' => 'full',
+						'library' => 'all',
+					),
+					array (
+						'key' => 'field_marker_position',
+						'label' => __('Marker position', 'bikeit'),
+						'name' => 'marker_position',
+						'type' => 'radio',
+						'choices' => array (
+							'center' => __('Center', 'bikeit'),
+							'bottom_center' => __('Bottom center', 'bikeit'),
+							'bottom_right' => __('Botttom right', 'bikeit'),
+							'bottom_left' => __('Bottom left', 'bikeit'),
+						),
+						'other_choice' => 0,
+						'save_other_choice' => 0,
+						'default_value' => '',
+						'layout' => 'horizontal',
+					),
+				),
+				'location' => array (
+					array (
+						array (
+							'param' => 'ef_taxonomy',
+							'operator' => '==',
+							'value' => 'place-category',
+							'order_no' => 0,
+							'group_no' => 0,
+						),
+					),
+				),
+				'options' => array (
+					'position' => 'normal',
+					'layout' => 'no_box',
+					'hide_on_screen' => array (
+					),
+				),
+				'menu_order' => 0,
+			));
+
 		}
 
 	}

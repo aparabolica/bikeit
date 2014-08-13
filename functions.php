@@ -62,6 +62,29 @@ function bikeit_labels() {
 	return apply_filters('bikeit_labels', $labels);
 }
 
+/*
+ * Get place categories
+ */
+
+function bikeit_get_place_categories() {
+
+	$terms = get_terms('place-category', array('hide_empty' => 0));
+
+	foreach($terms as &$term) {
+
+		$term = get_object_vars($term);
+
+		$term['markers'] = array();
+		$term['markers']['approved'] = get_field('approved_marker', 'place-category_' . $term['term_id'])['url'];
+		$term['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $term['term_id'])['url'];
+		$term['markers']['position'] = get_field('marker_position', 'place-category_' . $term['term_id']);
+
+	}
+
+	return $terms;
+
+}
+
 
 /*
  * Scripts and styles
@@ -75,13 +98,17 @@ function bikeit_scripts() {
 	wp_enqueue_style('bikeit-main', get_template_directory_uri() . '/css/main.css', array('bikeit-base', 'bikeit-skeleton'));
 	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 
-	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery'), '0.0.0');
+	wp_enqueue_script('bikeit-vendor', get_template_directory_uri() . '/js/vendor.js', array('jquery'), '0.0.0');
+	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('bikeit-vendor'), '0.0.0');
 	wp_localize_script('bikeit-main', 'bikeit', array(
 		'name' => get_bloginfo('name'),
 		'url' => home_url(),
 		'templateUri' => get_template_directory_uri(),
 		'macroLocation' => 'São Paulo, Brasil',
-		'labels' => bikeit_labels()
+		'apiUrl' => esc_url_raw(get_json_url()),
+		'nonce' => wp_create_nonce('wp_json'),
+		'labels' => bikeit_labels(),
+		'placeCategories' => bikeit_get_place_categories()
 	));
 
 }
