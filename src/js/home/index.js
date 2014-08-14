@@ -39,17 +39,5 @@ angular.module('bikeit.home', [
 
 		$scope.posts = HomeData.data;
 
-		$scope.map = {
-			markers: {}
-		};
-
-		angular.forEach($scope.posts, function(post) {
-			$scope.map.markers[post.ID] = {
-				lat: post.location.lat,
-				lng: post.location.lng,
-				message: post.title
-			}
-		});
-
 	}
 ]);

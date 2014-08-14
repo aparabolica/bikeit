@@ -48,4 +48,80 @@ angular.module('bikeit.place', [])
 
 		}
 	}
+})
+
+.directive('mapFilters', [
+	'templatePath',
+	'$window',
+	function(templatePath, $window) {
+		return {
+			restrict: 'E',
+			templateUrl: templatePath + '/views/place/partials/map-filters.html',
+			link: function(scope, element, attrs) {
+
+				scope.categoryId = false;
+
+				scope.categories = $window.bikeit.placeCategories;
+
+				scope.filter = function(category) {
+
+					if(!category)
+						scope.categoryId = false;
+					else
+						scope.categoryId = category.term_id;
+
+				}
+
+			}
+		}
+	}
+])
+
+.filter('placeToMarker', [
+	'leafletData',
+	'MapMarkers',
+	function(leafletData, Markers) {
+		return _.memoize(function(input) {
+
+			if(input.length) {
+
+				var markers = {};
+				_.each(input, function(place) {
+					var icon = {};
+					if(place.terms['place-category']) {
+						var catId = place.terms['place-category'][0].ID;
+						icon = Markers['place-category-' + catId];
+					}
+					markers[place.ID] = {
+						lat: place.location.lat,
+						lng: place.location.lng,
+						icon: icon,
+						message: place.title
+					};
+				});
+
+				return markers;
+
+			}
+
+			return {};
+
+		});
+	}
+])
+
+.filter('placeCategory', function() {
+	return function(input, categoryId) {
+
+		if(categoryId) {
+
+			return _.filter(input, function(place) {
+				return place.terms['place-category'] && parseInt(place.terms['place-category'][0].ID) == parseInt(categoryId);
+			});
+
+		}
+
+		return input;
+
+	}
 });

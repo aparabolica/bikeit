@@ -2,6 +2,7 @@
   "name": "bikeit",
   "version": "0.0.0",
   "dependencies": {
+    "underscore": "latest",
     "angular": "latest",
     "ui-router": "latest",
     "leaflet": "latest",

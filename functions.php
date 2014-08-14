@@ -56,7 +56,8 @@ function bikeit_labels() {
 
 	$labels = array(
 		'Viewing list of reviews' => __('Viewing list of reviews', 'bikeit'),
-		'featured' => __('Featured', 'bikeit')
+		'featured' => __('Featured', 'bikeit'),
+		'Filter your search' => __('Filter your search', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
@@ -75,8 +76,8 @@ function bikeit_get_place_categories() {
 		$term = get_object_vars($term);
 
 		$term['markers'] = array();
-		$term['markers']['approved'] = get_field('approved_marker', 'place-category_' . $term['term_id'])['url'];
-		$term['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $term['term_id'])['url'];
+		$term['markers']['approved'] = get_field('approved_marker', 'place-category_' . $term['term_id']);
+		$term['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $term['term_id']);
 		$term['markers']['position'] = get_field('marker_position', 'place-category_' . $term['term_id']);
 
 	}
@@ -92,6 +93,7 @@ function bikeit_get_place_categories() {
 
 function bikeit_scripts() {
 
+	wp_enqueue_style('opensans', 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700,800');
 	wp_enqueue_style('bikeit-base', get_template_directory_uri() . '/css/base.css');
 	wp_enqueue_style('bikeit-skeleton', get_template_directory_uri() . '/css/skeleton.css');
 	wp_enqueue_style('leaflet', get_template_directory_uri() . '/css/leaflet.css');

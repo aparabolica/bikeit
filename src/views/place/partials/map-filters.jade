@@ -1,0 +1,5 @@
+section#map-filters
+	h2 {{labels['Filter your search']}}
+	ul
+		li(ng-click="filter(false)") Todos
+		li(ng-repeat="category in categories" ng-click="filter(category)") {{category.name}}

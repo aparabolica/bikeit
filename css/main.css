@@ -26,6 +26,21 @@
 /*
  * Base
  */
+html,
+body {
+  font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+  background: #ffffff;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+  line-height: 140%;
+  color: #333;
+}
 a,
 a:visited {
   color: #ecb417;
@@ -36,14 +51,6 @@ a:focus,
 a:visited:focus {
   color: #e98918;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  line-height: 140%;
-}
 ul li.columns,
 ul li.column {
   margin-bottom: 0;
@@ -51,15 +58,32 @@ ul li.column {
 /*
  * Map
  */
-.leaflet-container {
+#map {
   width: 100%;
   height: 400px;
+  position: relative;
+}
+#map .leaflet-container {
+  width: 70%;
+  height: 100%;
+}
+#map .map-sidebar {
+  width: 30%;
+  z-index: 2;
+  background: #ffffff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 2px solid #eeeeee;
+  border-bottom: 2px solid #eeeeee;
 }
 /*
  * Places
  */
 .place.list-item {
   padding: 20px 20px 0;
+  height: 320px;
   background: #eeeeee;
   border: 1px solid #c3c3c3;
   -webkit-box-shadow: 0 0 5px 3px #eeeeee;
@@ -67,6 +91,7 @@ ul li.column {
   -moz-box-shadow: 0 0 5px 3px #eeeeee;
   -o-box-shadow: 0 0 5px 3px #eeeeee;
   box-shadow: 0 0 5px 3px #eeeeee;
+  position: relative;
 }
 .place.list-item .image {
   margin: -20px -20px 20px -20px;
@@ -79,11 +104,20 @@ ul li.column {
   margin: -35px auto 10px;
 }
 .place.list-item h2 {
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
+  font-weight: 700;
+}
+.place.list-item p.address {
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+  margin: 0 0 20px;
 }
 .place.list-item .place-rating {
   display: table;
+  position: absolute;
+  bottom: 0;
   margin: 0 -20px;
 }
 .place.list-item .place-rating p {

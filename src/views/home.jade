@@ -1,5 +1,7 @@
 #map(ng-controller="MapController")
-	leaflet(defaults="mapDefaults" markers="map.markers")
+	leaflet(defaults="mapDefaults" markers="markers = ((posts | placeCategory:categoryId) | placeToMarker)")
+	.map-sidebar
+		map-filters
 
 .container
 	.twelve.columns
