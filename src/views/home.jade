@@ -1,13 +1,15 @@
-#map(ng-controller="MapController")
+section#map.row(ng-controller="MapController")
 	leaflet(defaults="mapDefaults" markers="markers = ((posts | placeCategory:categoryId) | placeToMarker)")
 	.map-sidebar
 		map-filters
 
-.container
-	.twelve.columns
-		h2
-			| {{labels['Viewing list of reviews']}} 
-			a(href="javascript:void(0)") {{labels['featured']}}
-	ul
-		li.three.columns(ng-repeat="post in posts")
-			place-list-item(place="post")
+section#featured-places
+	.container
+		.twelve.columns
+			.row
+				h2.section-title
+					| {{labels['Viewing list of reviews']}} 
+					a(href="javascript:void(0)") {{labels['featured']}}
+		ul.row
+			li.three.columns(ng-repeat="post in posts")
+				place-list-item(place="post")

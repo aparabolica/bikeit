@@ -4,8 +4,7 @@ angular.module('bikeit.place', [])
 
 .directive('placeListItem', [
 	'templatePath',
-	'macroLocation',
-	function(templatePath, macroLocation) {
+	function(templatePath) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -16,7 +15,7 @@ angular.module('bikeit.place', [])
 
 				scope.sanitizeAddress = function(place) {
 
-					return place.location.address.split(', ' + macroLocation)[0];
+					return place.location.address;
 
 				};
 
@@ -31,7 +30,7 @@ angular.module('bikeit.place', [])
 		scope: {
 			place: '='
 		},
-		template: '<img class="place-icon" ng-show="{{place.terms[\'place-category\'].length}}" ng-src="{{getPlaceIcon(place)}}" />',
+		template: '<img class="place-icon" title="{{place.terms[\'place-category\'][0].name}}" alt="{{place.terms[\'place-category\'][0].name}}" ng-show="{{place.terms[\'place-category\'].length}}" ng-src="{{getPlaceIcon(place)}}" />',
 		link: function(scope, element, attrs) {
 
 			scope.getPlaceIcon = function(place) {
@@ -96,7 +95,7 @@ angular.module('bikeit.place', [])
 						lat: place.location.lat,
 						lng: place.location.lng,
 						icon: icon,
-						message: place.title
+						message: '<h2>' + place.title + '</h2>' + '<p>' + place.location.address + '</p>'
 					};
 				});
 
@@ -106,6 +105,8 @@ angular.module('bikeit.place', [])
 
 			return {};
 
+		}, function() {
+			return JSON.stringify(arguments);
 		});
 	}
 ])

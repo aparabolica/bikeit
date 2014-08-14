@@ -29,7 +29,6 @@ angular.module('bikeit', [
 .constant('baseUrl', window.bikeit.url.split(window.location.origin)[1])
 .constant('templatePath', window.bikeit.templateUri.split(window.location.origin)[1])
 .constant('siteName', window.bikeit.name)
-.constant('macroLocation', window.bikeit.macroLocation)
 .constant('labels', window.bikeit.labels)
 
 .config([
@@ -40,7 +39,19 @@ angular.module('bikeit', [
 	}
 ])
 
-.factory('WPService', require('./service'));
+.factory('WPService', require('./service'))
+
+.directive('tooltip', function() {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			if(attrs.tooltip) {
+				element.addClass('has-tooltip');
+				element.append('<div class="tooltip"><span>' + attrs.tooltip + '</span></div>');
+			}
+		}
+	}
+});
 
 jQuery(document).ready(function() {
 	console.log(window.bikeit);

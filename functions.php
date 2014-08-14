@@ -76,6 +76,7 @@ function bikeit_get_place_categories() {
 		$term = get_object_vars($term);
 
 		$term['markers'] = array();
+		$term['markers']['default'] = get_field('marker', 'place-category_' . $term['term_id']);
 		$term['markers']['approved'] = get_field('approved_marker', 'place-category_' . $term['term_id']);
 		$term['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $term['term_id']);
 		$term['markers']['position'] = get_field('marker_position', 'place-category_' . $term['term_id']);
@@ -93,7 +94,8 @@ function bikeit_get_place_categories() {
 
 function bikeit_scripts() {
 
-	wp_enqueue_style('opensans', 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700,800');
+	wp_enqueue_style('open-sans-condensed', 'http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic');
+	wp_enqueue_style('open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700,800');
 	wp_enqueue_style('bikeit-base', get_template_directory_uri() . '/css/base.css');
 	wp_enqueue_style('bikeit-skeleton', get_template_directory_uri() . '/css/skeleton.css');
 	wp_enqueue_style('leaflet', get_template_directory_uri() . '/css/leaflet.css');
@@ -106,7 +108,6 @@ function bikeit_scripts() {
 		'name' => get_bloginfo('name'),
 		'url' => home_url(),
 		'templateUri' => get_template_directory_uri(),
-		'macroLocation' => 'São Paulo, Brasil',
 		'apiUrl' => esc_url_raw(get_json_url()),
 		'nonce' => wp_create_nonce('wp_json'),
 		'labels' => bikeit_labels(),
@@ -116,9 +117,18 @@ function bikeit_scripts() {
 }
 add_action('wp_enqueue_scripts', 'bikeit_scripts');
 
+function bikeit_admin_scripts() {
+
+	wp_enqueue_script('bikeit-vendor', get_template_directory_uri() . '/js/vendor.js', array('jquery'), '0.0.0');
+
+}
+add_action('admin_footer', 'bikeit_admin_scripts');
+
 /*
  * BikeIT functions
  */
+
+require_once(TEMPLATEPATH . '/inc/settings.php');
 
 require_once(TEMPLATEPATH . '/inc/place.php');
 require_once(TEMPLATEPATH . '/inc/review.php');

@@ -8,14 +8,29 @@ angular.module('bikeit.map', [
 .controller('MapController', [
 	'labels',
 	'leafletData',
+	'leafletEvents',
 	'$scope',
-	function(labels, leafletData, $scope) {
+	function(labels, leafletData, leafletEvents, $scope) {
 
 		$scope.mapDefaults = {
 
 			scrollWheelZoom: false
 
 		};
+
+		$scope.$on('leafletDirectiveMarker.mouseover', function(event, args) {
+			args.leafletEvent.target.openPopup();
+			args.leafletEvent.target.setZIndexOffset(1000);
+		});
+
+		$scope.$on('leafletDirectiveMarker.mouseout', function(event, args) {
+			args.leafletEvent.target.closePopup();
+			args.leafletEvent.target.setZIndexOffset(0);
+		});
+
+		$scope.$on('leafletDirectiveMarker.click', function(event, args) {
+			console.log('Should go to place');
+		});
 
 		$scope.$watch('markers', function(markers) {
 
@@ -82,8 +97,6 @@ angular.module('bikeit.map', [
 			};
 
 		});
-
-		console.log(markers);
 
 		return markers;
 

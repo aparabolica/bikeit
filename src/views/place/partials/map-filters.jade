@@ -1,5 +1,8 @@
 section#map-filters
-	h2 {{labels['Filter your search']}}
+	h2.sidebar-title {{labels['Filter your search']}}
 	ul
-		li(ng-click="filter(false)") Todos
-		li(ng-repeat="category in categories" ng-click="filter(category)") {{category.name}}
+		li(ng-click="filter(false)" ng-class="{active: !categoryId}")
+			p.no-image Todos
+		li(ng-repeat="category in categories" ng-class="{active:categoryId == category.term_id}" ng-click="filter(category)" tooltip="{{category.description}}")
+			img(ng-src="{{category.markers.approved.url}}" alt="{{category.name}}" title="{{category.name}}")
+			p.category-name {{category.name}}

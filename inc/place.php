@@ -85,20 +85,20 @@ class BikeIT_Places {
 
 	}
 
-	function json_prepare_term($data, $term) {
-
-		if($term->taxonomy == 'place-category') {
-			$data['markers'] = array();
-			$data['markers']['approved'] = get_field('approved_marker', 'place-category_' . $data['ID'])['url'];
-			$data['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $data['ID'])['url'];
-			$data['markers']['position'] = get_field('marker_position', 'place-category_' . $data['ID']);
-		}
-
-		return $data;
-
-	}
-
 	function register_fields() {
+
+		$map_lat = '';
+		$map_lng = '';
+
+		$city = get_option('bikeit_city');
+
+		if($city) {
+			$city = json_decode($city, true);
+
+			$map_lat = $city['geometry']['location']['lat'];
+			$map_lng = $city['geometry']['location']['lng'];
+
+		}
 
 		if(function_exists("register_field_group")) {
 			// Place location
@@ -113,8 +113,8 @@ class BikeIT_Places {
 						'type' => 'google_map',
 						'instructions' => __('Place location', 'bikeit'),
 						'required' => 1,
-						'center_lat' => '',
-						'center_lng' => '',
+						'center_lat' => $map_lat,
+						'center_lng' => $map_lng,
 						'zoom' => '',
 						'height' => '',
 					),
@@ -144,6 +144,15 @@ class BikeIT_Places {
 				'id' => 'acf_place-category-settings',
 				'title' => __('Place category settings', 'bikeit'),
 				'fields' => array (
+					array (
+						'key' => 'field_marker',
+						'label' => __('Marker', 'bikeit'),
+						'name' => 'marker',
+						'type' => 'image',
+						'save_format' => 'object',
+						'preview_size' => 'full',
+						'library' => 'all',
+					),
 					array (
 						'key' => 'field_approved_marker',
 						'label' => __('Approved marker', 'bikeit'),
@@ -281,6 +290,20 @@ class BikeIT_Places {
 		}
 
 		return $_post;
+
+	}
+
+	function json_prepare_term($data, $term) {
+
+		if($term->taxonomy == 'place-category') {
+			$data['markers'] = array();
+			$data['markers']['default'] = get_field('marker', 'place-category_' . $data['ID'])['url'];
+			$data['markers']['approved'] = get_field('approved_marker', 'place-category_' . $data['ID'])['url'];
+			$data['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $data['ID'])['url'];
+			$data['markers']['position'] = get_field('marker_position', 'place-category_' . $data['ID']);
+		}
+
+		return $data;
 
 	}
 
