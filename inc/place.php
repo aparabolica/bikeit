@@ -12,6 +12,8 @@ class BikeIT_Places {
 		add_action('init', array($this, 'register_taxonomies'));
 		add_action('init', array($this, 'register_post_type'));
 		add_action('init', array($this, 'register_fields'));
+		add_filter('query_vars', array($this, 'query_vars'));
+		add_action('pre_get_posts', array($this, 'pre_get_posts'));
 		add_action('save_post', array($this, 'save_post'));
 		add_filter('json_prepare_term', array($this, 'json_prepare_term'), 10, 2);
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
@@ -257,6 +259,31 @@ class BikeIT_Places {
 		update_post_meta($post_id, 'approved', $this->get_score_average($approved));
 		update_post_meta($post_id, 'structure', $this->get_score_average($structure));
 		update_post_meta($post_id, 'kindness', $this->get_score_average($kindness));
+
+	}
+
+	function query_vars($vars) {
+
+		$vars[] = 'place_reviews';
+
+		return $vars;
+
+	}
+
+	function pre_get_posts($query) {
+
+		$place = $query->get('place_reviews');
+		if($place) {
+
+			$query->set('post_type', 'review');
+			$query->set('meta_query', array(
+				array(
+					'key' => 'place',
+					'value' => $place
+				)
+			));
+
+		}
 
 	}
 

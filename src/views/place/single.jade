@@ -1,0 +1,29 @@
+article.single-place(id="place-{{place.id}}")
+	.clearfix
+		section#map.row(ng-controller="MapController")
+			leaflet(defaults="mapDefaults" markers="markers = ((posts | placeCategory:categoryId) | placeToMarker)")
+		.container.header-container.anti-row
+			header#place-header.six.columns
+				.header-content
+					.main-info
+						.image(ng-show="place.featured_image" style="background-image:url({{place.featured_image.attachment_meta.sizes.medium.url}});")
+						h1 {{place.title}}
+						p.address {{place.location.address}}
+					.ratings
+						p.structure.clearfix
+							span.label {{labels['Structure']}}:
+							ratings(type="'structure'" rating="place.scores.structure")
+						p.kindness.clearfix
+							span.label {{labels['Kindness']}}:
+							ratings(type="'kindness'" rating="place.scores.kindness")
+					p.total
+						| {{labels['Total reviews']}}:
+						span.count {{place.review_count}}
+					p.submit-review
+						a(href="javascript:void(0);") {{labels['Submit review']}}
+	section#reviews
+		.container
+			.twelve.columns
+				h2.section-title {{labels['Reviews']}}
+		.review-list(ng-show="reviews.length")
+			review-list-item(ng-repeat="review in reviews" review="review")

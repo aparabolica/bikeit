@@ -183,6 +183,10 @@ class BikeIT_Reviews {
 	function json_prepare_post($_post, $post, $context) {
 
 		if($post['post_type'] == 'review') {
+			$_post['rating'] = array();
+			$_post['rating']['approved'] = intval(get_post_meta($post['ID'], 'approved', true));
+			$_post['rating']['structure'] = intval(get_post_meta($post['ID'], 'structure', true));
+			$_post['rating']['kindness'] = intval(get_post_meta($post['ID'], 'kindness', true));
 		}
 
 		return $_post;

@@ -12,7 +12,8 @@ module.exports = [
 
 		var load = function(query, cb) {
 
-			query = query || { page: 1, filter: { posts_per_page: 10 }};
+			query = query || {};
+			query = _.extend({ page: 1, filter: { posts_per_page: 10 }}, query);
 
 			/*
 			 * Using jQuery ajax because angular doesnt handle nested query string

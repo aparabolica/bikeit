@@ -1,0 +1,135 @@
+@import "functions.less";
+
+html,
+body {
+	width: 100%;
+	font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+	background: @bg;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Open Sans Condensed", "Helvetica", "Arial", sans-serif;
+	line-height: 140%;
+	color: #333;
+}
+
+a,
+a:visited {
+	color: @light-orange;
+	&:hover,
+	&:focus {
+		color: @dark-orange;
+	}
+}
+
+ul li.columns,
+ul li.column {
+	margin-bottom: 0;
+}
+
+.section-title {
+	font-family: "Open Sans";
+	font-size: 26px;
+}
+
+.has-tooltip {
+	position: relative;
+	.tooltip {
+		display: none;
+		left: 50%;
+		bottom: 100%;
+		margin-bottom: 12px;
+		margin-left: -75px;
+		width: 150px;
+		background: @light-gray;
+		border: 1px solid @gray;
+		position: absolute;
+		z-index: 100;
+		padding: 5px;
+		.box-sizing(border-box);
+		&:before {
+			content: '';
+			position: absolute;
+			width: 12px;
+			height: 12px;
+			background: @light-gray;
+			border: 1px solid @gray;
+			.transform(rotate(45deg));
+			bottom: -6px;
+			left: 50%;
+			margin-left: -6px;
+		}
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: 0px;
+			height: 15px;
+			background: @light-gray;
+			left: 1px;
+			right: 1px;
+		}
+		span {
+			position: relative;
+			z-index: 2;
+			font-size: 12px;
+			font-family: "Open Sans Condensed";
+			font-weight: 600;
+		}
+	}
+	&:hover {
+		z-index: 100;
+		.tooltip {
+			display: block;
+		}
+	}
+}
+
+.rating {
+	.rating-item {
+		width: 18px;
+		height: 18px;
+		float: left;
+		background-position: top left;
+		background-repeat: no-repeat;
+		.rating-filled {
+			display: block;
+			width: 100%;
+			height: 100%;
+			background-position: top left;
+			background-repeat: no-repeat;
+		}
+	}
+}
+
+.rating-structure {
+	.rating-item {
+		background-image: url(../img/structure_0.png);
+		.rating-filled {
+			background-image: url(../img/structure_1.png);
+		}
+	}
+}
+
+.rating-kindness {
+	.rating-item {
+		background-image: url(../img/kindness_0.png);
+		.rating-filled {
+			background-image: url(../img/kindness_1.png);
+		}
+	}
+}
+
+/*
+ * Header
+ */
+
+#masthead {
+	.box-shadow(0 0 60px rgba(0,0,0,0.2));
+	position: relative;
+	z-index: 100;
+}

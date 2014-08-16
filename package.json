@@ -6,6 +6,7 @@
     "angular": "latest",
     "ui-router": "latest",
     "leaflet": "latest",
+    "moment": "latest",
     "napa": "latest"
   },
   "devDependencies": {

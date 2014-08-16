@@ -1,0 +1,21 @@
+article.list-item.review-list-item.row(id="review-{{review.ID}}")
+	.container
+		.five.columns
+			header.review-header
+				.review-author.clearfix
+					img(ng-src="{{review.author.avatar}}")
+					h3 {{review.author.name}}
+					p.date {{labels['Published']}} {{getReviewDate(review)}}
+				.review-ratings
+					p.rate.clearfix
+						span.label {{labels['Approval']}}
+						span.info {{getReviewApproval(review)}}
+					p.structure.clearfix
+						span.label {{labels['Structure']}}
+						ratings(type="'structure'" rating="review.rating.structure")
+					p.kindness.clearfix
+						span.label {{labels['Kindness']}}
+						ratings(type="'kindness'" rating="review.rating.kindness")
+
+		.seven.columns
+			section.review-content(ng-bind-html="getReviewContent(review)")

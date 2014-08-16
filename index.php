@@ -23,13 +23,13 @@
 <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico" type="image/x-icon" />
 <?php wp_head(); ?>
 </head>
-<body <?php body_class(get_bloginfo('language')); ?>>
+<body <?php body_class(get_bloginfo('language')); ?> ng-controller="SiteController">
 
 	<header id="masthead">
 
 		<div class="container">
 			<div class="three columns">
-				<h1><?php bloginfo('name'); ?></h1>
+				<h1><a href="javascript:void(0);" ng-click="goHome()"><?php bloginfo('name'); ?></a></h1>
 			</div>
 			<div class="three columns">
 				<div class="user" ng-controller="UserController" ng-init="getUser()" ng-show="loadedUser">

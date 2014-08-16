@@ -6,11 +6,11 @@ angular.module('bikeit.map', [
 	'leaflet-directive'
 ])
 .controller('MapController', [
-	'labels',
+	'$state',
 	'leafletData',
 	'leafletEvents',
 	'$scope',
-	function(labels, leafletData, leafletEvents, $scope) {
+	function($state, leafletData, leafletEvents, $scope) {
 
 		$scope.mapDefaults = {
 
@@ -29,7 +29,7 @@ angular.module('bikeit.map', [
 		});
 
 		$scope.$on('leafletDirectiveMarker.click', function(event, args) {
-			console.log('Should go to place');
+			$state.go('placesSingle', { placeId:  args.markerName})
 		});
 
 		$scope.$watch('markers', function(markers) {

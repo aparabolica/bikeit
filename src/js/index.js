@@ -8,6 +8,7 @@ require('./user');
 require('./map');
 require('./home');
 require('./place');
+require('./review');
 
 /*
  * Main module
@@ -21,6 +22,7 @@ angular.module('bikeit', [
 	'bikeit.map',
 	'bikeit.home',
 	'bikeit.place',
+	'bikeit.review',
 	'leaflet-directive'
 ])
 
@@ -51,7 +53,22 @@ angular.module('bikeit', [
 			}
 		}
 	}
-});
+})
+
+.controller('SiteController', [
+	'$state',
+	'labels',
+	'$scope',
+	function($state, labels, $scope) {
+
+		$scope.labels = labels;
+
+		$scope.goHome = function() {
+			$state.go('home');
+		};
+
+	}
+]);
 
 jQuery(document).ready(function() {
 	console.log(window.bikeit);

@@ -2,6 +2,72 @@
 
 angular.module('bikeit.place', [])
 
+.config([
+	'$stateProvider',
+	function($stateProvider) {
+		$stateProvider
+			.state('places', {
+				url: '/places/',
+				controller: 'PlaceIndexController',
+				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/place/index.html'
+			})
+			.state('placesSingle', {
+				url: '/places/:placeId/',
+				controller: 'PlaceSingleController',
+				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/place/single.html',
+				resolve: {
+					'PlaceData': [
+						'$q',
+						'$stateParams',
+						'WPService',
+						function($q, $stateParams, WP) {
+							var deferred = $q.defer();
+							var data = {};
+							WP.getPost($stateParams.placeId).then(function(place) {
+								data.place = place;
+								WP.query({
+									filter: {
+										'place_reviews': place.ID
+									}
+								}).then(function(reviews) {
+									data.reviews = reviews;
+									deferred.resolve(data);
+								});
+							});
+							return deferred.promise;
+						}
+					]
+				}
+			});
+	}
+])
+
+.controller('PlaceController', [
+	'$state',
+	'$scope',
+	function($state, $scope) {
+
+		$scope.accessPlace = function(place) {
+			$state.go('placesSingle', { placeId: place.ID });
+		};
+
+	}
+])
+
+.controller('PlaceSingleController', [
+	'PlaceData',
+	'$scope',
+	function(PlaceData, $scope) {
+
+		$scope.place = PlaceData.place;
+		$scope.posts = [PlaceData.place];
+		$scope.reviews = PlaceData.reviews.data;
+
+		console.log($scope.reviews);
+
+	}
+])
+
 .directive('placeListItem', [
 	'templatePath',
 	function(templatePath) {
@@ -10,7 +76,7 @@ angular.module('bikeit.place', [])
 			scope: {
 				place: '='
 			},
-			templateUrl: templatePath + '/views/place/partials/place-list-item.html',
+			templateUrl: templatePath + '/views/place/partials/list-item.html',
 			link: function(scope, element, attrs) {
 
 				scope.sanitizeAddress = function(place) {
@@ -48,6 +114,45 @@ angular.module('bikeit.place', [])
 		}
 	}
 })
+
+.directive('ratings', [
+	function() {
+		return {
+			restrict: 'E',
+			scope: {
+				'type': '=',
+				'rating': '='
+			},
+			template: '<span class="rating rating-{{type}}" title="{{rating}}/5"><span class="rating-item" ng-repeat="i in range(5) track by $index"><span class="rating-filled" style="width:{{filledAmount($index+1)}}%">&nbsp;</span></span></span>',
+			link: function(scope, element, attrs) {
+
+				scope.rating = parseFloat(scope.rating);
+
+				scope.range = function(n) {
+					return new Array(n);
+				};
+
+				scope.filledAmount = function(i) {
+
+					var percentage;
+
+					if(i <= scope.rating) {
+						percentage = 100;
+					} else {
+						percentage = -((scope.rating-i)*100);
+					}
+
+					if(percentage <= 0 || percentage > 100)
+						return 0;
+					else
+						return percentage;
+
+				}
+
+			}
+		}
+	}
+])
 
 .directive('mapFilters', [
 	'templatePath',

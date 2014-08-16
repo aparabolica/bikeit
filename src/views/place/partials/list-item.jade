@@ -1,8 +1,9 @@
-article.place.list-item.row(id="place-{{place.ID}}")
+article.place.list-item.row(id="place-{{place.ID}}" ng-controller="PlaceController")
 	.image(ng-show="place.featured_image" style="background-image:url({{place.featured_image.attachment_meta.sizes.medium.url}});")
 	header.place-header
 		place-icon(place="place")
-		h2 {{place.title}}
+		h2
+			a(href="javascript:void(0)" ng-click="accessPlace(place)") {{place.title}}
 		p.address {{sanitizeAddress(place)}}
 	section.place-rating
 		p.review-count

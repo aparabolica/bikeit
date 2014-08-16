@@ -30,12 +30,9 @@ angular.module('bikeit.home', [
 	}
 ])
 .controller('HomeController', [
-	'labels',
 	'HomeData',
 	'$scope',
-	function(labels, HomeData, $scope) {
-
-		$scope.labels = labels;
+	function(HomeData, $scope) {
 
 		$scope.posts = HomeData.data;
 
