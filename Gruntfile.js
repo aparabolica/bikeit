@@ -23,6 +23,9 @@ module.exports = function(grunt) {
 		},
 		less: {
 			compile: {
+				options: {
+					compress: true
+				},
 				files: {
 					'css/main.css': 'src/css/main.less',
 					'css/responsive.css': 'src/css/responsive.less'
