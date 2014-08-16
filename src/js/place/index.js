@@ -115,45 +115,6 @@ angular.module('bikeit.place', [])
 	}
 })
 
-.directive('ratings', [
-	function() {
-		return {
-			restrict: 'E',
-			scope: {
-				'type': '=',
-				'rating': '='
-			},
-			template: '<span class="rating rating-{{type}}" title="{{rating}}/5"><span class="rating-item" ng-repeat="i in range(5) track by $index"><span class="rating-filled" style="width:{{filledAmount($index+1)}}%">&nbsp;</span></span></span>',
-			link: function(scope, element, attrs) {
-
-				scope.rating = parseFloat(scope.rating);
-
-				scope.range = function(n) {
-					return new Array(n);
-				};
-
-				scope.filledAmount = function(i) {
-
-					var percentage;
-
-					if(i <= scope.rating) {
-						percentage = 100;
-					} else {
-						percentage = -((scope.rating-i)*100);
-					}
-
-					if(percentage <= 0 || percentage > 100)
-						return 0;
-					else
-						return percentage;
-
-				}
-
-			}
-		}
-	}
-])
-
 .directive('mapFilters', [
 	'templatePath',
 	'$window',

@@ -9,12 +9,12 @@ article.place.list-item.row(id="place-{{place.ID}}" ng-controller="PlaceControll
 		p.review-count
 			span.label Review count
 			span.icon.entypo &#9998;
-			span.count {{place.review_count}}
+			span.count {{place.review_count | number}}
 		p.structure
 			span.label Structure
 			span.icon.entypo &#9733;
-			span.count {{place.scores.structure}}
+			span.count {{place.scores.structure | number}}
 		p.kindness
 			span.label Kindness
 			span.icon.entypo &hearts;
-			span.count {{place.scores.kindness}}
+			span.count {{place.scores.kindness | number}}
