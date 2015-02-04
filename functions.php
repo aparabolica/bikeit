@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Required WP REST API plugin
  */
 require_once dirname(__FILE__) . '/inc/class-tgm-plugin-activation.php';
@@ -44,10 +44,10 @@ function bikeit_acf_dir() {
 }
 add_filter('acf/helpers/get_dir', 'bikeit_acf_dir');
 
-define('ACF_LITE', false);
+define('ACF_LITE', true);
 require_once(TEMPLATEPATH . '/inc/acf/acf.php');
 
-/* 
+/*
  * Theme WP features
  */
 

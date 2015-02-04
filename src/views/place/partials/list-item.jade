@@ -1,5 +1,5 @@
 article.place.list-item.row(id="place-{{place.ID}}" ng-controller="PlaceController")
-	.image(ng-show="place.featured_image" style="background-image:url({{place.featured_image.attachment_meta.sizes.medium.url}});")
+	.image(ng-show="place.featured_image" back-img="place.featured_image.attachment_meta.sizes.medium.url")
 	header.place-header
 		place-icon(place="place")
 		h2

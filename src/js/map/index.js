@@ -69,7 +69,7 @@ angular.module('bikeit.map', [
 
 		_.each($window.bikeit.placeCategories, function(place) {
 
-			var image = place.markers.approved;
+			var image = place.markers.default;
 			var position = place.markers.position;
 			var popupAnchor;
 

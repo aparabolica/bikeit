@@ -15,7 +15,6 @@ require('./review');
  */
 
 angular.module('bikeit', [
-	'ngDialog',
 	'ui.router',
 	'bikeit.auth',
 	'bikeit.user',
@@ -53,6 +52,16 @@ angular.module('bikeit', [
 			}
 		}
 	}
+})
+
+.directive('backImg', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImg;
+        element.css({
+            'background-image': 'url(' + url +')',
+            'background-size' : 'cover'
+        });
+    };
 })
 
 .controller('SiteController', [
