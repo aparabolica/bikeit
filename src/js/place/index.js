@@ -63,8 +63,6 @@ angular.module('bikeit.place', [])
 		$scope.posts = [PlaceData.place];
 		$scope.reviews = PlaceData.reviews.data;
 
-		console.log($scope.reviews);
-
 	}
 ])
 
