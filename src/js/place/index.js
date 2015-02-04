@@ -101,9 +101,16 @@ angular.module('bikeit.place', [])
 
 			scope.getPlaceIcon = function(place) {
 
+				var approval = 'default';
+
+				if(parseFloat(place.scores.approved) >= 0.5)
+					approval = 'approved';
+				else
+					approval = 'unapproved';
+
 				if(place.terms['place-category']) {
 
-					return place.terms['place-category'][0].markers.approved;
+					return place.terms['place-category'][0].markers[approval];
 
 				}
 
@@ -152,10 +159,18 @@ angular.module('bikeit.place', [])
 
 				var markers = {};
 				_.each(input, function(place) {
+
+					var approval = 'default';
+
+					if(parseFloat(place.scores.approved) >= 0.5)
+						approval = 'approved';
+					else
+						approval = 'unapproved';
+
 					var icon = {};
 					if(place.terms['place-category']) {
 						var catId = place.terms['place-category'][0].ID;
-						icon = Markers['place-category-' + catId];
+						icon = Markers['place-category-' + catId + '-' + approval];
 					}
 					markers[place.ID] = {
 						lat: place.location.lat,

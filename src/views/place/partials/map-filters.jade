@@ -4,5 +4,5 @@ section#map-filters
 		li(ng-click="filter(false)" ng-class="{active: !categoryId}")
 			p.no-image Todos
 		li(ng-repeat="category in categories" ng-class="{active:categoryId == category.term_id}" ng-click="filter(category)" tooltip="{{category.description}}")
-			img(ng-src="{{category.markers.approved.url}}" alt="{{category.name}}" title="{{category.name}}")
+			img(ng-src="{{category.markers.default.url}}" alt="{{category.name}}" title="{{category.name}}")
 			p.category-name {{category.name}}

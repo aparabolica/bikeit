@@ -69,32 +69,38 @@ angular.module('bikeit.map', [
 
 		_.each($window.bikeit.placeCategories, function(place) {
 
-			var image = place.markers.default;
-			var position = place.markers.position;
-			var popupAnchor;
+			var images = ['default', 'approved', 'unapproved'];
 
-			if(position == 'center') {
-				position = [image.width/2, image.height/2];
-				popupAnchor = [0, -image.height/2-10];
-			} else if(position == 'bottom_center') {
-				position = [image.width/2, image.height];
-				popupAnchor = [0, -image.height-10];
-			} else if(position == 'bottom_left') {
-				position = [0, image.height];
-				popupAnchor = [image.width/2, -image.height-10];
-			} else if(position == 'bottom_right') {
-				position = [image.width, image.height];
-				popupAnchor = [-image.width/2, -image.height-10];
-			}
+			_.each(images, function(image) {
 
-			markers['place-category-' + place.term_id] = {
-				iconUrl: image.url,
-				shadowUrl: false,
-				shadowSize: [0,0],
-				iconSize: [image.width, image.height],
-				iconAnchor: position,
-				popupAnchor: popupAnchor
-			};
+				var imageObj = place.markers[image];
+				var position = place.markers.position;
+				var popupAnchor;
+
+				if(position == 'center') {
+					position = [imageObj.width/2, imageObj.height/2];
+					popupAnchor = [0, -imageObj.height/2-10];
+				} else if(position == 'bottom_center') {
+					position = [imageObj.width/2, imageObj.height];
+					popupAnchor = [0, -imageObj.height-10];
+				} else if(position == 'bottom_left') {
+					position = [0, imageObj.height];
+					popupAnchor = [imageObj.width/2, -imageObj.height-10];
+				} else if(position == 'bottom_right') {
+					position = [imageObj.width, imageObj.height];
+					popupAnchor = [-imageObj.width/2, -imageObj.height-10];
+				}
+
+				markers['place-category-' + place.term_id + '-' + image] = {
+					iconUrl: imageObj.url,
+					shadowUrl: false,
+					shadowSize: [0,0],
+					iconSize: [imageObj.width, imageObj.height],
+					iconAnchor: position,
+					popupAnchor: popupAnchor
+				};
+
+			});
 
 		});
 

@@ -1,5 +1,5 @@
 article.place.list-item.row(id="place-{{place.ID}}" ng-controller="PlaceController")
-	.image(ng-show="place.featured_image" back-img="place.featured_image.attachment_meta.sizes.medium.url")
+	.image(ng-show="place.featured_image" back-img="{{place.featured_image.attachment_meta.sizes.medium.url}}")
 	header.place-header
 		place-icon(place="place")
 		h2
@@ -9,12 +9,12 @@ article.place.list-item.row(id="place-{{place.ID}}" ng-controller="PlaceControll
 		p.review-count
 			span.label Review count
 			span.icon.entypo &#9998;
-			span.count {{place.review_count | number}}
+			span.count {{place.review_count | number:2}}
 		p.structure
 			span.label Structure
 			span.icon.entypo &#9733;
-			span.count {{place.scores.structure | number}}
+			span.count {{place.scores.structure | number:2}}
 		p.kindness
 			span.label Kindness
 			span.icon.entypo &hearts;
-			span.count {{place.scores.kindness | number}}
+			span.count {{place.scores.kindness | number:2}}
