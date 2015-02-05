@@ -51,7 +51,7 @@ module.exports = function(grunt) {
 				files: [
 					{
 						cwd: 'src',
-						src: ['**', '!**/*.less', '!**/*.jade', '!**/*.js'],
+						src: ['**', '!**/*.less', '!**/*.jade', '!js/**/*'],
 						dest: '.',
 						expand: true
 					},
@@ -116,8 +116,8 @@ module.exports = function(grunt) {
 	);
 
 	grunt.registerTask(
-		'default', 
-		'Build, start server and watch.', 
+		'default',
+		'Build, start server and watch.',
 		['build', 'watch']
 	);
 

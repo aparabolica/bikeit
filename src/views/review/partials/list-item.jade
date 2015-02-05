@@ -1,6 +1,6 @@
 article.list-item.review-list-item.row(id="review-{{review.ID}}")
 	.container
-		.five.columns
+		.four.columns
 			header.review-header
 				.review-author.clearfix
 					img(ng-src="{{review.author.avatar}}")
@@ -17,5 +17,8 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 						span.label {{labels['Kindness']}}
 						ratings(type="'kindness'" rating="review.rating.kindness")
 
-		.seven.columns
+		.eight.columns
 			section.review-content(ng-bind-html="getReviewContent(review)")
+
+			section.review-comments
+				a.button(href="javascript:void(0);") {{labels['Comments']}}

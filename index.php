@@ -29,7 +29,7 @@
 
 		<div class="container">
 			<div class="three columns">
-				<h1><a href="javascript:void(0);" ng-click="goHome()"><?php bloginfo('name'); ?></a></h1>
+				<h1><a href="javascript:void(0);" ng-click="goHome()"><?php bloginfo('name'); ?><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" /></a></h1>
 			</div>
 			<div class="three columns">
 				<div class="user" ng-controller="UserController" ng-init="getUser()" ng-show="loadedUser">

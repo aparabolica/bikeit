@@ -52,7 +52,7 @@ angular.module('bikeit.review', [])
 				'type': '=',
 				'rating': '='
 			},
-			template: '<span class="rating rating-{{type}}" title="{{rating | number}}/5"><span class="rating-item" ng-repeat="i in range(5) track by $index"><span class="rating-filled" style="width:{{filledAmount($index+1)}}%">&nbsp;</span></span></span>',
+			template: '<span class="rating rating-{{type}} clearfix" title="{{rating | number}}/5"><span class="rating-item" ng-repeat="i in range(5) track by $index"><span class="rating-filled" style="width:{{filledAmount($index+1)}}%">&nbsp;</span></span></span>',
 			link: function(scope, element, attrs) {
 
 				scope.rating = parseFloat(scope.rating);

@@ -71,7 +71,8 @@ function bikeit_labels() {
 		'Approval' => __('Approval', 'bikeit'),
 		'Approved' => __('Approved', 'bikeit'),
 		'Disapproved' => __('Disapproved', 'bikeit'),
-		'Published' => __('Published', 'bikeit')
+		'Published' => __('Published', 'bikeit'),
+		'Comments' => __('Comments', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
