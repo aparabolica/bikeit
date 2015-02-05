@@ -6,7 +6,8 @@ angular.module('bikeit.review', [])
 	'templatePath',
 	'labels',
 	'$sce',
-	function(templatePath, labels, $sce) {
+	'WPService',
+	function(templatePath, labels, $sce, WP) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -15,28 +16,49 @@ angular.module('bikeit.review', [])
 			templateUrl: templatePath + '/views/review/partials/list-item.html',
 			link: function(scope, element, attrs) {
 
+				var review = scope.review;
+
 				scope.labels = labels;
 
-				scope.getReviewDate = function(review) {
+				scope.getReviewDate = function() {
 
 					return moment(review.date).format('L');
 
 				}
 
-				scope.getReviewContent = function(review) {
+				scope.getReviewContent = function() {
 
 					return $sce.trustAsHtml(review.content);
 
 				};
 
-				scope.getReviewApproval = function(review) {
+				scope.getReviewApproval = function() {
 
 					if(parseInt(review.rating.approved)) {
 						return labels['Approved'];
 					} else {
-						return labels['Disapproved'];
+						return labels['Failed'];
 					}
 
+				};
+
+				scope.toggleComments = function() {
+
+					if(!scope.comments) {
+						WP.getPostComments(review.ID).then(function(data) {
+							scope.comments = data;
+						});
+					}
+
+					if(!scope.displayComments)
+						scope.displayComments = true;
+					else
+						scope.displayComments = false;
+
+				};
+
+				scope.getCommentContent = function(c) {
+					return $sce.trustAsHtml(c.content);
 				};
 
 			}
@@ -52,7 +74,7 @@ angular.module('bikeit.review', [])
 				'type': '=',
 				'rating': '='
 			},
-			template: '<span class="rating rating-{{type}} clearfix" title="{{rating | number}}/5"><span class="rating-item" ng-repeat="i in range(5) track by $index"><span class="rating-filled" style="width:{{filledAmount($index+1)}}%">&nbsp;</span></span></span>',
+			template: '<span class="rating rating-{{type}} clearfix" title="{{rating | number:2}}/5"><span class="rating-item" ng-repeat="i in range(5) track by $index"><span class="rating-filled" style="width:{{filledAmount($index+1)}}%">&nbsp;</span></span></span>',
 			link: function(scope, element, attrs) {
 
 				scope.rating = parseFloat(scope.rating);

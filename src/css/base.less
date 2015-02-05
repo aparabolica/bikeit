@@ -27,6 +27,20 @@ a:visited {
 	}
 }
 
+button,
+.button,
+a.button,
+input[type=submit] {
+	background: @dark-orange;
+	color: #fff;
+	text-decoration: none;
+	padding: 15px 25px;
+	line-height: 100%;
+	&:hover {
+		background: @light-orange;
+	}
+}
+
 ul li.columns,
 ul li.column {
 	margin-bottom: 0;
@@ -34,7 +48,9 @@ ul li.column {
 
 .section-title {
 	font-family: "Open Sans";
-	font-size: 26px;
+	font-size: 36px;
+	margin: 0 0 40px;
+	color: #666;
 }
 
 .has-tooltip {

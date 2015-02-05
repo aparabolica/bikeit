@@ -5,20 +5,39 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 				.review-author.clearfix
 					img(ng-src="{{review.author.avatar}}")
 					h3 {{review.author.name}}
-					p.date {{labels['Published']}} {{getReviewDate(review)}}
+					p.date {{labels['Published']}} {{getReviewDate()}}
 				.review-ratings
 					p.rate.clearfix
-						span.label {{labels['Approval']}}
-						span.info {{getReviewApproval(review)}}
+						span.label {{labels['Rating']}}:
+						span.info {{getReviewApproval()}}
 					p.structure.clearfix
-						span.label {{labels['Structure']}}
+						span.label {{labels['Structure']}}:
 						ratings(type="'structure'" rating="review.rating.structure")
 					p.kindness.clearfix
-						span.label {{labels['Kindness']}}
+						span.label {{labels['Kindness']}}:
 						ratings(type="'kindness'" rating="review.rating.kindness")
 
 		.eight.columns
-			section.review-content(ng-bind-html="getReviewContent(review)")
+			section.review-content(ng-bind-html="getReviewContent()")
 
 			section.review-comments
-				a.button(href="javascript:void(0);") {{labels['Comments']}}
+				.comment-buttons
+					.vote
+						a.upvote.vote-button(href="javascript:void(0);")
+							span.icon-thumbs-up
+							| {{review.votes.up}}
+						a.downvote.vote-button(href="javascript:void(0);")
+							span.icon-thumbs-down
+							| {{review.votes.down}}
+					a.button.comment-review(href="javascript:void(0);" ng-click="toggleComments()") {{labels['Reply this review']}}
+				.clear
+				.comments-content(ng-show="displayComments")
+					.comment-list(ng-show="comments")
+						article(ng-repeat="comment in comments")
+							h3 {{comment.author.name}}
+							div(ng-bind-html="getCommentContent(comment)")
+					.reply
+						form
+							input(type="text" placeholder="Nome")
+							input(type="text" placeholder="Email")
+							textarea(placeholder="Mensagem")

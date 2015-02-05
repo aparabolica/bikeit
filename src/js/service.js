@@ -156,6 +156,25 @@ module.exports = [
 
 				return deferred.promise;
 
+			},
+			getPostComments: function(postId) {
+
+				var deferred = $q.defer();
+
+				jQuery.ajax({
+					url: url + '/' + postId + '/comments',
+					dataType: 'json',
+					cache: true,
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text) {
+						deferred.reject(text);
+					}
+				});
+
+				return deferred.promise;
+
 			}
 		}
 

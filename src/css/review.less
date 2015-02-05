@@ -1,7 +1,6 @@
 @import "functions.less";
 
 .review-list-item {
-	padding-bottom: 40px;
 	border-bottom: 1px solid #ddd;
 	.review-author {
 		img {
@@ -12,9 +11,9 @@
 			margin: 0 40px 40px 0;
 		}
 		h3 {
-			font-size: 18px;
+			font-size: 22px;
 			font-weight: 800;
-			margin: 20px 0 0;
+			margin: 16px 0 0;
 		}
 		p.date {
 			font-size: 12px;
@@ -23,14 +22,16 @@
 		}
 	}
 	.review-ratings {
-		margin-left: 10px;
+		margin: 0 0 40px;
 		p {
 			margin: 0 0 10px;
 			.label {
 				float: left;
-				width: 110px;
+				width: 80px;
+				margin: 0 40px 0 0;
 				font-size: 12px;
 				color: #666;
+				text-align: right;
 				text-transform: lowercase;
 			}
 			.info {
@@ -44,8 +45,40 @@
 		}
 	}
 	.review-content {
+		min-height: 155px;
 		padding-top: 10px;
 		font-size: 16px;
 		line-height: 150%;
+		margin: 0 0 40px;
+	}
+	.review-comments {
+		.comment-buttons {
+			float: right;
+			a {
+				display: inline-block;
+				text-transform: lowercase;
+				margin-left: 30px;
+			}
+			.vote {
+				display: inline;
+				margin-right: 20px;
+				a {
+					color: #999;
+					text-decoration: none;
+					line-height: 18px;
+					&:hover {
+						color: #111;
+					}
+					span {
+						font-size: 18px;
+						margin-right: 5px;
+					}
+				}
+			}
+		}
+		.comments-content {
+			border-top: 1px solid #ddd;
+			padding: 40px 0;
+		}
 	}
 }

@@ -18,7 +18,7 @@ class BikeIT_Reviews {
 
 	function register_post_type() {
 
-		$labels = array( 
+		$labels = array(
 			'name' => __('Reviews', 'bikeit'),
 			'singular_name' => __('Review', 'bikeit'),
 			'add_new' => __('Add review', 'bikeit'),
@@ -32,7 +32,7 @@ class BikeIT_Reviews {
 			'menu_name' => __('Reviews', 'bikeit')
 		);
 
-		$args = array( 
+		$args = array(
 			'labels' => $labels,
 			'hierarchical' => false,
 			'description' => __('BikeIT Reviews', 'bikeit'),
@@ -187,9 +187,19 @@ class BikeIT_Reviews {
 			$_post['rating']['approved'] = intval(get_post_meta($post['ID'], 'approved', true));
 			$_post['rating']['structure'] = intval(get_post_meta($post['ID'], 'structure', true));
 			$_post['rating']['kindness'] = intval(get_post_meta($post['ID'], 'kindness', true));
+
+			$_post['votes'] = array();
+			$_post['votes']['up'] = intval(get_post_meta($post['ID'], '_upvote_count', true));
+			$_post['votes']['down'] = intval(get_post_meta($post['ID'], '_downvote_count', true));
 		}
 
 		return $_post;
+
+	}
+
+	function vote() {
+
+
 
 	}
 

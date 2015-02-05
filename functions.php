@@ -68,11 +68,11 @@ function bikeit_labels() {
 		'Total reviews' => __('Total reviews', 'bikeit'),
 		'Submit review' => __('Submit review', 'bikeit'),
 		'Reviews' => __('Reviews', 'bikeit'),
-		'Approval' => __('Approval', 'bikeit'),
+		'Rating' => __('Rating', 'bikeit'),
 		'Approved' => __('Approved', 'bikeit'),
-		'Disapproved' => __('Disapproved', 'bikeit'),
+		'Failed' => __('Failed', 'bikeit'),
 		'Published' => __('Published', 'bikeit'),
-		'Comments' => __('Comments', 'bikeit')
+		'Reply this review' => __('Reply this review', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
