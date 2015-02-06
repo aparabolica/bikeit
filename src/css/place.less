@@ -54,19 +54,20 @@
 			.label {
 				display: none;
 			}
-			.icon {
+			[class^="icon-"], [class*=" icon-"] {
 				display: block;
 				margin-bottom: 10px;
 				color: #666;
+				font-size: 18px;
 			}
 			.count {
 				font-weight: 800;
 				color: #666;
 			}
-			&.structure .icon {
+			&.structure [class^="icon-"], [class*=" icon-"] {
 				color: @light-orange;
 			}
-			&.kindness .icon {
+			&.kindness [class^="icon-"], [class*=" icon-"] {
 				color: @dark-orange;
 			}
 		}

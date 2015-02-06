@@ -8,13 +8,13 @@ article.place.list-item.row(id="place-{{place.ID}}" ng-controller="PlaceControll
 	section.place-rating
 		p.review-count
 			span.label Review count
-			span.icon.entypo &#9998;
+			span.icon-pencil
 			span.count {{place.review_count | number:0}}
 		p.structure
 			span.label Structure
-			span.icon.entypo &#9733;
+			span.icon-star
 			span.count {{place.scores.structure | number:2}}
 		p.kindness
 			span.label Kindness
-			span.icon.entypo &hearts;
+			span.icon-heart
 			span.count {{place.scores.kindness | number:2}}
