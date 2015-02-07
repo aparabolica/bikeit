@@ -68,10 +68,29 @@
 					line-height: 18px;
 					&:hover {
 						color: #111;
+						&.upvote {
+							color: green;
+						}
+						&.downvote {
+							color: red;
+						}
 					}
 					span {
 						font-size: 18px;
 						margin-right: 5px;
+						font-weight: normal !important;
+					}
+					&.active {
+						font-weight: 600;
+						&.upvote {
+							color: green;
+						}
+						&.downvote {
+							color: red;
+						}
+						&:hover {
+							color: #999;
+						}
 					}
 				}
 			}

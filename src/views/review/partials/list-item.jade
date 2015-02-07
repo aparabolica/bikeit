@@ -23,10 +23,10 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 			section.review-comments
 				.comment-buttons
 					.vote
-						a.upvote.vote-button(href="javascript:void(0);")
+						a.upvote.vote-button(href="javascript:void(0);" ng-click="vote('up')" ng-class="{active: review.userVote == 'up'}")
 							span.icon-thumbs-up
 							| {{review.votes.up}}
-						a.downvote.vote-button(href="javascript:void(0);")
+						a.downvote.vote-button(href="javascript:void(0);" ng-click="vote('down')" ng-class="{active: review.userVote == 'down'}")
 							span.icon-thumbs-down
 							| {{review.votes.down}}
 					a.button.comment-review(href="javascript:void(0);" ng-click="toggleComments()") {{labels['Reply this review']}}

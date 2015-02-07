@@ -12,6 +12,7 @@ class BikeIT_Reviews {
 		add_action('init', array($this, 'register_post_type'));
 		add_action('init', array($this, 'register_fields'));
 		add_action('save_post', array($this, 'save_post'));
+		add_filter('pre_get_posts', array($this, 'pre_get_posts'));
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
 
 	}
@@ -180,6 +181,16 @@ class BikeIT_Reviews {
 
 	}
 
+	function pre_get_posts($query) {
+
+		if($query->get('post_type') == 'review' || $query->get('post_type') == array('review')) {
+			$query->set('order', 'DESC');
+			$query->set('orderby', 'meta_value');
+			$query->set('meta_key', '_vote_ratio');
+		}
+
+	}
+
 	function json_prepare_post($_post, $post, $context) {
 
 		if($post['post_type'] == 'review') {
@@ -191,15 +202,17 @@ class BikeIT_Reviews {
 			$_post['votes'] = array();
 			$_post['votes']['up'] = intval(get_post_meta($post['ID'], '_upvote_count', true));
 			$_post['votes']['down'] = intval(get_post_meta($post['ID'], '_downvote_count', true));
+			$_post['votes']['total'] = intval(get_post_meta($post['ID'], '_vote_total', true));
+			$_post['votes']['ratio'] = intval(get_post_meta($post['ID'], '_vote_ratio', true));
+
+			if(is_user_logged_in()) {
+				$user_vote = bikeit_get_user_vote(get_current_user_id(), $post['ID']);
+				if($user_vote)
+					$_post['userVote'] = $user_vote['vote'];
+			}
 		}
 
 		return $_post;
-
-	}
-
-	function vote() {
-
-
 
 	}
 
