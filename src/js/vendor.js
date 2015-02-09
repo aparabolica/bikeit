@@ -6,4 +6,4 @@ require('leaflet');
 require('angular');
 require('angular-leaflet');
 require('angular-ui-router');
-//require('ng-dialog');
+require('ng-dialog');

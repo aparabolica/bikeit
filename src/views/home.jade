@@ -3,12 +3,22 @@ section#map.row.with-sidebar(ng-controller="MapController")
 	.map-sidebar
 		map-filters
 
+section#main-search(ng-controller="SearchController")
+	.container
+		.twelve.columns.row
+			form(ng-submit="search()")
+				input(ng-model="searchType" value="place" type="hidden")
+				input#main-search-input(type="text" ng-model="searchText" placeholder="Onde você vai?")
+		ul.row(ng-show="searchResults.length")
+			li.three.columns(ng-repeat="post in searchResults")
+				place-list-item(place="post")
+
 section#featured-places
 	.container
 		.twelve.columns
 			.row
 				h2.section-title
-					| {{labels['Viewing list of reviews']}} 
+					| {{labels['Viewing list of reviews']}}
 					a(href="javascript:void(0)") {{labels['featured']}}
 		ul.row
 			li.three.columns(ng-repeat="post in posts")

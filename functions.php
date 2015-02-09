@@ -126,6 +126,7 @@ function bikeit_scripts() {
 		'templateUri' => get_template_directory_uri(),
 		'apiUrl' => esc_url_raw(get_json_url()),
 		'nonce' => wp_create_nonce('wp_json'),
+		'logoutUrl' => wp_logout_url(home_url()),
 		'labels' => bikeit_labels(),
 		'placeCategories' => bikeit_get_place_categories()
 	));

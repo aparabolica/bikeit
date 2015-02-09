@@ -26,7 +26,6 @@ angular.module('bikeit.auth', [])
 
 		jQuery.ajaxSetup({
 			beforeSend: function(req) {
-				console.log('Outgoing with: ' + Auth.getNonce());
 				if(Auth.getNonce())
 					req.setRequestHeader("X-WP-Nonce", Auth.getNonce());
 			}
@@ -34,7 +33,6 @@ angular.module('bikeit.auth', [])
 
 		return {
 			request: function(config) {
-				console.log('Outgoing with: ' + Auth.getNonce());
 				config.headers = config.headers || {};
 				if(Auth.getNonce())
 					config.headers['X-WP-Nonce'] = Auth.getNonce();
@@ -57,6 +55,7 @@ angular.module('bikeit.auth', [])
 	function($scope, $http, apiUrl, Auth) {
 
 		$scope.login = function(data) {
+
 			// $http.post(apiUrl + '/auth', data)
 			// 	.success(function(data) {
 			// 		// Auth.setNonce(false);

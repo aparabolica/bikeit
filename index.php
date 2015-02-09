@@ -34,7 +34,7 @@
 			<div class="three columns">
 				<div class="user" ng-controller="UserController" ng-init="getUser()" ng-show="loadedUser">
 					<div ng-show="user">
-						<p>Olá {{user.name}}</p>
+						<p>Olá {{user.name}}. <a href="{{logoutUrl}}">Sair</a></p>
 					</div>
 					<div ng-hide="user">
 						<p><a href="#">Entrar</a><a href="#">Cadastrar</a></p>

@@ -72,14 +72,50 @@ angular.module('bikeit', [
 
 		$scope.labels = labels;
 
+		$scope.logoutUrl = window.bikeit.logoutUrl;
+
 		$scope.goHome = function() {
 			$state.go('home');
 		};
 
 	}
+])
+
+.controller('SearchController', [
+	'$scope',
+	'WPService',
+	function($scope, WP) {
+
+		$scope.searchResults = [];
+
+		var search = _.debounce(function(text) {
+			console.log($scope.searchType);
+			if(!text || typeof text == 'undefined') {
+				$scope.searchResults = [];
+			} else {
+				WP.query({
+					filter: {
+						's': text
+					},
+					'type': $scope.searchType || 'place'
+				}).then(function(data) {
+					console.log(data);
+					$scope.searchResults = data.data;
+				});
+			}
+		}, 200);
+
+		$scope.$watch('searchText', function(text) {
+			if(!text || typeof text == 'undefined') {
+				$scope.searchResults = [];
+			} else {
+				search(text);
+			}
+		});
+
+	}
 ]);
 
 jQuery(document).ready(function() {
-	console.log(window.bikeit);
 	angular.bootstrap(document, ['bikeit']);
 });
