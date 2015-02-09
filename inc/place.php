@@ -11,7 +11,9 @@ class BikeIT_Places {
 
 		add_action('init', array($this, 'register_taxonomies'));
 		add_action('init', array($this, 'register_post_type'));
+		add_action('init', array($this, 'place_caps'));
 		add_action('init', array($this, 'register_fields'));
+		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
 		add_filter('query_vars', array($this, 'query_vars'));
 		add_action('pre_get_posts', array($this, 'pre_get_posts'));
 		add_action('save_post', array($this, 'save_post'));
@@ -22,7 +24,7 @@ class BikeIT_Places {
 
 	function register_post_type() {
 
-		$labels = array( 
+		$labels = array(
 			'name' => __('Places', 'bikeit'),
 			'singular_name' => __('Place', 'bikeit'),
 			'add_new' => __('Add place', 'bikeit'),
@@ -36,7 +38,7 @@ class BikeIT_Places {
 			'menu_name' => __('Places', 'bikeit')
 		);
 
-		$args = array( 
+		$args = array(
 			'labels' => $labels,
 			'hierarchical' => false,
 			'description' => __('BikeIT Places', 'bikeit'),
@@ -46,11 +48,101 @@ class BikeIT_Places {
 			'show_in_menu' => true,
 			'has_archive' => true,
 			'menu_position' => 4,
-			'rewrite' => array('slug' => 'place', 'with_front' => false)
+			'rewrite' => array('slug' => 'place', 'with_front' => false),
+			'capability_type' => 'place',
+			'capabilities' => array(
+				'publish_posts' => 'publish_places',
+				'edit_posts' => 'edit_places',
+				'edit_others_posts' => 'edit_others_places',
+				'delete_posts' => 'delete_places',
+				'delete_others_posts' => 'delete_others_places',
+				'read_private_posts' => 'read_private_places',
+				'edit_post' => 'edit_place',
+				'delete_post' => 'delete_place',
+				'read_post' => 'read_place'
+			)
 		);
 
 		register_post_type('place', $args);
 
+	}
+
+	function place_caps() {
+		global $wp_roles;
+
+		if ( isset($wp_roles) ) {
+
+			$master_roles = array(
+				'administrator',
+				'editor'
+			);
+
+			$contrib_roles = array(
+				'author',
+				'contributor'
+			);
+
+			foreach($master_roles as $role) {
+				$wp_roles->add_cap( $role, 'publish_places' );
+				$wp_roles->add_cap( $role, 'edit_places' );
+				$wp_roles->add_cap( $role, 'edit_others_places' );
+				$wp_roles->add_cap( $role, 'delete_places' );
+				$wp_roles->add_cap( $role, 'delete_others_places' );
+				$wp_roles->add_cap( $role, 'read_private_places' );
+				$wp_roles->add_cap( $role, 'edit_place' );
+				$wp_roles->add_cap( $role, 'delete_place' );
+				$wp_roles->add_cap( $role, 'read_place' );
+			}
+
+			foreach($contrib_roles as $role) {
+
+				$wp_roles->add_cap( $role, 'publish_places' );
+				$wp_roles->add_cap( $role, 'edit_places' );
+				$wp_roles->add_cap( $role, 'edit_place' );
+
+			}
+
+		}
+	}
+
+	function map_meta_cap( $caps, $cap, $user_id, $args ) {
+
+		/* If editing, deleting, or reading a place, get the post and post type object. */
+		if ( 'edit_place' == $cap || 'delete_place' == $cap || 'read_place' == $cap ) {
+			$post = get_post( $args[0] );
+			$post_type = get_post_type_object( $post->post_type );
+
+			/* Set an empty array for the caps. */
+			$caps = array();
+		}
+
+		/* If editing a place, assign the required capability. */
+		if ( 'edit_place' == $cap ) {
+			if ( $post->post_status == 'publish' )
+				$caps[] = $post_type->cap->edit_others_posts;
+			elseif( $user_id == $post->post_author )
+				$caps[] = $post_type->cap->edit_posts;
+		}
+
+		/* If deleting a place, assign the required capability. */
+		elseif ( 'delete_place' == $cap ) {
+			if ( $user_id == $post->post_author )
+				$caps[] = $post_type->cap->delete_posts;
+			else
+				$caps[] = $post_type->cap->delete_others_posts;
+		}
+
+		/* If reading a private place, assign the required capability. */
+		elseif ( 'read_place' == $cap ) {
+
+			if ( 'private' != $post->post_status )
+				$caps[] = 'read';
+			else
+				$caps[] = $post_type->cap->read_private_posts;
+		}
+
+		/* Return the capabilities required by the user. */
+		return $caps;
 	}
 
 	function register_taxonomies() {

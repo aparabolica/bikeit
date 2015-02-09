@@ -2,22 +2,42 @@
 
 angular.module('bikeit.auth', [])
 
+.factory('AuthService', [
+	'nonce',
+	function(nonce) {
+
+		return {
+			getNonce: function() {
+				return nonce;
+			},
+			setNonce: function(val) {
+				nonce = val;
+			}
+		}
+
+	}
+])
+
 .factory('authInterceptor', [
 	'$rootScope',
 	'$q',
-	'nonce',
-	function($rootScope, $q, nonce) {
+	'AuthService',
+	function($rootScope, $q, Auth) {
 
 		jQuery.ajaxSetup({
 			beforeSend: function(req) {
-				req.setRequestHeader("X-WP-Nonce", nonce);
+				console.log('Outgoing with: ' + Auth.getNonce());
+				if(Auth.getNonce())
+					req.setRequestHeader("X-WP-Nonce", Auth.getNonce());
 			}
 		});
 
 		return {
 			request: function(config) {
+				console.log('Outgoing with: ' + Auth.getNonce());
 				config.headers = config.headers || {};
-				config.headers['X-WP-Nonce'] = nonce;
+				if(Auth.getNonce())
+					config.headers['X-WP-Nonce'] = Auth.getNonce();
 				return config || $q.when(config);
 			}
 		};
@@ -27,5 +47,27 @@ angular.module('bikeit.auth', [])
 	'$httpProvider',
 	function($httpProvider) {
 		$httpProvider.interceptors.push('authInterceptor');
+	}
+])
+.controller('LoginForm', [
+	'$scope',
+	'$http',
+	'apiUrl',
+	'AuthService',
+	function($scope, $http, apiUrl, Auth) {
+
+		$scope.login = function(data) {
+			// $http.post(apiUrl + '/auth', data)
+			// 	.success(function(data) {
+			// 		// Auth.setNonce(false);
+			// 		// $http.get(apiUrl + '/auth/nonce').success(function(data) {
+			// 		// 	Auth.setNonce(data.nonce);
+			// 		// });
+			// 	})
+			// 	.error(function(data) {
+			// 		console.log(data);
+			// 	});
+		}
+
 	}
 ]);

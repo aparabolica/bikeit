@@ -47,6 +47,15 @@
 
 	<div ui-view autoscroll="false"></div>
 
+	<!-- <div ng-controller="LoginForm">
+		<form ng-submit="login(form)">
+			<input type="text" ng-model="form.user_login" />
+			<input type="password" ng-model="form.user_password" />
+			<input type="checkbox" ng-model="form.remember" />
+			<input type="submit" />
+		</form>
+	</div> -->
+
 	<?php wp_footer(); ?>
 
 </body>

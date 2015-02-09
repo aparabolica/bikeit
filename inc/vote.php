@@ -8,7 +8,19 @@
 class BikeIT_Votes {
 
 	function __construct() {
+		add_action('save_post', array($this, 'save_post'));
 		add_filter('json_endpoints', array($this, 'vote_routes'));
+	}
+
+	function save_post($post_id) {
+
+		if ( wp_is_post_revision( $post_id ) )
+			return;
+
+		if(get_post_meta($post_id, '_vote_ratio', true) == '') {
+			update_post_meta($post_id, '_vote_ratio', 0);
+		}
+
 	}
 
 	function vote_routes($routes) {

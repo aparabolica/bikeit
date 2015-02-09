@@ -11,6 +11,8 @@ class BikeIT_Reviews {
 
 		add_action('init', array($this, 'register_post_type'));
 		add_action('init', array($this, 'register_fields'));
+		add_action('init', array($this, 'review_caps'));
+		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
 		add_action('save_post', array($this, 'save_post'));
 		add_filter('pre_get_posts', array($this, 'pre_get_posts'));
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
@@ -43,11 +45,101 @@ class BikeIT_Reviews {
 			'show_in_menu' => true,
 			'has_archive' => true,
 			'menu_position' => 4,
-			'rewrite' => array('slug' => 'review', 'with_front' => false)
+			'rewrite' => array('slug' => 'review', 'with_front' => false),
+			'capability_type' => 'review',
+			'capabilities' => array(
+				'publish_posts' => 'publish_reviews',
+				'edit_posts' => 'edit_reviews',
+				'edit_others_posts' => 'edit_others_reviews',
+				'delete_posts' => 'delete_reviews',
+				'delete_others_posts' => 'delete_others_reviews',
+				'read_private_posts' => 'read_private_reviews',
+				'edit_post' => 'edit_review',
+				'delete_post' => 'delete_review',
+				'read_post' => 'read_review'
+			)
 		);
 
 		register_post_type('review', $args);
 
+	}
+
+	function review_caps() {
+		global $wp_roles;
+
+		if ( isset($wp_roles) ) {
+
+			$master_roles = array(
+				'administrator',
+				'editor'
+			);
+
+			$contrib_roles = array(
+				'author',
+				'contributor'
+			);
+
+			foreach($master_roles as $role) {
+				$wp_roles->add_cap( $role, 'publish_reviews' );
+				$wp_roles->add_cap( $role, 'edit_reviews' );
+				$wp_roles->add_cap( $role, 'edit_others_reviews' );
+				$wp_roles->add_cap( $role, 'delete_reviews' );
+				$wp_roles->add_cap( $role, 'delete_others_reviews' );
+				$wp_roles->add_cap( $role, 'read_private_reviews' );
+				$wp_roles->add_cap( $role, 'edit_review' );
+				$wp_roles->add_cap( $role, 'delete_review' );
+				$wp_roles->add_cap( $role, 'read_review' );
+			}
+
+			foreach($contrib_roles as $role) {
+
+				$wp_roles->add_cap( $role, 'publish_reviews' );
+				$wp_roles->add_cap( $role, 'edit_reviews' );
+				$wp_roles->add_cap( $role, 'edit_review' );
+
+			}
+
+		}
+	}
+
+	function map_meta_cap( $caps, $cap, $user_id, $args ) {
+
+		/* If editing, deleting, or reading a review, get the post and post type object. */
+		if ( 'edit_review' == $cap || 'delete_review' == $cap || 'read_review' == $cap ) {
+			$post = get_post( $args[0] );
+			$post_type = get_post_type_object( $post->post_type );
+
+			/* Set an empty array for the caps. */
+			$caps = array();
+		}
+
+		/* If editing a review, assign the required capability. */
+		if ( 'edit_review' == $cap ) {
+			if ( $post->post_status == 'publish' )
+				$caps[] = $post_type->cap->edit_others_posts;
+			elseif( $user_id == $post->post_author )
+				$caps[] = $post_type->cap->edit_posts;
+		}
+
+		/* If deleting a review, assign the required capability. */
+		elseif ( 'delete_review' == $cap ) {
+			if ( $user_id == $post->post_author )
+				$caps[] = $post_type->cap->delete_posts;
+			else
+				$caps[] = $post_type->cap->delete_others_posts;
+		}
+
+		/* If reading a private review, assign the required capability. */
+		elseif ( 'read_review' == $cap ) {
+
+			if ( 'private' != $post->post_status )
+				$caps[] = 'read';
+			else
+				$caps[] = $post_type->cap->read_private_posts;
+		}
+
+		/* Return the capabilities required by the user. */
+		return $caps;
 	}
 
 	function register_fields() {
@@ -183,7 +275,7 @@ class BikeIT_Reviews {
 
 	function pre_get_posts($query) {
 
-		if($query->get('post_type') == 'review' || $query->get('post_type') == array('review')) {
+		if(!is_admin() && $query->get('post_type') == 'review' || $query->get('post_type') == array('review')) {
 			$query->set('order', 'DESC');
 			$query->set('orderby', 'meta_value');
 			$query->set('meta_key', '_vote_ratio');

@@ -146,6 +146,8 @@ add_action('admin_footer', 'bikeit_admin_scripts');
 
 require_once(TEMPLATEPATH . '/inc/settings.php');
 
+//require_once(TEMPLATEPATH . '/inc/auth.php');
+
 require_once(TEMPLATEPATH . '/inc/vote.php');
 
 require_once(TEMPLATEPATH . '/inc/place.php');
