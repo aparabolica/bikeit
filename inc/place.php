@@ -17,6 +17,7 @@ class BikeIT_Places {
 		add_filter('query_vars', array($this, 'query_vars'));
 		add_action('pre_get_posts', array($this, 'pre_get_posts'));
 		add_action('save_post', array($this, 'save_post'));
+		add_filter('posts_clauses', array($this, 'posts_clauses'), 10, 2);
 		add_filter('json_prepare_term', array($this, 'json_prepare_term'), 10, 2);
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
 
@@ -362,6 +363,26 @@ class BikeIT_Places {
 
 	}
 
+
+	/*
+	 * Include meta key in search
+	 */
+
+	function posts_clauses($clauses, $query) {
+		global $wpdb, $wp;
+		if($query->is_search) {
+			$clauses['join'] .= " LEFT JOIN $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id) ";
+			$like = '%' . $wpdb->esc_like( $query->get('s') ) . '%';
+			$clauses['where'] = preg_replace(
+				"/($wpdb->posts.post_title LIKE '{$like}')/i",
+				"$0 OR ( $wpdb->postmeta.meta_value LIKE '{$like}' )",
+				$clauses['where']
+			);
+			$clauses['distinct'] = 'DISTINCT';
+		}
+		return $clauses;
+	}
+
 	function pre_get_posts($query) {
 
 		$place = $query->get('place_reviews');
@@ -376,6 +397,19 @@ class BikeIT_Places {
 			));
 
 		}
+
+		// if($query->is_search) {
+
+		// 	$query->set('meta_query', array(
+		// 		'relation' => 'OR',
+		// 		array(
+		// 			'key' => 'location',
+		// 			'value' => $query->get('s'),
+		// 			'compare' => 'LIKE'
+		// 		)
+		// 	));
+
+		// }
 
 	}
 
