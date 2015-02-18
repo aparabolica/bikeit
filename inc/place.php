@@ -365,7 +365,7 @@ class BikeIT_Places {
 
 
 	/*
-	 * Include meta key in search
+	 * Post meta as searchable data
 	 */
 
 	function posts_clauses($clauses, $query) {

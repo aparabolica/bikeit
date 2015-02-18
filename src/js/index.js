@@ -84,14 +84,16 @@ angular.module('bikeit', [
 .controller('SearchController', [
 	'$scope',
 	'WPService',
-	function($scope, WP) {
+	'$http',
+	function($scope, WP, $http) {
 
 		$scope.searchResults = [];
+		$scope.addressResults = [];
 
 		var search = _.debounce(function(text) {
-			console.log($scope.searchType);
 			if(!text || typeof text == 'undefined') {
 				$scope.searchResults = [];
+				$scope.addressResults = [];
 			} else {
 				WP.query({
 					filter: {
@@ -99,8 +101,18 @@ angular.module('bikeit', [
 					},
 					'type': $scope.searchType || 'place'
 				}).then(function(data) {
-					console.log(data);
 					$scope.searchResults = data.data;
+				});
+				var bounds = window.bikeit.city.boundingbox;
+				$http.get('http://nominatim.openstreetmap.org/search', {
+					params: {
+						format: 'json',
+						q: text,
+						bounded: 1,
+						viewbox: bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0]
+					}
+				}).success(function(data) {
+					$scope.addressResults = data;
 				});
 			}
 		}, 200);
@@ -108,6 +120,7 @@ angular.module('bikeit', [
 		$scope.$watch('searchText', function(text) {
 			if(!text || typeof text == 'undefined') {
 				$scope.searchResults = [];
+				$scope.addressResults = [];
 			} else {
 				search(text);
 			}
@@ -117,5 +130,6 @@ angular.module('bikeit', [
 ]);
 
 jQuery(document).ready(function() {
+	console.log(bikeit);
 	angular.bootstrap(document, ['bikeit']);
 });

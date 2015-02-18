@@ -73,10 +73,14 @@ angular.module('bikeit.place', [])
 		return {
 			restrict: 'E',
 			scope: {
-				place: '='
+				place: '=',
+				style: '@'
 			},
 			templateUrl: templatePath + '/views/place/partials/list-item.html',
 			link: function(scope, element, attrs) {
+
+				if(!scope.style)
+					scope.style = 'row';
 
 				scope.sanitizeAddress = function(place) {
 

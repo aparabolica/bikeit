@@ -72,6 +72,47 @@
 			}
 		}
 	}
+	&.minimal {
+		.box-shadow(0 0 0);
+		border: 0;
+		background: transparent;
+		height: auto;
+		padding: 0;
+		.image {
+			float: left;
+			width: 33.33333%;
+			height: 100px;
+			margin: 0;
+		}
+		.place-header {
+			float: left;
+			width: 33.33333%;
+			position: relative;
+			.place-icon {
+				margin: 0;
+				position: absolute;
+				left: -30px;
+			}
+			h2,
+			p.address {
+				text-align: left;
+			}
+		}
+		.place-rating {
+			float: left;
+			width: 33.33333%;
+			position: static;
+			display: block;
+			margin: 0;
+			width: auto;
+			p {
+				width: auto;
+				display: block;
+				float: left;
+			}
+		}
+
+	}
 }
 
 @single-map-height: 600px;

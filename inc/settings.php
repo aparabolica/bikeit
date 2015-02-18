@@ -94,7 +94,7 @@ class BikeIT_Settings {
 
 					if(data) {
 						$('input[name="bikeit_city"]').val(JSON.stringify(data));
-						$('.selected-city').text(data.formatted_address);
+						$('.selected-city').text(data.display_name);
 						$('.selected-city').show();
 					} else {
 						$('.selected-city').hide();
@@ -122,20 +122,16 @@ class BikeIT_Settings {
 
 					$cityResults.empty();
 
-					$.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + text, function(data) {
+					$.get('http://nominatim.openstreetmap.org/search?format=json&city=' + text, function(data) {
 
-						console.log(data.results);
-
-						_.each(data.results, function(item) {
+						_.each(data, function(item) {
 							var $li = $('<li />');
-							$li.text(item.formatted_address);
+							$li.text(item.display_name);
 							$li.data('address', item);
 							$cityResults.append($li);
 						});
 
 					});
-
-					console.log(text);
 
 				}, 300));
 

@@ -9,9 +9,12 @@ section#main-search(ng-controller="SearchController")
 			form(ng-submit="search()")
 				input(ng-model="searchType" value="place" type="hidden")
 				input#main-search-input(type="text" ng-model="searchText" placeholder="Onde você vai?")
-		ul.row(ng-show="searchResults.length")
-			li.three.columns(ng-repeat="post in searchResults")
-				place-list-item(place="post")
+		ul.twelve.columns.row(ng-show="searchResults.length")
+			li(ng-repeat="post in searchResults")
+				place-list-item(place="post" style="minimal")
+		ul.twelve.columns.row(ng-show="addressResults.length")
+			li(ng-repeat="address in addressResults")
+				h3 {{address.display_name}}
 
 section#featured-places
 	.container
