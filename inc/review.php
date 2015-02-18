@@ -16,6 +16,7 @@ class BikeIT_Reviews {
 		add_action('save_post', array($this, 'save_post'));
 		add_filter('pre_get_posts', array($this, 'pre_get_posts'));
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
+		add_action('json_insert_post', array($this, 'json_insert_post'), 10, 3);
 
 	}
 
@@ -305,6 +306,26 @@ class BikeIT_Reviews {
 		}
 
 		return $_post;
+
+	}
+
+	function json_insert_post($post, $data, $update) {
+
+		/*
+		 * NOT WORKING
+		 */
+
+		if($data['stamp'])
+			update_field('stampable', $data['stamp'], $post['ID']);
+
+		if($data['place'])
+			update_field('place', $data['place'], $post['ID']);
+
+		if($data['kindness'])
+			update_field('kindness', $data['kindness'], $post['ID']);
+
+		if($data['structure'])
+			update_field('structure', $data['structure'], $post['ID']);
 
 	}
 

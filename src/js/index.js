@@ -15,6 +15,7 @@ require('./review');
  */
 
 angular.module('bikeit', [
+	'ngDialog',
 	'ui.router',
 	'bikeit.auth',
 	'bikeit.user',
@@ -64,9 +65,25 @@ angular.module('bikeit', [
     };
 })
 
+.factory('Labels', [
+	'labels',
+	function(labels) {
+
+		return function(text) {
+			if(typeof text == 'undefined')
+				return '';
+			else if(labels[text])
+				return labels[text];
+			else
+				return text;
+		}
+
+	}
+])
+
 .controller('SiteController', [
 	'$state',
-	'labels',
+	'Labels',
 	'$scope',
 	function($state, labels, $scope) {
 

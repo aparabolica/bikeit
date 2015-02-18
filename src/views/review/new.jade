@@ -1,0 +1,49 @@
+section(ng-show="!place || !place.ID")
+	h2 Find or create a place
+section(ng-show="place && place.ID")
+	h2 {{labels('Reviewing')}} {{place.title}}
+	form(ng-submit="submit(newReview)" ng-init="newReview = {};")
+		input(type="hidden" ng-model="newReview.place" value="{{place.ID}}")
+		.approval
+			p
+				input(id="input_approval_approved" type="radio" name="approval" ng-model="newReview.approval" value="1")
+				label(for="input_approval_approved") {{labels('Approved')}}
+			p
+				input(id="input_approval_failed" type="radio" name="approval" ng-model="newReview.approval" value="0")
+				label(for="input_approval_failed") {{labels('Failed')}}
+		.scores
+
+			p
+				label {{labels('Structure')}}
+
+			ratings(type="structure" rating="0" editable="1" model="newReview.structure")
+
+			p
+				label {{labels('Kindness')}}
+
+			ratings(type="kindness" rating="0" editable="1" model="newReview.kindness")
+
+		p.stamp
+
+			input(id="input_stamp" type="checkbox" ng-model="newReview.stamp")
+			label(for="input_stamp") {{labels('Nominate for BikeIT Stamp')}}
+
+		p.notify-place
+
+			input(id="input_notify" type="checkbox" ng-model="newReview.notify")
+			label(for="input_notify") {{labels('Notify place about your review')}}
+
+		.content
+
+			p
+				label(for="input_content") {{labels('Tell us about your experience')}}
+
+			textarea(id="input_content" ng-model="newReview.content")
+
+		.photos
+
+			p
+				label.button(for="input_photos") {{labels('Send photos')}}
+				input(id="input_photos" ng-model="newReview.photos" type="file" ng-hide="1==1" accept="image/*")
+
+		input(type="submit" value="{{labels('Submit review')}}")

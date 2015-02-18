@@ -12,6 +12,8 @@
     "napa": "1.2.0"
   },
   "devDependencies": {
+    "browserify": "latest",
+    "browserify-shim": "latest",
     "grunt": "latest",
     "grunt-contrib-less": "latest",
     "grunt-contrib-jade": "latest",
@@ -20,11 +22,19 @@
     "grunt-contrib-copy": "latest",
     "grunt-contrib-watch": "latest"
   },
+  "browser": {
+    "angular": "./node_modules/angular/angular.js"
+  },
+  "browserify-shim": {
+    "angular": "angular"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
   "description": "Review brike friendly spots",
   "main": "Gruntfile.js",
-  "scripts": {
-    "postinstall": "napa"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/cardume/bikeit.git"

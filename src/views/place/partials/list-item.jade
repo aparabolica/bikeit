@@ -7,14 +7,14 @@ article.place.list-item.clearfix(id="place-{{place.ID}}" class="{{style}}" ng-co
 		p.address {{sanitizeAddress(place)}}
 	section.place-rating
 		p.review-count
-			span.label Review count
+			span.label {{labels('Review count')}}
 			span.icon-pencil
 			span.count {{place.review_count | number:0}}
 		p.structure
-			span.label Structure
+			span.label {{labels('Structure')}}
 			span.icon-star
 			span.count {{place.scores.structure | number:2}}
 		p.kindness
-			span.label Kindness
+			span.label {{labels('Kindness')}}
 			span.icon-heart
 			span.count {{place.scores.kindness | number:2}}

@@ -11,21 +11,21 @@ article.single-place(id="place-{{place.id}}")
 						p.address {{place.location.address}}
 					.ratings
 						p.structure.clearfix
-							span.label {{labels['Structure']}}:
-							ratings(type="'structure'" rating="place.scores.structure")
+							span.label {{labels('Structure')}}:
+							ratings(type="structure" rating="{{place.scores.structure}}")
 						p.kindness.clearfix
-							span.label {{labels['Kindness']}}:
-							ratings(type="'kindness'" rating="place.scores.kindness")
+							span.label {{labels('Kindness')}}:
+							ratings(type="kindness" rating="{{place.scores.kindness}}")
 					p.total
-						| {{labels['Total reviews']}}:
+						| {{labels('Total reviews')}}:
 						span.count {{place.review_count}}
-					p.submit-review
-						a(href="javascript:void(0);")
-							| {{labels['Submit review']}}
+					p.submit-review(ng-controller="SubmitReviewCtrl")
+						a(href="javascript:void(0);" ng-click="newReview(place)")
+							| {{labels('Submit review')}}
 							span.icon-pencil
 	section#reviews
 		.container
 			.twelve.columns
-				h2.section-title {{labels['Reviews']}}
+				h2.section-title {{labels('Reviews')}}
 		.review-list(ng-show="reviews.length")
 			review-list-item(ng-repeat="review in reviews" review="review")

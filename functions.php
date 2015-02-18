@@ -72,7 +72,12 @@ function bikeit_labels() {
 		'Approved' => __('Approved', 'bikeit'),
 		'Failed' => __('Failed', 'bikeit'),
 		'Published' => __('Published', 'bikeit'),
-		'Reply this review' => __('Reply this review', 'bikeit')
+		'Reply this review' => __('Reply this review', 'bikeit'),
+		'Reviewing' => __('Reviewing', 'bikeit'),
+		'Nominate for BikeIT Stamp' => __('Nominate for BikeIT Stamp', 'bikeit'),
+		'Notify place about your review' => __('Notify place about your review', 'bikeit'),
+		'Tell us about your experience' => __('Tell us about your experience', 'bikeit'),
+		'Send photos' => __('Send photos', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
@@ -114,6 +119,8 @@ function bikeit_scripts() {
 	wp_enqueue_style('bikeit-reset', get_template_directory_uri() . '/css/reset.css');
 	wp_enqueue_style('bikeit-skeleton', get_template_directory_uri() . '/css/skeleton.css');
 	wp_enqueue_style('leaflet', get_template_directory_uri() . '/css/leaflet.css');
+	wp_enqueue_style('ng-dialog', get_template_directory_uri() . '/css/ngDialog.min.css');
+	wp_enqueue_style('ng-dialog-default', get_template_directory_uri() . '/css/ngDialog-theme-default.min.css');
 	wp_enqueue_style('bikeit-main', get_template_directory_uri() . '/css/main.css', array('bikeit-reset', 'bikeit-skeleton'));
 	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 

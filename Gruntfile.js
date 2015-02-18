@@ -2,15 +2,18 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		browserify: {
-			js: {
+			all: {
+				options: {
+					transform: ['browserify-shim'],
+				},
 				files: {
-					'js/vendor.js': 'src/js/vendor.js',
-					'js/main.js': 'src/js/index.js'
+					'js/vendor.js': ['src/js/vendor.js'],
+					'js/main.js': ['src/js/index.js']
 				}
 			}
 		},
 		uglify: {
-			build: {
+			all: {
 				options: {
 					mangle: true,
 					compress: true
@@ -22,7 +25,7 @@ module.exports = function(grunt) {
 			}
 		},
 		less: {
-			compile: {
+			all: {
 				options: {
 					compress: true
 				},
@@ -33,7 +36,7 @@ module.exports = function(grunt) {
 			}
 		},
 		jade: {
-			compile: {
+			all: {
 				options: {
 					doctype: 'html'
 				},
@@ -47,7 +50,7 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
-			build: {
+			all: {
 				files: [
 					{
 						cwd: 'src',
@@ -58,6 +61,12 @@ module.exports = function(grunt) {
 					{
 						cwd: 'node_modules/leaflet/dist',
 						src: ['**', '!**/*.js'],
+						dest: 'css',
+						expand: true
+					},
+					{
+						cwd: 'node_modules/ng-dialog/css',
+						src: ['**'],
 						dest: 'css',
 						expand: true
 					}
@@ -118,7 +127,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'default',
 		'Build, start server and watch.',
-		['build', 'watch']
+		['browserify', 'views', 'copy', 'watch']
 	);
 
 }

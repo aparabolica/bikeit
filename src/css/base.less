@@ -31,6 +31,7 @@ button,
 .button,
 a.button,
 input[type=submit] {
+	border: 0;
 	background: @dark-orange;
 	color: #fff;
 	text-decoration: none;
@@ -165,4 +166,15 @@ ul li.column {
 	.box-shadow(0 0 60px rgba(0,0,0,0.2));
 	position: relative;
 	z-index: 100;
+}
+
+
+/*
+ * Dialogs
+ */
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+	border-radius: 0;
+	background: #fff;
+	width: 700px;
 }

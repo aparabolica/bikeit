@@ -68,8 +68,9 @@ angular.module('bikeit.place', [])
 ])
 
 .directive('placeListItem', [
+	'Labels',
 	'templatePath',
-	function(templatePath) {
+	function(labels, templatePath) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -78,6 +79,8 @@ angular.module('bikeit.place', [])
 			},
 			templateUrl: templatePath + '/views/place/partials/list-item.html',
 			link: function(scope, element, attrs) {
+
+				scope.labels = labels;
 
 				if(!scope.style)
 					scope.style = 'row';

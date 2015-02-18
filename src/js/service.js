@@ -175,6 +175,28 @@ module.exports = [
 
 				return deferred.promise;
 
+			},
+			post: function(data) {
+
+				var deferred = $q.defer();
+
+				jQuery.ajax({
+					url: url,
+					dataType: 'json',
+					type: 'POST',
+					data: {
+						data: data
+					},
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text) {
+						deferred.reject(text);
+					}
+				});
+
+				return deferred.promise;
+
 			}
 		}
 
