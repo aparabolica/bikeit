@@ -180,6 +180,8 @@ module.exports = [
 
 				var deferred = $q.defer();
 
+				console.log(data);
+
 				jQuery.ajax({
 					url: url,
 					dataType: 'json',

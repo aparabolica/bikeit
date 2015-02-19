@@ -311,21 +311,26 @@ class BikeIT_Reviews {
 
 	function json_insert_post($post, $data, $update) {
 
-		/*
-		 * NOT WORKING
-		 */
+		$review_meta = $data['review_meta'];
 
-		if($data['stamp'])
-			update_field('stampable', $data['stamp'], $post['ID']);
+		// TODO Validation
 
-		if($data['place'])
-			update_field('place', $data['place'], $post['ID']);
+		if($review_meta['place'])
+			update_field('place', $review_meta['place'], $post['ID']);
 
-		if($data['kindness'])
-			update_field('kindness', $data['kindness'], $post['ID']);
+		if($review_meta['approved'])
+			update_field('approved', $review_meta['approved'], $post['ID']);
 
-		if($data['structure'])
-			update_field('structure', $data['structure'], $post['ID']);
+		if($review_meta['kindness'])
+			update_field('kindness', $review_meta['kindness'], $post['ID']);
+
+		if($review_meta['structure'])
+			update_field('structure', $review_meta['structure'], $post['ID']);
+
+		if($review_meta['stampable'])
+			update_field('stampable', $review_meta['stampable'], $post['ID']);
+
+		do_action('save_post', $post['ID'], get_post($post['ID']), true);
 
 	}
 

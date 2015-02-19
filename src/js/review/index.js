@@ -36,18 +36,18 @@ angular.module('bikeit.review', [])
 		}
 
 		$scope.submit = function(review) {
-			console.log(review);
 			WP.post({
 				'title': ' ',
 				'content_raw': review.content,
 				'type': 'review',
 				'status': 'publish',
 				'review_meta': {
+					'approved': review.approved,
 					'kindness': review.kindness,
 					'structure': review.structure,
-					'stamp': review.stamp,
-					'notify': review.stamp,
-					'place': review.place
+					'stampable': review.stampable ? 1 : 0,
+					'notify': review.notify ? 1 : 0,
+					'place': $scope.place.ID
 				}
 			}).then(function(data) {
 				console.log(data);
