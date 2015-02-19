@@ -32,12 +32,12 @@
 				<h1><a href="javascript:void(0);" ng-click="goHome()"><?php bloginfo('name'); ?><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" /></a></h1>
 			</div>
 			<div class="three columns">
-				<div class="user" ng-controller="UserController" ng-init="getUser()" ng-show="loadedUser">
+				<div class="user" ng-controller="UserController" ng-show="loadedUser">
 					<div ng-show="user">
 						<p>Olá {{user.name}}. <a href="{{logoutUrl}}">Sair</a></p>
 					</div>
 					<div ng-hide="user">
-						<p><a href="#">Entrar</a><a href="#">Cadastrar</a></p>
+						<p><a href="#" ng-click="loginForm()">Entrar</a><a href="#">Cadastrar</a></p>
 					</div>
 				</div>
 			</div>
@@ -46,15 +46,6 @@
 	</header>
 
 	<div ui-view autoscroll="false"></div>
-
-	<!-- <div ng-controller="LoginForm">
-		<form ng-submit="login(form)">
-			<input type="text" ng-model="form.user_login" />
-			<input type="password" ng-model="form.user_password" />
-			<input type="checkbox" ng-model="form.remember" />
-			<input type="submit" />
-		</form>
-	</div> -->
 
 	<?php wp_footer(); ?>
 

@@ -1,59 +1,62 @@
-section#new-place(ng-show="!place || !place.ID")
-	h2 Find or create a place
-section#new-review(ng-show="place && place.ID")
-	h2 {{labels('Reviewing')}} {{place.title}}
-	form(ng-submit="submit(newReview)" ng-init="newReview: {}")
-		input(type="hidden" ng-model="newReview.place" ng-value="place.ID")
-		.form-section.clearfix
-			.approval(ng-class="{failed: newReview.approved == 0, approved: newReview.approved == 1}")
-				p.icon
-					span.icon-emoji-neutral(ng-show="!newReview.approved && newReview.approved != 0")
-					span.icon-emoji-sad(ng-show="newReview.approved == 0")
-					span.icon-emoji-happy(ng-show="newReview.approved == 1")
-				.inputs
-				p
-					input(id="input_approval_approved" type="radio" ng-model="newReview.approved" value="1" ng-hide="1==1")
-					label(for="input_approval_approved")
-						span.icon-dot-single(ng-show="newReview.approved != 1")
-						span.icon-check(ng-show="newReview.approved == 1")
-						| {{labels('Approved')}}
-				p
-					input(id="input_approval_failed" type="radio" ng-model="newReview.approved" value="0" ng-hide="1==1")
-					label(for="input_approval_failed")
-						span.icon-dot-single(ng-show="newReview.approved != 0")
-						span.icon-check(ng-show="newReview.approved == 0")
-						| {{labels('Failed')}}
-			.ratings
+div(ng-hide="user" ng-include="loginTemplate")
 
-				p
-					label {{labels('Structure')}}
-					ratings.rating(type="structure" rating="0" editable="1" model="newReview.structure")
+div(ng-show="user")
+	section#new-place(ng-show="!place || !place.ID")
+		h2 Find or create a place
+	section#new-review(ng-show="place && place.ID")
+		h2 {{labels('Reviewing')}} {{place.title}}
+		form(ng-submit="submit(newReview)" ng-init="newReview = {}")
+			input(type="hidden" ng-model="newReview.place" ng-value="place.ID")
+			.form-section.clearfix
+				.approval(ng-class="{failed: newReview.approved == 0, approved: newReview.approved == 1}")
+					p.icon
+						span.icon-emoji-neutral(ng-show="!newReview.approved && newReview.approved != 0")
+						span.icon-emoji-sad(ng-show="newReview.approved == 0")
+						span.icon-emoji-happy(ng-show="newReview.approved == 1")
+					.inputs
+					p
+						input(id="input_approval_approved" type="radio" ng-model="newReview.approved" value="1" ng-hide="1==1")
+						label(for="input_approval_approved")
+							span.icon-dot-single(ng-show="newReview.approved != 1")
+							span.icon-check(ng-show="newReview.approved == 1")
+							| {{labels('Approved')}}
+					p
+						input(id="input_approval_failed" type="radio" ng-model="newReview.approved" value="0" ng-hide="1==1")
+						label(for="input_approval_failed")
+							span.icon-dot-single(ng-show="newReview.approved != 0")
+							span.icon-check(ng-show="newReview.approved == 0")
+							| {{labels('Failed')}}
+				.ratings
 
-				p
-					label {{labels('Kindness')}}
-					ratings.rating(type="kindness" rating="0" editable="1" model="newReview.kindness")
-		.form-section.clearfix
-			p.stamp
+					p
+						label {{labels('Structure')}}
+						ratings.rating(type="structure" rating="0" editable="1" model="newReview.structure")
 
-				input(id="input_stamp" type="checkbox" ng-model="newReview.stampable")
-				label(for="input_stamp") {{labels('Nominate for BikeIT Stamp')}}
+					p
+						label {{labels('Kindness')}}
+						ratings.rating(type="kindness" rating="0" editable="1" model="newReview.kindness")
+			.form-section.clearfix
+				p.stamp
 
-			p.notify-place
+					input(id="input_stamp" type="checkbox" ng-model="newReview.stampable")
+					label(for="input_stamp") {{labels('Nominate for BikeIT Stamp')}}
 
-				input(id="input_notify" type="checkbox" ng-model="newReview.notify")
-				label(for="input_notify") {{labels('Notify place about your review')}}
+				p.notify-place
 
-		.form-section.clearfix
-			.content
+					input(id="input_notify" type="checkbox" ng-model="newReview.notify")
+					label(for="input_notify") {{labels('Notify place about your review')}}
 
-				p
-					label(for="input_content") {{labels('Tell us about your experience')}}
+			.form-section.clearfix
+				.content
 
-				textarea(id="input_content" ng-model="newReview.content")
+					p
+						label(for="input_content") {{labels('Tell us about your experience')}}
 
-		//- .photos
-		//- 	p
-		//- 		label.button(for="input_photos") {{labels('Send photos')}}
-		//- 		input(id="input_photos" ng-model="newReview.photos" type="file" ng-hide="1==1" accept="image/*")
+					textarea(id="input_content" ng-model="newReview.content")
 
-		input(type="submit" value="{{labels('Submit review')}}")
+			//- .photos
+			//- 	p
+			//- 		label.button(for="input_photos") {{labels('Send photos')}}
+			//- 		input(id="input_photos" ng-model="newReview.photos" type="file" ng-hide="1==1" accept="image/*")
+
+			input(type="submit" value="{{labels('Submit review')}}")

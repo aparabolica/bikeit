@@ -37,6 +37,7 @@ input[type=submit] {
 	text-decoration: none;
 	padding: 15px 25px;
 	line-height: 100%;
+	cursor: pointer;
 	&:hover {
 		background: @light-orange;
 	}
@@ -177,6 +178,7 @@ ul li.column {
 	border-radius: 0;
 	background: #fff;
 	width: 700px;
+	padding: 30px;
 }
 
 .ngdialog.ngdialog-theme-default .ngdialog-content h2 {
@@ -188,4 +190,70 @@ ul li.column {
 	color: @gray;
 	border-bottom: 1px solid @light-gray;
 	padding-bottom: 10px;
+}
+
+/*
+ * Auth form
+ */
+
+#login-form,
+#registration-form {
+	.box-sizing(border-box);
+	float: left;
+	input[type=checkbox] {
+		margin-right: 10px;
+	}
+	form {
+		margin: 0;
+	}
+	input[type=text],
+	input[type=password],
+	input[type=submit] {
+		width: 100%;
+		margin: 0;
+	}
+	input[type=submit] {
+		font-weight: 600;
+		text-transform: uppercase;
+		margin: 0;
+	}
+	label {
+		font-size: 12px;
+		font-weight: 600;
+		opacity: .9;
+	}
+}
+
+#registration-form {
+	width: 40%;
+	padding: 0;
+	p {
+		margin: 0 0 10px;
+	}
+	input[type=submit] {
+		margin-top: 13px;
+		background: @light-orange;
+	}
+}
+
+#login-form {
+	width: 60%;
+	background: @light-gray;
+	margin: -30px 30px -30px -30px;
+	padding: 30px;
+	h2 {
+		color: @dark-gray;
+		border-color: @gray;
+	}
+	label {
+		font-size: 12px;
+	}
+	p {
+		margin-bottom: 30px;
+	}
+	input[type=text],
+	input[type=password] {
+		padding: 15px;
+		font-size: 16px;
+	}
 }

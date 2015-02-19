@@ -130,8 +130,8 @@ module.exports = [
 					success: function(data, text, xhr) {
 						deferred.resolve(data);
 					},
-					error: function(xhr, text) {
-						deferred.reject(text);
+					error: function(xhr, text, error) {
+						deferred.reject(xhr.responseJSON);
 					}
 				});
 
@@ -149,8 +149,8 @@ module.exports = [
 					success: function(data, text, xhr) {
 						deferred.resolve(data);
 					},
-					error: function(xhr, text) {
-						deferred.reject(text);
+					error: function(xhr, text, error) {
+						deferred.reject(xhr.responseJSON);
 					}
 				});
 
@@ -168,8 +168,8 @@ module.exports = [
 					success: function(data, text, xhr) {
 						deferred.resolve(data);
 					},
-					error: function(xhr, text) {
-						deferred.reject(text);
+					error: function(xhr, text, error) {
+						deferred.reject(xhr.responseJSON);
 					}
 				});
 
@@ -179,8 +179,6 @@ module.exports = [
 			post: function(data) {
 
 				var deferred = $q.defer();
-
-				console.log(data);
 
 				jQuery.ajax({
 					url: url,
@@ -193,7 +191,7 @@ module.exports = [
 						deferred.resolve(data);
 					},
 					error: function(xhr, text) {
-						deferred.reject(text);
+						deferred.reject(xhr.responseJSON);
 					}
 				});
 

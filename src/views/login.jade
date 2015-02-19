@@ -1,0 +1,34 @@
+#login-form
+	h2 {{labels('Login')}}
+	form(ng-controller="LoginForm" ng-submit="login(loginData)")
+		p
+			label(for="input_login_username") {{labels('Email or username')}}
+			input(id="input_login_username" type="text" ng-model="loginData.user_login")
+		p
+			label(for="input_login_password") {{labels('Password')}}
+			input(id="input_login_password" type="password" ng-model="loginData.user_password")
+
+		p.check
+			input(id="input_login_remember" type="checkbox" ng-model="loginData.remember" value="forever")
+			label(for="input_login_remember") {{labels('Remember me')}}
+
+		input(type="submit" value="{{labels('Login')}}")
+
+#registration-form
+	h2{{labels('Registration')}}
+	form
+		p
+			label(for="input_register_email") {{labels('Email')}}
+			input(id="input_register_email" type="text" ng-model="registerData.email")
+		p
+			label(for="input_register_name") {{labels('Name')}}
+			input(id="input_register_name" type="text" ng-model="registerData.name")
+		p
+			label(for="input_register_password") {{labels('Password')}}
+			input(id="input_register_password" type="password" ng-model="registerData.user_password")
+		p
+			label(for="input_register_password_repeat") {{labels('Repeat password')}}
+			input(id="input_register_password_repeat" type="password" ng-model="registerData.user_password")
+
+		input(type="submit" value="{{labels('Register')}}")
+.clear

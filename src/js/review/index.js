@@ -24,16 +24,32 @@ angular.module('bikeit.review', [])
 	'templatePath',
 	'ngDialog',
 	'$scope',
+	'AuthService',
 	'WPService',
-	function(templatePath, ngDialog, $scope, WP) {
+	'$location',
+	function(templatePath, ngDialog, $scope, Auth, WP, $location) {
+
+		$scope.loginTemplate = templatePath + '/views/login.html';
+
+		$scope.$watch(function() {
+			return Auth.getNonce();
+		}, function(nonce) {
+			if(nonce) {
+				WP.getUser().then(function(data) {
+					$scope.user = data;
+				});
+			} else {
+				$scope.user = false;
+			}
+		});
 
 		$scope.newReview = function(place) {
 			$scope.place = place || false;
-			ngDialog.open({
+			$scope.dialog = ngDialog.open({
 				template: templatePath + '/views/review/new.html',
 				scope: $scope
 			});
-		}
+		};
 
 		$scope.submit = function(review) {
 			WP.post({
@@ -51,7 +67,13 @@ angular.module('bikeit.review', [])
 				}
 			}).then(function(data) {
 				console.log(data);
-			})
+				if($scope.dialog) {
+					$scope.dialog.close();
+					$scope.dialog = false;
+				}
+			}, function(error) {
+				console.log(error);
+			});
 		}
 
 	}

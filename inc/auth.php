@@ -9,6 +9,7 @@ class BikeIT_Auth {
 
 	function __construct() {
 		add_filter('json_endpoints', array($this, 'auth_routes'));
+		add_filter('json_authentication_errors', array($this, 'json_ajax_auth_errors'), 99);
 	}
 
 	function auth_routes($routes) {
@@ -38,6 +39,13 @@ class BikeIT_Auth {
 
 		return json_ensure_response(array('nonce' => wp_create_nonce('wp_json')));
 
+	}
+
+	function json_ajax_auth_errors($result) {
+
+		$result = true;
+
+		return $result;
 	}
 
 }

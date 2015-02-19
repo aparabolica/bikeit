@@ -6,7 +6,7 @@ article.single-place(id="place-{{place.id}}")
 			header#place-header.six.columns
 				.header-content
 					.main-info
-						.image(ng-show="place.featured_image" back-img="{{place.featured_image.attachment_meta.sizes.medium.url}}")
+						.image(back-img="{{place.featured_image.attachment_meta.sizes.medium.url}}")
 						h1 {{place.title}}
 						p.address {{place.location.address}}
 					.ratings
