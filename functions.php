@@ -30,10 +30,14 @@ function bikeit_register_required_plugins() {
 }
 add_action('tgmpa_register', 'bikeit_register_required_plugins');
 
+
+
 function bikeit_json_url_prefix() {
 	return 'api';
 }
 add_filter('json_url_prefix', 'bikeit_json_url_prefix');
+
+add_filter('show_admin_bar', '__return_false');
 
 /*
  * Advanced Custom Fields

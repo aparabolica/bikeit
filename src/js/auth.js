@@ -7,6 +7,8 @@ angular.module('bikeit.auth', [])
 	'$location',
 	function(nonce, $location) {
 
+		var user;
+
 		return {
 			getNonce: function() {
 				return nonce;
@@ -14,8 +16,11 @@ angular.module('bikeit.auth', [])
 			setNonce: function(val) {
 				nonce = val;
 			},
-			login: function() {
-				window.location = bikeit.url + '/wp-login.php?redirect_to=' + $location.absUrl();
+			getUser: function() {
+				return user;
+			},
+			setUser: function(val) {
+				user = val;
 			}
 		}
 
@@ -60,13 +65,12 @@ angular.module('bikeit.auth', [])
 
 		$scope.login = function(data) {
 
-			Auth.setNonce(false);
-
-			$http.post(apiUrl + '/auth', data)
+			$http.post(apiUrl + '/auth', _.extend({
+				'_wp_json_nonce': Auth.getNonce()
+			}, data))
 				.success(function(data) {
-					$http.get(apiUrl + '/auth/nonce').success(function(data) {
-						Auth.setNonce(data.nonce);
-					});
+					Auth.setNonce('auth');
+					Auth.setUser(data);
 				})
 				.error(function(data) {
 					console.log(data);
