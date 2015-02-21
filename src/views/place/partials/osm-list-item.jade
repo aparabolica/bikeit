@@ -1,0 +1,9 @@
+article.osm-place.list-item.clearfix(id="")
+	header.place-header
+		h3 {{place.name}}
+		p {{sanitizeAddress(place)}}
+	section.place-label
+		.maki-icon(class="{{place.icon}}")
+		h4 {{place.label}}
+	.place-actions
+		a.button(href="javascript:void(0);") {{labels('Review')}}
