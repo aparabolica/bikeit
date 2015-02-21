@@ -38,14 +38,38 @@ input[type=submit] {
 	padding: 15px 25px;
 	line-height: 100%;
 	cursor: pointer;
+	font-weight: 600;
+	text-transform: uppercase;
 	&:hover {
 		background: @light-orange;
+		color: #fff;
 	}
+}
+
+input[type=text]:disabled,
+input[type=password]:disabled,
+textarea:disabled {
+	background: @light-gray;
 }
 
 ul li.columns,
 ul li.column {
 	margin-bottom: 0;
+}
+
+.maki-icon {
+	background-image: url(../img/maki-sprite.png);
+}
+
+.dark .maki-icon { background-image: url(../img/maki-sprite.dark.png); }
+
+@media
+  only screen and (-webkit-min-device-pixel-ratio : 2),
+  only screen and (min-device-pixel-ratio : 2) {
+  .maki-icon {
+    background-image:url(../img/maki-sprite@2x.png);
+  }
+  .dark .maki-icon { background-image:url(../img/maki-sprite.dark@2x.png); }
 }
 
 .section-title {
@@ -56,19 +80,79 @@ ul li.column {
 }
 
 #main-search {
-	form {
-		margin: 0;
-		padding: 0;
+	::-webkit-input-placeholder {
+		color: #fff;
+		font-weight: 600;
+		opacity: .9;
+	}
+
+	:-moz-placeholder {
+		color: #fff;
+		font-weight: 600;
+		opacity: .9;
+	}
+
+	::-moz-placeholder {
+		color: #fff;
+		font-weight: 600;
+		opacity: .9;
+	}
+
+	:-ms-input-placeholder {
+		color: #fff;
 	}
 	#main-search-input {
-		width: 100%;
-		padding: 20px;
+		background: @light-orange;
+		border-top: 2px solid @dark-orange;
+		padding: 40px 0 0;
+		form {
+			margin: 0;
+			padding: 0;
+			position: relative;
+		}
+		.icon-magnifying-glass {
+			font-size: 40px;
+			color: #fff;
+			pointer-events: none;
+			position: absolute;
+			top: 20px;
+			right: 0;
+		}
+		.search-input {
+			width: 100%;
+			padding: 20px 0;
+			margin: 0;
+			background: transparent;
+			.box-sizing(border-box);
+			font-size: 24px;
+			border: 0;
+			color: #fff;
+			text-align: left;
+			//.box-shadow(0 0 3px 2px @light-gray);
+			//border: 1px solid @gray;
+			border-bottom: 1px solid @dark-orange;
+			margin: 0 0 10px;
+		}
+		p {
+			color: #fff;
+			opacity: .8;
+		}
+	}
+	li {
 		margin: 0;
-		.box-sizing(border-box);
-		font-size: 20px;
-		.box-shadow(0 0 3px 2px @light-gray);
-		border: 1px solid @gray;
-		text-align: center;
+	}
+	.main-search-results {
+		.search-title {
+			font-family: "Open Sans";
+			text-transform: uppercase;
+			font-size: 16px;
+			line-height: 16px;
+			font-weight: 600;
+			color: @gray;
+			padding: 0 0 20px;
+			margin: 0;
+			border-bottom: 1px solid @light-gray;
+		}
 	}
 }
 

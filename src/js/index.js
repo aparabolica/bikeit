@@ -126,16 +126,40 @@ angular.module('bikeit', [
 						format: 'json',
 						q: text,
 						bounded: 1,
+						addressdetails: 1,
 						viewbox: bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0]
 					}
 				}).success(function(data) {
-					$scope.addressResults = data;
+					$scope.addressResults = _.filter(data, function(item) {
+
+						// Filter places
+						if(item.class == 'highway' ||
+							item.class == 'place' ||
+							item.class == 'waterway' ||
+							item.class == 'landuse' ||
+							(!item.address[item.type] && !item.address.address29) ||
+							!window.osmLabels[item.class + '/' + item.type])
+							return false;
+
+						// Add title
+						item.name = item.address[item.type] || item.address.address29;
+
+						// Add label
+						item.label = window.osmLabels[item.class + '/' + item.type].name;
+
+						// Add icon
+						if(window.osmIcons[item.class + '/' + item.type])
+							item.icon = window.osmIcons[item.class + '/' + item.type];
+
+						return true;
+
+					});
 				});
 			}
-		}, 200);
+		}, 300);
 
 		$scope.$watch('searchText', function(text) {
-			if(!text || typeof text == 'undefined') {
+			if(!text || typeof text == 'undefined' || text.length <= 2) {
 				$scope.searchResults = [];
 				$scope.addressResults = [];
 			} else {

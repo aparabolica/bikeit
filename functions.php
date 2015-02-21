@@ -125,6 +125,7 @@ function bikeit_scripts() {
 	wp_enqueue_style('leaflet', get_template_directory_uri() . '/css/leaflet.css');
 	wp_enqueue_style('ng-dialog', get_template_directory_uri() . '/css/ngDialog.min.css');
 	wp_enqueue_style('ng-dialog-default', get_template_directory_uri() . '/css/ngDialog-theme-default.min.css');
+	wp_enqueue_style('maki', get_template_directory_uri() . '/css/maki-sprite.css');
 	wp_enqueue_style('bikeit-main', get_template_directory_uri() . '/css/main.css', array('bikeit-reset', 'bikeit-skeleton'));
 	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 
@@ -140,7 +141,10 @@ function bikeit_scripts() {
 		'logoutUrl' => wp_logout_url(home_url()),
 		'labels' => bikeit_labels(),
 		'placeCategories' => bikeit_get_place_categories(),
-		'city' => json_decode(get_option('bikeit_city'))
+		'city' => json_decode(get_option('bikeit_city')),
+		'map' => array(
+			'tile' => 'https://{s}.tiles.mapbox.com/v4/miguelpeixe.l94olf54/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWlndWVscGVpeGUiLCJhIjoiVlc0WWlrQSJ9.pIPkSx25w7ossO6rZH9Tcw'
+		)
 	));
 
 }

@@ -14,6 +14,7 @@ angular.module('bikeit.map', [
 
 		$scope.mapDefaults = {
 
+			tileLayer: window.bikeit.map.tile,
 			scrollWheelZoom: false
 
 		};

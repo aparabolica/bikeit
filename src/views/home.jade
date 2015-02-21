@@ -3,18 +3,26 @@ section#map.row.with-sidebar(ng-controller="MapController")
 	.map-sidebar
 		map-filters
 
-section#main-search(ng-controller="SearchController")
-	.container
-		.twelve.columns.row
-			form(ng-submit="search()")
-				input(ng-model="searchType" value="place" type="hidden")
-				input#main-search-input(type="text" ng-model="searchText" placeholder="Onde você vai?")
-		ul.twelve.columns.row(ng-show="searchResults.length")
-			li(ng-repeat="post in searchResults")
-				place-list-item(place="post" style="minimal")
-		ul.twelve.columns.row(ng-show="addressResults.length")
-			li(ng-repeat="address in addressResults")
-				h3 {{address.display_name}}
+section#main-search.anti-row(ng-controller="SearchController")
+	#main-search-input.row
+		.container
+			.twelve.columns.row
+				form(ng-submit="search()")
+					.icon-magnifying-glass
+					input.search-input(type="text" ng-model="searchText" placeholder="{{labels('Where are you going?')}}")
+					p Encontre lugares cadastrados no BikeIt e na base de dados do OpenStreetMap, o mapa livre e editável do mundo.
+	#bikeit-results.main-search-results(ng-show="searchResults.length")
+		.container
+			ul.twelve.columns.row
+				li(ng-repeat="post in searchResults")
+					place-list-item(place="post" style="minimal")
+	#osm-results.main-search-results(ng-controller="SubmitPlaceCtrl" ng-show="addressResults.length")
+		.container
+			.twelve.columns.row
+				h2.search-title {{labels('OpenStreetMap Results')}}
+				ul
+					li(ng-repeat="place in addressResults" ng-click="newPlace(place)")
+						osm-list-item(place="place")
 
 section#featured-places
 	.container

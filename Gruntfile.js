@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
-			all: {
+			main: {
 				files: [
 					{
 						cwd: 'src',
@@ -69,6 +69,20 @@ module.exports = function(grunt) {
 						src: ['**'],
 						dest: 'css',
 						expand: true
+					}
+				]
+			},
+			maki: {
+				files: [
+					{
+						cwd: 'node_modules/maki/www/images',
+						src: ['maki-sprite.png', 'maki-sprite@2x.png', 'maki-sprite.dark.png', 'maki-sprite.dark@2x.png'],
+						dest: 'img',
+						expand: true
+					},
+					{
+						src: 'node_modules/maki/www/maki-sprite.css',
+						dest: 'css/maki-sprite.css'
 					}
 				]
 			}

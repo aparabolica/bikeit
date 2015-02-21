@@ -67,6 +67,150 @@ angular.module('bikeit.place', [])
 	}
 ])
 
+.controller('SubmitPlaceCtrl', [
+	'templatePath',
+	'ngDialog',
+	'$scope',
+	'AuthService',
+	'WPService',
+	'$location',
+	'$timeout',
+	'$http',
+	'leafletData',
+	function(templatePath, ngDialog, $scope, Auth, WP, $location, $timeout, $http, leafletData) {
+
+		$scope.loginTemplate = templatePath + '/views/login.html';
+
+		$scope.$watch(function() {
+			return Auth.getNonce();
+		}, function(nonce) {
+			if(nonce) {
+				WP.getUser().then(function(data) {
+					$scope.user = data;
+				});
+			} else {
+				$scope.user = false;
+			}
+		});
+
+		var search = _.debounce(function(text) {
+			if(!text || typeof text == 'undefined') {
+				$scope.searchResults = [];
+			} else {
+				var bounds = window.bikeit.city.boundingbox;
+				$http.get('http://nominatim.openstreetmap.org/search', {
+					params: {
+						format: 'json',
+						q: text,
+						bounded: 1,
+						addressdetails: 1,
+						viewbox: bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0]
+					}
+				}).success(function(data) {
+					$scope.searchResults = data;
+				});
+			}
+		}, 300);
+
+		$scope.search = '';
+
+		$scope.sanitizeAddress = function(place) {
+			var address = '';
+			if(place.address.road) {
+				address += place.address.road;
+			}
+
+			if(place.address.house_number) {
+				address += ', ' + place.address.house_number;
+			}
+
+			if(place.address.city_district) {
+				if(place.address.road) {
+					address += ' - ';
+				}
+				address += place.address.city_district;
+			}
+
+			return address;
+		};
+
+		/* TODO */
+		$scope.selectAddress = function(address) {
+			console.log(address);
+			$scope.place.lat = address.lat;
+			$scope.place.lon = address.lon;
+			$scope.place.address = address;
+		};
+
+		$scope.newPlace = function(place) {
+			$scope.place = place || {};
+			$scope.map = {
+				defaults: {
+					tileLayer: window.bikeit.map.tile,
+					scrollWheelZoom: false
+				},
+				controls: false
+			};
+			if($scope.place.osm_id) {
+				$scope.map.center = {
+					lat: parseFloat($scope.place.lat),
+					lng: parseFloat($scope.place.lon),
+					zoom: 18
+				}
+			};
+
+			$scope.searchResults = [];
+
+			$scope.dialog = ngDialog.open({
+				template: templatePath + '/views/place/new.html',
+				scope: $scope,
+				controller: ['$scope', function(scope) {
+
+					scope.$watch('search', function(text) {
+						if(!text || typeof text == 'undefined' || text.length <= 2) {
+							$scope.searchResults = [];
+						} else {
+							search(text);
+						}
+					});
+
+				}]
+			});
+
+			$timeout(function() {
+				leafletData.getMap('new-place-map').then(function(map) {
+					map.invalidateSize(false);
+					$scope.$on('leafletDirectiveMap.moveend', function(event) {
+						var center = map.getCenter();
+						$scope.place.lat = center.lat;
+						$scope.place.lon = center.lng;
+					});
+				});
+			}, 300);
+		};
+
+		$scope.submit = function(place) {
+			WP.post({
+				'title': place.title,
+				'content_raw': '',
+				'type': 'place',
+				'status': 'publish',
+				'place_meta': {
+				}
+			}).then(function(data) {
+				console.log(data);
+				if($scope.dialog) {
+					$scope.dialog.close();
+					$scope.dialog = false;
+				}
+			}, function(error) {
+				console.log(error);
+			});
+		}
+
+	}
+])
+
 .directive('placeListItem', [
 	'Labels',
 	'templatePath',
@@ -88,6 +232,52 @@ angular.module('bikeit.place', [])
 				scope.sanitizeAddress = function(place) {
 
 					return place.location.address;
+
+				};
+
+			}
+		}
+	}
+])
+
+.directive('osmListItem', [
+	'Labels',
+	'templatePath',
+	function(labels, templatePath) {
+		return {
+			restrict: 'E',
+			scope: {
+				place: '=',
+				style: '@'
+			},
+			templateUrl: templatePath + '/views/place/partials/osm-list-item.html',
+			link: function(scope, element, attrs) {
+
+				scope.labels = labels;
+
+				scope.sanitizeTitle = function(place) {
+					return place.address[place.type] || place.address.address29;
+				}
+
+				scope.sanitizeAddress = function(place) {
+
+					var address = '';
+					if(place.address.road) {
+						address += place.address.road;
+					}
+
+					if(place.address.house_number) {
+						address += ', ' + place.address.house_number;
+					}
+
+					if(place.address.city_district) {
+						if(place.address.road) {
+							address += ' - ';
+						}
+						address += place.address.city_district;
+					}
+
+					return address;
 
 				};
 

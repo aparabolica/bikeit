@@ -115,6 +115,58 @@
 	}
 }
 
+@osm-list-height: 60px;
+
+.osm-place.list-item {
+	border-bottom: 1px solid @light-gray;
+	cursor: pointer;
+	&:hover {
+		border-color: @gray;
+	}
+	.place-label {
+		width: 25%;
+		float: left;
+		.maki-icon {
+			margin: 16px 10px 0 0;
+			float: left;
+		}
+		h4 {
+			font-family: "Open Sans";
+			font-weight: 400;
+			line-height: @osm-list-height;
+			font-size: 12px;
+			text-transform: uppercase;
+			margin: 0;
+		}
+	}
+	.place-header {
+		width: 60%;
+		float: left;
+		h3 {
+			float: left;
+			width: 40%;
+			font-size: 22px;
+			line-height: @osm-list-height;
+			font-weight: 600;
+			margin: 0;
+		}
+		p {
+			margin: 0;
+			line-height: @osm-list-height;
+		}
+	}
+	.place-actions {
+		width: 15%;
+		float: left;
+		.button {
+			line-height: @osm-list-height;
+			display: block;
+			text-align: center;
+			padding: 0;
+		}
+	}
+}
+
 @single-map-height: 600px;
 
 .single-place {
@@ -243,5 +295,40 @@
 	}
 	#reviews {
 		margin: 80px 0 0;
+	}
+}
+
+
+#new-place {
+	.map {
+		.map-container {
+			position: relative;
+			height: 300px;
+			border: 1px solid @dark-gray;
+			&:after,
+			&:before {
+				content: '';
+				background: @dark-gray;
+				pointer-events: none;
+				position: absolute;
+				z-index: 999999;
+			}
+			&:after {
+				left: 0;
+				top: 50%;
+				height: 1px;
+				width: 100%;
+			}
+			&:before {
+				left: 50%;
+				top: 0;
+				height: 100%;
+				width: 1px;
+			}
+			.leaflet-container {
+				width: 100%;
+				height: 100%;
+			}
+		}
 	}
 }

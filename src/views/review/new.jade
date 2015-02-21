@@ -1,12 +1,9 @@
 div(ng-hide="user" ng-include="loginTemplate")
 
 div(ng-show="user")
-	section#new-place(ng-show="!place || !place.ID")
-		h2 Find or create a place
 	section#new-review(ng-show="place && place.ID")
 		h2 {{labels('Reviewing')}} {{place.title}}
 		form(ng-submit="submit(newReview)" ng-init="newReview = {}")
-			input(type="hidden" ng-model="newReview.place" ng-value="place.ID")
 			.form-section.clearfix
 				.approval(ng-class="{failed: newReview.approved == 0, approved: newReview.approved == 1}")
 					p.icon
