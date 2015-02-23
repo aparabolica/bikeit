@@ -31,7 +31,7 @@
     /* Nested Column Classes */
     .column.alpha, .columns.alpha               { margin-left: 0; }
     .column.omega, .columns.omega               { margin-right: 0; }
-    
+
     /* Base Grid */
     .container .one.column                      { width: 60px;  }
     .container .two.columns                     { width: 140px; }
@@ -39,17 +39,17 @@
     .container .four.columns                    { width: 300px; }
     .container .five.columns                    { width: 380px; }
     .container .six.columns                     { width: 460px; }
-    .container .seven.columns                   { width: 540px; }   
+    .container .seven.columns                   { width: 540px; }
     .container .eight.columns                   { width: 620px; }
     .container .nine.columns                    { width: 700px; }
-    .container .ten.columns                     { width: 780px; }   
-    .container .eleven.columns                  { width: 860px; }   
+    .container .ten.columns                     { width: 780px; }
+    .container .eleven.columns                  { width: 860px; }
     .container .twelve.columns                  { width: 940px; }
 
     .container .one-third.column                { width: 300px; }
     .container .two-thirds.column               { width: 620px; }
-    
-    /* Offsets */   
+
+    /* Offsets */
     .container .offset-by-one                   { margin-left: 80px;  }
     .container .offset-by-two                   { margin-left: 170px; }
     .container .offset-by-three                 { margin-left: 250px; }
@@ -63,52 +63,10 @@
     .container .offset-by-eleven                { margin-left: 890px; }
 
 /* #Big screens
-===================================================*/
-
-    /* Note: Design for a width of 1680px */
-
-    @media only screen and (min-width: 1680px) {
-        .container                                  { width: 1680px; }
-        .container .column,
-        .container .columns                         { margin-left: 20px; margin-right: 20px;  }
-        .row                                        { margin-bottom: 40px; }
-        .anti-row                                   { margin-top: -40px; }
-        .column.alpha, .columns.alpha               { margin-left: 0; }
-        .column.omega, .columns.omega               { margin-right: 0; }
-        
-        .container .one.column                      { width: 100px;  }
-        .container .two.columns                     { width: 240px; }
-        .container .three.columns                   { width: 380px; }
-        .container .four.columns                    { width: 520px; }
-        .container .five.columns                    { width: 660px; }
-        .container .six.columns                     { width: 800px; }
-        .container .seven.columns                   { width: 940px; }   
-        .container .eight.columns                   { width: 1080px; }
-        .container .nine.columns                    { width: 1220px; }
-        .container .ten.columns                     { width: 1360px; }   
-        .container .eleven.columns                  { width: 1500px; }   
-        .container .twelve.columns                  { width: 1640px; }
-        
-        .container .one-third.column                { width: 520px; }
-        .container .two-thirds.column               { width: 1080px; }
-
-        /* Offsets */
-        .container .offset-by-one                   { margin-left: 140px;  }
-        .container .offset-by-two                   { margin-left: 280px; }
-        .container .offset-by-three                 { margin-left: 420px; }
-        .container .offset-by-four                  { margin-left: 560px; }
-        .container .offset-by-five                  { margin-left: 700px; }
-        .container .offset-by-six                   { margin-left: 840px; }
-        .container .offset-by-seven                 { margin-left: 980px; }
-        .container .offset-by-eight                 { margin-left: 1120px; }
-        .container .offset-by-nine                  { margin-left: 1260px; }
-        .container .offset-by-ten                   { margin-left: 1400px; }
-        .container .offset-by-eleven                { margin-left: 1540px; }
-    }
 
     /* Note: Design for a width of 1200px */
 
-    @media only screen and (min-width: 1200px) and (max-width: 1679px) {
+    @media only screen and (min-width: 1200px) {
         .container                                  { width: 1200px; }
         .container .column,
         .container .columns                         { margin-left: 20px; margin-right: 20px;  }
@@ -116,20 +74,20 @@
         .anti-row                                   { margin-top: -40px; }
         .column.alpha, .columns.alpha               { margin-left: 0; }
         .column.omega, .columns.omega               { margin-right: 0; }
-        
+
         .container .one.column                      { width: 60px;  }
         .container .two.columns                     { width: 160px; }
         .container .three.columns                   { width: 260px; }
         .container .four.columns                    { width: 360px; }
         .container .five.columns                    { width: 460px; }
         .container .six.columns                     { width: 560px; }
-        .container .seven.columns                   { width: 660px; }   
+        .container .seven.columns                   { width: 660px; }
         .container .eight.columns                   { width: 760px; }
         .container .nine.columns                    { width: 860px; }
-        .container .ten.columns                     { width: 960px; }   
-        .container .eleven.columns                  { width: 1060px; }   
+        .container .ten.columns                     { width: 960px; }
+        .container .eleven.columns                  { width: 1060px; }
         .container .twelve.columns                  { width: 1160px; }
-        
+
         .container .one-third.column                { width: 360px; }
         .container .two-thirds.column               { width: 760px; }
 
@@ -159,25 +117,25 @@
         .column.alpha, .columns.alpha               { margin-left: 0; margin-right: 10px; }
         .column.omega, .columns.omega               { margin-right: 0; margin-left: 10px; }
         .alpha.omega                                { margin-left: 0; margin-right: 0; }
-            
+
         .container .one.column                      { width: 44px;  }
         .container .two.columns                     { width: 108px; }
         .container .three.columns                   { width: 172px; }
         .container .four.columns                    { width: 236px; }
         .container .five.columns                    { width: 300px; }
         .container .six.columns                     { width: 364px; }
-        .container .seven.columns                   { width: 428px; }   
+        .container .seven.columns                   { width: 428px; }
         .container .eight.columns                   { width: 492px; }
         .container .nine.columns                    { width: 556px; }
-        .container .ten.columns                     { width: 620px; }   
-        .container .eleven.columns                  { width: 684px; }   
+        .container .ten.columns                     { width: 620px; }
+        .container .eleven.columns                  { width: 684px; }
         .container .twelve.columns                  { width: 748px; }
 
         .container .one-third.column                { width: 236px; }
         .container .two-thirds.column               { width: 492px; }
-            
-        
-        /* Offsets */   
+
+
+        /* Offsets */
         .container .offset-by-one                   { margin-left: 64px;  }
         .container .offset-by-two                   { margin-left: 128px; }
         .container .offset-by-three                 { margin-left: 192px; }

@@ -87,6 +87,11 @@ angular.module('bikeit.place', [])
 			if(nonce) {
 				WP.getUser().then(function(data) {
 					$scope.user = data;
+					$timeout(function() {
+						leafletData.getMap('new-place-map').then(function(map) {
+							map.invalidateSize(false);
+						});
+					}, 300);
 				});
 			} else {
 				$scope.user = false;
@@ -124,6 +129,13 @@ angular.module('bikeit.place', [])
 				address += ', ' + place.address.house_number;
 			}
 
+			if(place.address.suburb && place.address.suburb != place.address.city_district) {
+				if(place.address.road) {
+					address += ' - ';
+				}
+				address += place.address.suburb;
+			}
+
 			if(place.address.city_district) {
 				if(place.address.road) {
 					address += ' - ';
@@ -134,16 +146,24 @@ angular.module('bikeit.place', [])
 			return address;
 		};
 
+		$scope.clearPlace = function() {
+			$scope.place = {};
+		}
+
 		/* TODO */
 		$scope.selectAddress = function(address) {
-			console.log(address);
+			$scope.place.address = address.address;
 			$scope.place.lat = address.lat;
 			$scope.place.lon = address.lon;
-			$scope.place.address = address;
+			$scope.map.center = {
+				lat: parseFloat($scope.place.lat),
+				lng: parseFloat($scope.place.lon),
+				zoom: 18
+			}
 		};
 
 		$scope.newPlace = function(place) {
-			$scope.place = place || {};
+			$scope.place = _.clone(place) || {};
 			$scope.map = {
 				defaults: {
 					tileLayer: window.bikeit.map.tile,
@@ -167,6 +187,7 @@ angular.module('bikeit.place', [])
 				controller: ['$scope', function(scope) {
 
 					scope.$watch('search', function(text) {
+						console.log(scope);
 						if(!text || typeof text == 'undefined' || text.length <= 2) {
 							$scope.searchResults = [];
 						} else {
@@ -191,8 +212,8 @@ angular.module('bikeit.place', [])
 
 		$scope.submit = function(place) {
 			WP.post({
-				'title': place.title,
-				'content_raw': '',
+				'title': place.name,
+				'content_raw': ' ',
 				'type': 'place',
 				'status': 'publish',
 				'place_meta': {

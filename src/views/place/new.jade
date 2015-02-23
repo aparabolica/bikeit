@@ -4,7 +4,7 @@ div(ng-show="user")
 	section#new-place
 		h2 {{place.osm_id ? labels('Adding') + ' ' + place.name : labels('New place')}}
 		form(ng-submit="submit(place)")
-			a(href="javascript:void(0);" ng-show="place.osm_id" ng-click="place = {}") {{labels('Clear data (register new place)')}}
+			a(href="javascript:void(0);" ng-show="place.osm_id" ng-click="clearPlace()") {{labels('Clear data (register new place)')}}
 			p.name
 				label(for="input_place_name") {{labels('Name')}}
 				input(id="input_place_name" type="text" ng-model="place.name" ng-disabled="place.osm_id")

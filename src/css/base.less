@@ -74,37 +74,40 @@ ul li.column {
 
 .section-title {
 	font-family: "Open Sans";
-	font-size: 36px;
+	font-size: 28px;
+	line-height: 28px;
 	margin: 0 0 40px;
 	color: #666;
 }
 
 #main-search {
 	::-webkit-input-placeholder {
-		color: #fff;
-		font-weight: 600;
+		color: #666;
+		font-weight: 500;
 		opacity: .9;
 	}
 
 	:-moz-placeholder {
-		color: #fff;
-		font-weight: 600;
+		color: #666;
+		font-weight: 500;
 		opacity: .9;
 	}
 
 	::-moz-placeholder {
-		color: #fff;
-		font-weight: 600;
+		color: #666;
+		font-weight: 500;
 		opacity: .9;
 	}
 
 	:-ms-input-placeholder {
-		color: #fff;
+		color: #666;
+		font-weight: 500;
+		opacity: .9;
 	}
 	#main-search-input {
 		background: @light-orange;
 		border-top: 2px solid @dark-orange;
-		padding: 40px 0 0;
+		padding: 60px 0 0;
 		form {
 			margin: 0;
 			padding: 0;
@@ -112,30 +115,36 @@ ul li.column {
 		}
 		.icon-magnifying-glass {
 			font-size: 40px;
-			color: #fff;
+			color: #333;
 			pointer-events: none;
 			position: absolute;
-			top: 20px;
-			right: 0;
+			top: 17px;
+			right: 20px;
 		}
 		.search-input {
 			width: 100%;
-			padding: 20px 0;
+			padding: 20px;
 			margin: 0;
 			background: transparent;
 			.box-sizing(border-box);
-			font-size: 24px;
+			font-size: 28px;
+			line-height: 36px;
+			background: #fff;
 			border: 0;
-			color: #fff;
+			color: #333;
 			text-align: left;
 			//.box-shadow(0 0 3px 2px @light-gray);
 			//border: 1px solid @gray;
-			border-bottom: 1px solid @dark-orange;
 			margin: 0 0 10px;
+			.transition(all .2s linear);
+			&:focus {
+				.box-shadow(0 0 5px 1px rgba(0,0,0,0.1));
+			}
 		}
 		p {
 			color: #fff;
-			opacity: .8;
+			font-size: 14px;
+			line-height: 22px;
 		}
 	}
 	li {
