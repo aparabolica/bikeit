@@ -16,12 +16,12 @@ section#main-search.anti-row(ng-controller="SearchController")
 			ul.twelve.columns.row
 				li(ng-repeat="post in searchResults")
 					place-list-item(place="post" style="minimal")
-	#osm-results.main-search-results(ng-controller="SubmitPlaceCtrl" ng-show="addressResults.length")
+	#osm-results.main-search-results(ng-controller="SubmitPlaceCtrl" ng-show="filteredAddress.length")
 		.container
 			.twelve.columns.row
 				h2.search-title {{labels('OpenStreetMap Results')}}
 				ul
-					li(ng-repeat="place in addressResults" ng-click="newPlace(place)")
+					li(ng-repeat="place in filteredAddress = (addressResults | hideFound:searchResults)" ng-click="newPlace(place)")
 						osm-list-item(place="place")
 
 section#featured-places

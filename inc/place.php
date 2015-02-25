@@ -371,14 +371,16 @@ class BikeIT_Places {
 
 	function posts_clauses($clauses, $query) {
 		global $wpdb, $wp;
-		if($query->is_search) {
+		if($query->is_search && ($query->get('post_type') == 'place' || $query->get('post_type') == array('place'))) {
 			$clauses['join'] .= " LEFT JOIN $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id) ";
 			$like = '%' . $wpdb->esc_like( $query->get('s') ) . '%';
+			$meta_like = str_replace(' ', '%', $like);
 			$clauses['where'] = preg_replace(
-				"/($wpdb->posts.post_title LIKE '{$like}')/i",
-				"$0 OR ( $wpdb->postmeta.meta_value LIKE '{$like}' )",
+				"/$wpdb->posts.post_title/",
+				"$wpdb->postmeta.meta_value",
 				$clauses['where']
 			);
+			error_log($clauses['where']);
 			$clauses['distinct'] = 'DISTINCT';
 		}
 		return $clauses;
@@ -475,6 +477,9 @@ class BikeIT_Places {
 
 		if($review_meta['osm_id'])
 			update_post_meta($post['ID'], '_osm_id', $review_meta['osm_id']);
+
+		if($review_meta['params'])
+			update_post_meta($post['ID'], '_params', $review_meta['params']);
 
 		do_action('save_post', $post['ID'], get_post($post['ID']), true);
 

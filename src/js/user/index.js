@@ -9,7 +9,8 @@ angular.module('bikeit.user', [])
 	'ngDialog',
 	'templatePath',
 	'Labels',
-	function(WP, $scope, Auth, ngDialog, templatePath, labels) {
+	'$state',
+	function(WP, $scope, Auth, ngDialog, templatePath, labels, $state) {
 
 		$scope.loadedUser = false;
 
@@ -17,6 +18,9 @@ angular.module('bikeit.user', [])
 
 		$scope.loginForm = function() {
 			$scope.dialog = ngDialog.open({
+				preCloseCallback: function() {
+					$state.go($state.current, {}, {reload: true});
+				},
 				template: templatePath + '/views/login.html',
 				scope: $scope
 			});
@@ -28,12 +32,12 @@ angular.module('bikeit.user', [])
 			$scope.loadedUser = false;
 			if(nonce) {
 				WP.getUser().then(function(data) {
+					$scope.user = data;
+					$scope.loadedUser = true;
 					if($scope.dialog) {
 						$scope.dialog.close();
 						$scope.dialog = false;
 					}
-					$scope.user = data;
-					$scope.loadedUser = true;
 				}, function(reason) {
 					$scope.loadedUser = true;
 				});

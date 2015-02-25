@@ -196,7 +196,6 @@ angular.module('bikeit.place', [])
 				controller: ['$scope', function(scope) {
 
 					scope.$watch('search', function(text) {
-						console.log(scope);
 						if(!text || typeof text == 'undefined' || text.length <= 2) {
 							$scope.searchResults = [];
 						} else {
@@ -232,10 +231,10 @@ angular.module('bikeit.place', [])
 						'lat': parseFloat(place.lat),
 						'lng': parseFloat(place.lon)
 					},
-					'osm_id': place.osm_id
+					'osm_id': place.osm_id,
+					'params': JSON.stringify(place)
 				}
 			}).then(function(data) {
-				console.log(data);
 				if($scope.dialog) {
 					$scope.dialog.close();
 					$scope.dialog = false;
@@ -379,6 +378,26 @@ angular.module('bikeit.place', [])
 				}
 
 			}
+		}
+	}
+])
+
+.filter('hideFound', [
+	function() {
+		return function(input, found) {
+
+			if(input.length && found.length) {
+
+				return _.filter(input, function(item) {
+					return !_.filter(found, function(fItem) {
+						return item.osm_id == fItem.osm_id;
+					});
+				});
+
+			}
+
+			return input;
+
 		}
 	}
 ])
