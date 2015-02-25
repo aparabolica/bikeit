@@ -38,6 +38,9 @@ angular.module('bikeit.place', [])
 						}
 					]
 				}
+			})
+			.state('placesSingle.review', {
+				url: 'review/'
 			});
 	}
 ])
@@ -57,12 +60,17 @@ angular.module('bikeit.place', [])
 .controller('PlaceSingleController', [
 	'PlaceData',
 	'$scope',
-	function(PlaceData, $scope) {
+	'$state',
+	function(PlaceData, $scope, $state) {
 
 		$scope.place = PlaceData.place;
 		$scope.reviews = PlaceData.reviews.data;
 
-		console.log($scope.reviews);
+		console.log($state);
+
+		if($state.current.name == 'placesSingle.review') {
+			$scope.openReview = true;
+		}
 
 	}
 ])
@@ -77,7 +85,8 @@ angular.module('bikeit.place', [])
 	'$timeout',
 	'$http',
 	'leafletData',
-	function(templatePath, ngDialog, $scope, Auth, WP, $location, $timeout, $http, leafletData) {
+	'$state',
+	function(templatePath, ngDialog, $scope, Auth, WP, $location, $timeout, $http, leafletData, $state) {
 
 		$scope.loginTemplate = templatePath + '/views/login.html';
 
@@ -211,12 +220,19 @@ angular.module('bikeit.place', [])
 		};
 
 		$scope.submit = function(place) {
+			console.log(place);
 			WP.post({
 				'title': place.name,
 				'content_raw': ' ',
 				'type': 'place',
 				'status': 'publish',
 				'place_meta': {
+					'location': {
+						'address': $scope.sanitizeAddress(place),
+						'lat': parseFloat(place.lat),
+						'lng': parseFloat(place.lon)
+					},
+					'osm_id': place.osm_id
 				}
 			}).then(function(data) {
 				console.log(data);
@@ -224,6 +240,7 @@ angular.module('bikeit.place', [])
 					$scope.dialog.close();
 					$scope.dialog = false;
 				}
+				$state.go('placesSingle.review', {placeId: data.ID});
 			}, function(error) {
 				console.log(error);
 			});

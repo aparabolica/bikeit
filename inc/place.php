@@ -20,6 +20,7 @@ class BikeIT_Places {
 		add_filter('posts_clauses', array($this, 'posts_clauses'), 10, 2);
 		add_filter('json_prepare_term', array($this, 'json_prepare_term'), 10, 2);
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
+		add_action('json_insert_post', array($this, 'json_insert_post'), 10, 3);
 
 	}
 
@@ -202,7 +203,7 @@ class BikeIT_Places {
 				'title' => __('Location', 'bikeit'),
 				'fields' => array (
 					array (
-						'key' => 'field_53e54cab76167',
+						'key' => 'field_location',
 						'label' => 'Location',
 						'name' => 'location',
 						'type' => 'google_map',
@@ -432,6 +433,9 @@ class BikeIT_Places {
 			$_post['location']['lat'] = floatval($_post['location']['lat']);
 			$_post['location']['lng'] = floatval($_post['location']['lng']);
 
+			// OSM
+			$_post['osm_id'] = get_post_meta($post['ID'], '_osm_id', true);
+
 			/*
 			 * Reviews data and scores
 			 */
@@ -457,6 +461,22 @@ class BikeIT_Places {
 		}
 
 		return $data;
+
+	}
+
+	function json_insert_post($post, $data, $update) {
+
+		$review_meta = $data['place_meta'];
+
+		// TODO Validation
+
+		if($review_meta['location'])
+			update_field('location', $review_meta['location'], $post['ID']);
+
+		if($review_meta['osm_id'])
+			update_post_meta($post['ID'], '_osm_id', $review_meta['osm_id']);
+
+		do_action('save_post', $post['ID'], get_post($post['ID']), true);
 
 	}
 

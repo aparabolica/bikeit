@@ -20,7 +20,7 @@ article.single-place(id="place-{{place.id}}")
 						| {{labels('Total reviews')}}:
 						span.count {{place.review_count}}
 					p.submit-review(ng-controller="SubmitReviewCtrl")
-						a(href="javascript:void(0);" ng-click="newReview(place)")
+						a(href="javascript:void(0);" ng-click="newReview(place)" ng-init="onLoadReview(openReview, place)")
 							| {{labels('Submit review')}}
 							span.icon-pencil
 	section#reviews

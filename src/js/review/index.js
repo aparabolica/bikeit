@@ -27,7 +27,8 @@ angular.module('bikeit.review', [])
 	'AuthService',
 	'WPService',
 	'$location',
-	function(templatePath, ngDialog, $scope, Auth, WP, $location) {
+	'$state',
+	function(templatePath, ngDialog, $scope, Auth, WP, $location, $state) {
 
 		$scope.loginTemplate = templatePath + '/views/login.html';
 
@@ -37,18 +38,33 @@ angular.module('bikeit.review', [])
 			if(nonce) {
 				WP.getUser().then(function(data) {
 					$scope.user = data;
+					$scope.$emit('userReady', $scope.user);
 				});
 			} else {
 				$scope.user = false;
+				$scope.$emit('userReady', false);
 			}
 		});
 
 		$scope.newReview = function(place) {
 			$scope.place = place || false;
 			$scope.dialog = ngDialog.open({
+				preCloseCallback: function() {
+					$state.go('placesSingle', {}, {reload: true});
+				},
 				template: templatePath + '/views/review/new.html',
 				scope: $scope
 			});
+		};
+
+		$scope.onLoadReview = function(load, place) {
+
+			if(load) {
+				$scope.$on('userReady', function(ev, data) {
+					$scope.newReview(place);
+				});
+			}
+
 		};
 
 		$scope.submit = function(review) {
