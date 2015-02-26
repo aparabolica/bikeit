@@ -16,12 +16,13 @@
     "browserify": "latest",
     "browserify-shim": "latest",
     "grunt": "latest",
-    "grunt-contrib-less": "latest",
-    "grunt-contrib-jade": "latest",
     "grunt-browserify": "latest",
-    "grunt-contrib-uglify": "latest",
     "grunt-contrib-copy": "latest",
-    "grunt-contrib-watch": "latest"
+    "grunt-contrib-jade": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-pot": "^0.2.1"
   },
   "napa": {
     "iD": "https://github.com/openstreetmap/iD/archive/master.tar.gz"
@@ -43,7 +44,7 @@
     "type": "git",
     "url": "git://github.com/cardume/bikeit.git"
   },
-  "author": "Miguel Peixe",
+  "author": "Miguel Peixe <miguel@cardume.art.br>",
   "license": "GPLv3",
   "scripts": {
     "postinstall": "./node_modules/.bin/napa && node ./osm-icons.js"

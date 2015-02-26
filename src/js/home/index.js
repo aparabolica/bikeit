@@ -20,7 +20,10 @@ angular.module('bikeit.home', [
 						'WPService',
 						function(WP) {
 							return WP.query({
-								type: 'place'
+								type: 'place',
+								filter: {
+									'posts_per_page': 100
+								}
 							});
 						}
 					]

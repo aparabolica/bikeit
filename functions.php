@@ -1,6 +1,14 @@
 <?php
 
 /*
+ * Text domain
+ */
+function bikeit_theme_setup(){
+    load_theme_textdomain('bikeit', get_template_directory() . '/languages');
+}
+add_action('after_setup_theme', 'bikeit_theme_setup');
+
+/*
  * Required WP REST API plugin
  */
 require_once dirname(__FILE__) . '/inc/class-tgm-plugin-activation.php';

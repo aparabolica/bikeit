@@ -87,12 +87,31 @@ module.exports = function(grunt) {
 				]
 			}
 		},
+		pot: {
+			options: {
+				text_domain: 'bikeit',
+				language: 'PHP',
+				keywords: [
+					'__',
+					'_e',
+					'_ex',
+					'_n',
+					'_nx'
+				],
+				dest: 'languages/'
+			},
+			files: {
+				src: ['**/*.php', '!inc/acf/**/*.php', '!node_modules/**/*.php', '!inc/class-tgm*'],
+				expand: true
+			}
+		},
 		watch: {
 			options: {
 				livereload: true
 			},
 			php: {
-				files: '**/*.php'
+				files: '**/*.php',
+				tasks: ['pot']
 			},
 			css: {
 				files: 'src/css/**/*.less',
@@ -118,6 +137,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-pot');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask(
@@ -135,7 +155,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'build',
 		'Compiles everything.',
-		['javascript', 'views', 'copy']
+		['javascript', 'views', 'copy', 'pot']
 	);
 
 	grunt.registerTask(
