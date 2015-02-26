@@ -380,7 +380,6 @@ class BikeIT_Places {
 				"$wpdb->postmeta.meta_value",
 				$clauses['where']
 			);
-			error_log($clauses['where']);
 			$clauses['distinct'] = 'DISTINCT';
 		}
 		return $clauses;

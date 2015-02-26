@@ -388,8 +388,8 @@ angular.module('bikeit.place', [])
 
 			if(input.length && found.length) {
 
-				return _.filter(input, function(item) {
-					return !_.filter(found, function(fItem) {
+				input = _.filter(input, function(item) {
+					return !_.find(found, function(fItem) {
 						return item.osm_id == fItem.osm_id;
 					});
 				});
