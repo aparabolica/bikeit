@@ -1,10 +1,11 @@
 <?php
 
 /*
- * Text domain
+ * Theme setup
  */
 function bikeit_theme_setup(){
-    load_theme_textdomain('bikeit', get_template_directory() . '/languages');
+	// Text domain
+	load_theme_textdomain('bikeit', get_template_directory() . '/languages');
 }
 add_action('after_setup_theme', 'bikeit_theme_setup');
 
@@ -89,7 +90,8 @@ function bikeit_labels() {
 		'Nominate for BikeIT Stamp' => __('Nominate for BikeIT Stamp', 'bikeit'),
 		'Notify place about your review' => __('Notify place about your review', 'bikeit'),
 		'Tell us about your experience' => __('Tell us about your experience', 'bikeit'),
-		'Send photos' => __('Send photos', 'bikeit')
+		'Send photos' => __('Send photos', 'bikeit'),
+		'Where are you going?' => __('Where are you going?', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
@@ -144,7 +146,7 @@ function bikeit_scripts() {
 		'locale' => get_bloginfo('language'),
 		'url' => home_url(),
 		'templateUri' => get_template_directory_uri(),
-		'apiUrl' => esc_url_raw(get_json_url()),
+		'apiUrl' => get_option('permalink_structure') ? esc_url(get_json_url()) . '/' : esc_url(get_json_url()),
 		'nonce' => wp_create_nonce('wp_json'),
 		'logoutUrl' => wp_logout_url(home_url()),
 		'labels' => bikeit_labels(),

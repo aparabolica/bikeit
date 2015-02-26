@@ -46,6 +46,7 @@ class BikeIT_Settings {
 
 		?>
 		<p class="selected-city"></p>
+		<p class="remove-city"><a href="#"><?php _e('Remove city', 'bikeit'); ?></a></p>
 		<input type="hidden" name="bikeit_city" value='<?php echo get_option('bikeit_city'); ?>' />
 		<input type="text" id="bikeit_city" class="regular-text" autocomplete="off" />
 		<p class="description"><?php _e('Start typing a city name...', 'bikeit'); ?></p>
@@ -81,18 +82,27 @@ class BikeIT_Settings {
 
 				$cityResults.hide();
 
+				$('.remove-city').hide();
+
+				$('.remove-city a').on('click', function() {
+					$('input[name="bikeit_city"]').val('');
+					$('.selected-city').text('');
+					$('.remove-city,.selected-city').hide();
+					return false;
+				});
+
 				var updateSelectedCity = function(data) {
 
 					if(typeof data == 'string') {
 						try {
 							data = JSON.parse(data);
 						} catch(err) {
-							data = '{}';
-							data = JSON.parse(data);
+							data = {};
 						}
 					}
 
-					if(data) {
+					if(!_.isEmpty(data)) {
+						$('.remove-city').show();
 						$('input[name="bikeit_city"]').val(JSON.stringify(data));
 						$('.selected-city').text(data.display_name);
 						$('.selected-city').show();

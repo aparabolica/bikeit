@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-26 17:35-0300\n"
+"POT-Creation-Date: 2015-02-26 18:16-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,76 +17,80 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: functions.php:75
+#: functions.php:76
 msgid "Viewing list of reviews"
 msgstr ""
 
-#: functions.php:76
+#: functions.php:77
 msgid "Featured"
 msgstr ""
 
-#: functions.php:77
+#: functions.php:78
 msgid "Filter your search"
 msgstr ""
 
-#: functions.php:78
+#: functions.php:79
 msgid "Structure"
 msgstr ""
 
-#: functions.php:79
+#: functions.php:80
 msgid "Kindness"
 msgstr ""
 
-#: functions.php:80
+#: functions.php:81
 msgid "Total reviews"
 msgstr ""
 
-#: functions.php:81
+#: functions.php:82
 msgid "Submit review"
 msgstr ""
 
-#: functions.php:82 inc/review.php:26 inc/review.php:36
+#: functions.php:83 inc/review.php:26 inc/review.php:36
 msgid "Reviews"
 msgstr ""
 
-#: functions.php:83
+#: functions.php:84
 msgid "Rating"
 msgstr ""
 
-#: functions.php:84 inc/review.php:169
+#: functions.php:85 inc/review.php:169
 msgid "Approved"
 msgstr ""
 
-#: functions.php:85
+#: functions.php:86
 msgid "Failed"
 msgstr ""
 
-#: functions.php:86
+#: functions.php:87
 msgid "Published"
 msgstr ""
 
-#: functions.php:87
+#: functions.php:88
 msgid "Reply this review"
 msgstr ""
 
-#: functions.php:88
+#: functions.php:89
 msgid "Reviewing"
 msgstr ""
 
-#: functions.php:89
+#: functions.php:90
 msgid "Nominate for BikeIT Stamp"
 msgstr ""
 
-#: functions.php:90
+#: functions.php:91
 msgid "Notify place about your review"
 msgstr ""
 
-#: functions.php:91
+#: functions.php:92
 msgid "Tell us about your experience"
 msgstr ""
 
-#: functions.php:92
+#: functions.php:93
 msgid "Send photos"
+msgstr ""
+
+#: functions.php:94
+msgid "Where are you going?"
 msgstr ""
 
 #: inc/auth.php:41 inc/auth.php:92
@@ -325,7 +329,11 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: inc/settings.php:51
+#: inc/settings.php:49
+msgid "Remove city"
+msgstr ""
+
+#: inc/settings.php:52
 msgid "Start typing a city name..."
 msgstr ""
 

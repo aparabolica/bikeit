@@ -109,20 +109,18 @@ angular.module('bikeit.place', [])
 
 		$scope.categories = window.bikeit.placeCategories;
 
-		console.log($scope.categories);
-
 		var search = _.debounce(function(text) {
 			if(!text || typeof text == 'undefined') {
 				$scope.searchResults = [];
 			} else {
-				var bounds = window.bikeit.city.boundingbox;
+				var bounds = window.bikeit.city ? window.bikeit.city.boundingbox : false;
 				$http.get('http://nominatim.openstreetmap.org/search', {
 					params: {
 						format: 'json',
 						q: text,
-						bounded: 1,
+						bounded: bounds ? 1 : '',
 						addressdetails: 1,
-						viewbox: bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0]
+						viewbox: bounds ? bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0] : ''
 					}
 				}).success(function(data) {
 					$scope.searchResults = data;

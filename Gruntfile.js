@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 				dest: 'languages/'
 			},
 			files: {
-				src: ['**/*.php', '!inc/acf/**/*.php', '!node_modules/**/*.php', '!inc/class-tgm*'],
+				src: ['**/*.php', '!node_modules/**/*.php', '!inc/acf/**/*.php', '!inc/class-tgm*'],
 				expand: true
 			}
 		},
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
 				livereload: true
 			},
 			php: {
-				files: '**/*.php',
+				files: ['**/*.php', '!inc/acf/**/*.php', '!node_modules/**/*.php', '!inc/class-tgm*'],
 				tasks: ['pot']
 			},
 			css: {
@@ -161,7 +161,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'default',
 		'Build, start server and watch.',
-		['browserify', 'views', 'copy', 'watch']
+		['browserify', 'views', 'copy', 'pot', 'watch']
 	);
 
 }

@@ -8,7 +8,7 @@ module.exports = [
 	'apiUrl',
 	function($rootScope, $http, $q, $window, apiUrl) {
 
-		var url = apiUrl + '/posts';
+		var url = apiUrl + 'posts';
 
 		var load = function(query, cb) {
 
@@ -124,7 +124,7 @@ module.exports = [
 				var deferred = $q.defer();
 
 				jQuery.ajax({
-					url: apiUrl + '/users/' + userId,
+					url: apiUrl + 'users/' + userId,
 					dataType: 'json',
 					cache: true,
 					success: function(data, text, xhr) {

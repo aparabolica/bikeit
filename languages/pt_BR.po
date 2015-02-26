@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-26 17:33-0300\n"
-"PO-Revision-Date: 2015-02-26 17:33-0300\n"
+"POT-Creation-Date: 2015-02-26 18:16-0300\n"
+"PO-Revision-Date: 2015-02-26 18:17-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -17,77 +17,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: functions.php:75
+#: functions.php:76
 msgid "Viewing list of reviews"
 msgstr "Visualizando avaliações"
 
-#: functions.php:76
+#: functions.php:77
 msgid "Featured"
 msgstr "Destacada"
 
-#: functions.php:77
+#: functions.php:78
 msgid "Filter your search"
 msgstr "Filtre sua busca"
 
-#: functions.php:78
+#: functions.php:79
 msgid "Structure"
 msgstr "Estrutura"
 
-#: functions.php:79
+#: functions.php:80
 msgid "Kindness"
 msgstr "Gentileza"
 
-#: functions.php:80
+#: functions.php:81
 msgid "Total reviews"
 msgstr "Total de avaliações"
 
-#: functions.php:81
+#: functions.php:82
 msgid "Submit review"
 msgstr "Enviar avaliação"
 
-#: functions.php:82 inc/review.php:26 inc/review.php:36
+#: functions.php:83 inc/review.php:26 inc/review.php:36
 msgid "Reviews"
 msgstr "Avaliações"
 
-#: functions.php:83
+#: functions.php:84
 msgid "Rating"
 msgstr "Avaliação"
 
-#: functions.php:84 inc/review.php:169
+#: functions.php:85 inc/review.php:169
 msgid "Approved"
 msgstr "Aprovado"
 
-#: functions.php:85
+#: functions.php:86
 msgid "Failed"
 msgstr "Reprovado"
 
-#: functions.php:86
+#: functions.php:87
 msgid "Published"
 msgstr "Publicado"
 
-#: functions.php:87
+#: functions.php:88
 msgid "Reply this review"
 msgstr "Responder esta avaliação"
 
-#: functions.php:88
+#: functions.php:89
 msgid "Reviewing"
 msgstr "Avaliando"
 
-#: functions.php:89
+#: functions.php:90
 msgid "Nominate for BikeIT Stamp"
 msgstr "Nomear para o Selo BikeIt"
 
-#: functions.php:90
+#: functions.php:91
 msgid "Notify place about your review"
 msgstr "Notificar local sobre sua avaliação"
 
-#: functions.php:91
+#: functions.php:92
 msgid "Tell us about your experience"
 msgstr "Conte-nos sobre sua experiência"
 
-#: functions.php:92
+#: functions.php:93
 msgid "Send photos"
 msgstr "Enviar photos"
+
+#: functions.php:94
+msgid "Where are you going?"
+msgstr "Onde você vai?"
 
 #: inc/auth.php:41 inc/auth.php:92
 msgid "Cookie nonce is invalid"
@@ -325,7 +329,11 @@ msgstr "Configurações do BikeIT"
 msgid "City"
 msgstr "Cidade"
 
-#: inc/settings.php:51
+#: inc/settings.php:49
+msgid "Remove city"
+msgstr "Remover cidade"
+
+#: inc/settings.php:52
 msgid "Start typing a city name..."
 msgstr "Comece a digitar o nome de uma cidade..."
 
