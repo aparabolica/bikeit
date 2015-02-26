@@ -400,19 +400,6 @@ class BikeIT_Places {
 
 		}
 
-		// if($query->is_search) {
-
-		// 	$query->set('meta_query', array(
-		// 		'relation' => 'OR',
-		// 		array(
-		// 			'key' => 'location',
-		// 			'value' => $query->get('s'),
-		// 			'compare' => 'LIKE'
-		// 		)
-		// 	));
-
-		// }
-
 	}
 
 	function get_score_average($data) {
@@ -470,6 +457,9 @@ class BikeIT_Places {
 		$review_meta = $data['place_meta'];
 
 		// TODO Validation
+
+		if($review_meta['category'])
+			wp_set_object_terms($post['ID'], intval($review_meta['category']), 'place-category');
 
 		if($review_meta['location'])
 			update_field('location', $review_meta['location'], $post['ID']);

@@ -89,19 +89,20 @@ angular.module('bikeit.map', [
 				var imageObj = place.markers[image];
 				var position = place.markers.position;
 				var popupAnchor;
+				var offset = 5;
 
 				if(position == 'center') {
 					position = [imageObj.width/2, imageObj.height/2];
-					popupAnchor = [0, -imageObj.height/2-10];
+					popupAnchor = [0, -imageObj.height/2 + offset];
 				} else if(position == 'bottom_center') {
 					position = [imageObj.width/2, imageObj.height];
-					popupAnchor = [0, -imageObj.height-10];
+					popupAnchor = [0, -imageObj.height + offset];
 				} else if(position == 'bottom_left') {
 					position = [0, imageObj.height];
-					popupAnchor = [imageObj.width/2, -imageObj.height-10];
+					popupAnchor = [imageObj.width/2, -imageObj.height + offset];
 				} else if(position == 'bottom_right') {
 					position = [imageObj.width, imageObj.height];
-					popupAnchor = [-imageObj.width/2, -imageObj.height-10];
+					popupAnchor = [-imageObj.width/2, -imageObj.height + offset];
 				}
 
 				markers['place-category-' + place.term_id + '-' + image] = {

@@ -107,6 +107,10 @@ angular.module('bikeit.place', [])
 			}
 		});
 
+		$scope.categories = window.bikeit.placeCategories;
+
+		console.log($scope.categories);
+
 		var search = _.debounce(function(text) {
 			if(!text || typeof text == 'undefined') {
 				$scope.searchResults = [];
@@ -219,13 +223,13 @@ angular.module('bikeit.place', [])
 		};
 
 		$scope.submit = function(place) {
-			console.log(place);
 			WP.post({
 				'title': place.name,
 				'content_raw': ' ',
 				'type': 'place',
 				'status': 'publish',
 				'place_meta': {
+					'category': place.category,
 					'location': {
 						'address': $scope.sanitizeAddress(place),
 						'lat': parseFloat(place.lat),

@@ -8,6 +8,9 @@ div(ng-show="user")
 			p.name
 				label(for="input_place_name") {{labels('Name')}}
 				input(id="input_place_name" type="text" ng-model="place.name" ng-disabled="place.osm_id")
+			p.category
+				select(ng-model="place.category" ng-options="category.term_id as category.name for category in categories")
+					option --
 			.address-search(ng-hide="place.lat && place.lon")
 				p
 					label(for="input_place_search") {{labels('Search address')}}
