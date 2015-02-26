@@ -12,8 +12,20 @@ angular.module('bikeit.map', [
 	'$scope',
 	function($state, leafletData, leafletEvents, $scope) {
 
-		$scope.mapDefaults = {
+		var bounds = window.bikeit.city.boundingbox;
 
+		$scope.maxbounds = {
+			northEast: {
+				lat: parseFloat(bounds[0]),
+				lng: parseFloat(bounds[2])
+			},
+			southWest: {
+				lat: parseFloat(bounds[1]),
+				lng: parseFloat(bounds[3])
+			}
+		};
+
+		$scope.mapDefaults = {
 			tileLayer: window.bikeit.map.tile,
 			scrollWheelZoom: false
 
