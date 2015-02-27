@@ -65,7 +65,7 @@ angular.module('bikeit.auth', [])
 
 		$scope.login = function(data) {
 
-			$http.post(apiUrl + '/auth', _.extend({
+			$http.post(apiUrl + 'auth', _.extend({
 				'_wp_json_nonce': Auth.getNonce()
 			}, data))
 				.success(function(data) {
