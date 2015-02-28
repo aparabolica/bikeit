@@ -77,5 +77,20 @@ angular.module('bikeit.auth', [])
 				});
 		}
 
+		$scope.register = function(data) {
+
+			$http.post(apiUrl + 'register', _.extend({
+				'_wp_json_nonce': Auth.getNonce()
+			}, data))
+				.success(function(data) {
+					Auth.setNonce('auth');
+					Auth.setUser(data);
+				})
+				.error(function(data) {
+					console.log(data);
+				});
+
+		}
+
 	}
 ]);

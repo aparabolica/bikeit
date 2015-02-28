@@ -16,7 +16,7 @@
 
 #registration-form
 	h2 {{labels('Registration')}}
-	form
+	form(ng-controller="LoginForm" ng-submit="register(registerData)")
 		p
 			label(for="input_register_email") {{labels('Email')}}
 			input(id="input_register_email" type="text" ng-model="registerData.email")
