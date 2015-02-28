@@ -10,10 +10,10 @@ angular.module('bikeit.review', [])
 
 		return {
 			vote: function(id, vote) {
-				return $http.post(apiUrl + '/posts/' + id + '/vote', {vote: vote});
+				return $http.post(apiUrl + 'posts/' + id + '/vote', {vote: vote});
 			},
 			unvote: function(id) {
-				return $http.delete(apiUrl + '/posts/' + id + '/vote');
+				return $http.delete(apiUrl + 'posts/' + id + '/vote');
 			}
 		}
 
