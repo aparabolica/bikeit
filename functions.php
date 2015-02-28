@@ -167,6 +167,23 @@ function bikeit_admin_scripts() {
 }
 add_action('admin_footer', 'bikeit_admin_scripts');
 
+function bikeit_json_prepare_post($_post, $post, $context) {
+
+	unset($_post['guid']);
+	unset($_post['menu_order']);
+	unset($_post['parent']);
+	unset($_post['excerpt']);
+	unset($_post['password']);
+
+	return $_post;
+}
+add_filter('json_prepare_post', 'bikeit_json_prepare_post', 10, 3);
+
+function bikeit_page_link($url, $post_id) {
+	return get_bloginfo('url') . '/#!/page/' . $post_id . '/';
+}
+add_filter('page_link', 'bikeit_page_link', 10, 2);
+
 /*
  * BikeIT functions
  */

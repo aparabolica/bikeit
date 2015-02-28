@@ -11,6 +11,8 @@ class BikeIT_Places {
 
 		add_action('init', array($this, 'register_taxonomies'));
 		add_action('init', array($this, 'register_post_type'));
+		add_filter('post_type_link', array($this, 'post_type_link'), 10, 2);
+		add_filter('the_permalink', array($this, 'post_type_link'));
 		add_action('init', array($this, 'place_caps'));
 		add_action('init', array($this, 'register_fields'));
 		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
@@ -50,7 +52,7 @@ class BikeIT_Places {
 			'show_in_menu' => true,
 			'has_archive' => true,
 			'menu_position' => 4,
-			'rewrite' => array('slug' => 'place', 'with_front' => false),
+			'rewrite' => false,
 			'capability_type' => 'place',
 			'capabilities' => array(
 				'publish_posts' => 'publish_places',
@@ -67,6 +69,14 @@ class BikeIT_Places {
 
 		register_post_type('place', $args);
 
+	}
+
+	function post_type_link($url, $post = false) {
+		if(!$post) global $post;
+		if('place' == get_post_type($post)) {
+			return get_bloginfo('url') . '/#!/places/' . $post->ID . '/';
+		}
+		return $url;
 	}
 
 	function place_caps() {
@@ -413,6 +423,9 @@ class BikeIT_Places {
 	function json_prepare_post($_post, $post, $context) {
 
 		if($post['post_type'] == 'place') {
+
+			unset($_post['content']);
+
 			/*
 			 * Location
 			 */

@@ -28,10 +28,40 @@
 	<header id="masthead">
 
 		<div class="container">
-			<div class="three columns">
+			<div class="twelve columns">
 				<h1><a href="javascript:void(0);" ng-click="goHome()"><?php bloginfo('name'); ?><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" /></a></h1>
-			</div>
-			<div class="three columns">
+				<?php
+				if(is_multisite()) {
+					$sites = wp_get_sites();
+					if(!empty($sites)) {
+						$current = get_current_blog_id();
+						$name = trim(str_replace('BikeIt', '', get_bloginfo('name')));
+						echo '<div class="ms-dropdown-title">';
+						echo '<h2 class="side-title">' . $name . '<span class="icon-triangle-down"></span></h2>';
+						echo '<div class="ms-dropdown">';
+							echo '<input type="text" placeholder="' . __('Search cities', 'bikeit') . '" ng-model="msSearch" />';
+							$parsed_sites = array();
+							foreach($sites as $site) {
+								if($current != $site['blog_id']) {
+									$details = get_blog_details($site['blog_id']);
+									$name = trim(str_replace('BikeIt', '', $details->blogname));
+									$parsed_sites[] = array(
+										'url' => $details->siteurl,
+										'name' => $name
+									);
+								}
+							}
+							echo "<ul ng-init='mSites = " . json_encode($parsed_sites) . "'>";
+							echo '<li ng-repeat="site in mSites | filter:msSearch"><a href="{{site.url}}">{{site.name}}</a></li>';
+							echo '</ul>';
+						echo '</div>';
+						echo '</div>';
+					}
+				}
+				?>
+				<nav id="main-nav">
+					<?php wp_nav_menu(); ?>
+				</nav>
 				<div class="user" ng-controller="UserController" ng-show="loadedUser">
 					<div ng-show="user">
 						<p>Olá {{user.name}}. <a href="{{logoutUrl}}">Sair</a></p>

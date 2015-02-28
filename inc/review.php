@@ -10,6 +10,8 @@ class BikeIT_Reviews {
 	function __construct() {
 
 		add_action('init', array($this, 'register_post_type'));
+		add_filter('post_type_link', array($this, 'post_type_link'), 10, 2);
+		add_filter('the_permalink', array($this, 'post_type_link'));
 		add_action('init', array($this, 'register_fields'));
 		add_action('init', array($this, 'review_caps'));
 		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
@@ -63,6 +65,15 @@ class BikeIT_Reviews {
 
 		register_post_type('review', $args);
 
+	}
+
+	function post_type_link($url, $post = false) {
+		if(!$post) global $post;
+		$place = intval(get_post_meta($post->ID, 'place', true));
+		if('review' == get_post_type($post)) {
+			return get_bloginfo('url') . '/#!/places/' . $place . '/#review-' . $post->ID;
+		}
+		return $url;
 	}
 
 	function review_caps() {
@@ -287,6 +298,9 @@ class BikeIT_Reviews {
 	function json_prepare_post($_post, $post, $context) {
 
 		if($post['post_type'] == 'review') {
+
+			$_post['place'] = intval(get_post_meta($post['ID'], 'place', true));
+
 			$_post['rating'] = array();
 			$_post['rating']['approved'] = intval(get_post_meta($post['ID'], 'approved', true));
 			$_post['rating']['structure'] = intval(get_post_meta($post['ID'], 'structure', true));
