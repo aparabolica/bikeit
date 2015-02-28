@@ -132,7 +132,7 @@ class BikeIT_Settings {
 
 					$cityResults.empty();
 
-					$.get('http://nominatim.openstreetmap.org/search?format=json&city=' + text, function(data) {
+					$.get('http://nominatim.openstreetmap.org/search?format=json&q=' + text, function(data) {
 
 						_.each(data, function(item) {
 							var $li = $('<li />');
