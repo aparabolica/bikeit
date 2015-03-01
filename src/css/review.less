@@ -1,5 +1,40 @@
 @import "functions.less";
 
+.rating {
+	.rating-item {
+		width: 18px;
+		height: 18px;
+		float: left;
+		background-position: top left;
+		background-repeat: no-repeat;
+		.rating-filled {
+			display: block;
+			width: 100%;
+			height: 100%;
+			background-position: top left;
+			background-repeat: no-repeat;
+		}
+	}
+}
+
+.rating-structure {
+	.rating-item {
+		background-image: url(../img/structure_0.png);
+		.rating-filled {
+			background-image: url(../img/structure_1.png);
+		}
+	}
+}
+
+.rating-kindness {
+	.rating-item {
+		background-image: url(../img/kindness_0.png);
+		.rating-filled {
+			background-image: url(../img/kindness_1.png);
+		}
+	}
+}
+
 .review-list-item {
 	border-bottom: 1px solid #ddd;
 	.review-author {

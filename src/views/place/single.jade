@@ -26,6 +26,7 @@ article.single-place(id="place-{{place.id}}")
 	section#reviews
 		.container
 			.twelve.columns
-				h2.section-title {{labels('Reviews')}}
+				.row
+					h2.section-title {{labels('Reviews')}}
 		.review-list(ng-show="reviews.length")
 			review-list-item(ng-repeat="review in reviews" review="review")
