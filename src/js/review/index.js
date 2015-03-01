@@ -118,7 +118,7 @@ angular.module('bikeit.review', [])
 
 					return moment(review.date).format('L');
 
-				}
+				};
 
 				scope.getReviewContent = function() {
 

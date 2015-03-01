@@ -91,7 +91,9 @@ function bikeit_labels() {
 		'Notify place about your review' => __('Notify place about your review', 'bikeit'),
 		'Tell us about your experience' => __('Tell us about your experience', 'bikeit'),
 		'Send photos' => __('Send photos', 'bikeit'),
-		'Where are you going?' => __('Where are you going?', 'bikeit')
+		'Where are you going?' => __('Where are you going?', 'bikeit'),
+		'Login/Register' => __('Login/Register', 'bikeit'),
+		'Collaborative mapping bike-friendly city spots' => __('Collaborative mapping bike-friendly city spots', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

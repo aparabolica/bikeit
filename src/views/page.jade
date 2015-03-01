@@ -1,0 +1,8 @@
+article.page.top-row.row(id="page-{{page.ID}}")
+	header.page-header
+		.container
+			.eight.columns.offset-by-two
+				h1 {{page.title}}
+	section.page-content
+		.container
+			.eight.columns.offset-by-two(ng-bind-html="getContent()")

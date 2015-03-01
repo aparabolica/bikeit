@@ -7,6 +7,7 @@ require('./auth');
 require('./user');
 require('./map');
 require('./home');
+require('./page');
 require('./place');
 require('./review');
 
@@ -21,6 +22,7 @@ angular.module('bikeit', [
 	'bikeit.user',
 	'bikeit.map',
 	'bikeit.home',
+	'bikeit.page',
 	'bikeit.place',
 	'bikeit.review',
 	'leaflet-directive'

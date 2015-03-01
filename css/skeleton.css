@@ -27,6 +27,7 @@
     .container .columns                         { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
     .row                                        { margin-bottom: 20px; }
     .anti-row                                   { margin-top: -20px; }
+    .top-row                                    { padding-top: 20px; }
 
     /* Nested Column Classes */
     .column.alpha, .columns.alpha               { margin-left: 0; }
@@ -72,6 +73,7 @@
         .container .columns                         { margin-left: 20px; margin-right: 20px;  }
         .row                                        { margin-bottom: 40px; }
         .anti-row                                   { margin-top: -40px; }
+        .top-row                                    { padding-top: 40px; }
         .column.alpha, .columns.alpha               { margin-left: 0; }
         .column.omega, .columns.omega               { margin-right: 0; }
 

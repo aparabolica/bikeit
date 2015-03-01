@@ -28,8 +28,10 @@
 	<header id="masthead">
 
 		<div class="container">
-			<div class="twelve columns">
+			<div class="two columns">
 				<h1><a href="javascript:void(0);" ng-click="goHome()"><?php bloginfo('name'); ?><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" /></a></h1>
+			</div>
+			<div class="ten columns alpha">
 				<?php
 				if(is_multisite()) {
 					$sites = wp_get_sites();
@@ -67,7 +69,7 @@
 						<p>Olá {{user.name}}. <a href="{{logoutUrl}}">Sair</a></p>
 					</div>
 					<div ng-hide="user">
-						<p><a href="#" ng-click="loginForm()">Entrar</a><a href="#">Cadastrar</a></p>
+						<p><a class="button" href="#" ng-click="loginForm()">{{labels('Login/Register')}}</a></p>
 					</div>
 				</div>
 			</div>
@@ -76,6 +78,23 @@
 	</header>
 
 	<div ui-view autoscroll="false"></div>
+
+	<footer id="colophon">
+
+		<div class="colophon-content container">
+			<div class="four columns">
+				&nbsp;
+			</div>
+			<div class="four columns">
+				<div class="footer-logo"></div>
+				<p class="site-desc">{{labels('Collaborative mapping bike-friendly city spots')}}</p>
+			</div>
+			<div class="four columns">
+				&nbsp;
+			</div>
+		</div>
+
+	</footer>
 
 	<?php wp_footer(); ?>
 
