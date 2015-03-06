@@ -300,7 +300,36 @@
 
 
 #new-place {
+	input[type=text],
+	select {
+		width: 100%;
+		padding: 10px;
+		.box-sizing(border-box);
+	}
+	#input_place_name {
+		font-size: 18px;
+	}
+	.address-details {
+		input {
+			margin: 0;
+		}
+		.road {
+			width: 70%;
+			padding-right: 20px;
+			.box-sizing(border-box);
+			float: left;
+		}
+		.number {
+			width: 30%;
+			float: left;
+		}
+	}
+	input[type=submit],
+	.button {
+		width: 100%;
+	}
 	.map {
+		margin: 0 0 40px;
 		.map-container {
 			position: relative;
 			height: 300px;

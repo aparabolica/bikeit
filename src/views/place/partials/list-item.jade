@@ -4,7 +4,7 @@ article.place.list-item.clearfix(id="place-{{place.ID}}" class="{{style}}" ng-co
 		place-icon(place="place")
 		h2
 			a(href="javascript:void(0)" ng-click="accessPlace(place)") {{place.title}}
-		p.address {{sanitizeAddress(place)}}
+		p.address {{place.formatted_address}}
 	section.place-rating
 		p.review-count
 			span.label {{labels('Review count')}}

@@ -43,7 +43,7 @@ angular.module('bikeit', [
 	}
 ])
 
-.factory('WPService', require('./service'))
+.factory('WPService', require('./wp'))
 
 .directive('tooltip', function() {
 	return {
@@ -172,7 +172,6 @@ angular.module('bikeit', [
 	}
 ]);
 
-jQuery(document).ready(function() {
-	console.log(bikeit);
+angular.element(document).ready(function() {
 	angular.bootstrap(document, ['bikeit']);
 });

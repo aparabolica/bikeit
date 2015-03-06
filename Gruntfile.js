@@ -72,6 +72,24 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			moment: {
+				files: [
+					{
+						src: 'node_modules/moment/min/moment-with-locales.min.js',
+						dest: 'js/moment.js'
+					}
+				]
+			},
+			osmLabels: {
+				files: [
+					{
+						cwd: 'node_modules/iD/dist/locales',
+						src: ['**/*.json'],
+						dest: 'osm-labels',
+						expand: true
+					}
+				]
+			},
 			maki: {
 				files: [
 					{

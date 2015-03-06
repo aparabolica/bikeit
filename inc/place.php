@@ -46,7 +46,7 @@ class BikeIT_Places {
 			'labels' => $labels,
 			'hierarchical' => false,
 			'description' => __('BikeIT Places', 'bikeit'),
-			'supports' => array('title', 'editor', 'excerpt', 'author', 'revisions', 'thumbnail'),
+			'supports' => array('title', 'editor', 'excerpt', 'author', 'revisions', 'thumbnail', 'custom-fields'),
 			'public' => true,
 			'show_ui' => true,
 			'show_in_menu' => true,
@@ -193,58 +193,7 @@ class BikeIT_Places {
 
 	function register_fields() {
 
-		$map_lat = '';
-		$map_lng = '';
-
-		$city = get_option('bikeit_city');
-
-		if($city) {
-			$city = json_decode($city, true);
-
-			$map_lat = $city['geometry']['location']['lat'];
-			$map_lng = $city['geometry']['location']['lng'];
-
-		}
-
 		if(function_exists("register_field_group")) {
-			// Place location
-			register_field_group(array (
-				'id' => 'acf_location',
-				'title' => __('Location', 'bikeit'),
-				'fields' => array (
-					array (
-						'key' => 'field_location',
-						'label' => 'Location',
-						'name' => 'location',
-						'type' => 'google_map',
-						'instructions' => __('Place location', 'bikeit'),
-						'required' => 1,
-						'center_lat' => $map_lat,
-						'center_lng' => $map_lng,
-						'zoom' => '',
-						'height' => '',
-					),
-				),
-				'location' => array (
-					array (
-						array (
-							'param' => 'post_type',
-							'operator' => '==',
-							'value' => 'place',
-							'order_no' => 0,
-							'group_no' => 0,
-						),
-					),
-				),
-				'options' => array (
-					'position' => 'normal',
-					'layout' => 'no_box',
-					'hide_on_screen' => array (
-					),
-				),
-				'menu_order' => 0,
-			));
-
 			// Place category markers
 			register_field_group(array (
 				'id' => 'acf_place-category-settings',
@@ -313,9 +262,7 @@ class BikeIT_Places {
 				),
 				'menu_order' => 0,
 			));
-
 		}
-
 	}
 
 	function save_post($post_id) {
@@ -422,17 +369,21 @@ class BikeIT_Places {
 
 	function json_prepare_post($_post, $post, $context) {
 
-		if($post['post_type'] == 'place') {
+			if($post['post_type'] == 'place') {
 
 			unset($_post['content']);
 
 			/*
 			 * Location
 			 */
-			$_post['location'] = get_field('location', $post['ID']);
+			$_post['location'] = array();
 			// Parse float
-			$_post['location']['lat'] = floatval($_post['location']['lat']);
-			$_post['location']['lng'] = floatval($_post['location']['lng']);
+			$_post['location']['road'] = get_post_meta($post['ID'], 'road', true);
+			$_post['location']['number'] = get_post_meta($post['ID'], 'number', true);
+			$_post['location']['district'] = get_post_meta($post['ID'], 'district', true);
+			$_post['location']['lat'] = floatval(get_post_meta($post['ID'], 'lat', true));
+			$_post['location']['lng'] = floatval(get_post_meta($post['ID'], 'lng', true));
+			$_post['formatted_address'] = $this->format_address($_post['location']);
 
 			// OSM
 			$_post['osm_id'] = get_post_meta($post['ID'], '_osm_id', true);
@@ -448,6 +399,26 @@ class BikeIT_Places {
 		}
 
 		return $_post;
+
+	}
+
+	function format_address($location) {
+
+		$address = '';
+
+		if($location['road'])
+			$address .= $location['road'];
+
+		if($location['road'] && $location['number'])
+			$address .= ', ' . $location['number'];
+
+		if($location['district']) {
+			if($location['road'])
+				$address .= ' - ';
+			$address .= $location['district'];
+		}
+
+		return $address;
 
 	}
 
@@ -469,13 +440,47 @@ class BikeIT_Places {
 
 		$review_meta = $data['place_meta'];
 
+		// Send note to OSM
+		// TODO check changes to original OSM (if any)
+		$osm_note = false;
+		if($osm_note) {
+			$osm_url = 'http://api.openstreetmap.org/api/0.6/notes';
+			$osm_data = array(
+				'lat' => $review_meta['location']['lat'],
+				'lon' => $review_meta['location']['lng'],
+				'text' => $data['title'] . ' ' . $review_meta['location']['address'] . "\n" . $review_meta['category'] . "\nSubmitted via BikeIT"
+			);
+
+			$osm_context = stream_context_create(array(
+				'http' => array(
+					'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+					'method' => 'POST',
+					'content' => http_build_query($osm_data)
+				)
+			));
+
+			$osm_result = file_get_contents($osm_url, false, $osm_context);
+		}
+
 		// TODO Validation
 
 		if($review_meta['category'])
 			wp_set_object_terms($post['ID'], intval($review_meta['category']), 'place-category');
 
-		if($review_meta['location'])
-			update_field('location', $review_meta['location'], $post['ID']);
+		if($review_meta['road'])
+			update_post_meta($post['ID'], 'road', $review_meta['road']);
+
+		if($review_meta['number'])
+			update_post_meta($post['ID'], 'number', $review_meta['number']);
+
+		if($review_meta['district'])
+			update_post_meta($post['ID'], 'district', $review_meta['district']);
+
+		if($review_meta['lat'])
+			update_post_meta($post['ID'], 'lat', $review_meta['lat']);
+
+		if($review_meta['lng'])
+			update_post_meta($post['ID'], 'lng', $review_meta['lng']);
 
 		if($review_meta['osm_id'])
 			update_post_meta($post['ID'], '_osm_id', $review_meta['osm_id']);

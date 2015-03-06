@@ -8,7 +8,7 @@ article.single-place(id="place-{{place.id}}")
 					.main-info
 						.image(back-img="{{place.featured_image.attachment_meta.sizes.medium.url}}")
 						h1 {{place.title}}
-						p.address {{place.location.address}}
+						p.address {{place.formatted_address}}
 					.ratings
 						p.structure.clearfix
 							span.label {{labels('Structure')}}:

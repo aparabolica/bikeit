@@ -93,7 +93,16 @@ function bikeit_labels() {
 		'Send photos' => __('Send photos', 'bikeit'),
 		'Where are you going?' => __('Where are you going?', 'bikeit'),
 		'Login/Register' => __('Login/Register', 'bikeit'),
-		'Collaborative mapping bike-friendly city spots' => __('Collaborative mapping bike-friendly city spots', 'bikeit')
+		'Collaborative mapping bike-friendly city spots' => __('Collaborative mapping bike-friendly city spots', 'bikeit'),
+		'Adding' => __('Adding', 'bikeit'),
+		'Name' => __('Name', 'bikeit'),
+		'Search address' => __('Search address', 'bikeit'),
+		'Address' => __('Address', 'bikeit'),
+		'Number' => __('Number', 'bikeit'),
+		'District' => __('District', 'bikeit'),
+		'Exact location' => __('Exact location', 'bikeit'),
+		'Submit place' => __('Submit place', 'bikeit'),
+		'OpenStreetMap Results' => __('OpenStreetMap Results', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
@@ -141,8 +150,9 @@ function bikeit_scripts() {
 	wp_enqueue_style('bikeit-main', get_template_directory_uri() . '/css/main.css', array('bikeit-reset', 'bikeit-skeleton'));
 	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 
-	wp_enqueue_script('bikeit-vendor', get_template_directory_uri() . '/js/vendor.js', array('jquery'), '0.0.0');
-	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('bikeit-vendor'), '0.0.0');
+	wp_enqueue_script('moment', get_template_directory_uri() . '/js/moment.js');
+	wp_enqueue_script('bikeit-vendor', get_template_directory_uri() . '/js/vendor.js', array('jquery'));
+	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('bikeit-vendor'));
 	wp_localize_script('bikeit-vendor', 'bikeit', array(
 		'name' => get_bloginfo('name'),
 		'locale' => get_bloginfo('language'),
@@ -162,9 +172,31 @@ function bikeit_scripts() {
 }
 add_action('wp_enqueue_scripts', 'bikeit_scripts');
 
+function bikeit_moment_locale() {
+	?>
+	<script type="text/javascript">
+		moment.locale('<?php echo strtolower(get_locale()); ?>');
+	</script>
+	<?php
+}
+add_action('wp_head', 'bikeit_moment_locale');
+
+function bikeit_osm_labels() {
+	$locale = str_replace('_', '-', get_locale());
+	$labels = file_get_contents(TEMPLATEPATH . '/osm-labels/' . $locale . '.json');
+	if(!$labels)
+		$labels = file_get_contents(TEMPLATEPATH . '/osm-labels/en.json');
+	?>
+	<script type="text/javascript">
+		window.osmLabels = <?php echo $labels; ?>.presets.presets;
+	</script>
+	<?php
+}
+add_action('wp_head', 'bikeit_osm_labels', 5);
+
 function bikeit_admin_scripts() {
 
-	wp_enqueue_script('bikeit-vendor', get_template_directory_uri() . '/js/vendor.js', array('jquery'), '0.0.0');
+	wp_enqueue_script('bikeit-vendor', get_template_directory_uri() . '/js/vendor.js', array('jquery'));
 
 }
 add_action('admin_footer', 'bikeit_admin_scripts');
@@ -197,4 +229,5 @@ require_once(TEMPLATEPATH . '/inc/auth.php');
 require_once(TEMPLATEPATH . '/inc/vote.php');
 
 require_once(TEMPLATEPATH . '/inc/place.php');
+
 require_once(TEMPLATEPATH . '/inc/review.php');

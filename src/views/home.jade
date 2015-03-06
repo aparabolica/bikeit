@@ -24,6 +24,9 @@ section#main-search.anti-row(ng-controller="SearchController")
 					li(ng-repeat="place in filteredAddress = (addressResults | hideFound:searchResults)" ng-click="newPlace(place)")
 						osm-list-item(place="place")
 
+.container.twelve.columns(ng-controller="SubmitPlaceCtrl")
+	a.button(ng-click="newPlace()") Novo local
+
 section#featured-places
 	.container
 		.twelve.columns

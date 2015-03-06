@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-01 16:45-0300\n"
+"POT-Creation-Date: 2015-03-06 20:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,6 +99,42 @@ msgstr ""
 
 #: functions.php:96
 msgid "Collaborative mapping bike-friendly city spots"
+msgstr ""
+
+#: functions.php:97
+msgid "Adding"
+msgstr ""
+
+#: functions.php:98
+msgid "Name"
+msgstr ""
+
+#: functions.php:99
+msgid "Search address"
+msgstr ""
+
+#: functions.php:100
+msgid "Address"
+msgstr ""
+
+#: functions.php:101
+msgid "Number"
+msgstr ""
+
+#: functions.php:102
+msgid "District"
+msgstr ""
+
+#: functions.php:103
+msgid "Exact location"
+msgstr ""
+
+#: functions.php:104
+msgid "Submit place"
+msgstr ""
+
+#: functions.php:105
+msgid "OpenStreetMap Results"
 msgstr ""
 
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132
@@ -205,47 +241,39 @@ msgstr ""
 msgid "No place categories found"
 msgstr ""
 
-#: inc/place.php:213
-msgid "Location"
-msgstr ""
-
-#: inc/place.php:220
-msgid "Place location"
-msgstr ""
-
-#: inc/place.php:251
+#: inc/place.php:200
 msgid "Place category settings"
 msgstr ""
 
-#: inc/place.php:255
+#: inc/place.php:204
 msgid "Marker"
 msgstr ""
 
-#: inc/place.php:264
+#: inc/place.php:213
 msgid "Approved marker"
 msgstr ""
 
-#: inc/place.php:273
+#: inc/place.php:222
 msgid "Unapproved marker"
 msgstr ""
 
-#: inc/place.php:282
+#: inc/place.php:231
 msgid "Marker position"
 msgstr ""
 
-#: inc/place.php:286
+#: inc/place.php:235
 msgid "Center"
 msgstr ""
 
-#: inc/place.php:287
+#: inc/place.php:236
 msgid "Bottom center"
 msgstr ""
 
-#: inc/place.php:288
+#: inc/place.php:237
 msgid "Botttom right"
 msgstr ""
 
-#: inc/place.php:289
+#: inc/place.php:238
 msgid "Bottom left"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-01 16:28-0300\n"
-"PO-Revision-Date: 2015-03-01 16:28-0300\n"
+"POT-Creation-Date: 2015-03-06 17:13-0300\n"
+"PO-Revision-Date: 2015-03-06 17:14-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -100,6 +100,42 @@ msgstr "Entrar/Cadastrar"
 #: functions.php:96
 msgid "Collaborative mapping bike-friendly city spots"
 msgstr "Mapeamento colaborativo de estabelecimentos amigos do ciclista"
+
+#: functions.php:97
+msgid "Adding"
+msgstr "Adicionando"
+
+#: functions.php:98
+msgid "Name"
+msgstr "Nome"
+
+#: functions.php:99
+msgid "Search address"
+msgstr "Buscar endereço"
+
+#: functions.php:100
+msgid "Address"
+msgstr "Endereço"
+
+#: functions.php:101
+msgid "Number"
+msgstr "Número"
+
+#: functions.php:102
+msgid "District"
+msgstr "Bairro"
+
+#: functions.php:103
+msgid "Exact location"
+msgstr "Localização exata"
+
+#: functions.php:104
+msgid "Submit place"
+msgstr "Cadastrar local"
+
+#: functions.php:105
+msgid "OpenStreetMap Results"
+msgstr "Resultados do OpenStreetMap"
 
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132
 msgid "Cookie nonce is invalid"
