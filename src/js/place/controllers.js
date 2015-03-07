@@ -198,7 +198,7 @@ angular.module('bikeit.place')
 					'lat': parseFloat(place.lat),
 					'lng': parseFloat(place.lon),
 					'road': place.road || place.address.road,
-					'district': place.district || place.address.district,
+					'district': place.district || place.address.city_district,
 					'number': place.number || place.address.house_number,
 					'osm_id': place.osm_id,
 					'params': JSON.stringify(place)

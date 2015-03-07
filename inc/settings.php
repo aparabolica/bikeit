@@ -10,6 +10,16 @@ class BikeIT_Settings {
 	function __construct() {
 
 		add_action('admin_init', array($this, 'init_theme_settings'));
+		add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
+
+	}
+
+	function enqueue_scripts() {
+
+		if(get_current_screen()->id == 'options-general') {
+			wp_enqueue_media();
+			wp_enqueue_script('bikeit-settings', get_template_directory_uri() . '/inc/settings.js');
+		}
 
 	}
 
@@ -30,15 +40,15 @@ class BikeIT_Settings {
 			'general_settings_section'
 		);
 
+		add_settings_field(
+			'bikeit_labels_approved',
+			__('Approved place label image', 'bikeit'),
+			array($this, 'labels_approved_field'),
+			'general',
+			'general_settings_section'
+		);
+
 		register_setting('general', 'bikeit_city');
-
-	}
-
-	function settings_callback() {
-
-		?>
-		Teste
-		<?php
 
 	}
 
@@ -74,85 +84,28 @@ class BikeIT_Settings {
 				color: #333;
 			}
 		</style>
-		<script type="text/javascript">
-
-			jQuery(document).ready(function($) {
-
-				var $cityResults = $('ul.city-results');
-
-				$cityResults.hide();
-
-				$('.remove-city').hide();
-
-				$('.remove-city a').on('click', function() {
-					$('input[name="bikeit_city"]').val('');
-					$('.selected-city').text('');
-					$('.remove-city,.selected-city').hide();
-					return false;
-				});
-
-				var updateSelectedCity = function(data) {
-
-					if(typeof data == 'string') {
-						try {
-							data = JSON.parse(data);
-						} catch(err) {
-							data = {};
-						}
-					}
-
-					if(!_.isEmpty(data)) {
-						$('.remove-city').show();
-						$('input[name="bikeit_city"]').val(JSON.stringify(data));
-						$('.selected-city').text(data.display_name);
-						$('.selected-city').show();
-					} else {
-						$('.selected-city').hide();
-					}
-
-				};
-
-				updateSelectedCity($('input[name="bikeit_city"]').val());
-
-				$cityResults.on('click', 'li', function() {
-
-					updateSelectedCity($(this).data('address'));
-
-				});
-
-				$('input#bikeit_city').keyup(_.debounce(function() {
-
-					var text = $(this).val();
-
-					if(text) {
-						$cityResults.show();
-					} else {
-						$cityResults.hide();
-					}
-
-					$cityResults.empty();
-
-					$.get('http://nominatim.openstreetmap.org/search?format=json&q=' + text, function(data) {
-
-						_.each(data, function(item) {
-							var $li = $('<li />');
-							$li.text(item.display_name);
-							$li.data('address', item);
-							$cityResults.append($li);
-						});
-
-					});
-
-				}, 300));
-
-			});
-
-		</script>
-
 		<?php
 
 	}
 
+	function labels_approved_field() {
+		$labels = get_option('bikeit_labels');
+		print_r($labels);
+		$label = $labels['approved'];
+		?>
+		<div class="bikeit-custom-uploader">
+			<input id="bikeit_labels_approved" class="image_url" name="bikeit_labels[approved]" type="text" placeholder="<?php _e('Approved label url', 'bikeit'); ?>" value="<?php echo $label; ?>" size="60" />
+			<a class="open-media-uploader button" /><?php _e('Upload'); ?></a>
+		</div>
+		<?php if($label) { ?>
+			<div class="label-preview">
+				<img src="<?php echo $label; ?>" style="max-width:300px;height:auto;" />
+			</div>
+			<?php } ?>
+		<?php
+	}
+
 }
 
-$GLOBALS['bikeit_settings'] = new BikeIT_Settings();
+if(is_admin())
+	$GLOBALS['bikeit_settings'] = new BikeIT_Settings();
