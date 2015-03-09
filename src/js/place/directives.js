@@ -87,7 +87,7 @@ angular.module('bikeit.place')
 				if(parseFloat(place.scores.approved) >= 0.5)
 					approval = 'approved';
 				else
-					approval = 'unapproved';
+					approval = 'failed';
 
 				if(place.terms['place-category']) {
 
@@ -116,12 +116,21 @@ angular.module('bikeit.place')
 
 				scope.categories = $window.bikeit.placeCategories;
 
-				scope.filter = function(category) {
+				scope.placeLabels = $window.bikeit.placeLabels;
 
-					if(!category)
-						scope.categoryId = false;
-					else
-						scope.categoryId = category.term_id;
+				scope.filter = function(f, type) {
+
+					if(type == 'category') {
+						if(!f || scope.categoryId == f.term_id)
+							scope.categoryId = false;
+						else
+							scope.categoryId = f.term_id;
+					} else if(type == 'score') {
+						if(!f || scope.score == f)
+							scope.score = false;
+						else
+							scope.score = f;
+					}
 
 				}
 

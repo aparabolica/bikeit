@@ -38,7 +38,7 @@ angular.module('bikeit.place')
 					if(parseFloat(place.scores.approved) >= 0.5)
 						approval = 'approved';
 					else
-						approval = 'unapproved';
+						approval = 'failed';
 
 					var icon = {};
 					if(place.terms['place-category']) {
@@ -72,6 +72,29 @@ angular.module('bikeit.place')
 
 			return _.filter(input, function(place) {
 				return place.terms['place-category'] && parseInt(place.terms['place-category'][0].ID) == parseInt(categoryId);
+			});
+
+		}
+
+		return input;
+
+	}
+})
+
+.filter('score', function() {
+	return function(input, score) {
+
+		if(score) {
+
+			return _.filter(input, function(place) {
+
+				var approval;
+				if(parseFloat(place.scores.approved) >= 0.5)
+					approval = 'approved';
+				else
+					approval = 'failed';
+
+				return score == approval;
 			});
 
 		}

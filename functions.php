@@ -81,6 +81,8 @@ function bikeit_labels() {
 		'Kindness' => __('Kindness', 'bikeit'),
 		'Total reviews' => __('Total reviews', 'bikeit'),
 		'Submit review' => __('Submit review', 'bikeit'),
+		'Edit review' => __('Edit review', 'bikeit'),
+		'Update review' => __('Update review', 'bikeit'),
 		'Reviews' => __('Reviews', 'bikeit'),
 		'Rating' => __('Rating', 'bikeit'),
 		'Approved' => __('Approved', 'bikeit'),
@@ -123,7 +125,8 @@ function bikeit_get_place_categories() {
 		$term['markers'] = array();
 		$term['markers']['default'] = get_field('marker', 'place-category_' . $term['term_id']);
 		$term['markers']['approved'] = get_field('approved_marker', 'place-category_' . $term['term_id']);
-		$term['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $term['term_id']);
+		$term['markers']['failed'] = get_field('failed_marker', 'place-category_' . $term['term_id']);
+		$term['markers']['stamp'] = get_field('stamp_marker', 'place-category_' . $term['term_id']);
 		$term['markers']['position'] = get_field('marker_position', 'place-category_' . $term['term_id']);
 
 	}
@@ -163,6 +166,7 @@ function bikeit_scripts() {
 		'labels' => bikeit_labels(),
 		'placeCategories' => bikeit_get_place_categories(),
 		'city' => json_decode(get_option('bikeit_city')),
+		'placeLabels' => get_option('bikeit_labels'),
 		'map' => array(
 			'tile' => 'https://{s}.tiles.mapbox.com/v4/miguelpeixe.l94olf54/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWlndWVscGVpeGUiLCJhIjoiVlc0WWlrQSJ9.pIPkSx25w7ossO6rZH9Tcw'
 		)
@@ -199,16 +203,6 @@ function bikeit_osm_labels() {
 }
 add_action('wp_head', 'bikeit_osm_labels', 5);
 
-/* 
- * Admin scripts
- */
-function bikeit_admin_scripts() {
-
-	wp_enqueue_script('bikeit-vendor', get_template_directory_uri() . '/js/vendor.js', array('jquery'));
-
-}
-add_action('admin_footer', 'bikeit_admin_scripts');
-
 /*
  * Remove unnecessary content from API responses
  */
@@ -231,6 +225,11 @@ function bikeit_page_link($url, $post_id) {
 	return get_bloginfo('url') . '/#!/page/' . $post_id . '/';
 }
 add_filter('page_link', 'bikeit_page_link', 10, 2);
+
+/*
+ * Hide get shortlink from post edition
+ */
+add_filter( 'pre_get_shortlink', '__return_empty_string' );
 
 /*
  * BikeIT modules

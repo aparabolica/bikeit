@@ -83,7 +83,7 @@ angular.module('bikeit.map', [
 
 		_.each($window.bikeit.placeCategories, function(place) {
 
-			var images = ['default', 'approved', 'unapproved'];
+			var images = ['default', 'approved', 'failed', 'stamp'];
 
 			_.each(images, function(image) {
 

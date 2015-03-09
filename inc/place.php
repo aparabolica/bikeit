@@ -18,7 +18,8 @@ class BikeIT_Places {
 		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
 		add_filter('query_vars', array($this, 'query_vars'));
 		add_action('pre_get_posts', array($this, 'pre_get_posts'));
-		add_action('save_post', array($this, 'save_post'));
+		add_action('save_post', array($this, 'change_post'));
+		add_action('delete_post', array($this, 'change_post'));
 		add_filter('posts_clauses', array($this, 'posts_clauses'), 10, 2);
 		add_filter('json_prepare_term', array($this, 'json_prepare_term'), 10, 2);
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
@@ -46,7 +47,7 @@ class BikeIT_Places {
 			'labels' => $labels,
 			'hierarchical' => false,
 			'description' => __('BikeIT Places', 'bikeit'),
-			'supports' => array('title', 'editor', 'excerpt', 'author', 'revisions', 'thumbnail', 'custom-fields'),
+			'supports' => array('title', 'author', 'revisions', 'thumbnail', 'custom-fields'),
 			'public' => true,
 			'show_ui' => true,
 			'show_in_menu' => true,
@@ -218,9 +219,18 @@ class BikeIT_Places {
 						'library' => 'all',
 					),
 					array (
-						'key' => 'field_unapproved_marker',
-						'label' => __('Unapproved marker', 'bikeit'),
-						'name' => 'unapproved_marker',
+						'key' => 'field_failed_marker',
+						'label' => __('Failed marker', 'bikeit'),
+						'name' => 'failed_marker',
+						'type' => 'image',
+						'save_format' => 'object',
+						'preview_size' => 'full',
+						'library' => 'all',
+					),
+					array (
+						'key' => 'field_stamp_marker',
+						'label' => __('BikeIT Stamp marker', 'bikeit'),
+						'name' => 'stamp_marker',
 						'type' => 'image',
 						'save_format' => 'object',
 						'preview_size' => 'full',
@@ -265,7 +275,7 @@ class BikeIT_Places {
 		}
 	}
 
-	function save_post($post_id) {
+	function change_post($post_id) {
 
 		// Update place score on review save
 		$post = get_post($post_id);
@@ -428,7 +438,8 @@ class BikeIT_Places {
 			$data['markers'] = array();
 			$data['markers']['default'] = get_field('marker', 'place-category_' . $data['ID'])['url'];
 			$data['markers']['approved'] = get_field('approved_marker', 'place-category_' . $data['ID'])['url'];
-			$data['markers']['unapproved'] = get_field('unapproved_marker', 'place-category_' . $data['ID'])['url'];
+			$data['markers']['failed'] = get_field('failed_marker', 'place-category_' . $data['ID'])['url'];
+			$data['markers']['stamp'] = get_field('stamp_marker', 'place-category_' . $data['ID'])['url'];
 			$data['markers']['position'] = get_field('marker_position', 'place-category_' . $data['ID']);
 		}
 

@@ -18,7 +18,7 @@ class BikeIT_Settings {
 
 		if(get_current_screen()->id == 'options-general') {
 			wp_enqueue_media();
-			wp_enqueue_script('bikeit-settings', get_template_directory_uri() . '/inc/settings.js');
+			wp_enqueue_script('bikeit-settings', get_template_directory_uri() . '/inc/settings.js', array('jquery', 'underscore'));
 		}
 
 	}
@@ -26,7 +26,7 @@ class BikeIT_Settings {
 	function init_theme_settings() {
 
 		add_settings_section(
-			'general_settings_section',
+			'bikeit_settings_section',
 			__('BikeIT Settings', 'bikeit'),
 			'',
 			'general'
@@ -37,18 +37,36 @@ class BikeIT_Settings {
 			__('City', 'bikeit'),
 			array($this, 'city_field'),
 			'general',
-			'general_settings_section'
+			'bikeit_settings_section'
 		);
+
+		register_setting('general', 'bikeit_city');
 
 		add_settings_field(
 			'bikeit_labels_approved',
 			__('Approved place label image', 'bikeit'),
 			array($this, 'labels_approved_field'),
 			'general',
-			'general_settings_section'
+			'bikeit_settings_section'
 		);
 
-		register_setting('general', 'bikeit_city');
+		add_settings_field(
+			'bikeit_labels_failed',
+			__('Failed place label image', 'bikeit'),
+			array($this, 'labels_failed_field'),
+			'general',
+			'bikeit_settings_section'
+		);
+
+		add_settings_field(
+			'bikeit_labels_stamp',
+			__('BikeIT Stamp place label image', 'bikeit'),
+			array($this, 'labels_stamp_field'),
+			'general',
+			'bikeit_settings_section'
+		);
+
+		register_setting('general', 'bikeit_labels');
 
 	}
 
@@ -88,21 +106,31 @@ class BikeIT_Settings {
 
 	}
 
-	function labels_approved_field() {
+	function label_images_field($l, $title) {
+
 		$labels = get_option('bikeit_labels');
-		print_r($labels);
-		$label = $labels['approved'];
+		$label = isset($labels[$l]) ? $labels[$l] : '';
 		?>
 		<div class="bikeit-custom-uploader">
-			<input id="bikeit_labels_approved" class="image_url" name="bikeit_labels[approved]" type="text" placeholder="<?php _e('Approved label url', 'bikeit'); ?>" value="<?php echo $label; ?>" size="60" />
+			<input id="bikeit_labels_approved" class="image_url" name="bikeit_labels[<?php echo $l; ?>]" type="text" placeholder="<?php echo $title; ?>" value="<?php echo $label; ?>" size="60" />
 			<a class="open-media-uploader button" /><?php _e('Upload'); ?></a>
-		</div>
-		<?php if($label) { ?>
-			<div class="label-preview">
+			<div class="bikeit-media-uploader-preview">
 				<img src="<?php echo $label; ?>" style="max-width:300px;height:auto;" />
 			</div>
-			<?php } ?>
+		</div>
 		<?php
+	}
+
+	function labels_approved_field() {
+		$this->label_images_field('approved', __('Approved label url', 'bikeit'));
+	}
+
+	function labels_failed_field() {
+		$this->label_images_field('failed', __('Failed label url', 'bikeit'));
+	}
+
+	function labels_stamp_field() {
+		$this->label_images_field('stamp', __('BikeIT stamp label url', 'bikeit'));
 	}
 
 }

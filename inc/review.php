@@ -18,6 +18,7 @@ class BikeIT_Reviews {
 		add_action('save_post', array($this, 'save_post'));
 		add_filter('pre_get_posts', array($this, 'pre_get_posts'));
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
+		add_filter('json_prepare_post', array($this, 'json_prepare_place'), 10, 3);
 		add_action('json_insert_post', array($this, 'json_insert_post'), 10, 3);
 
 	}
@@ -127,10 +128,10 @@ class BikeIT_Reviews {
 
 		/* If editing a review, assign the required capability. */
 		if ( 'edit_review' == $cap ) {
-			if ( $post->post_status == 'publish' )
-				$caps[] = $post_type->cap->edit_others_posts;
-			elseif( $user_id == $post->post_author )
+			if ( $user_id == $post->post_author )
 				$caps[] = $post_type->cap->edit_posts;
+			else
+				$caps[] = $post_type->cap->edit_others_posts;
 		}
 
 		/* If deleting a review, assign the required capability. */
@@ -305,6 +306,7 @@ class BikeIT_Reviews {
 			$_post['rating']['approved'] = intval(get_post_meta($post['ID'], 'approved', true));
 			$_post['rating']['structure'] = intval(get_post_meta($post['ID'], 'structure', true));
 			$_post['rating']['kindness'] = intval(get_post_meta($post['ID'], 'kindness', true));
+			$_post['rating']['stampable'] = intval(get_post_meta($post['ID'], 'stampable', true));
 
 			$_post['votes'] = array();
 			$_post['votes']['up'] = intval(get_post_meta($post['ID'], '_upvote_count', true));
@@ -315,12 +317,48 @@ class BikeIT_Reviews {
 			if(is_user_logged_in()) {
 				$user_vote = bikeit_get_user_vote(get_current_user_id(), $post['ID']);
 				if($user_vote)
-					$_post['userVote'] = $user_vote['vote'];
+					$_post['user_vote'] = $user_vote['vote'];
 			}
 		}
 
 		return $_post;
 
+	}
+
+	function get_user_review($place_id) {
+
+		global $wp_json_posts;
+
+		if(is_user_logged_in()) {
+			$user_id = get_current_user_id();
+			$post = $wp_json_posts->get_posts(array(
+				'post_type' => 'place',
+				'author' => $user_id,
+				'place_reviews' => $place_id
+			));
+			if($post) {
+				return $post->data[0];
+			}
+		}
+
+		return false;
+
+	}
+
+	function json_prepare_place($_post, $post, $context) {
+
+		if($post['post_type'] == 'place') {
+
+			$user_review = $this->get_user_review($post['ID']);
+
+			if($user_review) {
+				$_post['user_review'] = $user_review;
+				$_post['user_review']['content'] = get_post($user_review['ID'])->post_content;
+			}
+
+		}
+
+		return $_post;
 	}
 
 	function json_insert_post($post, $data, $update) {
@@ -334,6 +372,8 @@ class BikeIT_Reviews {
 
 		if($review_meta['approved'])
 			update_field('approved', $review_meta['approved'], $post['ID']);
+		else
+			update_field('approved', 0, $post['ID']);
 
 		if($review_meta['kindness'])
 			update_field('kindness', $review_meta['kindness'], $post['ID']);

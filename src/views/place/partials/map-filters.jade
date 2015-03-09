@@ -1,8 +1,12 @@
 section#map-filters
 	h2.sidebar-title {{labels['Filter your search']}}
 	ul
-		li(ng-click="filter(false)" ng-class="{active: !categoryId}")
-			p.no-image Todos
-		li(ng-repeat="category in categories" ng-class="{active:categoryId == category.term_id}" ng-click="filter(category)" tooltip="{{category.description}}")
+		//
+			li(ng-click="filter(false)" ng-class="{active: !categoryId}")
+				p.no-image Todos
+		li(ng-repeat="(label,url) in placeLabels" ng-class="{active:score == label}" ng-click="filter(label, 'score')")
+			img(ng-src="{{url}}" alt="{{label}}" title="label")
+			p.category-name {{label}}
+		li(ng-repeat="category in categories" ng-class="{active:categoryId == category.term_id}" ng-click="filter(category, 'category')" tooltip="{{category.description}}")
 			img(ng-src="{{category.markers.default.url}}" alt="{{category.name}}" title="{{category.name}}")
 			p.category-name {{category.name}}

@@ -197,6 +197,28 @@ module.exports = [
 
 				return deferred.promise;
 
+			},
+			update: function(data) {
+
+				var deferred = $q.defer();
+
+				jQuery.ajax({
+					url: url + '/' + data.ID,
+					dataType: 'json',
+					type: 'POST',
+					data: {
+						data: data
+					},
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text) {
+						deferred.reject(xhr.responseJSON);
+					}
+				});
+
+				return deferred.promise;
+
 			}
 		}
 

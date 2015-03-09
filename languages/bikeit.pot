@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-06 22:20-0300\n"
+"POT-Creation-Date: 2015-03-09 18:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,95 +45,103 @@ msgstr ""
 msgid "Submit review"
 msgstr ""
 
-#: functions.php:84 inc/review.php:28 inc/review.php:38
-msgid "Reviews"
+#: functions.php:84 inc/review.php:33
+msgid "Edit review"
 msgstr ""
 
 #: functions.php:85
-msgid "Rating"
+msgid "Update review"
 msgstr ""
 
-#: functions.php:86 inc/review.php:180
-msgid "Approved"
+#: functions.php:86 inc/review.php:29 inc/review.php:39
+msgid "Reviews"
 msgstr ""
 
 #: functions.php:87
-msgid "Failed"
+msgid "Rating"
 msgstr ""
 
-#: functions.php:88
-msgid "Published"
+#: functions.php:88 inc/review.php:181
+msgid "Approved"
 msgstr ""
 
 #: functions.php:89
-msgid "Reply this review"
+msgid "Failed"
 msgstr ""
 
 #: functions.php:90
-msgid "Reviewing"
+msgid "Published"
 msgstr ""
 
 #: functions.php:91
-msgid "Nominate for BikeIT Stamp"
+msgid "Reply this review"
 msgstr ""
 
 #: functions.php:92
-msgid "Notify place about your review"
+msgid "Reviewing"
 msgstr ""
 
 #: functions.php:93
-msgid "Tell us about your experience"
+msgid "Nominate for BikeIT Stamp"
 msgstr ""
 
 #: functions.php:94
-msgid "Send photos"
+msgid "Notify place about your review"
 msgstr ""
 
 #: functions.php:95
-msgid "Where are you going?"
+msgid "Tell us about your experience"
 msgstr ""
 
 #: functions.php:96
-msgid "Login/Register"
+msgid "Send photos"
 msgstr ""
 
 #: functions.php:97
-msgid "Collaborative mapping bike-friendly city spots"
+msgid "Where are you going?"
 msgstr ""
 
 #: functions.php:98
-msgid "Adding"
+msgid "Login/Register"
 msgstr ""
 
 #: functions.php:99
-msgid "Name"
+msgid "Collaborative mapping bike-friendly city spots"
 msgstr ""
 
 #: functions.php:100
-msgid "Search address"
+msgid "Adding"
 msgstr ""
 
 #: functions.php:101
-msgid "Address"
+msgid "Name"
 msgstr ""
 
 #: functions.php:102
-msgid "Number"
+msgid "Search address"
 msgstr ""
 
 #: functions.php:103
-msgid "District"
+msgid "Address"
 msgstr ""
 
 #: functions.php:104
-msgid "Exact location"
+msgid "Number"
 msgstr ""
 
 #: functions.php:105
-msgid "Submit place"
+msgid "District"
 msgstr ""
 
 #: functions.php:106
+msgid "Exact location"
+msgstr ""
+
+#: functions.php:107
+msgid "Submit place"
+msgstr ""
+
+#: functions.php:108
 msgid "OpenStreetMap Results"
 msgstr ""
 
@@ -141,219 +149,227 @@ msgstr ""
 msgid "Cookie nonce is invalid"
 msgstr ""
 
-#: inc/place.php:32 inc/place.php:42
+#: inc/place.php:33 inc/place.php:43
 msgid "Places"
 msgstr ""
 
-#: inc/place.php:33 inc/review.php:166
+#: inc/place.php:34 inc/review.php:167
 msgid "Place"
 msgstr ""
 
-#: inc/place.php:34
+#: inc/place.php:35
 msgid "Add place"
 msgstr ""
 
-#: inc/place.php:35
+#: inc/place.php:36
 msgid "Add new place"
 msgstr ""
 
-#: inc/place.php:36
+#: inc/place.php:37
 msgid "Edit place"
 msgstr ""
 
-#: inc/place.php:37
+#: inc/place.php:38
 msgid "New place"
 msgstr ""
 
-#: inc/place.php:38
+#: inc/place.php:39
 msgid "View place"
 msgstr ""
 
-#: inc/place.php:39
+#: inc/place.php:40
 msgid "Search place"
 msgstr ""
 
-#: inc/place.php:40
+#: inc/place.php:41
 msgid "No place found"
 msgstr ""
 
-#: inc/place.php:41
+#: inc/place.php:42
 msgid "No place found in the trash"
 msgstr ""
 
-#: inc/place.php:48
+#: inc/place.php:49
 msgid "BikeIT Places"
 msgstr ""
 
+#: inc/place.php:164
+msgid "Place categories"
+msgstr ""
+
 #: inc/place.php:165
-msgid "All place categories"
+msgid "Place category"
 msgstr ""
 
 #: inc/place.php:166
-msgid "Edit place category"
+msgid "All place categories"
 msgstr ""
 
 #: inc/place.php:167
-msgid "View place category"
+msgid "Edit place category"
 msgstr ""
 
 #: inc/place.php:168
-msgid "Update place category"
+msgid "View place category"
 msgstr ""
 
 #: inc/place.php:169
-msgid "Add new place category"
+msgid "Update place category"
 msgstr ""
 
 #: inc/place.php:170
-msgid "New place category name"
+msgid "Add new place category"
 msgstr ""
 
 #: inc/place.php:171
-msgid "Parent place category"
+msgid "New place category name"
 msgstr ""
 
 #: inc/place.php:172
-msgid "Parent place category:"
+msgid "Parent place category"
 msgstr ""
 
 #: inc/place.php:173
-msgid "Search place categories"
+msgid "Parent place category:"
 msgstr ""
 
 #: inc/place.php:174
-msgid "Popular place categories"
+msgid "Search place categories"
 msgstr ""
 
 #: inc/place.php:175
-msgid "Separate place categories with commas"
+msgid "Popular place categories"
 msgstr ""
 
 #: inc/place.php:176
-msgid "Add or remove place categories"
+msgid "Separate place categories with commas"
 msgstr ""
 
 #: inc/place.php:177
-msgid "Choose from most used place categories"
+msgid "Add or remove place categories"
 msgstr ""
 
 #: inc/place.php:178
+msgid "Choose from most used place categories"
+msgstr ""
+
+#: inc/place.php:179
 msgid "No place categories found"
 msgstr ""
 
-#: inc/place.php:200
+#: inc/place.php:201
 msgid "Place category settings"
 msgstr ""
 
-#: inc/place.php:204
+#: inc/place.php:205
 msgid "Marker"
 msgstr ""
 
-#: inc/place.php:213
+#: inc/place.php:214
 msgid "Approved marker"
 msgstr ""
 
-#: inc/place.php:222
-msgid "Unapproved marker"
+#: inc/place.php:223
+msgid "Failed marker"
 msgstr ""
 
-#: inc/place.php:231
+#: inc/place.php:232
+msgid "BikeIT Stamp marker"
+msgstr ""
+
+#: inc/place.php:241
 msgid "Marker position"
 msgstr ""
 
-#: inc/place.php:235
+#: inc/place.php:245
 msgid "Center"
 msgstr ""
 
-#: inc/place.php:236
+#: inc/place.php:246
 msgid "Bottom center"
 msgstr ""
 
-#: inc/place.php:237
+#: inc/place.php:247
 msgid "Botttom right"
 msgstr ""
 
-#: inc/place.php:238
+#: inc/place.php:248
 msgid "Bottom left"
 msgstr ""
 
-#: inc/review.php:29
+#: inc/review.php:30
 msgid "Review"
 msgstr ""
 
-#: inc/review.php:30
+#: inc/review.php:31
 msgid "Add review"
 msgstr ""
 
-#: inc/review.php:31
+#: inc/review.php:32
 msgid "Add new review"
 msgstr ""
 
-#: inc/review.php:32
-msgid "Edit review"
-msgstr ""
-
-#: inc/review.php:33
+#: inc/review.php:34
 msgid "New review"
 msgstr ""
 
-#: inc/review.php:34
+#: inc/review.php:35
 msgid "View review"
 msgstr ""
 
-#: inc/review.php:35
+#: inc/review.php:36
 msgid "Search review"
 msgstr ""
 
-#: inc/review.php:36
+#: inc/review.php:37
 msgid "No review found"
 msgstr ""
 
-#: inc/review.php:37
+#: inc/review.php:38
 msgid "No review found in the trash"
 msgstr ""
 
-#: inc/review.php:44
+#: inc/review.php:45
 msgid "BikeIT Reviews"
 msgstr ""
 
-#: inc/review.php:162
+#: inc/review.php:163
 msgid "Review settings"
 msgstr ""
 
-#: inc/review.php:183
+#: inc/review.php:184
 msgid "Mark if you approve it's bike receptivity"
 msgstr ""
 
-#: inc/review.php:185
+#: inc/review.php:186
 msgid "I approve this place"
 msgstr ""
 
-#: inc/review.php:190
+#: inc/review.php:191
 msgid "Structure score"
 msgstr ""
 
-#: inc/review.php:193
+#: inc/review.php:194
 msgid "Rate the strucutre of this place"
 msgstr ""
 
-#: inc/review.php:209
+#: inc/review.php:210
 msgid "Kindness score"
 msgstr ""
 
-#: inc/review.php:212
+#: inc/review.php:213
 msgid "Rate the kindness of this place"
 msgstr ""
 
-#: inc/review.php:228
+#: inc/review.php:229
 msgid "Stampable"
 msgstr ""
 
-#: inc/review.php:231
+#: inc/review.php:232
 msgid "Mark if you want this spot as a nominee for a BikeIt Stamp"
 msgstr ""
 
-#: inc/review.php:232
+#: inc/review.php:233
 msgid "Nominate for a BikeIt Stamp"
 msgstr ""
 
@@ -365,24 +381,40 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: inc/settings.php:45
+#: inc/settings.php:47
 msgid "Approved place label image"
 msgstr ""
 
-#: inc/settings.php:59
+#: inc/settings.php:55
+msgid "Failed place label image"
+msgstr ""
+
+#: inc/settings.php:63
+msgid "BikeIT Stamp place label image"
+msgstr ""
+
+#: inc/settings.php:77
 msgid "Remove city"
 msgstr ""
 
-#: inc/settings.php:62
+#: inc/settings.php:80
 msgid "Start typing a city name..."
 msgstr ""
 
-#: inc/settings.php:97
+#: inc/settings.php:116
+msgid "Upload"
+msgstr ""
+
+#: inc/settings.php:125
 msgid "Approved label url"
 msgstr ""
 
-#: inc/settings.php:98
-msgid "Upload"
+#: inc/settings.php:129
+msgid "Failed label url"
+msgstr ""
+
+#: inc/settings.php:133
+msgid "BikeIT stamp label url"
 msgstr ""
 
 #: inc/vote.php:44

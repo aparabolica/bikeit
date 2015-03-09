@@ -1,5 +1,5 @@
 section#map.row.with-sidebar(ng-controller="MapController")
-	leaflet(defaults="mapDefaults" maxbounds="maxbounds" markers="markers = ((posts | placeCategory:categoryId) | placeToMarker)")
+	leaflet(defaults="mapDefaults" maxbounds="maxbounds" markers="markers = ((posts | placeCategory:categoryId | score:score) | placeToMarker)")
 	.map-sidebar
 		map-filters
 

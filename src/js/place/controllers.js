@@ -23,8 +23,6 @@ angular.module('bikeit.place')
 		$scope.place = PlaceData.place;
 		$scope.reviews = PlaceData.reviews.data;
 
-		console.log($state);
-
 		if($state.current.name == 'placesSingle.review') {
 			$scope.openReview = true;
 		}

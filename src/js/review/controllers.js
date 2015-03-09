@@ -28,8 +28,13 @@ angular.module('bikeit.review')
 			}
 		});
 
-		$scope.newReview = function(place) {
+		$scope.newReview = function(place, review) {
 			$scope.place = place || false;
+			$scope.review = review ? _.clone(review) : {};
+			if(!_.isEmpty(review)) {
+				review.rating.stampable = review.rating.stampable ? true : false; 
+			}
+			console.log($scope.review);
 			$scope.dialog = ngDialog.open({
 				preCloseCallback: function() {
 					$state.go('placesSingle', {}, {reload: true});
@@ -43,35 +48,47 @@ angular.module('bikeit.review')
 
 			if(load) {
 				$scope.$on('userReady', function(ev, data) {
-					$scope.newReview(place);
+					$scope.newReview(place, place.user_review);
 				});
 			}
 
 		};
 
 		$scope.submit = function(review) {
-			WP.post({
+			var data = {
+				'ID': review.ID || null,
 				'title': ' ',
 				'content_raw': review.content,
 				'type': 'review',
 				'status': 'publish',
 				'review_meta': {
-					'approved': review.approved,
-					'kindness': review.kindness,
-					'structure': review.structure,
-					'stampable': review.stampable ? 1 : 0,
+					'approved': review.rating.approved,
+					'kindness': review.rating.kindness,
+					'structure': review.rating.structure,
+					'stampable': review.rating.stampable ? 1 : 0,
 					'notify': review.notify ? 1 : 0,
 					'place': $scope.place.ID
 				}
-			}).then(function(data) {
-				console.log(data);
-				if($scope.dialog) {
-					$scope.dialog.close();
-					$scope.dialog = false;
-				}
-			}, function(error) {
-				console.log(error);
-			});
+			};
+			if(review.ID) {
+				WP.update(data).then(function(data) {
+					if($scope.dialog) {
+						$scope.dialog.close();
+						$scope.dialog = false;
+					}
+				}, function(error) {
+					console.log(error);
+				});
+			} else {
+				WP.post(data).then(function(data) {
+					if($scope.dialog) {
+						$scope.dialog.close();
+						$scope.dialog = false;
+					}
+				}, function(error) {
+					console.log(error);
+				});
+			}
 		}
 
 	}

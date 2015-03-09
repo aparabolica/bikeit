@@ -44,21 +44,21 @@ angular.module('bikeit.review')
 				};
 
 				scope.vote = function(vote) {
-					if(review.userVote == vote) {
+					if(review.user_vote == vote) {
 
 						Review.unvote(review.ID).success(function(data, status, headers, config) {
-							review.votes[review.userVote]--;
-							review.userVote = false;
+							review.votes[review.user_vote]--;
+							review.user_vote = false;
 						});
 
 					} else {
 						Review.vote(review.ID, vote)
 							.success(function(data, status, headers, config) {
-								if(review.userVote !== vote) {
-									review.votes[review.userVote]--;
+								if(review.user_vote !== vote) {
+									review.votes[review.user_vote]--;
 								}
 								review.votes[vote]++;
-								review.userVote = vote;
+								review.user_vote = vote;
 							});
 					}
 				}

@@ -12,6 +12,7 @@ jQuery(document).ready(function($){
 		wp.media.editor.send.attachment = function(props, attachment){
 			if ( _custom_media ) {
 				button.parents('.bikeit-custom-uploader').find('.image_url').val(attachment.url);
+				button.parents('.bikeit-custom-uploader').find('.bikeit-media-uploader-preview img').attr('src', attachment.url);
 			} else {
 				return _orig_send_attachment.apply( this, [props, attachment] );
 			};

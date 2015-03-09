@@ -112,6 +112,7 @@ module.exports = function(grunt) {
 				keywords: [
 					'__',
 					'_e',
+					'_x',
 					'_ex',
 					'_n',
 					'_nx'
