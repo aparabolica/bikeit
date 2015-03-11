@@ -5,10 +5,11 @@ angular.module('bikeit.review')
 .directive('reviewListItem', [
 	'templatePath',
 	'Labels',
+	'$state',
 	'$sce',
 	'WPService',
 	'ReviewService',
-	function(templatePath, labels, $sce, WP, Review) {
+	function(templatePath, labels, $state, $sce, WP, Review) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -20,6 +21,10 @@ angular.module('bikeit.review')
 				var review = scope.review;
 
 				scope.labels = labels;
+
+				scope.accessUser = function(user) {
+					$state.go('user', {userId: user.ID});
+				};
 
 				scope.getReviewDate = function() {
 

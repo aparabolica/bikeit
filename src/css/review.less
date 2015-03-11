@@ -37,7 +37,8 @@
 
 .review-list-item {
 	border-bottom: 1px solid #ddd;
-	.review-author {
+	.review-author,
+	.review-place {
 		img {
 			width: 80px;
 			height: auto;
@@ -49,15 +50,27 @@
 			font-size: 22px;
 			font-weight: 800;
 			margin: 16px 0 0;
+			a {
+				color: #333;
+				text-decoration: none;
+				&:hover {
+					color: #111;
+				}
+			}
 		}
-		p.date {
-			font-size: 12px;
-			text-transform: lowercase;
-			color: #666;
+		&.review-place {
+			h3 {
+				margin: 0;
+			}
 		}
 	}
+	p.date {
+		font-size: 12px;
+		text-transform: lowercase;
+		color: #666;
+	}
 	.review-ratings {
-		margin: 0 0 40px;
+		margin: 0 0 20px;
 		p {
 			margin: 0 0 10px;
 			.label {

@@ -1,9 +1,9 @@
-article.single-place(id="place-{{place.id}}")
+article.single-place.content-map(id="place-{{place.id}}")
 	.clearfix
 		section#map.row(ng-controller="MapController")
 			leaflet(defaults="mapDefaults" markers="markers = ([place] | placeToMarker)")
 		.container.header-container.anti-row
-			header#place-header.six.columns
+			header#place-header.content-map-header.five.columns
 				.header-content
 					.main-info
 						.image(back-img="{{place.featured_image.attachment_meta.sizes.medium.url}}")
@@ -20,7 +20,7 @@ article.single-place(id="place-{{place.id}}")
 						| {{labels('Total reviews')}}:
 						span.count {{place.review_count}}
 					p.submit-review(ng-controller="SubmitReviewCtrl")
-						a(href="javascript:void(0);" ng-click="newReview(place, place.user_review)" ng-init="onLoadReview(openReview, place)")
+						a(href="javascript:void(0);" ng-click="newReview(place)" ng-init="onLoadReview(openReview, place)")
 							span(ng-hide="place.user_review") {{labels('Submit review')}}
 							span(ng-show="place.user_review") {{labels('Edit review')}}
 							span.icon-pencil

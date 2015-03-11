@@ -2,10 +2,15 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 	.container
 		.four.columns
 			header.review-header
-				.review-author.clearfix
+				.review-place(ng-show="review.placeData")
+					h3
+						a(href="javascript:void(0)") {{review.placeData.title}}
+				.review-author
 					img(ng-src="{{review.author.avatar}}")
-					h3 {{review.author.name}}
-					p.date {{labels('Published')}} {{getReviewDate()}}
+					h3 
+						a(href="javascript:void(0);" ng-click="accessUser(review.author)") {{review.author.name}}
+				p.date {{labels('Published')}} {{getReviewDate()}}
+				.clear
 				.review-ratings
 					p.rate.clearfix
 						span.label {{labels('Rating')}}:

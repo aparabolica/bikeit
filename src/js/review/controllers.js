@@ -28,13 +28,19 @@ angular.module('bikeit.review')
 			}
 		});
 
-		$scope.newReview = function(place, review) {
+		$scope.$on('bikeit.userLoggedIn', function() {
+			if($scope.dialog)
+				$scope.dialog.close();
+			$state.go($state.current.name, {}, {reload:true});
+		});
+
+		$scope.newReview = function(place) {
+			$state.go('placesSingle.review', {});
 			$scope.place = place || false;
-			$scope.review = review ? _.clone(review) : {};
-			if(!_.isEmpty(review)) {
-				review.rating.stampable = review.rating.stampable ? true : false; 
+			$scope.review = place.user_review ? _.clone(place.user_review) : {};
+			if(!_.isEmpty($scope.review)) {
+				$scope.review.rating.stampable = $scope.review.rating.stampable ? true : false; 
 			}
-			console.log($scope.review);
 			$scope.dialog = ngDialog.open({
 				preCloseCallback: function() {
 					$state.go('placesSingle', {}, {reload: true});
@@ -48,7 +54,7 @@ angular.module('bikeit.review')
 
 			if(load) {
 				$scope.$on('userReady', function(ev, data) {
-					$scope.newReview(place, place.user_review);
+					$scope.newReview(place);
 				});
 			}
 

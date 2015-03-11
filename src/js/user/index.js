@@ -12,11 +12,34 @@ angular.module('bikeit.user', [])
 				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/user/single.html',
 				resolve: {
 					'UserData': [
-						'$q',
 						'$stateParams',
 						'WPService',
-						function($q, $stateParams, WP) {
+						function($stateParams, WP) {
 							return WP.getUser($stateParams.userId);
+						}
+					],
+					'UserPlaces': [
+						'$stateParams',
+						'WPService',
+						function($stateParams, WP) {
+							return WP.query({
+								filter: {
+									'user_reviewed': $stateParams.userId,
+									'posts_per_page': -1
+								}
+							});
+						}
+					],
+					'UserReviews': [
+						'$stateParams',
+						'WPService',
+						function($stateParams, WP) {
+							return WP.query({
+								type: 'review',
+								filter: {
+									'author': $stateParams.userId
+								}
+							});
 						}
 					]
 				}

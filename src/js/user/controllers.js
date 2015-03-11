@@ -52,9 +52,30 @@ angular.module('bikeit.user')
 
 .controller('UserSingleController', [
 	'UserData',
+	'UserPlaces',
+	'UserReviews',
 	'$scope',
-	function(UserData, $scope) {
+	function(UserData, UserPlaces, UserReviews, $scope) {
 		$scope.user = UserData;
-		console.log($scope.user);
+		$scope.places = UserPlaces.data;
+		$scope.reviews = UserReviews.data;
+
+		_.each($scope.reviews, function(review) {
+
+			review.placeData = _.find($scope.places, function(place) { return parseInt(place.ID) == parseInt(review.place); });
+
+			console.log(review.placeData);
+
+		});
+
+		$scope.getUserRegistration = function() {
+
+			return moment($scope.user.registered).format('L');
+
+		};
+
+		$scope.getUserAvatar = function() {
+			return $scope.user.avatar.replace('?s=96', '?s=400');
+		};
 	}
 ]);

@@ -90,3 +90,57 @@
 		}
 	}
 }
+
+@single-map-height: 600px;
+
+.content-map {
+	#map {
+		width: 66.6666%;
+		height: @single-map-height;
+		.leaflet-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 200%;
+			left: -50%;
+			.leaflet-left {
+				left: 30%;
+			}
+			.leaflet-top {
+				top: 100px;
+			}
+			.leaflet-right {
+				right: auto;
+				left: 30%;
+			}
+		}
+	}
+	.header-container {
+		position: relative;
+		.content-map-header {
+			float: right;
+			background: #fff;
+			margin-top: -@single-map-height;
+			height: @single-map-height;
+			.box-shadow(0 0 5px 0 rgba(0,0,0,0.1));
+			position: relative;
+			.header-content {
+				padding: 20px;
+				.main-info {
+					border-bottom: 1px solid @gray;
+					margin: 0 0 20px;
+					h1 {
+						text-align: center;
+						font-weight: 800;
+						text-transform: uppercase;
+						font-size: 32px;
+						line-height: 38px;
+						padding: 20px;
+						margin: 20px -20px 20px -20px;
+						background: rgba(255,255,255,0.8);
+					}
+				}
+			}
+		}
+	}
+}

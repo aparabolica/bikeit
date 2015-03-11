@@ -21,20 +21,18 @@ angular.module('bikeit.place', [])
 						'$stateParams',
 						'WPService',
 						function($q, $stateParams, WP) {
-							var deferred = $q.defer();
-							var data = {};
-							WP.getPost($stateParams.placeId).then(function(place) {
-								data.place = place;
-								WP.query({
-									filter: {
-										'place_reviews': place.ID
-									}
-								}).then(function(reviews) {
-									data.reviews = reviews;
-									deferred.resolve(data);
-								});
+							return WP.getPost($stateParams.placeId);
+						}
+					],
+					'PlaceReviews': [
+						'$stateParams',
+						'WPService',
+						function($stateParams, WP) {
+							return WP.query({
+								filter: {
+									'place_reviews': $stateParams.placeId
+								}
 							});
-							return deferred.promise;
 						}
 					]
 				}

@@ -1,0 +1,73 @@
+.single-user {
+	.header-container {
+		#user-header {
+			.header-content {
+				.main-info {
+					margin: 0 0 40px;
+					.user-avatar {
+						width: 60%;
+						height: auto;
+						margin: 0 auto;
+						.border-radius(100%);
+						display: block;
+					}
+					h1 {
+						margin-bottom: 0px;
+					}
+					.registration {
+						text-align: center;
+						text-transform: lowercase;
+						color: @gray;
+					}
+				}
+				.total {
+					font-size: 16px;
+					line-height: 20px;
+					text-align: center;
+					font-weight: 600;
+					color: #666;
+					text-transform: lowercase;
+					margin-bottom: 40px;
+					.count {
+						margin-left: 20px;
+						font-size: 18px;
+						font-weight: 800;
+					}
+				}
+				.ratings {
+					text-align: center;
+					p {
+						display: inline;
+						margin: 0 20px;
+						font-size: 18px;
+						color: #666;
+						[class^="icon-"], [class*=" icon-"] {
+							margin-right: 10px;
+						}
+						&.upvotes {
+							[class^="icon-"], [class*=" icon-"] {
+								color: green;
+							}
+						}
+						&.downvotes {
+							[class^="icon-"], [class*=" icon-"] {
+								color: red;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	#reviews {
+		margin: 40px 0 0;
+		.review-header {
+			.review-author {
+				display: none;
+			}
+		}
+		.review-list-item .review-ratings p .label {
+			text-align: left;
+		}
+	}
+}

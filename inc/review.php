@@ -16,9 +16,12 @@ class BikeIT_Reviews {
 		add_action('init', array($this, 'review_caps'));
 		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
 		add_action('save_post', array($this, 'save_post'));
+		add_action('save_post', array($this, 'change_post'));
+		add_action('delete_post', array($this, 'change_post'));
 		add_filter('pre_get_posts', array($this, 'pre_get_posts'));
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
 		add_filter('json_prepare_post', array($this, 'json_prepare_place'), 10, 3);
+		add_filter('json_prepare_user', array($this, 'json_prepare_user'), 10, 3);
 		add_action('json_insert_post', array($this, 'json_insert_post'), 10, 3);
 
 	}
@@ -286,9 +289,26 @@ class BikeIT_Reviews {
 
 	}
 
+	function change_post($post_id) {
+		global $bikeit_places, $bikeit_votes;
+		$place_id = get_post_meta($post_id, 'place', true);
+		if($bikeit_places && $place_id) {
+			$bikeit_places->update_place_score($place_id);
+		}
+		if($bikeit_votes) {
+			$bikeit_votes->update_author_votes(get_post($post_id)->post_author);
+		}
+		$post = get_post($post_id);
+		if($post->post_status != 'publish') {
+			$this->delete_user_reviewed_place(get_post_meta($post_id, 'place', true), $post->post_author);
+		} else {
+			$this->add_user_reviewed_place(get_post_meta($post_id, 'place', true), $post->post_author);
+		}
+	}
+
 	function pre_get_posts($query) {
 
-		if(!is_admin() && $query->get('post_type') == 'review' || $query->get('post_type') == array('review')) {
+		if(!is_admin() && ($query->get('post_type') == 'review' || $query->get('post_type') == array('review'))) {
 			$query->set('order', 'DESC');
 			$query->set('orderby', 'meta_value');
 			$query->set('meta_key', '_vote_ratio');
@@ -300,7 +320,7 @@ class BikeIT_Reviews {
 
 		if($post['post_type'] == 'review') {
 
-			$_post['place'] = intval(get_post_meta($post['ID'], 'place', true));
+			$_post['place'] = get_post_meta($post['ID'], 'place', true);
 
 			$_post['rating'] = array();
 			$_post['rating']['approved'] = intval(get_post_meta($post['ID'], 'approved', true));
@@ -361,14 +381,47 @@ class BikeIT_Reviews {
 		return $_post;
 	}
 
+	function json_prepare_user($user_fields, $user, $context) {
+		$query = new WP_Query(array('post_type' => 'review', 'author' => $user->ID));
+		$user_fields['total_reviews'] = $query->found_posts;
+		return $user_fields;
+	}
+
+	function add_user_reviewed_place($place_id, $user_id) {
+		if(!$this->get_user_reviewed_place($place_id, $user_id)) {
+			add_post_meta($place_id, 'users_reviewed', $user_id);
+		}
+	}
+
+	function delete_user_reviewed_place($place_id, $user_id) {
+		if($this->get_user_reviewed_place($place_id, $user_id)) {
+			delete_post_meta($place_id, 'users_reviewed', $user_id);
+		}
+	}
+
+	function get_user_reviewed_place($place_id, $user_id) {
+
+		$reviewed = false;
+
+		$users_reviewed = get_post_meta($place_id, 'users_reviewed');
+		foreach($users_reviewed as $user_reviewed) {
+			if($user_reviewed == $user_id)
+				$reviewed = true;
+		}
+
+		return $reviewed;
+
+	}
+
 	function json_insert_post($post, $data, $update) {
 
 		$review_meta = $data['review_meta'];
 
 		// TODO Validation
 
-		if($review_meta['place'])
+		if($review_meta['place']) {
 			update_field('place', $review_meta['place'], $post['ID']);
+		}
 
 		if($review_meta['approved'])
 			update_field('approved', $review_meta['approved'], $post['ID']);

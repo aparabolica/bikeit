@@ -18,8 +18,6 @@ class BikeIT_Places {
 		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
 		add_filter('query_vars', array($this, 'query_vars'));
 		add_action('pre_get_posts', array($this, 'pre_get_posts'));
-		add_action('save_post', array($this, 'change_post'));
-		add_action('delete_post', array($this, 'change_post'));
 		add_filter('posts_clauses', array($this, 'posts_clauses'), 10, 2);
 		add_filter('json_prepare_term', array($this, 'json_prepare_term'), 10, 2);
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
@@ -275,20 +273,10 @@ class BikeIT_Places {
 		}
 	}
 
-	function change_post($post_id) {
-
-		// Update place score on review save
-		$post = get_post($post_id);
-		if($post->post_type == 'review' && $post->post_status == 'publish') {
-			$place = get_field('place', $post_id);
-			$this->update_place_score($place->ID);
-		}
-
-	}
-
 	function update_place_score($post_id) {
 
 		$reviews_query = new WP_Query(array(
+			'post_status' => 'publish',
 			'posts_per_page' => -1,
 			'post_type' => 'review',
 			'meta_query' => array(
@@ -326,6 +314,7 @@ class BikeIT_Places {
 	function query_vars($vars) {
 
 		$vars[] = 'place_reviews';
+		$vars[] = 'user_reviewed';
 
 		return $vars;
 
@@ -367,6 +356,20 @@ class BikeIT_Places {
 
 		}
 
+		$user_reviewed = $query->get('user_reviewed'); 
+		if($user_reviewed) {
+
+			$query->set('post_type', 'place');
+			$query->set('meta_query', array(
+				array(
+					'key' => 'users_reviewed',
+					'value' => $user_reviewed,
+					'compare' => '='
+				)
+			));
+
+		}
+
 	}
 
 	function get_score_average($data) {
@@ -379,7 +382,7 @@ class BikeIT_Places {
 
 	function json_prepare_post($_post, $post, $context) {
 
-			if($post['post_type'] == 'place') {
+		if($post['post_type'] == 'place') {
 
 			unset($_post['content']);
 
@@ -393,7 +396,7 @@ class BikeIT_Places {
 			$_post['location']['district'] = get_post_meta($post['ID'], 'district', true);
 			$_post['location']['lat'] = floatval(get_post_meta($post['ID'], 'lat', true));
 			$_post['location']['lng'] = floatval(get_post_meta($post['ID'], 'lng', true));
-			$_post['formatted_address'] = $this->format_address($_post['location']);
+			$_post['formatted_address'] = $this->get_formatted_address($_post['location']);
 
 			// OSM
 			$_post['osm_id'] = get_post_meta($post['ID'], '_osm_id', true);
@@ -412,7 +415,7 @@ class BikeIT_Places {
 
 	}
 
-	function format_address($location) {
+	function get_formatted_address($location) {
 
 		$address = '';
 
@@ -451,28 +454,6 @@ class BikeIT_Places {
 
 		$review_meta = $data['place_meta'];
 
-		// Send note to OSM
-		// TODO check changes to original OSM (if any)
-		$osm_note = false;
-		if($osm_note) {
-			$osm_url = 'http://api.openstreetmap.org/api/0.6/notes';
-			$osm_data = array(
-				'lat' => $review_meta['location']['lat'],
-				'lon' => $review_meta['location']['lng'],
-				'text' => $data['title'] . ' ' . $review_meta['location']['address'] . "\n" . $review_meta['category'] . "\nSubmitted via BikeIT"
-			);
-
-			$osm_context = stream_context_create(array(
-				'http' => array(
-					'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-					'method' => 'POST',
-					'content' => http_build_query($osm_data)
-				)
-			));
-
-			$osm_result = file_get_contents($osm_url, false, $osm_context);
-		}
-
 		// TODO Validation
 
 		if($review_meta['category'])
@@ -498,6 +479,35 @@ class BikeIT_Places {
 
 		if($review_meta['params'])
 			update_post_meta($post['ID'], '_params', $review_meta['params']);
+
+		// Send note to OSM
+		// TODO check changes to original OSM (if any)
+		$osm_note = false;
+		if($osm_note) {
+
+			$osm_url = 'http://api.openstreetmap.org/api/0.6/notes';
+
+			$location = array();
+			$location['road'] = get_post_meta($post['ID'], 'road', true);
+			$location['number'] = get_post_meta($post['ID'], 'number', true);
+			$location['district'] = get_post_meta($post['ID'], 'district', true);
+
+			$osm_data = array(
+				'lat' => $review_meta['location']['lat'],
+				'lon' => $review_meta['location']['lng'],
+				'text' => $data['title'] . ' ' . $this->get_formatted_address($location) . " " . $review_meta['category'] . " Submitted via BikeIT"
+			);
+
+			$osm_context = stream_context_create(array(
+				'http' => array(
+					'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+					'method' => 'POST',
+					'content' => http_build_query($osm_data)
+				)
+			));
+
+			$osm_result = file_get_contents($osm_url, false, $osm_context);
+		}
 
 		do_action('save_post', $post['ID'], get_post($post['ID']), true);
 

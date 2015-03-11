@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-09 18:35-0300\n"
+"POT-Creation-Date: 2015-03-11 17:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Submit review"
 msgstr ""
 
-#: functions.php:84 inc/review.php:33
+#: functions.php:84 inc/review.php:36
 msgid "Edit review"
 msgstr ""
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Update review"
 msgstr ""
 
-#: functions.php:86 inc/review.php:29 inc/review.php:39
+#: functions.php:86 inc/review.php:32 inc/review.php:42
 msgid "Reviews"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: functions.php:88 inc/review.php:181
+#: functions.php:88 inc/review.php:184
 msgid "Approved"
 msgstr ""
 
@@ -149,227 +149,227 @@ msgstr ""
 msgid "Cookie nonce is invalid"
 msgstr ""
 
-#: inc/place.php:33 inc/place.php:43
+#: inc/place.php:31 inc/place.php:41
 msgid "Places"
 msgstr ""
 
-#: inc/place.php:34 inc/review.php:167
+#: inc/place.php:32 inc/review.php:170
 msgid "Place"
 msgstr ""
 
-#: inc/place.php:35
+#: inc/place.php:33
 msgid "Add place"
 msgstr ""
 
-#: inc/place.php:36
+#: inc/place.php:34
 msgid "Add new place"
 msgstr ""
 
-#: inc/place.php:37
+#: inc/place.php:35
 msgid "Edit place"
 msgstr ""
 
-#: inc/place.php:38
+#: inc/place.php:36
 msgid "New place"
 msgstr ""
 
-#: inc/place.php:39
+#: inc/place.php:37
 msgid "View place"
 msgstr ""
 
-#: inc/place.php:40
+#: inc/place.php:38
 msgid "Search place"
 msgstr ""
 
-#: inc/place.php:41
+#: inc/place.php:39
 msgid "No place found"
 msgstr ""
 
-#: inc/place.php:42
+#: inc/place.php:40
 msgid "No place found in the trash"
 msgstr ""
 
-#: inc/place.php:49
+#: inc/place.php:47
 msgid "BikeIT Places"
 msgstr ""
 
-#: inc/place.php:164
+#: inc/place.php:162
 msgid "Place categories"
 msgstr ""
 
-#: inc/place.php:165
+#: inc/place.php:163
 msgid "Place category"
 msgstr ""
 
-#: inc/place.php:166
+#: inc/place.php:164
 msgid "All place categories"
 msgstr ""
 
-#: inc/place.php:167
+#: inc/place.php:165
 msgid "Edit place category"
 msgstr ""
 
-#: inc/place.php:168
+#: inc/place.php:166
 msgid "View place category"
 msgstr ""
 
-#: inc/place.php:169
+#: inc/place.php:167
 msgid "Update place category"
 msgstr ""
 
-#: inc/place.php:170
+#: inc/place.php:168
 msgid "Add new place category"
 msgstr ""
 
-#: inc/place.php:171
+#: inc/place.php:169
 msgid "New place category name"
 msgstr ""
 
-#: inc/place.php:172
+#: inc/place.php:170
 msgid "Parent place category"
 msgstr ""
 
-#: inc/place.php:173
+#: inc/place.php:171
 msgid "Parent place category:"
 msgstr ""
 
-#: inc/place.php:174
+#: inc/place.php:172
 msgid "Search place categories"
 msgstr ""
 
-#: inc/place.php:175
+#: inc/place.php:173
 msgid "Popular place categories"
 msgstr ""
 
-#: inc/place.php:176
+#: inc/place.php:174
 msgid "Separate place categories with commas"
 msgstr ""
 
-#: inc/place.php:177
+#: inc/place.php:175
 msgid "Add or remove place categories"
 msgstr ""
 
-#: inc/place.php:178
+#: inc/place.php:176
 msgid "Choose from most used place categories"
 msgstr ""
 
-#: inc/place.php:179
+#: inc/place.php:177
 msgid "No place categories found"
 msgstr ""
 
-#: inc/place.php:201
+#: inc/place.php:199
 msgid "Place category settings"
 msgstr ""
 
-#: inc/place.php:205
+#: inc/place.php:203
 msgid "Marker"
 msgstr ""
 
-#: inc/place.php:214
+#: inc/place.php:212
 msgid "Approved marker"
 msgstr ""
 
-#: inc/place.php:223
+#: inc/place.php:221
 msgid "Failed marker"
 msgstr ""
 
-#: inc/place.php:232
+#: inc/place.php:230
 msgid "BikeIT Stamp marker"
 msgstr ""
 
-#: inc/place.php:241
+#: inc/place.php:239
 msgid "Marker position"
 msgstr ""
 
-#: inc/place.php:245
+#: inc/place.php:243
 msgid "Center"
 msgstr ""
 
-#: inc/place.php:246
+#: inc/place.php:244
 msgid "Bottom center"
 msgstr ""
 
-#: inc/place.php:247
+#: inc/place.php:245
 msgid "Botttom right"
 msgstr ""
 
-#: inc/place.php:248
+#: inc/place.php:246
 msgid "Bottom left"
 msgstr ""
 
-#: inc/review.php:30
+#: inc/review.php:33
 msgid "Review"
 msgstr ""
 
-#: inc/review.php:31
+#: inc/review.php:34
 msgid "Add review"
 msgstr ""
 
-#: inc/review.php:32
+#: inc/review.php:35
 msgid "Add new review"
 msgstr ""
 
-#: inc/review.php:34
+#: inc/review.php:37
 msgid "New review"
 msgstr ""
 
-#: inc/review.php:35
+#: inc/review.php:38
 msgid "View review"
 msgstr ""
 
-#: inc/review.php:36
+#: inc/review.php:39
 msgid "Search review"
 msgstr ""
 
-#: inc/review.php:37
+#: inc/review.php:40
 msgid "No review found"
 msgstr ""
 
-#: inc/review.php:38
+#: inc/review.php:41
 msgid "No review found in the trash"
 msgstr ""
 
-#: inc/review.php:45
+#: inc/review.php:48
 msgid "BikeIT Reviews"
 msgstr ""
 
-#: inc/review.php:163
+#: inc/review.php:166
 msgid "Review settings"
 msgstr ""
 
-#: inc/review.php:184
+#: inc/review.php:187
 msgid "Mark if you approve it's bike receptivity"
 msgstr ""
 
-#: inc/review.php:186
+#: inc/review.php:189
 msgid "I approve this place"
 msgstr ""
 
-#: inc/review.php:191
+#: inc/review.php:194
 msgid "Structure score"
 msgstr ""
 
-#: inc/review.php:194
+#: inc/review.php:197
 msgid "Rate the strucutre of this place"
 msgstr ""
 
-#: inc/review.php:210
+#: inc/review.php:213
 msgid "Kindness score"
 msgstr ""
 
-#: inc/review.php:213
+#: inc/review.php:216
 msgid "Rate the kindness of this place"
 msgstr ""
 
-#: inc/review.php:229
+#: inc/review.php:232
 msgid "Stampable"
 msgstr ""
 
-#: inc/review.php:232
+#: inc/review.php:235
 msgid "Mark if you want this spot as a nominee for a BikeIt Stamp"
 msgstr ""
 
-#: inc/review.php:233
+#: inc/review.php:236
 msgid "Nominate for a BikeIt Stamp"
 msgstr ""
 
@@ -417,15 +417,15 @@ msgstr ""
 msgid "BikeIT stamp label url"
 msgstr ""
 
-#: inc/vote.php:44
+#: inc/vote.php:52
 msgid "Sorry, you must be logged in to vote."
 msgstr ""
 
-#: inc/vote.php:48
+#: inc/vote.php:56
 msgid "Invalid vote."
 msgstr ""
 
-#: inc/vote.php:74
+#: inc/vote.php:85
 msgid "Vote not found."
 msgstr ""
 

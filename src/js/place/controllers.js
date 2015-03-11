@@ -16,12 +16,13 @@ angular.module('bikeit.place')
 
 .controller('PlaceSingleController', [
 	'PlaceData',
+	'PlaceReviews',
 	'$scope',
 	'$state',
-	function(PlaceData, $scope, $state) {
+	function(PlaceData, PlaceReviews, $scope, $state) {
 
-		$scope.place = PlaceData.place;
-		$scope.reviews = PlaceData.reviews.data;
+		$scope.place = PlaceData;
+		$scope.reviews = PlaceReviews.data;
 
 		if($state.current.name == 'placesSingle.review') {
 			$scope.openReview = true;

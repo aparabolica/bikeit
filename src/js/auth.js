@@ -57,11 +57,12 @@ angular.module('bikeit.auth', [])
 	}
 ])
 .controller('LoginForm', [
+	'$rootScope',
 	'$scope',
 	'$http',
 	'apiUrl',
 	'AuthService',
-	function($scope, $http, apiUrl, Auth) {
+	function($rootScope, $scope, $http, apiUrl, Auth) {
 
 		$scope.login = function(data) {
 
@@ -71,6 +72,7 @@ angular.module('bikeit.auth', [])
 				.success(function(data) {
 					Auth.setNonce('auth');
 					Auth.setUser(data);
+					$rootScope.$broadcast('bikeit.userLoggedIn');
 				})
 				.error(function(data) {
 					console.log(data);
@@ -85,6 +87,7 @@ angular.module('bikeit.auth', [])
 				.success(function(data) {
 					Auth.setNonce('auth');
 					Auth.setUser(data);
+					$rootScope.$broadcast('bikeit.userRegistered');
 				})
 				.error(function(data) {
 					console.log(data);

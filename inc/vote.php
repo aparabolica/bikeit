@@ -9,6 +9,7 @@ class BikeIT_Votes {
 
 	function __construct() {
 		add_action('save_post', array($this, 'save_post'));
+		add_filter('json_prepare_user', array($this, 'json_prepare_user'), 10, 3);
 		add_filter('json_endpoints', array($this, 'vote_routes'));
 	}
 
@@ -36,6 +37,13 @@ class BikeIT_Votes {
 
 	}
 
+	function json_prepare_user($user_fields, $user, $context) {
+		$user_fields['votes'] = array();
+		$user_fields['votes']['up'] = intval(get_user_meta($user->ID, 'votes_up', true));
+		$user_fields['votes']['down'] = intval(get_user_meta($user->ID, 'votes_down', true));
+		return $user_fields;
+	}
+
 	function vote($id, $data) {
 
 		$vote = $data['vote'];
@@ -59,6 +67,9 @@ class BikeIT_Votes {
 
 		$this->update_vote_totals($id);
 
+		$post = get_post($id);
+		$this->update_author_votes($post->post_author);
+
 		$response = json_ensure_response($result);
 		$response->set_status(201);
 		return $response;
@@ -74,6 +85,9 @@ class BikeIT_Votes {
 			return new WP_Error( 'bikeit_vote_not_found', __( 'Vote not found.' ), array( 'status' => 404 ) );
 
 		$this->update_vote_totals($id);
+
+		$post = get_post($id);
+		$this->update_author_votes($post->post_author);
 
 		$response = json_ensure_response($result);
 		return $response;
@@ -92,6 +106,47 @@ class BikeIT_Votes {
 		}
 
 		return $user_vote;
+	}
+
+	function update_author_votes($user_id) {
+
+		$up = 0;
+		$down = 0;
+
+		$query = new WP_Query(array(
+			'post_status' => 'publish',
+			'posts_per_page' => -1,
+			'post_type' => 'any',
+			'meta_query' => array(
+				array(
+					'key' => 'votes',
+					'compare' => 'EXISTS'
+				)
+			),
+			'author' => $user_id
+		));
+
+		global $post;
+
+		if($query->have_posts()) {
+			while($query->have_posts()) {
+				$query->the_post();
+				$votes = get_post_meta($post->ID, 'votes');
+				if($votes) {
+					foreach($votes as $vote) {
+						if($vote['vote'] == 'up')
+							$up++;
+						elseif($vote['vote'] == 'down')
+							$down++;
+					}
+				}
+				wp_reset_postdata();
+			}
+		}
+
+		update_user_meta($user_id, 'votes_up', $up);
+		update_user_meta($user_id, 'votes_down', $down);
+
 	}
 
 	function update_vote_totals($id) {
@@ -123,8 +178,6 @@ class BikeIT_Votes {
 	}
 
 }
-
-
 
 $GLOBALS['bikeit_votes'] = new BikeIT_Votes();
 
