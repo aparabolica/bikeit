@@ -16,6 +16,14 @@ angular.module('bikeit.user')
 
 		$scope.labels = labels;
 
+		$scope.adminUrl = window.bikeit.adminUrl;
+
+		$scope.accessUser = function() {
+			if($scope.user) {
+				$state.go('user', {userId: $scope.user.ID});
+			}
+		};
+
 		$scope.loginForm = function() {
 			$scope.dialog = ngDialog.open({
 				preCloseCallback: function() {

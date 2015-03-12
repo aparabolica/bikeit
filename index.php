@@ -65,8 +65,17 @@
 					<?php wp_nav_menu(); ?>
 				</nav>
 				<div class="user" ng-controller="UserController" ng-show="loadedUser">
-					<div ng-show="user">
-						<p>Olá {{user.name}}. <a href="{{logoutUrl}}">Sair</a></p>
+					<div class="user-nav" ng-show="user">
+						<img ng-src="{{user.avatar}}" alt="{{user.name}}" />
+						<p><a href="javascript:void(0);" ng-click="accessUser()">{{user.name}}</a><a class="logout" href="{{logoutUrl}}">{{labels('Logout')}}</a></p>
+						<div class="user-nav-menu">
+							<ul>
+								<li><a href="javascript:void(0);" ng-click="accessUser()">{{labels('My profile')}}</a></li>
+								<li><a href="javascript:void(0);">{{labels('Edit my profile')}}</a></li>
+								<li ng-show="user.roles[0] == 'administrator'"><a href="{{adminUrl}}" target="_self">{{labels('Control panel')}}</a></li>
+								<li><a href="{{logoutUrl}}">{{labels('Logout')}}</a></li>
+							</ul>
+						</div>
 					</div>
 					<div ng-hide="user">
 						<p><a class="button" href="#" ng-click="loginForm()">{{labels('Login/Register')}}</a></p>

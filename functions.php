@@ -95,7 +95,6 @@ function bikeit_labels() {
 		'Tell us about your experience' => __('Tell us about your experience', 'bikeit'),
 		'Send photos' => __('Send photos', 'bikeit'),
 		'Where are you going?' => __('Where are you going?', 'bikeit'),
-		'Login/Register' => __('Login/Register', 'bikeit'),
 		'Collaborative mapping bike-friendly city spots' => __('Collaborative mapping bike-friendly city spots', 'bikeit'),
 		'Adding' => __('Adding', 'bikeit'),
 		'Name' => __('Name', 'bikeit'),
@@ -105,7 +104,11 @@ function bikeit_labels() {
 		'District' => __('District', 'bikeit'),
 		'Exact location' => __('Exact location', 'bikeit'),
 		'Submit place' => __('Submit place', 'bikeit'),
-		'OpenStreetMap Results' => __('OpenStreetMap Results', 'bikeit')
+		'OpenStreetMap Results' => __('OpenStreetMap Results', 'bikeit'),
+		'Logout' => __('Logout', 'bikeit'),
+		'My profile' => __('My profile', 'bikeit'),
+		'Edit my profile' => __('Edit my profile', 'bikeit'),
+		'Login/Register' => __('Login/Register', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
@@ -159,6 +162,7 @@ function bikeit_scripts() {
 		'name' => get_bloginfo('name'),
 		'locale' => get_bloginfo('language'),
 		'url' => home_url(),
+		'adminUrl' => admin_url(),
 		'templateUri' => get_template_directory_uri(),
 		'apiUrl' => get_option('permalink_structure') ? esc_url(get_json_url()) . '/' : esc_url(get_json_url()),
 		'nonce' => wp_create_nonce('wp_json'),

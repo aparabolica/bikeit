@@ -106,5 +106,67 @@
 	.user {
 		line-height: 30px;
 		float: right;
+		cursor: default;
+		img {
+			float:left;
+			width: 30px;
+			height: auto;
+			.border-radius(100%);
+			margin: 0 10px 0 0;
+		}
+		p {
+			float: left;
+		}
+		a {
+			color: #333;
+			font-weight: 600;
+			text-decoration: none;
+		}
+		.logout {
+			font-size: 12px;
+			margin-left: 10px;
+			text-transform: uppercase;
+			color: #666;
+			&:hover {
+				color: #333;
+			}
+		}
+		.user-nav {
+			position: relative;
+			height: 60px;
+			.user-nav-menu {
+				position: absolute;
+				top: 59px;
+				left: 0;
+				right: 0;
+				background: #fff;
+				display: none;
+				ul {
+					margin: 0;
+					padding: 0;
+					border-left: 1px solid @light-gray;
+					border-right: 1px solid @light-gray;
+					li {
+						margin: 0;
+						padding: 0;
+						a {
+							display: block;
+							padding: 10px;
+							border-bottom: 1px solid @light-gray;
+							color: #666;
+							&:hover {
+								color: #333;
+								background: @light-gray;
+							}
+						}
+					}
+				}
+			}
+			&:hover {
+				.user-nav-menu {
+					display: block;
+				}
+			}
+		}
 	}
 }

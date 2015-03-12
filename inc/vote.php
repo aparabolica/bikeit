@@ -38,9 +38,7 @@ class BikeIT_Votes {
 	}
 
 	function json_prepare_user($user_fields, $user, $context) {
-		$user_fields['votes'] = array();
-		$user_fields['votes']['up'] = intval(get_user_meta($user->ID, 'votes_up', true));
-		$user_fields['votes']['down'] = intval(get_user_meta($user->ID, 'votes_down', true));
+		$user_fields['votes'] = $this->get_author_votes($user->ID);
 		return $user_fields;
 	}
 
@@ -144,8 +142,8 @@ class BikeIT_Votes {
 			}
 		}
 
-		update_user_meta($user_id, 'votes_up', $up);
-		update_user_meta($user_id, 'votes_down', $down);
+		update_user_meta($user_id, 'votes_' . get_current_blog_id() . '_up', $up);
+		update_user_meta($user_id, 'votes_' . get_current_blog_id() . '_down', $down);
 
 	}
 
@@ -175,6 +173,24 @@ class BikeIT_Votes {
 		update_post_meta($id, '_vote_total', $count['total']);
 		update_post_meta($id, '_vote_ratio', $ratio);
 
+	}
+
+	function get_author_votes($user_id) {
+		$sites = wp_get_sites();
+
+		$up = 0;
+		$down = 0;
+		foreach($sites as $site) {
+			$site_up = intval(get_user_meta($user_id, 'votes_' . $site['blog_id'] . '_up', true));
+			$site_down = intval(get_user_meta($user_id, 'votes_' . $site['blog_id'] . '_down', true));
+			$up = $up + $site_up;
+			$down = $down + $site_down;
+		}
+
+		return array(
+			'up' => $up,
+			'down' => $down
+		);
 	}
 
 }
