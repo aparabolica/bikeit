@@ -47,7 +47,7 @@ class BikeIT_Votes {
 		$vote = $data['vote'];
 
 		if(!is_user_logged_in()) {
-			return new WP_Error( 'bikeit_user_cannot_vote', __( 'Sorry, you must be logged in to vote.' ), array( 'status' => 401 ) );
+			return new WP_Error( 'bikeit_user_cannot_vote', __( 'Sorry, you must be logged in to vote.', 'bikeit' ), array( 'status' => 401 ) );
 		}
 
 		if(!$vote || ($vote !== 'up' && $vote !== 'down')) {
@@ -80,7 +80,7 @@ class BikeIT_Votes {
 		if($user_vote)
 			$result = delete_post_meta($id, 'votes', $user_vote);
 		else
-			return new WP_Error( 'bikeit_vote_not_found', __( 'Vote not found.' ), array( 'status' => 404 ) );
+			return new WP_Error( 'bikeit_vote_not_found', __( 'Vote not found.', 'bikeit' ), array( 'status' => 404 ) );
 
 		$this->update_vote_totals($id);
 

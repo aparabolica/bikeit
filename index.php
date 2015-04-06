@@ -25,6 +25,13 @@
 </head>
 <body <?php body_class(get_bloginfo('language')); ?> ng-controller="SiteController">
 
+	<div id="messages" ng-controller="MessageCtrl">
+		<div class="message-content" ng-repeat="message in messages" ng-show="message.text">
+			<a class="close-button" ng-click="close(message)" href="javascript:void(0);">{{labels('Close')}}</a>
+			<p ng-class="message.status">{{message.text}}</p>
+		</div>
+	</div>
+
 	<header id="masthead">
 
 		<div class="container">

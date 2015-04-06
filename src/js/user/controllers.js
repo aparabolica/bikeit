@@ -72,8 +72,6 @@ angular.module('bikeit.user')
 
 			review.placeData = _.find($scope.places, function(place) { return parseInt(place.ID) == parseInt(review.place); });
 
-			console.log(review.placeData);
-
 		});
 
 		$scope.getUserRegistration = function() {

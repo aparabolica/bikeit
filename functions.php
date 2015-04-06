@@ -74,6 +74,7 @@ add_theme_support('post-thumbnails');
 function bikeit_labels() {
 
 	$labels = array(
+		'Featured places' => __('Featured places', 'bikeit'),
 		'Viewing list of reviews' => __('Viewing list of reviews', 'bikeit'),
 		'featured' => __('Featured', 'bikeit'),
 		'Filter your search' => __('Filter your search', 'bikeit'),

@@ -24,16 +24,16 @@ section#main-search.anti-row(ng-controller="SearchController")
 					li(ng-repeat="place in filteredAddress = (addressResults | hideFound:searchResults)" ng-click="newPlace(place)")
 						osm-list-item(place="place")
 
-.container.twelve.columns(ng-controller="SubmitPlaceCtrl")
-	a.button(ng-click="newPlace()") Novo local
+.container
+	.twelve.columns(ng-controller="SubmitPlaceCtrl")
+		a.button(ng-click="newPlace()") Novo local
 
 section#featured-places
 	.container
 		.twelve.columns
 			.row
 				h2.section-title
-					| {{labels('Viewing list of reviews')}}
-					a(href="javascript:void(0)") {{labels('featured')}}
+					| {{labels('Featured places')}}
 		ul.row
 			li.three.columns(ng-repeat="post in posts")
 				place-list-item(place="post")

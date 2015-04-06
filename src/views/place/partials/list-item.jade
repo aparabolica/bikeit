@@ -3,7 +3,7 @@ article.place.list-item.clearfix(id="place-{{place.ID}}" class="{{style}}" ng-co
 	header.place-header
 		place-icon(place="place")
 		h2
-			a(href="javascript:void(0)" ng-click="accessPlace(place)") {{place.title}}
+			a(ui-sref="placesSingle({placeId: place.ID})" ng-click="accessPlace(place)") {{place.title}}
 		p.address {{place.formatted_address}}
 	section.place-rating
 		p.review-count

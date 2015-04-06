@@ -4,11 +4,11 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 			header.review-header
 				.review-place(ng-show="review.placeData")
 					h3
-						a(href="javascript:void(0)") {{review.placeData.title}}
+						a(ui-sref="placesSingle({placeId: review.placeData.ID})") {{review.placeData.title}}
 				.review-author
 					img(ng-src="{{review.author.avatar}}")
 					h3 
-						a(href="javascript:void(0);" ng-click="accessUser(review.author)") {{review.author.name}}
+						a(ui-sref="user({userId: review.author.ID})") {{review.author.name}}
 				p.date {{labels('Published')}} {{getReviewDate()}}
 				.clear
 				.review-ratings
@@ -43,6 +43,4 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 							div(ng-bind-html="getCommentContent(comment)")
 					.reply
 						form
-							input(type="text" placeholder="Nome")
-							input(type="text" placeholder="Email")
 							textarea(placeholder="Mensagem")

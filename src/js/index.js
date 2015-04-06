@@ -2,6 +2,8 @@
  * Modules
  */
 
+require('./util/message');
+
 require('./auth');
 
 require('./user');
@@ -18,6 +20,7 @@ require('./review');
 angular.module('bikeit', [
 	'ngDialog',
 	'ui.router',
+	'bikeit.message',
 	'bikeit.auth',
 	'bikeit.user',
 	'bikeit.map',

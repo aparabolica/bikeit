@@ -65,7 +65,14 @@ angular.module('bikeit.map', [
 
 				leafletData.getMap().then(function(m) {
 
-					m.fitBounds(bounds, { reset: true });
+					var rightOffset = 20;
+					var leftOffset = 20;
+
+					if(jQuery('.content-map').length) {
+						rightOffset = jQuery('body').width() - jQuery('.content-map-header').position().left -20;
+					}
+
+					m.fitBounds(bounds, { reset: true, paddingBottomRight: [rightOffset, 20], paddingTopLeft: [leftOffset, 20] });
 
 				});
 

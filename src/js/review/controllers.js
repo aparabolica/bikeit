@@ -15,17 +15,12 @@ angular.module('bikeit.review')
 		$scope.loginTemplate = templatePath + '/views/login.html';
 
 		$scope.$watch(function() {
-			return Auth.getNonce();
-		}, function(nonce) {
-			if(nonce) {
-				WP.getUser().then(function(data) {
-					$scope.user = data;
-					$scope.$emit('userReady', $scope.user);
-				});
-			} else {
+			return Auth.getUser();
+		}, function(data) {
+			if(data)
+				$scope.user = data;
+			else
 				$scope.user = false;
-				$scope.$emit('userReady', false);
-			}
 		});
 
 		$scope.$on('bikeit.userLoggedIn', function() {

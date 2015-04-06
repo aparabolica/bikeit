@@ -62,7 +62,8 @@ angular.module('bikeit.auth', [])
 	'$http',
 	'apiUrl',
 	'AuthService',
-	function($rootScope, $scope, $http, apiUrl, Auth) {
+	'WPService',
+	function($rootScope, $scope, $http, apiUrl, Auth, WP) {
 
 		$scope.login = function(data) {
 
@@ -71,7 +72,9 @@ angular.module('bikeit.auth', [])
 			}, data))
 				.success(function(data) {
 					Auth.setNonce('auth');
-					Auth.setUser(data);
+					WP.getUser().then(function(data) {
+						Auth.setUser(data);
+					});
 					$rootScope.$broadcast('bikeit.userLoggedIn');
 				})
 				.error(function(data) {

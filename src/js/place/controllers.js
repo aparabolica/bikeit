@@ -47,17 +47,15 @@ angular.module('bikeit.place')
 		$scope.loginTemplate = templatePath + '/views/login.html';
 
 		$scope.$watch(function() {
-			return Auth.getNonce();
-		}, function(nonce) {
-			if(nonce) {
-				WP.getUser().then(function(data) {
-					$scope.user = data;
-					$timeout(function() {
-						leafletData.getMap('new-place-map').then(function(map) {
-							map.invalidateSize(false);
-						});
-					}, 300);
-				});
+			return Auth.getUser();
+		}, function(data) {
+			if(data) {
+				$scope.user = data;
+				$timeout(function() {
+					leafletData.getMap('new-place-map').then(function(map) {
+						map.invalidateSize(false);
+					});
+				}, 300);
 			} else {
 				$scope.user = false;
 			}

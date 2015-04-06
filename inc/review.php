@@ -404,9 +404,11 @@ class BikeIT_Reviews {
 		$reviewed = false;
 
 		$users_reviewed = get_post_meta($place_id, 'users_reviewed');
-		foreach($users_reviewed as $user_reviewed) {
-			if($user_reviewed == $user_id)
-				$reviewed = true;
+		if($users_reviewed) {
+			foreach($users_reviewed as $user_reviewed) {
+				if($user_reviewed == $user_id)
+					$reviewed = true;
+			}
 		}
 
 		return $reviewed;

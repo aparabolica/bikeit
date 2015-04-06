@@ -84,6 +84,43 @@ ul li.column {
 	color: @dark-gray;
 }
 
+#messages {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	z-index: 999999;
+	.message-content {
+		background: #999;
+		padding: 10px;
+	}
+	p {
+		margin: 0;
+	}
+	.ok,
+	.success {
+		background: #0f0;
+		border-bottom: 1px solid darken(#0f0, 10%);
+		padding: 15px 0;
+	}
+	.error {
+		background: #f00;
+		border-bottom: 1px solid darken(#f00, 10%);
+		padding: 15px 0;
+	}
+	.close-button {
+		color: #fff;
+		font-size: 12px;
+		text-decoration: none;
+		float: right;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+}
+
 /*
  * SEARCH
  */
