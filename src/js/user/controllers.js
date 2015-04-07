@@ -35,23 +35,17 @@ angular.module('bikeit.user')
 		};
 
 		$scope.$watch(function() {
-			return Auth.getNonce();
-		}, function(nonce) {
-			$scope.loadedUser = false;
-			if(nonce) {
-				WP.getUser().then(function(data) {
-					$scope.user = data;
-					$scope.loadedUser = true;
-					if($scope.dialog) {
-						$scope.dialog.close();
-						$scope.dialog = false;
-					}
-				}, function(reason) {
-					$scope.loadedUser = true;
-				});
+			return Auth.getUser();
+		}, function(data) {
+			$scope.loadedUser = true;
+			if(data) {
+				$scope.user = data;
+				if($scope.dialog) {
+					$scope.dialog.close();
+					$scope.dialog = false;
+				}
 			} else {
 				$scope.user = false;
-				$scope.loadedUser = true;
 			}
 		});
 

@@ -1,0 +1,1 @@
+<div id="dialog-messages" ng-controller="MessageCtrl" class="message-notification"><div ng-repeat="message in messages" ng-show="message.text" class="message-content"><a ng-click="close(message)" href="javascript:void(0);" class="close-button">{{labels('Close')}}</a><p ng-class="message.status" ng-bind-html="getMessage(message)"></p></div></div>

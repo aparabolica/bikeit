@@ -83,14 +83,14 @@ angular.module('bikeit.message', [])
 				return config || $q.when(config);
 			},
 			response: function(response) {
-				if(response.data && response.data.message) {
-					Message.add(response.data.message);
+				if(response.data.length && response.data[0].message) {
+					Message.add(response.data[0].message);
 				}
 				return response || $q.when(response);
 			},
 			responseError: function(rejection) {
-				if(rejection.data && rejection.data.message) {
-					Message.add(rejection.data.message);
+				if(rejection.data.length && rejection.data[0].message) {
+					Message.add(rejection.data[0].message);
 				}
 				return $q.reject(rejection);
 			}
@@ -126,18 +126,29 @@ angular.module('bikeit.message', [])
 
 .controller('MessageCtrl', [
 	'$scope',
+	'$sce',
 	'MessageService',
-	function($scope, MessageService) {
+	function($scope, $sce, MessageService) {
 
 		$scope.service = MessageService;
 
 		$scope.$watch('service.get()', function(messages) {
+			var $dialogs = document.querySelectorAll('.ngdialog');
+			if($dialogs.length) {
+				$scope.isDialog = true;
+			} else {
+				$scope.isDialog = false;
+			}
 			$scope.messages = messages;
 		});
 
+		$scope.getMessage = function(message) {
+			return $sce.trustAsHtml(message.text);
+		};
+
 		$scope.close = function(message) {
 			$scope.service.close(message);
-		}
+		};
 
 	}
 ]);;

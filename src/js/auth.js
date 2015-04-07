@@ -56,6 +56,24 @@ angular.module('bikeit.auth', [])
 		$httpProvider.interceptors.push('authInterceptor');
 	}
 ])
+.run([
+	'$rootScope',
+	'WPService',
+	'AuthService',
+	function($rootScope, WP, Auth) {
+
+		$rootScope.$watch(function() {
+			return Auth.getNonce();
+		}, function(nonce) {
+			if(nonce) {
+				WP.getUser().then(function(data) {
+					Auth.setUser(data);
+				});
+			}
+		});
+
+	}
+])
 .controller('LoginForm', [
 	'$rootScope',
 	'$scope',
@@ -76,9 +94,6 @@ angular.module('bikeit.auth', [])
 						Auth.setUser(data);
 					});
 					$rootScope.$broadcast('bikeit.userLoggedIn');
-				})
-				.error(function(data) {
-					console.log(data);
 				});
 		}
 
@@ -91,11 +106,7 @@ angular.module('bikeit.auth', [])
 					Auth.setNonce('auth');
 					Auth.setUser(data);
 					$rootScope.$broadcast('bikeit.userRegistered');
-				})
-				.error(function(data) {
-					console.log(data);
 				});
-
 		}
 
 	}

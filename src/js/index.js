@@ -96,10 +96,6 @@ angular.module('bikeit', [
 
 		$scope.logoutUrl = window.bikeit.logoutUrl;
 
-		$scope.goHome = function() {
-			$state.go('home');
-		};
-
 	}
 ])
 

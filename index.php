@@ -25,10 +25,10 @@
 </head>
 <body <?php body_class(get_bloginfo('language')); ?> ng-controller="SiteController">
 
-	<div id="messages" ng-controller="MessageCtrl">
+	<div id="messages" class="message-notification" ng-controller="MessageCtrl" ng-hide="isDialog">
 		<div class="message-content" ng-repeat="message in messages" ng-show="message.text">
 			<a class="close-button" ng-click="close(message)" href="javascript:void(0);">{{labels('Close')}}</a>
-			<p ng-class="message.status">{{message.text}}</p>
+			<p ng-class="message.status" ng-bind-html="getMessage(message)"></p>
 		</div>
 	</div>
 
@@ -36,7 +36,7 @@
 
 		<div class="container">
 			<div class="two columns">
-				<h1><a href="javascript:void(0);" ng-click="goHome()"><?php bloginfo('name'); ?><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" /></a></h1>
+				<h1><a ui-sref="home"><?php bloginfo('name'); ?><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" /></a></h1>
 			</div>
 			<div class="ten columns alpha">
 				<?php
@@ -85,7 +85,7 @@
 						</div>
 					</div>
 					<div ng-hide="user">
-						<p><a class="button" href="#" ng-click="loginForm()">{{labels('Login/Register')}}</a></p>
+						<p><a class="button" href="javascript:void(0);" ng-click="loginForm()">{{labels('Login/Register')}}</a></p>
 					</div>
 				</div>
 			</div>

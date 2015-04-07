@@ -1,0 +1,4 @@
+#dialog-messages.message-notification(ng-controller="MessageCtrl")
+	.message-content(ng-repeat="message in messages" ng-show="message.text")
+		a.close-button(ng-click="close(message)" href="javascript:void(0);") {{labels('Close')}}
+		p(ng-class="message.status" ng-bind-html="getMessage(message)")

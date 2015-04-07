@@ -84,7 +84,7 @@ ul li.column {
 	color: @dark-gray;
 }
 
-#messages {
+.message-notification {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -93,23 +93,20 @@ ul li.column {
 	font-size: 14px;
 	color: #fff;
 	z-index: 999999;
+	&#dialog-messages {
+		position: absolute;
+	}
+	a,
+	strong {
+		color:#fff;
+	}
 	.message-content {
-		background: #999;
+		background: @light-orange;
+		border-bottom: 1px solid @dark-orange;
 		padding: 10px;
 	}
 	p {
 		margin: 0;
-	}
-	.ok,
-	.success {
-		background: #0f0;
-		border-bottom: 1px solid darken(#0f0, 10%);
-		padding: 15px 0;
-	}
-	.error {
-		background: #f00;
-		border-bottom: 1px solid darken(#f00, 10%);
-		padding: 15px 0;
 	}
 	.close-button {
 		color: #fff;
