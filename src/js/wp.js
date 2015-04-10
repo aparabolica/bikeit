@@ -184,9 +184,7 @@ module.exports = [
 					url: url,
 					dataType: 'json',
 					type: 'POST',
-					data: {
-						data: data
-					},
+					data: data,
 					success: function(data, text, xhr) {
 						deferred.resolve(data);
 					},
@@ -206,9 +204,7 @@ module.exports = [
 					url: url + '/' + data.ID,
 					dataType: 'json',
 					type: 'POST',
-					data: {
-						data: data
-					},
+					data: data,
 					success: function(data, text, xhr) {
 						deferred.resolve(data);
 					},

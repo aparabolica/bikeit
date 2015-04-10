@@ -22,6 +22,7 @@ class BikeIT_Places {
 		add_filter('json_prepare_term', array($this, 'json_prepare_term'), 10, 2);
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
 		add_action('json_insert_post', array($this, 'json_insert_post'), 10, 3);
+		add_action('wp_dashboard_setup', array($this, 'nominee_dashboard_widget_setup'));
 
 	}
 
@@ -193,6 +194,41 @@ class BikeIT_Places {
 	function register_fields() {
 
 		if(function_exists("register_field_group")) {
+			register_field_group(array(
+				'id' => 'acf_place-settings',
+				'title' => __('Place setings', 'bikeit'),
+				'fields' => array(
+					array(
+						'key' => 'field_stamped',
+						'label' => __('BikeIt Stamp', 'bikeit'),
+						'name' => 'stamped',
+						'type' => 'true_false',
+						'instructions' => __('Mark to give a BikeIT Stamp to this place', 'bikeit'),
+						'required' => 0,
+						'message' => __('Give a BikeIT Stamp to this place', 'bikeit'),
+						'default_value' => 0
+					)
+				),
+				'location' => array(
+					array(
+						array(
+							'param' => 'post_type',
+							'operator' => '==',
+							'value' => 'place',
+							'order_no' => 0,
+							'group_no' => 0
+						)
+					)
+				),
+				'options' => array (
+					'position' => 'normal',
+					'layout' => 'no_box',
+					'hide_on_screen' => array (
+					),
+				),
+				'menu_order' => 0
+			));
+
 			// Place category markers
 			register_field_group(array (
 				'id' => 'acf_place-category-settings',
@@ -289,6 +325,7 @@ class BikeIT_Places {
 
 		update_post_meta($post_id, 'review_count', $reviews_query->found_posts);
 
+		$stamp_points = 0;
 		$approved = array();
 		$structure = array();
 		$kindness = array();
@@ -296,6 +333,9 @@ class BikeIT_Places {
 		while($reviews_query->have_posts()) {
 
 			$reviews_query->the_post();
+
+			if(get_field('stampable'))
+				$stamp_points++;
 
 			$approved[] = get_field('approved');
 			$structure[] = get_field('structure');
@@ -305,6 +345,8 @@ class BikeIT_Places {
 
 		}
 
+		update_post_meta($post_id, 'stamp_points', $stamp_points);
+		update_post_meta($post_id, 'stamp_score', $stamp_points / $reviews_query->found_posts);
 		update_post_meta($post_id, 'approved', $this->get_score_average($approved));
 		update_post_meta($post_id, 'structure', $this->get_score_average($structure));
 		update_post_meta($post_id, 'kindness', $this->get_score_average($kindness));
@@ -404,6 +446,7 @@ class BikeIT_Places {
 			/*
 			 * Reviews data and scores
 			 */
+			$_post['stamped'] = get_post_meta($post['ID'], 'stamped', true);
 			$_post['review_count'] = get_post_meta($post['ID'], 'review_count', true);
 			$_post['scores'] = array();
 			$_post['scores']['approved'] = get_post_meta($post['ID'], 'approved', true);
@@ -452,33 +495,33 @@ class BikeIT_Places {
 
 	function json_insert_post($post, $data, $update) {
 
-		$review_meta = $data['place_meta'];
+		$place_meta = $data['place_meta'];
 
 		// TODO Validation
 
-		if($review_meta['category'])
-			wp_set_object_terms($post['ID'], intval($review_meta['category']), 'place-category');
+		if($place_meta['category'])
+			wp_set_object_terms($post['ID'], intval($place_meta['category']), 'place-category');
 
-		if($review_meta['road'])
-			update_post_meta($post['ID'], 'road', $review_meta['road']);
+		if($place_meta['road'])
+			update_post_meta($post['ID'], 'road', $place_meta['road']);
 
-		if($review_meta['number'])
-			update_post_meta($post['ID'], 'number', $review_meta['number']);
+		if($place_meta['number'])
+			update_post_meta($post['ID'], 'number', $place_meta['number']);
 
-		if($review_meta['district'])
-			update_post_meta($post['ID'], 'district', $review_meta['district']);
+		if($place_meta['district'])
+			update_post_meta($post['ID'], 'district', $place_meta['district']);
 
-		if($review_meta['lat'])
-			update_post_meta($post['ID'], 'lat', $review_meta['lat']);
+		if($place_meta['lat'])
+			update_post_meta($post['ID'], 'lat', $place_meta['lat']);
 
-		if($review_meta['lng'])
-			update_post_meta($post['ID'], 'lng', $review_meta['lng']);
+		if($place_meta['lng'])
+			update_post_meta($post['ID'], 'lng', $place_meta['lng']);
 
-		if($review_meta['osm_id'])
-			update_post_meta($post['ID'], '_osm_id', $review_meta['osm_id']);
+		if($place_meta['osm_id'])
+			update_post_meta($post['ID'], '_osm_id', $place_meta['osm_id']);
 
-		if($review_meta['params'])
-			update_post_meta($post['ID'], '_params', $review_meta['params']);
+		if($place_meta['params'])
+			update_post_meta($post['ID'], '_params', $place_meta['params']);
 
 		// Send note to OSM
 		// TODO check changes to original OSM (if any)
@@ -493,9 +536,9 @@ class BikeIT_Places {
 			$location['district'] = get_post_meta($post['ID'], 'district', true);
 
 			$osm_data = array(
-				'lat' => $review_meta['location']['lat'],
-				'lon' => $review_meta['location']['lng'],
-				'text' => $data['title'] . ' ' . $this->get_formatted_address($location) . " " . $review_meta['category'] . " Submitted via BikeIT"
+				'lat' => $place_meta['location']['lat'],
+				'lon' => $place_meta['location']['lng'],
+				'text' => $data['title'] . ' ' . $this->get_formatted_address($location) . " " . $place_meta['category'] . " Submitted via BikeIT"
 			);
 
 			$osm_context = stream_context_create(array(
@@ -510,6 +553,99 @@ class BikeIT_Places {
 		}
 
 		do_action('save_post', $post['ID'], get_post($post['ID']), true);
+
+	}
+
+	/*
+	 * Stamp nominees dashboard widget
+	 */
+	function nominee_dashboard_widget_setup() {
+		wp_add_dashboard_widget(
+			'bikeit_nominee_dashboard_widget',
+			__('Stamp nominees', 'bikeit'),
+			array($this, 'nominee_dashboard_widget'),
+			'dashboard',
+			'side',
+			'high'
+		);
+	}
+
+	function nominee_dashboard_widget() {
+
+		$query = new WP_Query(array(
+			'posts_per_page' => 10,
+			'post_type' => 'place',
+			'orderby' => 'meta_value_num',
+			'order' => 'DESC',
+			'meta_key' => 'stamp_points',
+			'meta_query' => array(
+				'relation' => 'OR',
+				array(
+					'key' => 'stamped',
+					'value' => 0,
+					'compare' => '='
+				),
+				array(
+					'key' => 'stamped',
+					'compare' => 'NOT EXISTS'
+				)
+			)
+		));
+
+		if($query->have_posts()) {
+			?>
+			<p><?php _e('Selected nominees for a BikeIT Stamp', 'bikeit'); ?></p>
+			<div class="places">
+				<table style="width:100%;">
+					<thead>
+						<tr style="text-align:left;">
+							<th>
+								<?php _e('Place', 'bikeit'); ?>
+							</th>
+							<th>
+								<?php _e('Stamp rate', 'bikeit'); ?>
+							</th>
+							<th>
+								<?php _e('Approval', 'bikeit'); ?>
+							</th>
+							<th>
+								<?php _e('Stamp points', 'bikeit'); ?>
+							</th>
+							<th>
+								<?php _e('Review count', 'bikeit'); ?>
+							</th>
+						</tr>
+					</thead>
+					<?php
+					global $post;
+					while($query->have_posts()) {
+						$query->the_post();
+						?>
+						<tr>
+							<td>
+								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> (<a href="<?php echo admin_url('post.php?post=' . $post->ID . '&action=edit'); ?>"><?php _e('edit', 'bikeit'); ?></a>)
+							</td>
+							<td>
+								<?php echo get_post_meta($post->ID, 'stamp_score', true)*100; ?>%
+							</td>
+							<td>
+								<?php echo get_post_meta($post->ID, 'approved', true)*100; ?>%
+							</td>
+							<td>
+								<?php echo get_post_meta($post->ID, 'stamp_points', true); ?>
+							</td>
+							<td>
+								<?php echo get_post_meta($post->ID, 'review_count', true); ?>
+							</td>
+						</tr>
+						<?php
+						wp_reset_postdata();
+					}
+					?>
+				</table>
+			</div>
+			<?php
+		}
 
 	}
 

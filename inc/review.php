@@ -23,6 +23,7 @@ class BikeIT_Reviews {
 		add_filter('json_prepare_post', array($this, 'json_prepare_place'), 10, 3);
 		add_filter('json_prepare_user', array($this, 'json_prepare_user'), 10, 3);
 		add_action('json_insert_post', array($this, 'json_insert_post'), 10, 3);
+		add_action('wp_dashboard_setup', array($this, 'latest_reviews_dashboard_widget_setup'));
 
 	}
 
@@ -425,22 +426,80 @@ class BikeIT_Reviews {
 			update_field('place', $review_meta['place'], $post['ID']);
 		}
 
-		if($review_meta['approved'])
-			update_field('approved', $review_meta['approved'], $post['ID']);
-		else
-			update_field('approved', 0, $post['ID']);
+		if(isset($review_meta['approved'])) {
+			if($review_meta['approved'])
+				update_field('approved', $review_meta['approved'], $post['ID']);
+			else
+				update_field('approved', 0, $post['ID']);
+		}
 
-		if($review_meta['kindness'])
+		if(isset($review_meta['kindness']))
 			update_field('kindness', $review_meta['kindness'], $post['ID']);
 
-		if($review_meta['structure'])
+		if(isset($review_meta['structure']))
 			update_field('structure', $review_meta['structure'], $post['ID']);
 
-		if($review_meta['stampable'])
-			update_field('stampable', $review_meta['stampable'], $post['ID']);
+		if(isset($review_meta['stampable'])) {
+			if($review_meta['stampable'])
+				update_field('stampable', $review_meta['stampable'], $post['ID']);
+			else
+				update_field('stampable', 0, $post['ID']);
+		}
 
 		do_action('save_post', $post['ID'], get_post($post['ID']), true);
 
+	}
+
+	/*
+	 * Latest reviews dashboard widget
+	 */
+	function latest_reviews_dashboard_widget_setup() {
+		wp_add_dashboard_widget(
+			'bikeit_latest_reviews_dashboard_widget',
+			__('Latest reviews', 'bikeit'),
+			array($this, 'latest_reviews_dashboard_widget'),
+			'dashboard',
+			'side',
+			'high'
+		);
+	}
+
+	function latest_reviews_dashboard_widget() {
+
+		$query = new WP_Query(array(
+			'posts_per_page' => 10,
+			'post_type' => 'review'
+		));
+
+		if($query->have_posts()) {
+			?>
+			<div class="places">
+				<table style="width:100%;">
+					<thead>
+						<tr style="text-align:left;">
+							<th>
+								<?php //_e('Place', 'bikeit'); ?>
+							</th>
+						</tr>
+					</thead>
+					<?php
+					global $post;
+					while($query->have_posts()) {
+						$query->the_post();
+						?>
+						<tr>
+							<td>
+								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+							</td>
+						</tr>
+						<?php
+						wp_reset_postdata();
+					}
+					?>
+				</table>
+			</div>
+			<?php
+		}
 	}
 
 }

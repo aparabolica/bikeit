@@ -48,9 +48,7 @@ angular.module('bikeit.review')
 		$scope.onLoadReview = function(load, place) {
 
 			if(load) {
-				$scope.$on('userReady', function(ev, data) {
-					$scope.newReview(place);
-				});
+				$scope.newReview(place);
 			}
 
 		};

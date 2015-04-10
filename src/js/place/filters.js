@@ -35,10 +35,15 @@ angular.module('bikeit.place')
 
 					var approval = 'default';
 
-					if(parseFloat(place.scores.approved) >= 0.5)
-						approval = 'approved';
-					else
-						approval = 'failed';
+
+					if(place.stamped)
+						approval = 'stamp';
+					else {
+						if(parseFloat(place.scores.approved) >= 0.5)
+							approval = 'approved';
+						else
+							approval = 'failed';
+					}
 
 					var icon = {};
 					if(place.terms['place-category']) {
