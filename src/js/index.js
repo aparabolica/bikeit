@@ -46,6 +46,27 @@ angular.module('bikeit', [
 	}
 ])
 
+.run([
+	'$rootScope',
+	'$location',
+	'$window',
+	function($rootScope, $location, $window) {
+		/*
+		 * Analytics
+		 */
+		$rootScope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState, fromParams) {
+			if($window._gaq && fromState.name) {
+				$window._gaq.push(['_trackPageview', $location.path()]);
+			}
+			if(fromState.name) {
+				jQuery('html,body').animate({
+					scrollTop: 0
+				}, '200');
+			}
+		});
+	}
+])
+
 .factory('WPService', require('./wp'))
 
 .directive('tooltip', function() {
