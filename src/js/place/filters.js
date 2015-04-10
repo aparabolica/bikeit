@@ -90,20 +90,19 @@ angular.module('bikeit.place')
 	return function(input, score) {
 
 		if(score) {
-
 			return _.filter(input, function(place) {
-
-				var approval;
-				if(parseFloat(place.scores.approved) >= 0.5)
-					approval = 'approved';
-				else
-					approval = 'failed';
-
-				return score == approval;
+				if(score == 'stamp') {
+					return parseInt(place.stamped);
+				} else {
+					var approval;
+					if(parseFloat(place.scores.approved) >= 0.5)
+						approval = 'approved';
+					else
+						approval = 'failed';
+					return score == approval;
+				}
 			});
-
 		}
-
 		return input;
 
 	}
