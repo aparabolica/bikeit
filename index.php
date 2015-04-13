@@ -99,14 +99,14 @@
 
 		<div class="colophon-content container">
 			<div class="four columns">
-				&nbsp;
+				<?php wp_nav_menu( array( 'theme_location' => 'footer-nav' ) ); ?>
 			</div>
 			<div class="four columns">
 				<div class="footer-logo"></div>
-				<p class="site-desc">{{labels('Collaborative mapping bike-friendly city spots')}}</p>
+				<p class="site-desc"><?php _e('Collaborative mapping bike-friendly city spots', 'bikeit'); ?></p>
 			</div>
 			<div class="four columns">
-				&nbsp;
+				<?php dynamic_sidebar('footer-sidebar'); ?>
 			</div>
 		</div>
 

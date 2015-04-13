@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-13 18:03-0300\n"
+"POT-Creation-Date: 2015-04-13 18:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,147 +17,159 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: functions.php:77
-msgid "Featured places"
+#: functions.php:13
+msgid "Footer menu"
 msgstr ""
 
-#: functions.php:78
-msgid "Viewing list of reviews"
+#: functions.php:21
+msgid "Footer widgets"
 msgstr ""
 
-#: functions.php:79
-msgid "Featured"
-msgstr ""
-
-#: functions.php:80
-msgid "Filter your search"
-msgstr ""
-
-#: functions.php:81
-msgid "Structure"
-msgstr ""
-
-#: functions.php:82
-msgid "Kindness"
-msgstr ""
-
-#: functions.php:83
-msgid "Total reviews"
-msgstr ""
-
-#: functions.php:84
-msgid "Submit review"
-msgstr ""
-
-#: functions.php:85 inc/review.php:39
-msgid "Edit review"
-msgstr ""
-
-#: functions.php:86
-msgid "Update review"
-msgstr ""
-
-#: functions.php:87 inc/review.php:35 inc/review.php:45
-msgid "Reviews"
-msgstr ""
-
-#: functions.php:88
-msgid "Rating"
-msgstr ""
-
-#: functions.php:89 inc/review.php:188
-msgid "Approved"
-msgstr ""
-
-#: functions.php:90
-msgid "Failed"
-msgstr ""
-
-#: functions.php:91
-msgid "Published"
-msgstr ""
-
-#: functions.php:92
-msgid "Reply this review"
-msgstr ""
-
-#: functions.php:93
-msgid "Reviewing"
-msgstr ""
-
-#: functions.php:94
-msgid "Nominate for BikeIT Stamp"
-msgstr ""
-
-#: functions.php:95
-msgid "Notify place about your review"
-msgstr ""
-
-#: functions.php:96
-msgid "Tell us about your experience"
+#: functions.php:23
+msgid "Widgets in this area will be shown on the footer of every page."
 msgstr ""
 
 #: functions.php:97
-msgid "Send photos"
+msgid "Featured places"
 msgstr ""
 
 #: functions.php:98
-msgid "Where are you going?"
+msgid "Viewing list of reviews"
 msgstr ""
 
 #: functions.php:99
-msgid "Collaborative mapping bike-friendly city spots"
+msgid "Featured"
 msgstr ""
 
 #: functions.php:100
-msgid "Adding"
+msgid "Filter your search"
 msgstr ""
 
 #: functions.php:101
-msgid "Name"
+msgid "Structure"
 msgstr ""
 
 #: functions.php:102
-msgid "Search address"
+msgid "Kindness"
 msgstr ""
 
 #: functions.php:103
-msgid "Address"
+msgid "Total reviews"
 msgstr ""
 
 #: functions.php:104
-msgid "Number"
+msgid "Submit review"
 msgstr ""
 
-#: functions.php:105
-msgid "District"
+#: functions.php:105 inc/review.php:39
+msgid "Edit review"
 msgstr ""
 
 #: functions.php:106
-msgid "Exact location"
+msgid "Update review"
 msgstr ""
 
-#: functions.php:107
-msgid "Submit place"
+#: functions.php:107 inc/review.php:35 inc/review.php:45
+msgid "Reviews"
 msgstr ""
 
 #: functions.php:108
-msgid "OpenStreetMap Results"
+msgid "Rating"
 msgstr ""
 
-#: functions.php:109
-msgid "Logout"
+#: functions.php:109 inc/review.php:188
+msgid "Approved"
 msgstr ""
 
 #: functions.php:110
-msgid "My profile"
+msgid "Failed"
 msgstr ""
 
 #: functions.php:111
-msgid "Edit my profile"
+msgid "Published"
 msgstr ""
 
 #: functions.php:112
+msgid "Reply this review"
+msgstr ""
+
+#: functions.php:113
+msgid "Reviewing"
+msgstr ""
+
+#: functions.php:114
+msgid "Nominate for BikeIT Stamp"
+msgstr ""
+
+#: functions.php:115
+msgid "Notify place about your review"
+msgstr ""
+
+#: functions.php:116
+msgid "Tell us about your experience"
+msgstr ""
+
+#: functions.php:117
+msgid "Send photos"
+msgstr ""
+
+#: functions.php:118
+msgid "Where are you going?"
+msgstr ""
+
+#: functions.php:119 index.php:106
+msgid "Collaborative mapping bike-friendly city spots"
+msgstr ""
+
+#: functions.php:120
+msgid "Adding"
+msgstr ""
+
+#: functions.php:121
+msgid "Name"
+msgstr ""
+
+#: functions.php:122
+msgid "Search address"
+msgstr ""
+
+#: functions.php:123
+msgid "Address"
+msgstr ""
+
+#: functions.php:124
+msgid "Number"
+msgstr ""
+
+#: functions.php:125
+msgid "District"
+msgstr ""
+
+#: functions.php:126
+msgid "Exact location"
+msgstr ""
+
+#: functions.php:127
+msgid "Submit place"
+msgstr ""
+
+#: functions.php:128
+msgid "OpenStreetMap Results"
+msgstr ""
+
+#: functions.php:129
+msgid "Logout"
+msgstr ""
+
+#: functions.php:130
+msgid "My profile"
+msgstr ""
+
+#: functions.php:131
+msgid "Edit my profile"
+msgstr ""
+
+#: functions.php:132
 msgid "Login/Register"
 msgstr ""
 

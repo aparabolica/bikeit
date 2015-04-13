@@ -3,11 +3,31 @@
 /*
  * Theme setup
  */
-function bikeit_theme_setup(){
+function bikeit_theme_setup() {
 	// Text domain
 	load_theme_textdomain('bikeit', get_template_directory() . '/languages');
+
+	// Nav menus
+	register_nav_menus(
+		array(
+			'footer-nav' => __('Footer menu', 'bikeit')
+		)
+	);
 }
 add_action('after_setup_theme', 'bikeit_theme_setup');
+
+function bikeit_sidebars() {
+	register_sidebar( array(
+		'name' => __( 'Footer widgets', 'bikeit' ),
+		'id' => 'footer-sidebar',
+		'description' => __( 'Widgets in this area will be shown on the footer of every page.', 'bikeit' ),
+		'before_widget' => '<li id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</li>',
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => '</h2>',
+	) );
+}
+add_action( 'widgets_init', 'bikeit_sidebars' );
 
 /*
  * Required plugins
