@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-13 17:58-0300\n"
+"POT-Creation-Date: 2015-04-13 18:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,7 +185,7 @@ msgstr ""
 msgid "Places"
 msgstr ""
 
-#: inc/place.php:33 inc/place.php:604 inc/review.php:174
+#: inc/place.php:33 inc/place.php:614 inc/review.php:174
 msgid "Place"
 msgstr ""
 
@@ -305,71 +305,83 @@ msgstr ""
 msgid "Give a BikeIT Stamp to this place"
 msgstr ""
 
-#: inc/place.php:235
+#: inc/place.php:213
+msgid "Featured place"
+msgstr ""
+
+#: inc/place.php:216
+msgid "Mark to feature this page in the homepage"
+msgstr ""
+
+#: inc/place.php:218
+msgid "Feature this place on the homepage"
+msgstr ""
+
+#: inc/place.php:245
 msgid "Place category settings"
 msgstr ""
 
-#: inc/place.php:239
+#: inc/place.php:249
 msgid "Marker"
 msgstr ""
 
-#: inc/place.php:248
+#: inc/place.php:258
 msgid "Approved marker"
 msgstr ""
 
-#: inc/place.php:257
+#: inc/place.php:267
 msgid "Failed marker"
 msgstr ""
 
-#: inc/place.php:266
+#: inc/place.php:276
 msgid "BikeIT Stamp marker"
 msgstr ""
 
-#: inc/place.php:275
+#: inc/place.php:285
 msgid "Marker position"
 msgstr ""
 
-#: inc/place.php:279
+#: inc/place.php:289
 msgid "Center"
 msgstr ""
 
-#: inc/place.php:280
+#: inc/place.php:290
 msgid "Bottom center"
 msgstr ""
 
-#: inc/place.php:281
+#: inc/place.php:291
 msgid "Botttom right"
 msgstr ""
 
-#: inc/place.php:282
+#: inc/place.php:292
 msgid "Bottom left"
 msgstr ""
 
-#: inc/place.php:566
+#: inc/place.php:576
 msgid "Stamp nominees"
 msgstr ""
 
-#: inc/place.php:598
+#: inc/place.php:608
 msgid "Selected nominees for a BikeIT Stamp"
 msgstr ""
 
-#: inc/place.php:607
+#: inc/place.php:617
 msgid "Stamp rate"
 msgstr ""
 
-#: inc/place.php:610
+#: inc/place.php:620
 msgid "Approval"
 msgstr ""
 
-#: inc/place.php:613
+#: inc/place.php:623
 msgid "Stamp points"
 msgstr ""
 
-#: inc/place.php:616
+#: inc/place.php:626
 msgid "Review count"
 msgstr ""
 
-#: inc/place.php:627
+#: inc/place.php:637
 msgid "edit"
 msgstr ""
 

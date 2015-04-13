@@ -207,6 +207,16 @@ class BikeIT_Places {
 						'required' => 0,
 						'message' => __('Give a BikeIT Stamp to this place', 'bikeit'),
 						'default_value' => 0
+					),
+					array(
+						'key' => 'field_featured',
+						'label' => __('Featured place', 'bikeit'),
+						'name' => 'featured',
+						'type' => 'true_false',
+						'instructions' => __('Mark to feature this page in the homepage', 'bikeit'),
+						'required' => 0,
+						'message' => __('Feature this place on the homepage', 'bikeit'),
+						'default_value' => 0
 					)
 				),
 				'location' => array(
