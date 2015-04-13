@@ -106,7 +106,7 @@ class BikeIT_Votes {
 		return $user_vote;
 	}
 
-	function update_author_votes($user_id) {
+	function update_author_votes($user_id, $exclude = false) {
 
 		$up = 0;
 		$down = 0;
@@ -115,6 +115,7 @@ class BikeIT_Votes {
 			'post_status' => 'publish',
 			'posts_per_page' => -1,
 			'post_type' => 'any',
+			'post__not_in' => $exclude ? array($exclude) : null,
 			'meta_query' => array(
 				array(
 					'key' => 'votes',

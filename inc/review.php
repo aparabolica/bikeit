@@ -17,7 +17,8 @@ class BikeIT_Reviews {
 		add_filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
 		add_action('save_post', array($this, 'save_post'));
 		add_action('save_post', array($this, 'change_post'));
-		add_action('delete_post', array($this, 'change_post'));
+		add_action('before_delete_post', array($this, 'change_post'));
+		add_action('before_delete_post', array($this, 'before_delete'));
 		add_filter('pre_get_posts', array($this, 'pre_get_posts'));
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
 		add_filter('json_prepare_post', array($this, 'json_prepare_place'), 10, 3);
@@ -111,6 +112,7 @@ class BikeIT_Reviews {
 			foreach($contrib_roles as $role) {
 
 				$wp_roles->add_cap( $role, 'publish_reviews' );
+				$wp_roles->add_cap( $role, 'delete_reviews' );
 				$wp_roles->add_cap( $role, 'edit_reviews' );
 				$wp_roles->add_cap( $role, 'edit_review' );
 
@@ -290,17 +292,22 @@ class BikeIT_Reviews {
 
 	}
 
-	function change_post($post_id) {
+	function before_delete($post_id) {
+		$this->change_post($post_id, true);
+	}
+
+	function change_post($post_id, $deleting = false) {
 		global $bikeit_places, $bikeit_votes;
+		$deleting = $deleting ? $post_id : false;
 		$place_id = get_post_meta($post_id, 'place', true);
 		if($bikeit_places && $place_id) {
-			$bikeit_places->update_place_score($place_id);
+			$bikeit_places->update_place_score($place_id, $deleting);
 		}
 		if($bikeit_votes) {
-			$bikeit_votes->update_author_votes(get_post($post_id)->post_author);
+			$bikeit_votes->update_author_votes(get_post($post_id)->post_author, $deleting);
 		}
 		$post = get_post($post_id);
-		if($post->post_status != 'publish') {
+		if($post->post_status != 'publish' || $deleting) {
 			$this->delete_user_reviewed_place(get_post_meta($post_id, 'place', true), $post->post_author);
 		} else {
 			$this->add_user_reviewed_place(get_post_meta($post_id, 'place', true), $post->post_author);

@@ -309,12 +309,13 @@ class BikeIT_Places {
 		}
 	}
 
-	function update_place_score($post_id) {
+	function update_place_score($post_id, $exclude = false) {
 
 		$reviews_query = new WP_Query(array(
 			'post_status' => 'publish',
 			'posts_per_page' => -1,
 			'post_type' => 'review',
+			'post__not_in' => $exclude ? array($exclude) : null,
 			'meta_query' => array(
 				array(
 					'key' => 'place',
@@ -346,7 +347,7 @@ class BikeIT_Places {
 		}
 
 		update_post_meta($post_id, 'stamp_points', $stamp_points);
-		update_post_meta($post_id, 'stamp_score', $stamp_points / $reviews_query->found_posts);
+		update_post_meta($post_id, 'stamp_score', $reviews_query->found_posts ? $stamp_points / $reviews_query->found_posts : 0);
 		update_post_meta($post_id, 'approved', $this->get_score_average($approved));
 		update_post_meta($post_id, 'structure', $this->get_score_average($structure));
 		update_post_meta($post_id, 'kindness', $this->get_score_average($kindness));

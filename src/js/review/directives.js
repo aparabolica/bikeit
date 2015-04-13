@@ -8,8 +8,9 @@ angular.module('bikeit.review')
 	'$state',
 	'$sce',
 	'WPService',
+	'AuthService',
 	'ReviewService',
-	function(templatePath, labels, $state, $sce, WP, Review) {
+	function(templatePath, labels, $state, $sce, WP, Auth, Review) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -21,10 +22,6 @@ angular.module('bikeit.review')
 				var review = scope.review;
 
 				scope.labels = labels;
-
-				scope.accessUser = function(user) {
-					$state.go('user', {userId: user.ID});
-				};
 
 				scope.getReviewDate = function() {
 
@@ -45,6 +42,30 @@ angular.module('bikeit.review')
 					} else {
 						return labels('Failed');
 					}
+
+				};
+
+				scope.deleteReview = function(review) {
+
+					if(confirm(labels('Are you sure?'))) {
+						WP.delete(review).then(function() {
+							$state.go($state.current, {}, {reload: true});
+						});
+					}
+
+				};
+
+				scope.canDeleteReview = function(review) {
+
+					var user = Auth.getUser();
+
+					if(user) {
+						if(user.capabilities.delete_others_reviews || 
+							(user.capabilities.delete_reviews && review.author.ID == user.ID))
+							return true;
+					}
+
+					return false;
 
 				};
 
