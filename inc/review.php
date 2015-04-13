@@ -22,7 +22,8 @@ class BikeIT_Reviews {
 		add_filter('pre_get_posts', array($this, 'pre_get_posts'));
 		add_filter('json_prepare_post', array($this, 'json_prepare_post'), 10, 3);
 		add_filter('json_prepare_post', array($this, 'json_prepare_place'), 10, 3);
-		add_filter('json_prepare_user', array($this, 'json_prepare_user'), 10, 3);
+		add_filter('json_prepare_user', array($this, 'json_prepare_user'), 10, 2);
+		add_filter('bikeit_prepare_contributor', array($this, 'json_prepare_user'), 10, 2);
 		add_action('json_insert_post', array($this, 'json_insert_post'), 10, 3);
 		add_action('wp_dashboard_setup', array($this, 'latest_reviews_dashboard_widget_setup'));
 
@@ -389,7 +390,7 @@ class BikeIT_Reviews {
 		return $_post;
 	}
 
-	function json_prepare_user($user_fields, $user, $context) {
+	function json_prepare_user($user_fields, $user) {
 		$query = new WP_Query(array('post_type' => 'review', 'author' => $user->ID));
 		$user_fields['total_reviews'] = $query->found_posts;
 		return $user_fields;

@@ -10,6 +10,7 @@ class BikeIT_Votes {
 	function __construct() {
 		add_action('save_post', array($this, 'save_post'));
 		add_filter('json_prepare_user', array($this, 'json_prepare_user'), 10, 3);
+		add_filter('bikeit_prepare_contributor', array($this, 'json_prepare_user'), 10, 2);
 		add_filter('json_endpoints', array($this, 'vote_routes'));
 	}
 
@@ -37,7 +38,7 @@ class BikeIT_Votes {
 
 	}
 
-	function json_prepare_user($user_fields, $user, $context) {
+	function json_prepare_user($user_fields, $user) {
 		$user_fields['votes'] = $this->get_author_votes($user->ID);
 		return $user_fields;
 	}

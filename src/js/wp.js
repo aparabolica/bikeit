@@ -138,6 +138,25 @@ module.exports = [
 				return deferred.promise;
 
 			},
+			getContributor: function(userId) {
+
+				var deferred = $q.defer();
+
+				jQuery.ajax({
+					url: apiUrl + 'contributors/' + userId,
+					dataType: 'json',
+					cache: true,
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text, error) {
+						deferred.reject(xhr.responseJSON);
+					}
+				});
+
+				return deferred.promise;
+
+			},
 			getPost: function(postId) {
 
 				var deferred = $q.defer();

@@ -262,6 +262,8 @@ require_once(TEMPLATEPATH . '/inc/settings.php');
 
 require_once(TEMPLATEPATH . '/inc/auth.php');
 
+require_once(TEMPLATEPATH . '/inc/contributor.php');
+
 require_once(TEMPLATEPATH . '/inc/vote.php');
 
 require_once(TEMPLATEPATH . '/inc/place.php');

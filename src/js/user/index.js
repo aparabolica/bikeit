@@ -15,7 +15,7 @@ angular.module('bikeit.user', [])
 						'$stateParams',
 						'WPService',
 						function($stateParams, WP) {
-							return WP.getUser($stateParams.userId);
+							return WP.getContributor($stateParams.userId);
 						}
 					],
 					'UserPlaces': [

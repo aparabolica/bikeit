@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-13 17:04-0300\n"
+"POT-Creation-Date: 2015-04-13 17:58-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Submit review"
 msgstr ""
 
-#: functions.php:85 inc/review.php:38
+#: functions.php:85 inc/review.php:39
 msgid "Edit review"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Update review"
 msgstr ""
 
-#: functions.php:87 inc/review.php:34 inc/review.php:44
+#: functions.php:87 inc/review.php:35 inc/review.php:45
 msgid "Reviews"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: functions.php:89 inc/review.php:187
+#: functions.php:89 inc/review.php:188
 msgid "Approved"
 msgstr ""
 
@@ -169,19 +169,23 @@ msgstr ""
 msgid "Sorry, you must be logged in to comment."
 msgstr ""
 
-#: inc/comment.php:45 inc/vote.php:50
+#: inc/comment.php:45 inc/vote.php:51
 msgid "Sorry, you must be logged in to vote."
 msgstr ""
 
-#: inc/comment.php:49 inc/vote.php:54
+#: inc/comment.php:49 inc/vote.php:55
 msgid "Invalid vote."
+msgstr ""
+
+#: inc/contributor.php:35
+msgid "Invalid user ID"
 msgstr ""
 
 #: inc/place.php:32 inc/place.php:42
 msgid "Places"
 msgstr ""
 
-#: inc/place.php:33 inc/place.php:604 inc/review.php:173
+#: inc/place.php:33 inc/place.php:604 inc/review.php:174
 msgid "Place"
 msgstr ""
 
@@ -369,83 +373,83 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: inc/review.php:35
+#: inc/review.php:36
 msgid "Review"
 msgstr ""
 
-#: inc/review.php:36
+#: inc/review.php:37
 msgid "Add review"
 msgstr ""
 
-#: inc/review.php:37
+#: inc/review.php:38
 msgid "Add new review"
 msgstr ""
 
-#: inc/review.php:39
+#: inc/review.php:40
 msgid "New review"
 msgstr ""
 
-#: inc/review.php:40
+#: inc/review.php:41
 msgid "View review"
 msgstr ""
 
-#: inc/review.php:41
+#: inc/review.php:42
 msgid "Search review"
 msgstr ""
 
-#: inc/review.php:42
+#: inc/review.php:43
 msgid "No review found"
 msgstr ""
 
-#: inc/review.php:43
+#: inc/review.php:44
 msgid "No review found in the trash"
 msgstr ""
 
-#: inc/review.php:50
+#: inc/review.php:51
 msgid "BikeIT Reviews"
 msgstr ""
 
-#: inc/review.php:169
+#: inc/review.php:170
 msgid "Review settings"
 msgstr ""
 
-#: inc/review.php:190
+#: inc/review.php:191
 msgid "Mark if you approve it's bike receptivity"
 msgstr ""
 
-#: inc/review.php:192
+#: inc/review.php:193
 msgid "I approve this place"
 msgstr ""
 
-#: inc/review.php:197
+#: inc/review.php:198
 msgid "Structure score"
 msgstr ""
 
-#: inc/review.php:200
+#: inc/review.php:201
 msgid "Rate the strucutre of this place"
 msgstr ""
 
-#: inc/review.php:216
+#: inc/review.php:217
 msgid "Kindness score"
 msgstr ""
 
-#: inc/review.php:219
+#: inc/review.php:220
 msgid "Rate the kindness of this place"
 msgstr ""
 
-#: inc/review.php:235
+#: inc/review.php:236
 msgid "Stampable"
 msgstr ""
 
-#: inc/review.php:238
+#: inc/review.php:239
 msgid "Mark if you want this spot as a nominee for a BikeIt Stamp"
 msgstr ""
 
-#: inc/review.php:239
+#: inc/review.php:240
 msgid "Nominate for a BikeIt Stamp"
 msgstr ""
 
-#: inc/review.php:466
+#: inc/review.php:467
 msgid "Latest reviews"
 msgstr ""
 
@@ -493,7 +497,7 @@ msgstr ""
 msgid "BikeIT stamp label url"
 msgstr ""
 
-#: inc/vote.php:83
+#: inc/vote.php:84
 msgid "Vote not found."
 msgstr ""
 
