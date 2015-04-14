@@ -9,6 +9,7 @@ require('leaflet');
 require('angular-leaflet');
 require('angular-ui-router');
 require('ng-dialog');
+require('ng-file-upload');
 
 /*
  * Modules
@@ -31,6 +32,7 @@ require('./review');
 
 angular.module('bikeit', [
 	'ngDialog',
+	'angularFileUpload',
 	'ui.router',
 	'bikeit.message',
 	'bikeit.auth',
@@ -94,13 +96,22 @@ angular.module('bikeit', [
 })
 
 .directive('backImg', function(){
-    return function(scope, element, attrs){
-        var url = attrs.backImg;
-        element.css({
-            'background-image': 'url(' + url +')',
-            'background-size' : 'cover'
-        });
-    };
+	return {
+		restrict: 'A',
+		scope: {
+			backImg: '='
+		},
+		link: function(scope, element, attrs) {
+			element.css({
+				'background-size' : 'cover'
+			});
+			scope.$watch('backImg', function(url) {
+				element.css({
+					'background-image': 'url(' + url + ')'
+				});
+			});
+		}
+	};
 })
 
 .factory('Labels', [

@@ -51,10 +51,15 @@ div(ng-show="user")
 
 					textarea(id="input_content" ng-model="review.content")
 
-			//- .photos
-			//- 	p
-			//- 		label.button(for="input_photos") {{labels('Send photos')}}
-			//- 		input(id="input_photos" ng-model="review.photos" type="file" ng-hide="1==1" accept="image/*")
+			.photos
+				.input-area.row(ng-file-drop ng-file-select ng-file-change="appendImages($files)" ng-multiple="true" allow-dir="true" accept=".jpg,.png,.pdf")
+					p Arraste fotos aqui
+					p.small Ou clique para selecionar
+
+				ul.photo-list(ng-show="files.length")
+					li.photo-item(ng-repeat="file in files")
+						.thumbnail(back-img="file.dataUrl")
+						p.photo-title {{file.file.name}}
 
 			input(ng-hide="review.ID" type="submit" value="{{labels('Submit review')}}")
 			input(ng-show="review.ID" type="submit" value="{{labels('Update review')}}")

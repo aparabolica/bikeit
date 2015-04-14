@@ -17,7 +17,7 @@ class BikeIT_Contributor {
 
 		$contributor_routes = array(
 			'/contributors/(?P<id>\d+)' => array(
-				array(array($this, 'get_contributor'),	WP_JSON_Server::READABLE)
+				array(array($this, 'get_contributor'), WP_JSON_Server::READABLE)
 			)
 		);
 

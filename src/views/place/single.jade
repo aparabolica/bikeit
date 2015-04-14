@@ -6,7 +6,7 @@ article.single-place.content-map(id="place-{{place.id}}")
 			header#place-header.content-map-header.five.columns
 				.header-content
 					.main-info
-						.image(back-img="{{place.featured_image.attachment_meta.sizes.medium.url}}")
+						.image(back-img="place.featured_image.attachment_meta.sizes.medium.url")
 						h1 {{place.title}}
 						p.address {{place.formatted_address}}
 					.ratings

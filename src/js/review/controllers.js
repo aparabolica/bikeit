@@ -14,6 +14,31 @@ angular.module('bikeit.review')
 
 		$scope.loginTemplate = templatePath + '/views/login.html';
 
+		$scope.files = [];
+
+		$scope.appendImages = function(files) {
+
+			console.log(files);
+
+			_.each(files, function(file) {
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				var fileObj = {
+					file: file,
+					dataUrl: ''
+				};
+				$scope.files.push(fileObj);
+				reader.onload = function() {
+					$scope.$apply(function() {
+						fileObj.dataUrl = reader.result;
+					});
+				};
+			});
+
+			console.log($scope.files);
+
+		};
+
 		$scope.$watch(function() {
 			return Auth.getUser();
 		}, function(data) {

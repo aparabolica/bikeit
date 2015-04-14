@@ -10,7 +10,8 @@
     "moment": "^2.9.0",
     "napa": "^1.2.0",
     "ng-dialog": "^0.3.10",
-    "underscore": "^1.7.0"
+    "underscore": "^1.7.0",
+    "ng-file-upload": "danialfarid/ng-file-upload#3.3.1"
   },
   "devDependencies": {
     "browserify": "^9.0.3",
