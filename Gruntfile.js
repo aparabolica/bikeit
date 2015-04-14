@@ -7,7 +7,6 @@ module.exports = function(grunt) {
 					transform: ['browserify-shim'],
 				},
 				files: {
-					'js/vendor.js': ['src/js/vendor.js'],
 					'js/main.js': ['src/js/index.js']
 				}
 			}
@@ -19,7 +18,6 @@ module.exports = function(grunt) {
 					compress: true
 				},
 				files: {
-					'js/vendor.js': 'js/vendor.js',
 					'js/main.js': 'js/main.js',
 				}
 			}
