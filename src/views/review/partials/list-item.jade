@@ -9,7 +9,8 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 					img(ng-src="{{review.author.avatar}}")
 					h3 
 						a(ui-sref="user({userId: review.author.ID})") {{review.author.name}}
-				p.date {{labels('Published')}} {{getReviewDate()}}
+				p.date
+						a(ui-sref="placesSingle.singleReview({placeId: review.place, reviewId: review.ID})") {{labels('Published')}} {{getReviewDate()}}
 				p(ng-show="canDeleteReview(review)")
 					a.delete(href="javascript:void(0);" ng-click="deleteReview(review)") {{labels('Delete review')}}
 				.clear

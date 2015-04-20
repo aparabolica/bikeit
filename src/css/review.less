@@ -68,6 +68,13 @@
 		font-size: 12px;
 		text-transform: lowercase;
 		color: #666;
+		a {
+			color: inherit;
+			text-decoration: none;
+			&:hover {
+				color: #333;
+			}
+		}
 	}
 	.delete {
 		display: inline-block;
@@ -243,12 +250,12 @@
 		.photos {
 			.input-area {
 				padding: 30px;
-				background: lighten(@light-orange, 20%);
-				border: 2px solid @light-orange;
+				background: lighten(@light-orange, 30%);
+				border: 2px solid lighten(@light-orange, 15%);
 				text-align: center;
 				cursor: pointer;
 				&:hover {
-					background: lighten(@light-orange, 15%);
+					background: lighten(@light-orange, 25%);
 				}
 				p {
 					margin: 0;
@@ -262,23 +269,70 @@
 			}
 			.photo-list {
 				.photo-item {
-					width: 25%;
+					width: calc(~"25% - 15px");
 					float: left;
 					font-size: 12px;
+					margin: 0 20px 20px 0;
+					border: 1px solid @light-gray;
 					.box-sizing(border-box);
-					padding-right: 20px;
-					margin-bottom: 20px;
+					padding: 5px;
+					position: relative;
+					.transition(all .2s linear);
+					&:nth-of-type(4n) {
+						margin-right: 0;
+					}
+					&:hover {
+						border: 1px solid @gray;
+						.box-shadow(1px 1px 2px rgba(0,0,0,0.1));
+						.actions {
+							opacity: 1;
+						}
+					}
+					.actions {
+						position: absolute;
+						top: -7px;
+						right: 10px;
+						opacity: 0;
+						.transition(all .2s linear);
+						p {
+							display: inline-block;
+							padding: 3px 4px;
+							background: #fff;
+							border: 1px solid @light-gray;
+							.border-radius(100%);
+							line-height: 100%;
+							margin-left: 5px;
+							cursor: pointer;
+							.transition(all .2s linear);
+							.box-shadow(-1px 1px 2px rgba(0,0,0,0.15));
+							&.delete {
+								&:hover {
+									color: red;
+									border: 1px solid red;
+								}
+							}
+							&.feature {
+								&:hover {
+									color: green;
+									border: 1px solid green;
+								}
+							}
+						}
+					}
 					.thumbnail {
 						width: 100%;
 						height: 150px;
 						background-size: cover;
 						background-position: center;
 						backgroud-repeat: no-repeat;
+						margin: 0 0 5px;
 					}
-					p {
+					.photo-title {
 						white-space: nowrap;
 						overflow: hidden;
 						text-overflow: ellipsis;
+						margin: 0;
+						color: #999;
 					}
 				}
 			}

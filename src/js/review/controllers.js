@@ -2,6 +2,16 @@
 
 angular.module('bikeit.review')
 
+.controller('ReviewSingleCtrl', [
+	'SingleReview',
+	'$scope',
+	function(Review, $scope) {
+		
+		$scope.review = Review;
+
+	}
+])
+
 .controller('SubmitReviewCtrl', [
 	'templatePath',
 	'ngDialog',
@@ -18,25 +28,21 @@ angular.module('bikeit.review')
 
 		$scope.appendImages = function(files) {
 
-			console.log(files);
-
 			_.each(files, function(file) {
-				var reader = new FileReader();
-				reader.readAsDataURL(file);
-				var fileObj = {
-					file: file,
-					dataUrl: ''
-				};
-				$scope.files.push(fileObj);
-				reader.onload = function() {
-					$scope.$apply(function() {
-						fileObj.dataUrl = reader.result;
-					});
-				};
+				WP.media(file).then(function(data) {
+					var fileObj = {
+						ID: data.ID,
+						name: data.title,
+						thumb: data.attachment_meta.sizes.thumbnail.url
+					};
+					$scope.files.push(fileObj);
+				});
 			});
 
-			console.log($scope.files);
+		};
 
+		$scope.deleteImage = function(file) {
+			$scope.files = _.filter($scope.files, function(f) { return f.file !== file.file; });
 		};
 
 		$scope.$watch(function() {
@@ -79,12 +85,20 @@ angular.module('bikeit.review')
 		};
 
 		$scope.submit = function(review) {
+
+			// Get images ID
+
+			if($scope.files.length) {
+				var images = _.map($scope.files, function(file) { return file.ID; });
+			}
+
 			var data = {
 				'ID': review.ID || null,
 				'title': ' ',
 				'content_raw': review.content,
 				'type': 'review',
 				'status': 'publish',
+				'images': images ? images : false,
 				'review_meta': {
 					'approved': review.rating.approved,
 					'kindness': review.rating.kindness,

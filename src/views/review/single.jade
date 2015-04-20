@@ -1,0 +1,9 @@
+section#single-review
+	.container
+		.twelve.columns
+			.row
+				.section-header
+					h2.section-title {{labels('User review')}}
+					a(ui-sref="placesSingle({placeId: review.place})")
+						{{labels('View all reviews to this place')}}
+	review-list-item(review="review")

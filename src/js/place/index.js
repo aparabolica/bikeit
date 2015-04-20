@@ -17,10 +17,9 @@ angular.module('bikeit.place', [])
 				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/place/single.html',
 				resolve: {
 					'PlaceData': [
-						'$q',
 						'$stateParams',
 						'WPService',
-						function($q, $stateParams, WP) {
+						function($stateParams, WP) {
 							return WP.getPost($stateParams.placeId);
 						}
 					],
@@ -33,6 +32,20 @@ angular.module('bikeit.place', [])
 									'place_reviews': $stateParams.placeId
 								}
 							});
+						}
+					]
+				}
+			})
+			.state('placesSingle.singleReview', {
+				url: 'r/:reviewId/',
+				controller: 'ReviewSingleCtrl',
+				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/review/single.html',
+				resolve: {
+					'SingleReview': [
+						'$stateParams',
+						'WPService',
+						function($stateParams, WP) {
+							return WP.getPost($stateParams.reviewId);
 						}
 					]
 				}

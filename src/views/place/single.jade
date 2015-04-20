@@ -1,4 +1,4 @@
-article.single-place.content-map(id="place-{{place.id}}")
+article.single-place.content-map(id="place-{{place.ID}}")
 	.clearfix
 		section#map.row(ng-controller="MapController")
 			leaflet(defaults="mapDefaults" markers="markers = ([place] | placeToMarker)")
@@ -24,10 +24,12 @@ article.single-place.content-map(id="place-{{place.id}}")
 							span(ng-hide="place.user_review") {{labels('Submit review')}}
 							span(ng-show="place.user_review") {{labels('Edit review')}}
 							span.icon-pencil
-	section#reviews
-		.container
-			.twelve.columns
-				.row
-					h2.section-title {{labels('Reviews')}}
-		.review-list(ng-show="reviews.length")
-			review-list-item(ng-repeat="review in reviews" review="review")
+
+	div(ui-view autoscroll="true")
+		section#reviews
+			.container
+				.twelve.columns
+					.row
+						h2.section-title {{labels('Reviews')}}
+			.review-list(ng-show="reviews.length")
+				review-list-item(ng-repeat="review in reviews" review="review")

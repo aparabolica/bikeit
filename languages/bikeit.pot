@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-14 19:54-0300\n"
+"POT-Creation-Date: 2015-04-20 14:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Where are you going?"
 msgstr ""
 
-#: functions.php:119 index.php:106
+#: functions.php:119 index.php:111
 msgid "Collaborative mapping bike-friendly city spots"
 msgstr ""
 
@@ -473,7 +473,7 @@ msgstr ""
 msgid "Nominate for a BikeIt Stamp"
 msgstr ""
 
-#: inc/review.php:467
+#: inc/review.php:530
 msgid "Latest reviews"
 msgstr ""
 

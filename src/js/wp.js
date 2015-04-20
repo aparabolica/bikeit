@@ -252,6 +252,30 @@ module.exports = [
 				});
 
 				return deferred.promise;
+			},
+			media: function(data) {
+
+				var deferred = $q.defer();
+
+				jQuery.ajax({
+					url: apiUrl + 'media',
+					type: 'POST',
+					data: data,
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
+					headers: { 'Content-Disposition': 'attachment;filename=' + data.name },
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text) {
+						deferred.reject(xhr.responseJSON);
+					}
+				});
+
+				return deferred.promise;
+
 			}
 		}
 

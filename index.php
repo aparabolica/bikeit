@@ -74,10 +74,13 @@
 				<div class="user" ng-controller="UserController" ng-show="loadedUser">
 					<div class="user-nav" ng-show="user">
 						<img ng-src="{{user.avatar}}" alt="{{user.name}}" />
-						<p><a href="javascript:void(0);" ng-click="accessUser()">{{user.name}}</a><a class="logout" href="{{logoutUrl}}">{{labels('Logout')}}</a></p>
+						<p>
+							<a ui-sref="user({userId: user.ID})">{{user.name}}</a>
+							<a class="logout" href="{{logoutUrl}}">{{labels('Logout')}}</a>
+						</p>
 						<div class="user-nav-menu">
 							<ul>
-								<li><a href="javascript:void(0);" ng-click="accessUser()">{{labels('My profile')}}</a></li>
+								<li><a ui-sref="user({userId: user.ID})">{{labels('My profile')}}</a></li>
 								<li><a href="javascript:void(0);">{{labels('Edit my profile')}}</a></li>
 								<li ng-show="user.roles[0] == 'administrator'"><a href="{{adminUrl}}" target="_self">{{labels('Control panel')}}</a></li>
 								<li><a href="{{logoutUrl}}">{{labels('Logout')}}</a></li>
@@ -97,16 +100,20 @@
 
 	<footer id="colophon">
 
-		<div class="colophon-content container">
-			<div class="four columns">
-				<?php wp_nav_menu( array( 'theme_location' => 'footer-nav' ) ); ?>
-			</div>
-			<div class="four columns">
-				<div class="footer-logo"></div>
-				<p class="site-desc"><?php _e('Collaborative mapping bike-friendly city spots', 'bikeit'); ?></p>
-			</div>
-			<div class="four columns">
-				<?php dynamic_sidebar('footer-sidebar'); ?>
+		<div class="container">
+			<div class="twelve columns">
+				<div class="colophon-content">
+					<div class="four columns alpha">
+						<?php wp_nav_menu( array( 'theme_location' => 'footer-nav' ) ); ?>
+					</div>
+					<div class="four columns">
+						<div class="footer-logo"></div>
+						<p class="site-desc"><?php _e('Collaborative mapping bike-friendly city spots', 'bikeit'); ?></p>
+					</div>
+					<div class="four columns omega">
+						<?php dynamic_sidebar('footer-sidebar'); ?>
+					</div>
+				</div>
 			</div>
 		</div>
 

@@ -78,7 +78,7 @@ class BikeIT_Reviews {
 		if(!$post) global $post;
 		$place = intval(get_post_meta($post->ID, 'place', true));
 		if('review' == get_post_type($post)) {
-			return get_bloginfo('url') . '/#!/places/' . $place . '/#review-' . $post->ID;
+			return get_bloginfo('url') . '/#!/places/' . $place . '/r/' . $post->ID;
 		}
 		return $url;
 	}
@@ -343,6 +343,8 @@ class BikeIT_Reviews {
 			$_post['votes']['total'] = intval(get_post_meta($post['ID'], '_vote_total', true));
 			$_post['votes']['ratio'] = intval(get_post_meta($post['ID'], '_vote_ratio', true));
 
+			$_post['images'] = $this->get_review_images($post['ID']);
+
 			if(is_user_logged_in()) {
 				$user_vote = bikeit_get_user_vote(get_current_user_id(), $post['ID']);
 				if($user_vote)
@@ -351,6 +353,57 @@ class BikeIT_Reviews {
 		}
 
 		return $_post;
+
+	}
+
+	function get_review_images($review_id) {
+		global $wp_json_posts;
+
+		$images_query = new WP_Query(array(
+			'post_type' => 'attachment',
+			'post_parent' => $review_id,
+			'posts_per_page' => -1,
+			'post_status' => array('publish', 'inherit')
+		));
+
+		$images = array();
+
+		if($images_query->have_posts()) {
+			global $post;
+			while($images_query->have_posts()) {
+				$images_query->the_post();
+
+				if(!wp_attachment_is_image(get_the_ID()))
+					continue;
+
+				$data = array();
+				$data['ID'] = get_the_ID();
+				$data['name'] = get_the_title();
+				$data['source']          = wp_get_attachment_url(get_the_ID());
+				$data['attachment_meta'] = wp_get_attachment_metadata(get_the_ID());
+
+				// Ensure empty meta is an empty object
+				if ( empty( $data['attachment_meta'] ) ) {
+					$data['attachment_meta'] = new stdClass;
+				} elseif ( ! empty( $data['attachment_meta']['sizes'] ) ) {
+					$img_url_basename = wp_basename( $data['source'] );
+
+					foreach ($data['attachment_meta']['sizes'] as $size => &$size_data) {
+						// Use the same method image_downsize() does
+						$size_data['url'] = str_replace( $img_url_basename, $size_data['file'], $data['source'] );
+					}
+					$data['thumb'] = $data['attachment_meta']['sizes']['thumbnail']['url'];
+				} else {
+					$data['attachment_meta']['sizes'] = new stdClass;
+				}
+
+				$images[] = $data;
+
+				wp_reset_postdata();
+			}
+		}
+
+		return $images;
 
 	}
 
@@ -432,6 +485,16 @@ class BikeIT_Reviews {
 
 		if($review_meta['place']) {
 			update_field('place', $review_meta['place'], $post['ID']);
+		}
+
+		if(isset($data['images']) && $data['images']) {
+			foreach($data['images'] as $image) {
+				wp_update_post(array(
+					'ID' => $image,
+					'post_parent' => $post['ID']
+				));
+				update_post_meta($image, 'place', $review_meta['place']);
+			}
 		}
 
 		if(isset($review_meta['approved'])) {

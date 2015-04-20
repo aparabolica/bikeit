@@ -54,9 +54,37 @@ angular.module('bikeit', [
 
 .config([
 	'$locationProvider',
-	function($locationProvider) {
+	'$urlRouterProvider',
+	function($locationProvider, $urlRouterProvider) {
 		$locationProvider.html5Mode(false);
 		$locationProvider.hashPrefix('!');
+
+		/*
+		 * Trailing slash rule
+		 */
+		$urlRouterProvider.rule(function($injector, $location) {
+			var path = $location.path(),
+				search = $location.search(),
+				params;
+
+			// check to see if the path already ends in '/'
+			if (path[path.length - 1] === '/') {
+				return;
+			}
+
+			// If there was no search string / query params, return with a `/`
+			if (Object.keys(search).length === 0) {
+				return path + '/';
+			}
+
+			// Otherwise build the search string and return a `/?` prefix
+			params = [];
+			angular.forEach(search, function(v, k){
+				params.push(k + '=' + v);
+			});
+			
+			return path + '/?' + params.join('&');
+		});
 	}
 ])
 
@@ -73,9 +101,11 @@ angular.module('bikeit', [
 				$window._gaq.push(['_trackPageview', $location.path()]);
 			}
 			if(fromState.name) {
-				jQuery('html,body').animate({
-					scrollTop: 0
-				}, '200');
+				if(toState.name != 'placesSingle.singleReview') {
+					jQuery('html,body').animate({
+						scrollTop: 0
+					}, '200');
+				}
 			}
 		});
 	}

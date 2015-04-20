@@ -52,14 +52,27 @@ div(ng-show="user")
 					textarea(id="input_content" ng-model="review.content")
 
 			.photos
-				.input-area.row(ng-file-drop ng-file-select ng-file-change="appendImages($files)" ng-multiple="true" allow-dir="true" accept=".jpg,.png,.pdf")
-					p Arraste fotos aqui
-					p.small Ou clique para selecionar
+				.input-area.row(ng-file-drop ng-file-select ng-file-change="appendImages($files)" ng-multiple="true" allow-dir="true" accept=".jpg,.png")
+					p {{labels('Drag photos here')}}
+					p.small {{labels('Or click to select from your computer')}}
 
-				ul.photo-list(ng-show="files.length")
+				ul.photo-list(ng-show="files.length || review.images.length")
 					li.photo-item(ng-repeat="file in files")
-						.thumbnail(back-img="file.dataUrl")
-						p.photo-title {{file.file.name}}
+						.actions
+							p.feature(title="{{labels('Feature this image')}}" ng-click="featureImage(file)")
+								span.icon-check
+							p.delete(title="{{labels('Delete this image')}}" ng-click="deleteImage(file)")
+								span.icon-cross
+						.thumbnail(back-img="file.thumb")
+						p.photo-title {{file.name}}
+					li.photo-item(ng-repeat="file in review.images")
+						.actions
+							p.feature(title="{{labels('Feature this image')}}" ng-click="featureImage(file)")
+								span.icon-check
+							p.delete(title="{{labels('Delete this image')}}" ng-click="deleteImage(file)")
+								span.icon-cross
+						.thumbnail(back-img="file.thumb")
+						p.photo-title {{file.name}}
 
 			input(ng-hide="review.ID" type="submit" value="{{labels('Submit review')}}")
 			input(ng-show="review.ID" type="submit" value="{{labels('Update review')}}")
