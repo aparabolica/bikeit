@@ -1,0 +1,9 @@
+section#image-gallery
+	nav
+		a.prev(href="javascript:void(0);" ng-click="prevImg()") 
+			span.label {{labels('Previous')}}
+			span.icon-triangle-left
+		a.next(href="javascript:void(0);" ng-click="nextImg()") 
+			span.label {{labels('Next')}}
+			span.icon-triangle-right
+	img.stage(ng-src="{{galleryImage.source}}")

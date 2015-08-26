@@ -23,9 +23,8 @@ angular.module('bikeit.place')
 ])
 
 .filter('placeToMarker', [
-	'leafletData',
 	'MapMarkers',
-	function(leafletData, Markers) {
+	function(Markers) {
 		return _.memoize(function(input) {
 
 			if(input.length) {

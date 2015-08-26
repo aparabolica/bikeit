@@ -1,5 +1,5 @@
 /*
- * Vendor
+ * Libraries
  */
 
 window._ = require('underscore');

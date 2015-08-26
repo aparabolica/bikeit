@@ -6,4 +6,4 @@ section#single-review
 					h2.section-title {{labels('User review')}}
 					a(ui-sref="placesSingle({placeId: review.place})")
 						{{labels('View all reviews to this place')}}
-	review-list-item(review="review")
+	review-list-item(review="review" single="true")

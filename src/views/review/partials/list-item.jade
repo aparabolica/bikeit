@@ -26,7 +26,17 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 						ratings(type="kindness" rating="{{review.rating.kindness}}")
 
 		.eight.columns
-			section.review-content(ng-bind-html="getReviewContent()")
+			section.review-content
+				div(ng-bind-html="getReviewContent()")
+				section.review-images(ng-show="review.images.length" ng-class="{open: isGallery}")
+					ul.review-image-list
+						.clearfix
+							li.review-image(ng-repeat="image in review.images")
+								a(href="javascript:void(0);" ng-click="openGallery(image)")
+									img(ng-src="{{image.thumb}}")
+					p.toggle-gallery(ng-click="toggleGallery()" ng-hide="single")
+						span(ng-show="isGallery") {{labels('Close image gallery')}}
+						span(ng-hide="isGallery") {{labels('Show image gallery')}}
 
 			section.review-comments
 				.comment-buttons

@@ -425,6 +425,59 @@ class BikeIT_Places {
 
 	}
 
+	function get_place_images($place_id) {
+		$images_query = new WP_Query(array(
+			'post_type' => 'attachment',
+			'meta_query' => array(
+				array(
+					'key' => 'place',
+					'value' => $place_id
+				)
+			),
+			'posts_per_page' => -1,
+			'post_status' => array('publish', 'inherit')
+		));
+
+		$images = array();
+
+		if($images_query->have_posts()) {
+			global $post;
+			while($images_query->have_posts()) {
+				$images_query->the_post();
+
+				if(!wp_attachment_is_image(get_the_ID()))
+					continue;
+
+				$data = array();
+				$data['ID'] = get_the_ID();
+				$data['name'] = get_the_title();
+				$data['source']          = wp_get_attachment_url(get_the_ID());
+				$data['attachment_meta'] = wp_get_attachment_metadata(get_the_ID());
+
+				// Ensure empty meta is an empty object
+				if ( empty( $data['attachment_meta'] ) ) {
+					$data['attachment_meta'] = new stdClass;
+				} elseif ( ! empty( $data['attachment_meta']['sizes'] ) ) {
+					$img_url_basename = wp_basename( $data['source'] );
+
+					foreach ($data['attachment_meta']['sizes'] as $size => &$size_data) {
+						// Use the same method image_downsize() does
+						$size_data['url'] = str_replace( $img_url_basename, $size_data['file'], $data['source'] );
+					}
+					$data['thumb'] = $data['attachment_meta']['sizes']['thumbnail']['url'];
+				} else {
+					$data['attachment_meta']['sizes'] = new stdClass;
+				}
+
+				$images[] = $data;
+
+				wp_reset_postdata();
+			}
+		}
+
+		return $images;
+	}
+
 	function get_score_average($data) {
 
 		if(count($data)) return array_sum($data) / count($data);
@@ -463,6 +516,8 @@ class BikeIT_Places {
 			$_post['scores']['approved'] = get_post_meta($post['ID'], 'approved', true);
 			$_post['scores']['structure'] = get_post_meta($post['ID'], 'structure', true);
 			$_post['scores']['kindness'] = get_post_meta($post['ID'], 'kindness', true);
+
+			$_post['images'] = $this->get_place_images($post['ID']);
 		}
 
 		return $_post;

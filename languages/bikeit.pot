@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-20 14:24-0300\n"
+"POT-Creation-Date: 2015-04-23 19:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: functions.php:109 inc/review.php:188
+#: functions.php:109 inc/review.php:191
 msgid "Approved"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Places"
 msgstr ""
 
-#: inc/place.php:33 inc/place.php:614 inc/review.php:174
+#: inc/place.php:33 inc/place.php:669 inc/review.php:177
 msgid "Place"
 msgstr ""
 
@@ -369,31 +369,31 @@ msgstr ""
 msgid "Bottom left"
 msgstr ""
 
-#: inc/place.php:576
+#: inc/place.php:631
 msgid "Stamp nominees"
 msgstr ""
 
-#: inc/place.php:608
+#: inc/place.php:663
 msgid "Selected nominees for a BikeIT Stamp"
 msgstr ""
 
-#: inc/place.php:617
+#: inc/place.php:672
 msgid "Stamp rate"
 msgstr ""
 
-#: inc/place.php:620
+#: inc/place.php:675
 msgid "Approval"
 msgstr ""
 
-#: inc/place.php:623
+#: inc/place.php:678
 msgid "Stamp points"
 msgstr ""
 
-#: inc/place.php:626
+#: inc/place.php:681
 msgid "Review count"
 msgstr ""
 
-#: inc/place.php:637
+#: inc/place.php:692
 msgid "edit"
 msgstr ""
 
@@ -433,43 +433,43 @@ msgstr ""
 msgid "BikeIT Reviews"
 msgstr ""
 
-#: inc/review.php:170
+#: inc/review.php:173
 msgid "Review settings"
 msgstr ""
 
-#: inc/review.php:191
+#: inc/review.php:194
 msgid "Mark if you approve it's bike receptivity"
 msgstr ""
 
-#: inc/review.php:193
+#: inc/review.php:196
 msgid "I approve this place"
 msgstr ""
 
-#: inc/review.php:198
+#: inc/review.php:201
 msgid "Structure score"
 msgstr ""
 
-#: inc/review.php:201
+#: inc/review.php:204
 msgid "Rate the strucutre of this place"
 msgstr ""
 
-#: inc/review.php:217
+#: inc/review.php:220
 msgid "Kindness score"
 msgstr ""
 
-#: inc/review.php:220
+#: inc/review.php:223
 msgid "Rate the kindness of this place"
 msgstr ""
 
-#: inc/review.php:236
+#: inc/review.php:239
 msgid "Stampable"
 msgstr ""
 
-#: inc/review.php:239
+#: inc/review.php:242
 msgid "Mark if you want this spot as a nominee for a BikeIt Stamp"
 msgstr ""
 
-#: inc/review.php:240
+#: inc/review.php:243
 msgid "Nominate for a BikeIt Stamp"
 msgstr ""
 

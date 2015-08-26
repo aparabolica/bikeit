@@ -5,16 +5,18 @@ angular.module('bikeit.review')
 .directive('reviewListItem', [
 	'templatePath',
 	'Labels',
+	'ngDialog',
 	'$state',
 	'$sce',
 	'WPService',
 	'AuthService',
 	'ReviewService',
-	function(templatePath, labels, $state, $sce, WP, Auth, Review) {
+	function(templatePath, labels, ngDialog, $state, $sce, WP, Auth, Review) {
 		return {
 			restrict: 'E',
 			scope: {
-				review: '='
+				review: '=',
+				single: '='
 			},
 			templateUrl: templatePath + '/views/review/partials/list-item.html',
 			link: function(scope, element, attrs) {
@@ -22,6 +24,65 @@ angular.module('bikeit.review')
 				var review = scope.review;
 
 				scope.labels = labels;
+
+				scope.toggleGallery = function() {
+					if(!scope.isGallery) {
+						scope.isGallery = true;
+					} else {
+						scope.isGallery = false;
+					}
+				};
+
+				function getImgIdx(image) {
+					var index = 0;
+					_.find(review.images, function(reviewImage, reviewImgIdx) {
+						if(reviewImage.ID == image.ID) {
+							index = reviewImgIdx;
+							return true;
+						}
+					});
+					return index;
+				}
+
+				scope.nextImg = function() {
+					var index = getImgIdx(scope.galleryImage);
+					scope.galleryImage = review.images[index+1] || review.images[0];
+				}
+				scope.prevImg = function() {
+					var index = getImgIdx(scope.galleryImage);
+					scope.galleryImage = review.images[index-1] || review.images[review.images.length-1];
+				}
+
+				function keyDown(e) {
+					e = e || window.event;
+					switch(e.which || e.keyCode) {
+						case 37: // left
+							scope.$apply(function() {
+								scope.prevImg();
+							});
+						break
+						case 39: // right
+							scope.$apply(function() {
+								scope.nextImg();
+							});
+						break;
+						default: return;
+					}
+					e.preventDefault();
+				}
+
+				scope.openGallery = function(image) {
+					jQuery(document).bind('keydown', keyDown);
+					scope.galleryImage = image;
+					scope.galleryDialog = ngDialog.open({
+						template: templatePath + '/views/review/gallery.html',
+						scope: scope,
+						className: 'ngdialog-theme-default image-gallery',
+						preCloseCallback: function() {
+							jQuery(document).unbind('keydown');
+						}
+					});
+				};
 
 				scope.getReviewDate = function() {
 
@@ -107,6 +168,11 @@ angular.module('bikeit.review')
 				scope.getCommentContent = function(c) {
 					return $sce.trustAsHtml(c.content);
 				};
+
+				if(scope.single) {
+					scope.isGallery = true;
+					scope.toggleComments();
+				}
 
 			}
 		}

@@ -112,6 +112,9 @@ class BikeIT_Reviews {
 
 			foreach($contrib_roles as $role) {
 
+				// media caps
+				$wp_roles->add_cap( $role, 'upload_files' );
+
 				$wp_roles->add_cap( $role, 'publish_reviews' );
 				$wp_roles->add_cap( $role, 'delete_reviews' );
 				$wp_roles->add_cap( $role, 'edit_reviews' );
@@ -357,8 +360,6 @@ class BikeIT_Reviews {
 	}
 
 	function get_review_images($review_id) {
-		global $wp_json_posts;
-
 		$images_query = new WP_Query(array(
 			'post_type' => 'attachment',
 			'post_parent' => $review_id,
@@ -404,7 +405,6 @@ class BikeIT_Reviews {
 		}
 
 		return $images;
-
 	}
 
 	function get_user_review($place_id) {
