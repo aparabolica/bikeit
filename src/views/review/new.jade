@@ -67,8 +67,8 @@ div(ng-show="user")
 						p.photo-title {{file.name}}
 					li.photo-item(ng-repeat="file in review.images")
 						.actions
-							p.feature(title="{{labels('Feature this image')}}" ng-click="featureImage(file)")
-								span.icon-check
+							//- p.feature(title="{{labels('Feature this image')}}" ng-click="featureImage(file)")
+							//- 	span.icon-check
 							p.delete(title="{{labels('Delete this image')}}" ng-click="deleteImage(file)")
 								span.icon-cross
 						.thumbnail(back-img="file.thumb")
