@@ -89,6 +89,10 @@ angular.module('bikeit.place')
 				else
 					approval = 'failed';
 
+				if(place.stamped) {
+					approval = 'stamp';
+				}
+
 				if(place.terms['place-category']) {
 
 					return place.terms['place-category'][0].markers[approval];

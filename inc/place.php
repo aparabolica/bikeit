@@ -409,7 +409,7 @@ class BikeIT_Places {
 
 		}
 
-		$user_reviewed = $query->get('user_reviewed'); 
+		$user_reviewed = $query->get('user_reviewed');
 		if($user_reviewed) {
 
 			$query->set('post_type', 'place');
@@ -510,7 +510,7 @@ class BikeIT_Places {
 			/*
 			 * Reviews data and scores
 			 */
-			$_post['stamped'] = get_post_meta($post['ID'], 'stamped', true);
+			$_post['stamped'] = intval(get_post_meta($post['ID'], 'stamped', true));
 			$_post['review_count'] = get_post_meta($post['ID'], 'review_count', true);
 			$_post['scores'] = array();
 			$_post['scores']['approved'] = get_post_meta($post['ID'], 'approved', true);
