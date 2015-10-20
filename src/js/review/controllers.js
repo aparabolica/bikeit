@@ -6,7 +6,7 @@ angular.module('bikeit.review')
 	'SingleReview',
 	'$scope',
 	function(Review, $scope) {
-		
+
 		$scope.review = Review;
 
 	}
@@ -41,8 +41,13 @@ angular.module('bikeit.review')
 
 		};
 
-		$scope.deleteImage = function(file) {
-			$scope.files = _.filter($scope.files, function(f) { return f.file !== file.file; });
+		$scope.deleteImage = function(media) {
+			// $scope.files = _.filter($scope.files, function(f) { return f.file !== file.file; });
+			console.log(media);
+			WP.delete(media).then(function(res) {
+				$scope.review.images = _.filter($scope.review.images, function(m) { return m.ID !== media.ID; });
+				$scope.files = _.filter($scope.files, function(m) { return m.ID !== media.ID; });
+			});
 		};
 
 		$scope.$watch(function() {
@@ -65,7 +70,7 @@ angular.module('bikeit.review')
 			$scope.place = place || false;
 			$scope.review = place.user_review ? _.clone(place.user_review) : {};
 			if(!_.isEmpty($scope.review)) {
-				$scope.review.rating.stampable = $scope.review.rating.stampable ? true : false; 
+				$scope.review.rating.stampable = $scope.review.rating.stampable ? true : false;
 			}
 			$scope.dialog = ngDialog.open({
 				preCloseCallback: function() {
