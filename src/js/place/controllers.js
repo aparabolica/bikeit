@@ -19,7 +19,9 @@ angular.module('bikeit.place')
 	'PlaceReviews',
 	'$scope',
 	'$state',
-	function(PlaceData, PlaceReviews, $scope, $state) {
+	'ngDialog',
+	'templatePath',
+	function(PlaceData, PlaceReviews, $scope, $state, ngDialog, templatePath) {
 
 		$scope.place = PlaceData;
 		$scope.reviews = PlaceReviews.data;
@@ -27,6 +29,65 @@ angular.module('bikeit.place')
 		if($state.current.name == 'placesSingle.review') {
 			$scope.openReview = true;
 		}
+
+		$scope.toggleGallery = function() {
+			if(!$scope.isGallery) {
+				$scope.isGallery = true;
+			} else {
+				$scope.isGallery = false;
+			}
+		};
+
+		function getImgIdx(image) {
+			var index = 0;
+			_.find($scope.place.images, function(placeImage, placeImgIdx) {
+				if(placeImage.ID == image.ID) {
+					index = placeImgIdx;
+					return true;
+				}
+			});
+			return index;
+		}
+
+		$scope.nextImg = function() {
+			var index = getImgIdx($scope.galleryImage);
+			$scope.galleryImage = $scope.place.images[index+1] || $scope.place.images[0];
+		}
+		$scope.prevImg = function() {
+			var index = getImgIdx($scope.galleryImage);
+			$scope.galleryImage = $scope.place.images[index-1] || $scope.place.images[$scope.place.images.length-1];
+		}
+
+		function keyDown(e) {
+			e = e || window.event;
+			switch(e.which || e.keyCode) {
+				case 37: // left
+					$scope.$apply(function() {
+						$scope.prevImg();
+					});
+				break
+				case 39: // right
+					$scope.$apply(function() {
+						$scope.nextImg();
+					});
+				break;
+				default: return;
+			}
+			e.preventDefault();
+		}
+
+		$scope.openGallery = function(image) {
+			jQuery(document).bind('keydown', keyDown);
+			$scope.galleryImage = image;
+			$scope.galleryDialog = ngDialog.open({
+				template: templatePath + '/views/review/gallery.html',
+				scope: $scope,
+				className: 'ngdialog-theme-default image-gallery',
+				preCloseCallback: function() {
+					jQuery(document).unbind('keydown');
+				}
+			});
+		};
 
 	}
 ])

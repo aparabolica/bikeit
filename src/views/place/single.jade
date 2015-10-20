@@ -24,7 +24,17 @@ article.single-place.content-map(id="place-{{place.ID}}")
 							span(ng-hide="place.user_review") {{labels('Submit review')}}
 							span(ng-show="place.user_review") {{labels('Edit review')}}
 							span.icon-pencil
-
+	section#place-media(ng-class="{open: isGallery}")
+		.container
+			.seven.columns
+				ul.place-image-list
+					.clearfix
+						li.review-image(ng-repeat="image in place.images")
+							a(href="javascript:void(0);" ng-click="openGallery(image)")
+								img(ng-src="{{image.thumb}}")
+				p.toggle-gallery(ng-click="toggleGallery()" ng-hide="single")
+					span(ng-show="isGallery") {{labels('Close image gallery')}}
+					span(ng-hide="isGallery") {{labels('Show image gallery')}}
 	div(ui-view autoscroll="true")
 		section#reviews
 			.container
