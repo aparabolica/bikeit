@@ -54,7 +54,7 @@
 								if($current != $site['blog_id']) {
 									$details = get_blog_details($site['blog_id']);
 									$name = trim(str_replace('BikeIt', '', $details->blogname));
-									$name = trim(str_replace('BikeIT', '', $details->blogname));
+									$name = trim(str_replace('BikeIT', '', $name));
 									$parsed_sites[] = array(
 										'url' => $details->siteurl,
 										'name' => $name
