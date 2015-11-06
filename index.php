@@ -45,6 +45,7 @@
 					if(!empty($sites)) {
 						$current = get_current_blog_id();
 						$name = trim(str_replace('BikeIt', '', get_bloginfo('name')));
+						$name = trim(str_replace('BikeIT', '', $name));
 						echo '<div class="ms-dropdown-title">';
 						echo '<h2 class="side-title">' . $name . '<span class="icon-triangle-down"></span></h2>';
 						echo '<div class="ms-dropdown">';
