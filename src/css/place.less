@@ -72,22 +72,28 @@
 			}
 		}
 	}
+	.button.review {
+		display: none;
+	}
 	&.minimal {
 		.box-shadow(0 0 0);
 		border: 0;
 		background: transparent;
 		height: auto;
 		border-bottom: 1px solid @light-gray;
-		padding: 5px 0;
+		padding: 0;
+		&:hover {
+			border-color: @gray;
+		}
 		.image {
 			float: left;
-			width: calc(~'33.33333% - 20px');
+			width: calc(~'25% - 20px');
 			height: 100px;
 			margin: 0 20px 0 0;
 		}
 		.place-header {
 			float: left;
-			width: calc(~'33.33333% - 20px');
+			width: calc(~'40% - 20px');
 			position: relative;
 			margin: 0 20px 0 0;
 			padding: 10px 0;
@@ -130,7 +136,17 @@
 				}
 			}
 		}
-
+		.button.review {
+			display: block;
+			float: right;
+			width: 15%;
+			padding-top: 40px;
+			padding-left: 0;
+			padding-right: 0;
+			text-align: center;
+			height: 100px;
+			.box-sizing(border-box);
+		}
 	}
 }
 

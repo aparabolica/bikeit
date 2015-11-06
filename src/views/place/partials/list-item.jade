@@ -3,7 +3,7 @@ article.place.list-item.clearfix(id="place-{{place.ID}}" class="{{style}}" ng-co
 	header.place-header
 		place-icon(place="place")
 		h2
-			a(ui-sref="placesSingle({placeId: place.ID})" ng-click="accessPlace(place)") {{place.title}}
+			a(ui-sref="placesSingle({placeId: place.ID})") {{place.title}}
 		p.address {{place.formatted_address}}
 	section.place-rating
 		p.review-count
@@ -18,3 +18,4 @@ article.place.list-item.clearfix(id="place-{{place.ID}}" class="{{style}}" ng-co
 			span.label {{labels('Kindness')}}
 			span.icon-heart
 			span.count {{place.scores.kindness | number:2}}
+	a.button.review(ui-sref="placesSingle.review({placeId: place.ID})") {{labels('Review')}}

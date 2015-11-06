@@ -13,7 +13,7 @@ section#main-search.anti-row(ng-controller="SearchController")
 					p Encontre estabelecimentos cadastrados no BikeIt e na base de dados do OpenStreetMap, o mapa livre e editável do mundo.
 	#bikeit-results.main-search-results(ng-show="searchResults.length")
 		.container
-			ul.twelve.columns.row
+			ul.twelve.columns
 				li(ng-repeat="post in mainSearchResults = searchResults")
 					place-list-item(place="post" style="minimal")
 	#osm-results.main-search-results(ng-controller="SubmitPlaceCtrl" ng-show="filteredAddress.length")
