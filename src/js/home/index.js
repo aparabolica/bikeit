@@ -16,7 +16,7 @@ angular.module('bikeit.home', [
 				controller: 'HomeController',
 				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/home.html',
 				resolve: {
-					HomeData: [
+					MapPlaces: [
 						'WPService',
 						function(WP) {
 							return WP.query({
@@ -26,6 +26,31 @@ angular.module('bikeit.home', [
 								}
 							});
 						}
+					],
+					FeaturedPlaces: [
+						'WPService',
+						function(WP) {
+							return WP.query({
+								type: 'place',
+								filter: {
+									'posts_per_page': 4,
+									'featured': true
+								}
+							})
+						}
+					],
+					RecentReviewPlaces: [
+						'WPService',
+						function(WP) {
+							return WP.query({
+								type: 'place',
+								filter: {
+									'posts_per_page': 8,
+									'orderby': 'review',
+									'order': 'DESC'
+								}
+							})
+						}
 					]
 				}
 			});
@@ -33,11 +58,15 @@ angular.module('bikeit.home', [
 	}
 ])
 .controller('HomeController', [
-	'HomeData',
+	'MapPlaces',
+	'FeaturedPlaces',
+	'RecentReviewPlaces',
 	'$scope',
-	function(HomeData, $scope) {
+	function(MapPlaces, FeaturedPlaces, RecentReviewPlaces, $scope) {
 
-		$scope.posts = HomeData.data;
+		$scope.posts = MapPlaces.data;
+		$scope.featured = FeaturedPlaces.data;
+		$scope.recent = RecentReviewPlaces.data;
 
 	}
 ]);

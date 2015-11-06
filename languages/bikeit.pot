@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-06 16:36-0200\n"
+"POT-Creation-Date: 2015-11-06 18:01-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Where are you going?"
 msgstr ""
 
-#: functions.php:119 index.php:112
+#: functions.php:119 index.php:113
 msgid "Collaborative mapping bike-friendly city spots"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Places"
 msgstr ""
 
-#: inc/place.php:33 inc/place.php:669 inc/review.php:177
+#: inc/place.php:33 inc/place.php:690 inc/review.php:177
 msgid "Place"
 msgstr ""
 
@@ -369,31 +369,31 @@ msgstr ""
 msgid "Bottom left"
 msgstr ""
 
-#: inc/place.php:631
+#: inc/place.php:652
 msgid "Stamp nominees"
 msgstr ""
 
-#: inc/place.php:663
+#: inc/place.php:684
 msgid "Selected nominees for a BikeIT Stamp"
 msgstr ""
 
-#: inc/place.php:672
+#: inc/place.php:693
 msgid "Stamp rate"
 msgstr ""
 
-#: inc/place.php:675
+#: inc/place.php:696
 msgid "Approval"
 msgstr ""
 
-#: inc/place.php:678
+#: inc/place.php:699
 msgid "Stamp points"
 msgstr ""
 
-#: inc/place.php:681
+#: inc/place.php:702
 msgid "Review count"
 msgstr ""
 
-#: inc/place.php:692
+#: inc/place.php:713
 msgid "edit"
 msgstr ""
 
@@ -473,7 +473,7 @@ msgstr ""
 msgid "Nominate for a BikeIt Stamp"
 msgstr ""
 
-#: inc/review.php:530
+#: inc/review.php:531
 msgid "Latest reviews"
 msgstr ""
 
@@ -529,6 +529,6 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: index.php:51
+#: index.php:52
 msgid "Search cities"
 msgstr ""

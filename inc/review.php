@@ -307,6 +307,7 @@ class BikeIT_Reviews {
 		if($bikeit_places && $place_id) {
 			$bikeit_places->update_place_score($place_id, $deleting);
 		}
+		$bikeit_places->update_last_review($place_id);
 		if($bikeit_votes) {
 			$bikeit_votes->update_author_votes(get_post($post_id)->post_author, $deleting);
 		}

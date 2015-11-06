@@ -364,10 +364,15 @@ class BikeIT_Places {
 
 	}
 
+	function update_last_review($post_id) {
+		update_post_meta($post_id, 'last_review_timestamp', time());
+	}
+
 	function query_vars($vars) {
 
 		$vars[] = 'place_reviews';
 		$vars[] = 'user_reviewed';
+		$vars[] = 'featured';
 
 		return $vars;
 
@@ -411,15 +416,31 @@ class BikeIT_Places {
 
 		$user_reviewed = $query->get('user_reviewed');
 		if($user_reviewed) {
-
+			$meta_query = $query->get('meta_query') ? $query->get('meta_query') : array();
+			$meta_query[] = array(
+				'key' => 'users_reviewed',
+				'value' => $user_reviewed,
+				'compare' => '='
+			);
 			$query->set('post_type', 'place');
-			$query->set('meta_query', array(
-				array(
-					'key' => 'users_reviewed',
-					'value' => $user_reviewed,
-					'compare' => '='
-				)
-			));
+			$query->set('meta_query', $meta_query);
+
+		}
+
+		if($query->get('featured')) {
+			$meta_query = $query->get('meta_query') ? $query->get('meta_query') : array();
+			$meta_query[] = array(
+				'key' => 'featured',
+				'value' => 1,
+				'compare' => '='
+			);
+			$query->set('meta_query', $meta_query);
+		}
+
+		if($query->get('orderby') == 'review') {
+
+			$query->set('meta_key', 'last_review_timestamp');
+			$query->set('orderby', 'meta_value_num');
 
 		}
 

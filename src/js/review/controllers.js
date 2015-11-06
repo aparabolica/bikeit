@@ -42,10 +42,12 @@ angular.module('bikeit.review')
 		};
 
 		$scope.deleteImage = function(media) {
-			WP.delete(media).then(function(res) {
-				$scope.review.images = _.filter($scope.review.images, function(m) { return m.ID !== media.ID; });
-				$scope.files = _.filter($scope.files, function(m) { return m.ID !== media.ID; });
-			});
+			if(confirm('Você tem certeza?')) {
+				WP.delete(media).then(function(res) {
+					$scope.review.images = _.filter($scope.review.images, function(m) { return m.ID !== media.ID; });
+					$scope.files = _.filter($scope.files, function(m) { return m.ID !== media.ID; });
+				});
+			}
 		};
 
 		$scope.$watch(function() {
