@@ -24,7 +24,7 @@ article.single-place.content-map(id="place-{{place.ID}}")
 							span(ng-hide="place.user_review") {{labels('Submit review')}}
 							span(ng-show="place.user_review") {{labels('Edit review')}}
 							span.icon-pencil
-	section#place-media(ng-class="{open: isGallery}")
+	section#place-media(ng-class="{open: isGallery}" ng-show="place.images.length")
 		.container
 			.seven.columns
 				ul.place-image-list
