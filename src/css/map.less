@@ -87,6 +87,16 @@
 				display: block;
 				margin: 0 auto 5px;
 			}
+			&.has-tooltip:nth-child(1),
+			&.has-tooltip:nth-child(2),
+			&.has-tooltip:nth-child(3), {
+				.tooltip {
+					bottom: auto;
+					top: 100%;
+					margin-bottom: 0;
+					margin-top: 12px;
+				}
+			}
 		}
 	}
 }
