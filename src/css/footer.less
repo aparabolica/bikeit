@@ -5,6 +5,13 @@
 	padding: 60px 0 40px;
 	.colophon-content {
 		border-top: 2px solid @gray;
+		a {
+			color: @dark-orange;
+			text-decoration: none;
+			&:hover {
+				color: #333;
+			}
+		}
 		.footer-logo {
 			width: 180px;
 			height: 118px;
@@ -17,6 +24,47 @@
 			text-transform: lowercase;
 			font-size: 18px;
 			line-height: 150%;
+		}
+		.menu {
+			margin-top: 20px;
+			a {
+				color: #666;
+				font-family: "Open Sans Condensed";
+				font-weight: 600;
+				font-size: 16px;
+				&:hover {
+					color: #333;
+				}
+			}
+			li ul {
+				margin-left: 10px;
+			}
+		}
+		.colophon-widgets {
+			margin-top: 20px;
+			text-align: right;
+			color: @gray;
+			font-family: "Open Sans Condensed";
+			font-size: 16px;
+			font-weight: 600;
+			line-height: 150%;
+			p {
+			}
+			strong {
+				color: #333;
+			}
+		}
+		.dev {
+			text-align: right;
+			color: #666;
+			font-family: "Open Sans Condensed";
+			line-height: 45px;
+			font-weight: 600;
+			text-transform: uppercase;
+			img {
+				float: right;
+				margin-left: 10px;
+			}
 		}
 	}
 }

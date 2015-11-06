@@ -113,7 +113,10 @@
 						<p class="site-desc"><?php _e('Collaborative mapping bike-friendly city spots', 'bikeit'); ?></p>
 					</div>
 					<div class="four columns omega">
-						<?php dynamic_sidebar('footer-sidebar'); ?>
+						<ul class="colophon-widgets">
+							<?php dynamic_sidebar('footer-sidebar'); ?>
+						</ul>
+						<p class="dev"><?php _e('Development by', 'bikeit'); ?> <a href="http://codigourbano.org" title="Código Urbano"><img src="<?php echo get_template_directory_uri(); ?>/img/codigourbano.png" alt="Código Urbano" /></a></p>
 					</div>
 				</div>
 			</div>
