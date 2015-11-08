@@ -10,6 +10,7 @@ function bikeit_theme_setup() {
 	// Nav menus
 	register_nav_menus(
 		array(
+			'header-nav' => __('Header nav', 'bikeit'),
 			'footer-nav' => __('Footer menu', 'bikeit')
 		)
 	);
@@ -140,6 +141,9 @@ function bikeit_labels() {
  */
 function bikeit_get_place_categories() {
 
+	if(is_multisite())
+		switch_to_blog(1);
+
 	$terms = get_terms('place-category', array('hide_empty' => 0));
 
 	foreach($terms as &$term) {
@@ -155,8 +159,35 @@ function bikeit_get_place_categories() {
 
 	}
 
+	if(is_multisite())
+		restore_current_blog();
+
 	return $terms;
 
+}
+
+function bikeit_get_place_labels() {
+	if(is_multisite())
+		switch_to_blog(1);
+
+	$labels = get_option('bikeit_labels');
+
+	if(is_multisite())
+		restore_current_blog();
+
+	return $labels;
+}
+
+function bikeit_get_main_site_api() {
+	if(is_multisite())
+		switch_to_blog(1);
+
+	$url = get_option('permalink_structure') ? esc_url(get_json_url()) . '/' : esc_url(get_json_url());
+
+	if(is_multisite())
+		restore_current_blog();
+
+	return $url;
 }
 
 
@@ -185,12 +216,13 @@ function bikeit_scripts() {
 		'adminUrl' => admin_url(),
 		'templateUri' => get_template_directory_uri(),
 		'apiUrl' => get_option('permalink_structure') ? esc_url(get_json_url()) . '/' : esc_url(get_json_url()),
+		'mainApiUrl' => bikeit_get_main_site_api(),
 		'nonce' => wp_create_nonce('wp_json'),
 		'logoutUrl' => wp_logout_url(home_url()),
 		'labels' => bikeit_labels(),
 		'placeCategories' => bikeit_get_place_categories(),
 		'city' => json_decode(get_option('bikeit_city')),
-		'placeLabels' => get_option('bikeit_labels'),
+		'placeLabels' => bikeit_get_place_labels(),
 		'map' => array(
 			'tile' => 'https://{s}.tiles.mapbox.com/v4/miguelpeixe.l94olf54/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWlndWVscGVpeGUiLCJhIjoiVlc0WWlrQSJ9.pIPkSx25w7ossO6rZH9Tcw'
 		)
@@ -246,7 +278,20 @@ add_filter('json_prepare_post', 'bikeit_json_prepare_post', 10, 3);
  * Set page link (angularjs routing)
  */
 function bikeit_page_link($url, $post_id) {
-	return get_bloginfo('url') . '/#!/page/' . $post_id . '/';
+	if(is_multisite()) {
+		global $switched;
+		if($switched) {
+			$local_switch = true;
+			restore_current_blog();
+		}
+	}
+
+	$url = get_bloginfo('url') . '/#!/page/' . $post_id . '/';
+
+	if(is_multisite() && $local_switch)
+		switch_to_blog(1);
+
+	return $url;
 }
 add_filter('page_link', 'bikeit_page_link', 10, 2);
 
@@ -288,3 +333,5 @@ require_once(TEMPLATEPATH . '/inc/vote.php');
 require_once(TEMPLATEPATH . '/inc/place.php');
 
 require_once(TEMPLATEPATH . '/inc/review.php');
+
+require_once(TEMPLATEPATH . '/inc/one-content.php');

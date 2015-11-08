@@ -71,7 +71,13 @@
 				}
 				?>
 				<nav id="main-nav">
-					<?php wp_nav_menu(); ?>
+					<?php
+					if(is_multisite())
+						switch_to_blog(1);
+					wp_nav_menu( array( 'theme_location' => 'header-nav' ) );
+					if(is_multisite())
+						restore_current_blog();
+					?>
 				</nav>
 				<div class="user" ng-controller="UserController" ng-show="loadedUser">
 					<div class="user-nav" ng-show="user">
@@ -100,13 +106,16 @@
 
 	<div ui-view autoscroll="false"></div>
 
+
 	<footer id="colophon">
 
 		<div class="container">
 			<div class="twelve columns">
 				<div class="colophon-content">
 					<div class="four columns alpha">
+						<?php	if(is_multisite()) switch_to_blog(1);	?>
 						<?php wp_nav_menu( array( 'theme_location' => 'footer-nav' ) ); ?>
+						<?php if(is_multisite()) restore_current_blog(); ?>
 					</div>
 					<div class="four columns">
 						<div class="footer-logo"></div>
@@ -123,6 +132,7 @@
 		</div>
 
 	</footer>
+
 
 	<?php wp_footer(); ?>
 

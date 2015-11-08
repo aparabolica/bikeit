@@ -46,6 +46,7 @@ angular.module('bikeit', [
 ])
 
 .constant('apiUrl', window.bikeit.apiUrl)
+.constant('mainApiUrl', window.bikeit.mainApiUrl)
 .constant('nonce', window.bikeit.nonce)
 .constant('baseUrl', window.bikeit.url.split(window.location.origin)[1])
 .constant('templatePath', window.bikeit.templateUri.split(window.location.origin)[1])
@@ -82,7 +83,7 @@ angular.module('bikeit', [
 			angular.forEach(search, function(v, k){
 				params.push(k + '=' + v);
 			});
-			
+
 			return path + '/?' + params.join('&');
 		});
 	}

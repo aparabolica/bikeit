@@ -42,31 +42,35 @@ class BikeIT_Settings {
 
 		register_setting('general', 'bikeit_city');
 
-		add_settings_field(
-			'bikeit_labels_approved',
-			__('Approved place label image', 'bikeit'),
-			array($this, 'labels_approved_field'),
-			'general',
-			'bikeit_settings_section'
-		);
+		if(!is_multisite() || get_current_blog_id() == 1) {
 
-		add_settings_field(
-			'bikeit_labels_failed',
-			__('Failed place label image', 'bikeit'),
-			array($this, 'labels_failed_field'),
-			'general',
-			'bikeit_settings_section'
-		);
+			add_settings_field(
+				'bikeit_labels_approved',
+				__('Approved place label image', 'bikeit'),
+				array($this, 'labels_approved_field'),
+				'general',
+				'bikeit_settings_section'
+			);
 
-		add_settings_field(
-			'bikeit_labels_stamp',
-			__('BikeIT Stamp place label image', 'bikeit'),
-			array($this, 'labels_stamp_field'),
-			'general',
-			'bikeit_settings_section'
-		);
+			add_settings_field(
+				'bikeit_labels_failed',
+				__('Failed place label image', 'bikeit'),
+				array($this, 'labels_failed_field'),
+				'general',
+				'bikeit_settings_section'
+			);
 
-		register_setting('general', 'bikeit_labels');
+			add_settings_field(
+				'bikeit_labels_stamp',
+				__('BikeIT Stamp place label image', 'bikeit'),
+				array($this, 'labels_stamp_field'),
+				'general',
+				'bikeit_settings_section'
+			);
+
+			register_setting('general', 'bikeit_labels');
+			
+		}
 
 	}
 

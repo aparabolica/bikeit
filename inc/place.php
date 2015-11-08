@@ -187,6 +187,10 @@ class BikeIT_Places {
 			'rewrite' => array('slug' => 'place/categories', 'with_front' => false)
 		);
 
+		if(is_multisite() && get_current_blog_id() != 1) {
+			$args['show_ui'] = false;
+		}
+
 		register_taxonomy('place-category', 'place', $args);
 
 	}
@@ -567,6 +571,9 @@ class BikeIT_Places {
 
 	function json_prepare_term($data, $term) {
 
+		if(is_multisite())
+			switch_to_blog(1);
+
 		if($term->taxonomy == 'place-category') {
 			$data['markers'] = array();
 			$data['markers']['default'] = get_field('marker', 'place-category_' . $data['ID'])['url'];
@@ -575,6 +582,9 @@ class BikeIT_Places {
 			$data['markers']['stamp'] = get_field('stamp_marker', 'place-category_' . $data['ID'])['url'];
 			$data['markers']['position'] = get_field('marker_position', 'place-category_' . $data['ID']);
 		}
+
+		if(is_multisite())
+			restore_current_blog();
 
 		return $data;
 

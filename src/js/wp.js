@@ -6,7 +6,8 @@ module.exports = [
 	'$q',
 	'$window',
 	'apiUrl',
-	function($rootScope, $http, $q, $window, apiUrl) {
+	'mainApiUrl',
+	function($rootScope, $http, $q, $window, apiUrl, mainApiUrl) {
 
 		var url = apiUrl + 'posts';
 
@@ -163,6 +164,25 @@ module.exports = [
 
 				jQuery.ajax({
 					url: url + '/' + postId,
+					dataType: 'json',
+					cache: true,
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text, error) {
+						deferred.reject(xhr.responseJSON);
+					}
+				});
+
+				return deferred.promise;
+
+			},
+			getPage: function(pageId) {
+
+				var deferred = $q.defer();
+
+				jQuery.ajax({
+					url: mainApiUrl + 'posts/' + pageId,
 					dataType: 'json',
 					cache: true,
 					success: function(data, text, xhr) {

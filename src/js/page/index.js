@@ -16,7 +16,7 @@ angular.module('bikeit.page', [
 						'$stateParams',
 						'WPService',
 						function($stateParams, WP) {
-							return WP.getPost($stateParams.pageId);
+							return WP.getPage($stateParams.pageId);
 						}
 					]
 				}
