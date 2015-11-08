@@ -98,6 +98,8 @@
 			> li {
 				float: left;
 				margin-right: 20px;
+				position: relative;
+				padding-bottom: 10px;
 				> a {
 					line-height: 30px;
 				}
@@ -107,6 +109,38 @@
 					text-decoration: none;
 					&:hover {
 						color: #666;
+					}
+				}
+				&:hover {
+					ul {
+						display: block;
+					}
+				}
+				ul {
+					position: absolute;
+					top: 35px;
+					left: -10px;
+					margin: 0;
+					padding: 0;
+					border: 1px solid @light-gray;
+					display: none;
+					.box-shadow(0 0 2px @light-gray);
+					li {
+						width: 150px;
+						background: #fff;
+						display: block;
+						margin: 0;
+						padding: 0;
+						a {
+							padding: 5px 10px;
+							display: block;
+							border-bottom: 1px solid @light-gray;
+						}
+						&:last-child {
+							a {
+								border-bottom: 0;
+							}
+						}
 					}
 				}
 			}
