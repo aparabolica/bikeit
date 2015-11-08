@@ -318,6 +318,22 @@ function bikeit_disable_default_dashboard_widgets() {
 }
 add_action('wp_dashboard_setup', 'bikeit_disable_default_dashboard_widgets', 999);
 
+function bikeit_ms_disable_dashboard_pages() {
+	if(is_multisite() && get_current_blog_id() != 1) {
+		?>
+		<style>
+			#menu-posts,
+			#menu-pages,
+			#menu-plugins,
+			#wp-admin-bar-my-sites-list .ab-sub-wrapper {
+				display: none !important;
+			}
+		</style>
+		<?php
+	}
+}
+add_action('admin_init', 'bikeit_ms_disable_dashboard_pages');
+
 /*
  * BikeIT modules
  */
