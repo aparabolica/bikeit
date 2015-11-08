@@ -130,7 +130,7 @@ class BikeIT_Places {
 
 		/* If editing a place, assign the required capability. */
 		if ( 'edit_place' == $cap ) {
-			if ( $post->post_status == 'publish' )
+			if ( get_post_meta($post->ID, 'review_count', true) >= 1 )
 				$caps[] = $post_type->cap->edit_others_posts;
 			elseif( $user_id == $post->post_author )
 				$caps[] = $post_type->cap->edit_posts;
