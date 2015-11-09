@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 12:07-0200\n"
+"POT-Creation-Date: 2015-11-09 12:22-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -195,6 +195,30 @@ msgstr ""
 
 #: functions.php:138 inc/place.php:712
 msgid "Review count"
+msgstr ""
+
+#: functions.php:139
+msgid "Category"
+msgstr ""
+
+#: functions.php:140
+msgid "Show image gallery"
+msgstr ""
+
+#: functions.php:141
+msgid "Close image gallery"
+msgstr ""
+
+#: functions.php:142
+msgid "Delete review"
+msgstr ""
+
+#: functions.php:143
+msgid "Drag photos here"
+msgstr ""
+
+#: functions.php:144
+msgid "Or click to select from your computer"
 msgstr ""
 
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132

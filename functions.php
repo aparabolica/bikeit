@@ -135,7 +135,13 @@ function bikeit_labels() {
 		'Recently reviewed' => __('Recently reviewed', 'bikeit'),
 		'New place' => __('New place', 'bikeit'),
 		'Review' => __('Review', 'bikeit'),
-		'Review count' => __('Review count', 'bikeit')
+		'Review count' => __('Review count', 'bikeit'),
+		'Category' => __('Category', 'bikeit'),
+		'Show image gallery' => __('Show image gallery', 'bikeit'),
+		'Close image gallery' => __('Close image gallery', 'bikeit'),
+		'Delete review' => __('Delete review', 'bikeit'),
+		'Drag photos here' => __('Drag photos here', 'bikeit'),
+		'Or click to select from your computer' => __('Or click to select from your computer', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

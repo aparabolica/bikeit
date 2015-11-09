@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 12:05-0200\n"
-"PO-Revision-Date: 2015-11-09 12:06-0300\n"
+"POT-Creation-Date: 2015-11-09 12:21-0200\n"
+"PO-Revision-Date: 2015-11-09 12:21-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -191,11 +191,35 @@ msgstr "Novo local"
 
 #: functions.php:137 inc/review.php:36
 msgid "Review"
-msgstr "Avaliação"
+msgstr "Avaliar"
 
 #: functions.php:138 inc/place.php:712
 msgid "Review count"
 msgstr "Avaliações"
+
+#: functions.php:139
+msgid "Category"
+msgstr "Categoria"
+
+#: functions.php:140
+msgid "Show image gallery"
+msgstr "Exibir galeria de imagens"
+
+#: functions.php:141
+msgid "Close image gallery"
+msgstr "Fechar galeria de imagens"
+
+#: functions.php:142
+msgid "Delete review"
+msgstr "Remover avaliação"
+
+#: functions.php:143
+msgid "Drag photos here"
+msgstr "Arraste fotos aqui"
+
+#: functions.php:144
+msgid "Or click to select from your computer"
+msgstr "Ou clique para selecionar do seu computador"
 
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132
 msgid "Cookie nonce is invalid"
