@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 12:48-0200\n"
-"PO-Revision-Date: 2015-11-09 12:49-0300\n"
+"POT-Creation-Date: 2015-11-09 13:35-0200\n"
+"PO-Revision-Date: 2015-11-09 13:36-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -220,6 +220,54 @@ msgstr "Arraste fotos aqui"
 #: functions.php:144
 msgid "Or click to select from your computer"
 msgstr "Ou clique para selecionar do seu computador"
+
+#: functions.php:145
+msgid "Register"
+msgstr "Registrar"
+
+#: functions.php:146
+msgid "Login"
+msgstr "Entrar"
+
+#: functions.php:147
+msgid "Delete this image"
+msgstr "Remover esta imagem"
+
+#: functions.php:148
+msgid "Remember me"
+msgstr "Lembrar de mim"
+
+#: functions.php:149
+msgid "Email or username"
+msgstr "Email ou nome de usuário"
+
+#: functions.php:150
+msgid "Password"
+msgstr "Senha"
+
+#: functions.php:151
+msgid "Repeat password"
+msgstr "Repetir senha"
+
+#: functions.php:152
+msgid "Email"
+msgstr "Email"
+
+#: functions.php:153
+msgid "Active since"
+msgstr "Ativo desde"
+
+#: functions.php:154
+msgid "Registration"
+msgstr "Cadastro"
+
+#: functions.php:155
+msgid "Close"
+msgstr "Fechar"
+
+#: functions.php:156
+msgid "Clear data (register new place)"
+msgstr "Limpar dados (registrar novo local)"
 
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132
 msgid "Cookie nonce is invalid"

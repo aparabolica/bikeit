@@ -135,6 +135,9 @@
 
 	</footer>
 
+	<div id="loading" loading-status-message ng-class="{active: loads.length}">
+		<div class="loading-message"></div>
+	</div>
 
 	<?php wp_footer(); ?>
 

@@ -248,6 +248,8 @@ angular.module('bikeit', [
 	}
 ]);
 
+require('./loading');
+
 angular.element(document).ready(function() {
 	console.log(bikeit);
 	angular.bootstrap(document, ['bikeit']);

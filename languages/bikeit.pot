@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 12:49-0200\n"
+"POT-Creation-Date: 2015-11-09 14:00-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,6 +219,54 @@ msgstr ""
 
 #: functions.php:144
 msgid "Or click to select from your computer"
+msgstr ""
+
+#: functions.php:145
+msgid "Register"
+msgstr ""
+
+#: functions.php:146
+msgid "Login"
+msgstr ""
+
+#: functions.php:147
+msgid "Delete this image"
+msgstr ""
+
+#: functions.php:148
+msgid "Remember me"
+msgstr ""
+
+#: functions.php:149
+msgid "Email or username"
+msgstr ""
+
+#: functions.php:150
+msgid "Password"
+msgstr ""
+
+#: functions.php:151
+msgid "Repeat password"
+msgstr ""
+
+#: functions.php:152
+msgid "Email"
+msgstr ""
+
+#: functions.php:153
+msgid "Active since"
+msgstr ""
+
+#: functions.php:154
+msgid "Registration"
+msgstr ""
+
+#: functions.php:155
+msgid "Close"
+msgstr ""
+
+#: functions.php:156
+msgid "Clear data (register new place)"
 msgstr ""
 
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132

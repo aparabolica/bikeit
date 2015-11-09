@@ -141,7 +141,19 @@ function bikeit_labels() {
 		'Close image gallery' => __('Close image gallery', 'bikeit'),
 		'Delete review' => __('Delete review', 'bikeit'),
 		'Drag photos here' => __('Drag photos here', 'bikeit'),
-		'Or click to select from your computer' => __('Or click to select from your computer', 'bikeit')
+		'Or click to select from your computer' => __('Or click to select from your computer', 'bikeit'),
+		'Register' => __('Register', 'bikeit'),
+		'Login' => __('Login', 'bikeit'),
+		'Delete this image' => __('Delete this image', 'bikeit'),
+		'Remember me' => __('Remember me', 'bikeit'),
+		'Email or username' => __('Email or username', 'bikeit'),
+		'Password' => __('Password', 'bikeit'),
+		'Repeat password' => __('Repeat password', 'bikeit'),
+		'Email' => __('Email', 'bikeit'),
+		'Active since' => __('Active since', 'bikeit'),
+		'Registration' => __('Registration', 'bikeit'),
+		'Close' => __('Close', 'bikeit'),
+		'Clear data (register new place)' => __('Clear data (register new place)', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
