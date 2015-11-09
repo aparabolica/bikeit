@@ -200,11 +200,11 @@ class BikeIT_Places {
 		if(function_exists("register_field_group")) {
 			register_field_group(array(
 				'id' => 'acf_place-settings',
-				'title' => __('Place setings', 'bikeit'),
+				'title' => __('Place settings', 'bikeit'),
 				'fields' => array(
 					array(
 						'key' => 'field_stamped',
-						'label' => __('BikeIt Stamp', 'bikeit'),
+						'label' => __('BikeIT Stamp', 'bikeit'),
 						'name' => 'stamped',
 						'type' => 'true_false',
 						'instructions' => __('Mark to give a BikeIT Stamp to this place', 'bikeit'),

@@ -125,7 +125,7 @@
 						<ul class="colophon-widgets">
 							<?php dynamic_sidebar('footer-sidebar'); ?>
 						</ul>
-						<p class="dev"><?php _e('Development by', 'bikeit'); ?> <a href="http://codigourbano.org" title="Código Urbano"><img src="<?php echo get_template_directory_uri(); ?>/img/codigourbano.png" alt="Código Urbano" /></a></p>
+						<p class="dev"><?php _e('Development by', 'bikeit'); ?> <a href="http://codigourbano.org" title="Código Urbano" rel="extenral" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/codigourbano.png" alt="Código Urbano" /></a></p>
 					</div>
 				</div>
 			</div>

@@ -154,8 +154,10 @@ angular.module('bikeit', [
 				return '';
 			else if(labels[text])
 				return labels[text];
-			else
+			else {
+				console.log(text);
 				return text;
+			}
 		}
 
 	}

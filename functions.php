@@ -130,7 +130,12 @@ function bikeit_labels() {
 		'Logout' => __('Logout', 'bikeit'),
 		'My profile' => __('My profile', 'bikeit'),
 		'Edit my profile' => __('Edit my profile', 'bikeit'),
-		'Login/Register' => __('Login/Register', 'bikeit')
+		'Login/Register' => __('Login/Register', 'bikeit'),
+		'Control panel' => __('Control panel', 'bikeit'),
+		'Recently reviewed' => __('Recently reviewed', 'bikeit'),
+		'New place' => __('New place', 'bikeit'),
+		'Review' => __('Review', 'bikeit'),
+		'Review count' => __('Review count', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

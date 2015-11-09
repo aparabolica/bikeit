@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-08 20:12-0200\n"
+"POT-Creation-Date: 2015-11-09 12:07-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,6 +177,26 @@ msgstr ""
 msgid "Login/Register"
 msgstr ""
 
+#: functions.php:134
+msgid "Control panel"
+msgstr ""
+
+#: functions.php:135
+msgid "Recently reviewed"
+msgstr ""
+
+#: functions.php:136 inc/place.php:37
+msgid "New place"
+msgstr ""
+
+#: functions.php:137 inc/review.php:36
+msgid "Review"
+msgstr ""
+
+#: functions.php:138 inc/place.php:712
+msgid "Review count"
+msgstr ""
+
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132
 msgid "Cookie nonce is invalid"
 msgstr ""
@@ -215,10 +235,6 @@ msgstr ""
 
 #: inc/place.php:36
 msgid "Edit place"
-msgstr ""
-
-#: inc/place.php:37
-msgid "New place"
 msgstr ""
 
 #: inc/place.php:38
@@ -306,11 +322,11 @@ msgid "No place categories found"
 msgstr ""
 
 #: inc/place.php:203
-msgid "Place setings"
+msgid "Place settings"
 msgstr ""
 
 #: inc/place.php:207
-msgid "BikeIt Stamp"
+msgid "BikeIT Stamp"
 msgstr ""
 
 #: inc/place.php:210
@@ -393,16 +409,8 @@ msgstr ""
 msgid "Stamp points"
 msgstr ""
 
-#: inc/place.php:712
-msgid "Review count"
-msgstr ""
-
 #: inc/place.php:723
 msgid "edit"
-msgstr ""
-
-#: inc/review.php:36
-msgid "Review"
 msgstr ""
 
 #: inc/review.php:37
@@ -474,7 +482,7 @@ msgid "Mark if you want this spot as a nominee for a BikeIt Stamp"
 msgstr ""
 
 #: inc/review.php:243
-msgid "Nominate for a BikeIt Stamp"
+msgid "Nominate for a BikeIT Stamp"
 msgstr ""
 
 #: inc/review.php:531

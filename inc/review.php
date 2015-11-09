@@ -240,7 +240,7 @@ class BikeIT_Reviews {
 						'name' => 'stampable',
 						'type' => 'true_false',
 						'instructions' => __('Mark if you want this spot as a nominee for a BikeIt Stamp', 'bikeit'),
-						'message' => __('Nominate for a BikeIt Stamp', 'bikeit'),
+						'message' => __('Nominate for a BikeIT Stamp', 'bikeit'),
 						'default_value' => 0,
 					),
 				),
