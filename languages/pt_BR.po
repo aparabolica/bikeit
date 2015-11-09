@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 12:21-0200\n"
-"PO-Revision-Date: 2015-11-09 12:21-0300\n"
+"POT-Creation-Date: 2015-11-09 12:48-0200\n"
+"PO-Revision-Date: 2015-11-09 12:49-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -121,7 +121,7 @@ msgstr "Enviar photos"
 msgid "Where are you going?"
 msgstr "Onde você vai?"
 
-#: functions.php:120 index.php:122
+#: functions.php:120 index.php:124
 msgid "Collaborative mapping bike-friendly city spots"
 msgstr "Mapeamento colaborativo de estabelecimentos amigos do ciclista"
 
@@ -569,7 +569,11 @@ msgstr "Página"
 msgid "Search cities"
 msgstr "Buscar cidades"
 
-#: index.php:128
+#: index.php:108
+msgid "Loading"
+msgstr "Carregando"
+
+#: index.php:130
 msgid "Development by"
 msgstr "Desenvolvimento por"
 

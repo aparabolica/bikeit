@@ -104,7 +104,9 @@
 
 	</header>
 
-	<div ui-view autoscroll="false"></div>
+	<div ui-view autoscroll="false">
+		<p class="first-load"><?php _e('Loading', 'bikeit'); ?>...</p>
+	</div>
 
 
 	<footer id="colophon">
