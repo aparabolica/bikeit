@@ -11,7 +11,7 @@ module.exports = [
 
 		var url = apiUrl + 'posts';
 
-		var load = function(query, cb) {
+		var load = function(query, cb, options) {
 
 			query = query || {};
 			query = _.extend({ page: 1, filter: { posts_per_page: 10 }}, query);
@@ -20,7 +20,7 @@ module.exports = [
 			 * Using jQuery ajax because angular doesnt handle nested query string
 			 */
 
-			jQuery.ajax({
+			jQuery.ajax(_.extend({
 				url: url,
 				data: query,
 				dataType: 'json',
@@ -32,11 +32,13 @@ module.exports = [
 					});
 
 				}
-			});
+			}, options));
 
 		};
 
-		var query = function(query) {
+		var query = function(query, options) {
+
+			options = options || {};
 
 			var deferred = $q.defer();
 			var totalPosts;
@@ -68,7 +70,7 @@ module.exports = [
 							load(_.extend(query, { page: currentPage+1 }), function(data) {
 								currentPage++;
 								deferred.resolve(data);
-							});
+							}, options);
 						}
 						return deferred.promise;
 					},
@@ -80,13 +82,13 @@ module.exports = [
 							load(_.extend(query, { page: currentPage-1 }), function(data) {
 								currentPage--;
 								deferred.resolve(data);
-							});
+							}, options);
 						}
 						return deferred.promise;
 					}
 				});
 
-			});
+			}, options);
 
 			return deferred.promise;
 

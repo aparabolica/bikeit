@@ -63,7 +63,7 @@ angular.module('bikeit.home', [
 				'posts_per_page': 20
 			}
 		};
-		WP.query(query).then(function(res) {
+		WP.query(query, {loadingMsg: false}).then(function(res) {
 			$scope.posts = $scope.posts.concat(res.data);
 			if(res.currentPage() == res.totalPages()) {
 				$scope.loadingMap = false;
@@ -76,7 +76,7 @@ angular.module('bikeit.home', [
 						filter: {
 							'posts_per_page': 20
 						}
-					}).then(function(res) {
+					}, {loadingMsg: false}).then(function(res) {
 						$scope.posts = $scope.posts.concat(res.data);
 						if(res.currentPage() == res.totalPages()) {
 							$scope.loadingMap = false;

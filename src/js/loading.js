@@ -12,25 +12,33 @@ angular.module('bikeit')
     if(typeof jQuery !== 'undefined') {
 
       jQuery(document).ajaxSend(function(ev, jqXHR, options) {
-        options.loadingId = service.add(options.loadingMessage);
+        if(options.loadingMsg !== false) {
+          options.loadingId = service.add(options.loadingMessage);
+        }
       });
 
       jQuery(document).ajaxComplete(function(ev, jqXHR, options) {
-        $rootScope.$apply(function() {
-          service.remove(options.loadingId);
-        });
+        if(options.loadingMsg !== false) {
+          $rootScope.$apply(function() {
+            service.remove(options.loadingId);
+          });
+        }
       });
 
       jQuery(document).ajaxError(function(ev, jqXHR, options) {
-        $rootScope.$apply(function() {
-          service.remove(options.loadingId);
-        });
+        if(options.loadingMsg !== false) {
+          $rootScope.$apply(function() {
+            service.remove(options.loadingId);
+          });
+        }
       });
 
       jQuery(document).ajaxSuccess(function(ev, jqXHR, options) {
-        $rootScope.$apply(function() {
-          service.remove(options.loadingId);
-        });
+        if(options.loadingMsg !== false) {
+          $rootScope.$apply(function() {
+            service.remove(options.loadingId);
+          });
+        }
       });
 
     }
