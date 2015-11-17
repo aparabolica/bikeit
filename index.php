@@ -129,6 +129,7 @@
 						</ul>
 						<p class="dev"><?php _e('Development by', 'bikeit'); ?> <a href="http://codigourbano.org" title="Código Urbano" rel="extenral" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/codigourbano.png" alt="Código Urbano" /></a></p>
 					</div>
+					<p class="source"><a class="icon icon-github" href="https://github.com/codigourbano/bikeit" title="<?php _e('Our source is open', 'bikeit'); ?>" rel="external" target="_blank"></a></p>
 				</div>
 			</div>
 		</div>

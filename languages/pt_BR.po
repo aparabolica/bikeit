@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-16 22:59-0200\n"
-"PO-Revision-Date: 2015-11-16 22:59-0300\n"
+"POT-Creation-Date: 2015-11-17 14:14-0200\n"
+"PO-Revision-Date: 2015-11-17 14:15-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -652,6 +652,10 @@ msgstr "Carregando"
 #: index.php:130
 msgid "Development by"
 msgstr "Desenvolvimento por"
+
+#: index.php:132
+msgid "Our source is open"
+msgstr "Nosso código é aberto"
 
 #~ msgid "Location"
 #~ msgstr "Localização"
