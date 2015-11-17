@@ -156,7 +156,9 @@ function bikeit_labels() {
 		'Clear data (register new place)' => __('Clear data (register new place)', 'bikeit'),
 		'User review' => __('User review', 'bikeit'),
 		'View all reviews to this place' => __('View all reviews to this place', 'bikeit'),
-		'Publish comment' => __('Publish comment', 'bikeit')
+		'Publish comment' => __('Publish comment', 'bikeit'),
+		'You must be logged in to comment' => __('You must be logged in to comment', 'bikeit'),
+		'Write your comment below:' => __('Write your comment below:', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

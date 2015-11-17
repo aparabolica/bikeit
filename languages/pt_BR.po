@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-16 22:03-0200\n"
-"PO-Revision-Date: 2015-11-16 22:04-0300\n"
+"POT-Creation-Date: 2015-11-16 22:26-0200\n"
+"PO-Revision-Date: 2015-11-16 22:26-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -81,11 +81,11 @@ msgstr "Avaliações"
 msgid "Rating"
 msgstr "Avaliação"
 
-#: functions.php:110 inc/review.php:191
+#: functions.php:110 functions.php:207 inc/review.php:191
 msgid "Approved"
 msgstr "Aprovado"
 
-#: functions.php:111
+#: functions.php:111 functions.php:209
 msgid "Failed"
 msgstr "Reprovado"
 
@@ -281,6 +281,18 @@ msgstr "Ver todos as avaliações deste local"
 msgid "Publish comment"
 msgstr "Publicar comentário"
 
+#: functions.php:160
+msgid "You must be logged in to comment"
+msgstr "Você deve estar logado para comentar"
+
+#: functions.php:161
+msgid "Write your comment below:"
+msgstr "Escreva seu comentário abaixo:"
+
+#: functions.php:211 inc/place.php:207
+msgid "BikeIT Stamp"
+msgstr "Selo BikeIT"
+
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132
 msgid "Cookie nonce is invalid"
 msgstr "Cookie inválido"
@@ -408,10 +420,6 @@ msgstr "Nenhuma categoria de local encontada"
 #: inc/place.php:203
 msgid "Place settings"
 msgstr "Configurações do local"
-
-#: inc/place.php:207
-msgid "BikeIT Stamp"
-msgstr "Selo BikeIT"
 
 #: inc/place.php:210
 msgid "Mark to give a BikeIT Stamp to this place"

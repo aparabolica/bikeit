@@ -58,9 +58,9 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 								p.date {{comment.date | formatDate:'LLLL'}}
 							.comment-body(ng-bind-html="getCommentContent(comment)")
 					.reply
-						p(ng-hide="user") Você deve estar logado para comentar
+						p(ng-hide="user") {{labels('You must be logged in to comment')}}
 						form(ng-submit="publishComment(newComment)" ng-show="user")
 							p
-								label(for="comment_input") Escreve seu comentário abaixo:
+								label(for="comment_input") {{labels('Write your comment below:')}}
 								textarea#comment_input(placeholder="Mensagem" ng-model="newComment")
 							input(type="submit" value="{{labels('Publish comment')}}")
