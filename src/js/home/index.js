@@ -25,6 +25,8 @@ angular.module('bikeit.home', [
 									'posts_per_page': 4,
 									'featured': true
 								}
+							}, {
+								cache: true
 							})
 						}
 					],
@@ -38,6 +40,8 @@ angular.module('bikeit.home', [
 									'orderby': 'review',
 									'order': 'DESC'
 								}
+							}, {
+								cache: true
 							})
 						}
 					]
@@ -63,7 +67,7 @@ angular.module('bikeit.home', [
 				'posts_per_page': 20
 			}
 		};
-		WP.query(query, {loadingMsg: false}).then(function(res) {
+		WP.query(query, {loadingMsg: false, cache: true}).then(function(res) {
 			$scope.posts = $scope.posts.concat(res.data);
 			if(res.currentPage() == res.totalPages()) {
 				$scope.loadingMap = false;
@@ -76,7 +80,7 @@ angular.module('bikeit.home', [
 						filter: {
 							'posts_per_page': 20
 						}
-					}, {loadingMsg: false}).then(function(res) {
+					}, {loadingMsg: false, cache: true}).then(function(res) {
 						$scope.posts = $scope.posts.concat(res.data);
 						if(res.currentPage() == res.totalPages()) {
 							$scope.loadingMap = false;
