@@ -16,17 +16,6 @@ angular.module('bikeit.home', [
 				controller: 'HomeController',
 				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/home.html',
 				resolve: {
-					MapPlaces: [
-						'WPService',
-						function(WP) {
-							return WP.query({
-								type: 'place',
-								filter: {
-									'posts_per_page': 100
-								}
-							});
-						}
-					],
 					FeaturedPlaces: [
 						'WPService',
 						function(WP) {
@@ -58,13 +47,45 @@ angular.module('bikeit.home', [
 	}
 ])
 .controller('HomeController', [
-	'MapPlaces',
 	'FeaturedPlaces',
 	'RecentReviewPlaces',
+	'WPService',
 	'$scope',
-	function(MapPlaces, FeaturedPlaces, RecentReviewPlaces, $scope) {
+	function(FeaturedPlaces, RecentReviewPlaces, WP, $scope) {
 
-		$scope.posts = MapPlaces.data;
+		$scope.loadingMap = true;
+
+		$scope.posts = [];
+		var query = {
+			type: 'place',
+			page: 1,
+			filter: {
+				'posts_per_page': 20
+			}
+		};
+		WP.query(query).then(function(res) {
+			$scope.posts = $scope.posts.concat(res.data);
+			if(res.currentPage() == res.totalPages()) {
+				$scope.loadingMap = false;
+			} else {
+				var i = 2;
+				for(; i <= res.totalPages(); i++) {
+					WP.query({
+						type: 'place',
+						page: i,
+						filter: {
+							'posts_per_page': 20
+						}
+					}).then(function(res) {
+						$scope.posts = $scope.posts.concat(res.data);
+						if(res.currentPage() == res.totalPages()) {
+							$scope.loadingMap = false;
+						}
+					});
+				}
+			}
+		});
+
 		$scope.featured = FeaturedPlaces.data;
 		$scope.recent = RecentReviewPlaces.data;
 

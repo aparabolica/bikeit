@@ -160,7 +160,8 @@ function bikeit_labels() {
 		'You must be logged in to comment' => __('You must be logged in to comment', 'bikeit'),
 		'Write your comment below:' => __('Write your comment below:', 'bikeit'),
 		'Edit profile' => __('Edit profile', 'bikeit'),
-		'Update' => __('Update', 'bikeit')
+		'Update' => __('Update', 'bikeit'),
+		'Loading map' => __('Loading map', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

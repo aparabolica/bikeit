@@ -4,6 +4,25 @@
 	width: 100%;
 	height: 500px;
 	position: relative;
+	.loading-map {
+		position: absolute;
+		top: 50%;
+		left: 35%;
+		width: 250px;
+		height: 100px;
+		margin-left: -125px;
+		margin-top: -50px;
+		text-align: center;
+		background: #fff;
+		text-transform: uppercase;
+		color: #666;
+		.box-shadow(0 0 0 10px rgba(255,255,255,0.5));
+		&:before {
+			content: url(../img/loading.gif);
+			display: block;
+			margin: 20px auto 10px;
+		}
+	}
 	.leaflet-container {
 		width: 100%;
 		height: 100%;

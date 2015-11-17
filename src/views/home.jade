@@ -1,5 +1,6 @@
 section#map.row.with-sidebar(ng-controller="MapController")
 	leaflet(defaults="mapDefaults" maxbounds="maxbounds" markers="markers = ((posts | placeCategory:categoryId | score:score) | placeToMarker)")
+	p.loading-map(ng-show="loadingMap") {{labels('Loading map')}}
 	.map-sidebar
 		map-filters
 

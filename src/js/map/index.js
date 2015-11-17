@@ -45,7 +45,7 @@ angular.module('bikeit.map', [
 			$state.go('placesSingle', { placeId:  args.markerName})
 		});
 
-		$scope.$watch('markers', function(markers) {
+		$scope.$watch('markers', _.debounce(function(markers) {
 
 			var bounds = false;
 
@@ -87,7 +87,7 @@ angular.module('bikeit.map', [
 
 			}
 
-		});
+		}, 300));
 
 	}
 ])
