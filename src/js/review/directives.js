@@ -21,6 +21,15 @@ angular.module('bikeit.review')
 			templateUrl: templatePath + '/views/review/partials/list-item.html',
 			link: function(scope, element, attrs) {
 
+				scope.$watch(function() {
+					return Auth.getUser();
+				}, function(data) {
+					if(data)
+						scope.user = data;
+					else
+						scope.user = false;
+				});
+
 				var review = scope.review;
 
 				scope.labels = labels;
@@ -84,12 +93,6 @@ angular.module('bikeit.review')
 					});
 				};
 
-				scope.getReviewDate = function() {
-
-					return moment(review.date).format('L');
-
-				};
-
 				scope.getReviewContent = function() {
 
 					return $sce.trustAsHtml(review.content);
@@ -118,11 +121,9 @@ angular.module('bikeit.review')
 
 				scope.canDeleteReview = function(review) {
 
-					var user = Auth.getUser();
-
-					if(user) {
-						if(user.capabilities.delete_others_reviews || 
-							(user.capabilities.delete_reviews && review.author.ID == user.ID))
+					if(scope.user) {
+						if(scope.user.capabilities.delete_others_reviews ||
+							(scope.user.capabilities.delete_reviews && review.author.ID == user.ID))
 							return true;
 					}
 
@@ -173,6 +174,14 @@ angular.module('bikeit.review')
 					scope.isGallery = true;
 					scope.toggleComments();
 				}
+
+				scope.newComment = '';
+				scope.publishComment = function(comment) {
+					WP.comment(review.ID, comment).then(function(cmm) {
+						scope.newComment = '';
+						scope.comments.push(cmm);
+					});
+				};
 
 			}
 		}

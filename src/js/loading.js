@@ -5,8 +5,9 @@
 angular.module('bikeit')
 
 .run([
+  '$rootScope',
   'LoadingService',
-  function(service) {
+  function($rootScope,service) {
 
     if(typeof jQuery !== 'undefined') {
 
@@ -15,7 +16,21 @@ angular.module('bikeit')
       });
 
       jQuery(document).ajaxComplete(function(ev, jqXHR, options) {
-        service.remove(options.loadingId);
+        $rootScope.$apply(function() {
+          service.remove(options.loadingId);
+        });
+      });
+
+      jQuery(document).ajaxError(function(ev, jqXHR, options) {
+        $rootScope.$apply(function() {
+          service.remove(options.loadingId);
+        });
+      });
+
+      jQuery(document).ajaxSuccess(function(ev, jqXHR, options) {
+        $rootScope.$apply(function() {
+          service.remove(options.loadingId);
+        });
       });
 
     }
@@ -63,17 +78,18 @@ angular.module('bikeit')
 ])
 
 .directive('loadingStatusMessage', [
+  '$timeout',
 	'LoadingService',
-	function(service) {
+	function($timeout, service) {
 		return {
-			link: function($scope, $element, attrs) {
-				$scope.$watch(function() {
+			template: '<div class="loading-message"><span ng-repeat="load in loads" ng-show="load.msg">{{load.msg}}<br/></span></div>',
+			link: function(scope, element, attrs) {
+				scope.$watch(function() {
 					return service.get();
 				}, function(loads) {
-					$scope.loads = loads;
+					scope.loads = loads;
 				});
-			},
-			template: '<div class="loading-message"><span ng-repeat="load in loads" ng-show="load.msg">{{load.msg}}<br/></span></div>'
+			}
 		};
 	}
 ])

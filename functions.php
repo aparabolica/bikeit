@@ -153,7 +153,10 @@ function bikeit_labels() {
 		'Active since' => __('Active since', 'bikeit'),
 		'Registration' => __('Registration', 'bikeit'),
 		'Close' => __('Close', 'bikeit'),
-		'Clear data (register new place)' => __('Clear data (register new place)', 'bikeit')
+		'Clear data (register new place)' => __('Clear data (register new place)', 'bikeit'),
+		'User review' => __('User review', 'bikeit'),
+		'View all reviews to this place' => __('View all reviews to this place', 'bikeit'),
+		'Publish comment' => __('Publish comment', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
@@ -372,5 +375,7 @@ require_once(TEMPLATEPATH . '/inc/vote.php');
 require_once(TEMPLATEPATH . '/inc/place.php');
 
 require_once(TEMPLATEPATH . '/inc/review.php');
+
+require_once(TEMPLATEPATH . '/inc/comment.php');
 
 require_once(TEMPLATEPATH . '/inc/one-content.php');

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 13:35-0200\n"
-"PO-Revision-Date: 2015-11-09 13:36-0300\n"
+"POT-Creation-Date: 2015-11-16 22:03-0200\n"
+"PO-Revision-Date: 2015-11-16 22:04-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -269,19 +269,31 @@ msgstr "Fechar"
 msgid "Clear data (register new place)"
 msgstr "Limpar dados (registrar novo local)"
 
+#: functions.php:157
+msgid "User review"
+msgstr "Avaliação do usuário"
+
+#: functions.php:158
+msgid "View all reviews to this place"
+msgstr "Ver todos as avaliações deste local"
+
+#: functions.php:159
+msgid "Publish comment"
+msgstr "Publicar comentário"
+
 #: inc/auth.php:44 inc/auth.php:81 inc/auth.php:132
 msgid "Cookie nonce is invalid"
 msgstr "Cookie inválido"
 
-#: inc/comment.php:29
+#: inc/comment.php:31
 msgid "Sorry, you must be logged in to comment."
 msgstr "Desculpe, você deve estar logado para comentar."
 
-#: inc/comment.php:45 inc/vote.php:51
+#: inc/comment.php:57 inc/vote.php:51
 msgid "Sorry, you must be logged in to vote."
 msgstr "Desculpe, você deve estar logado para votar."
 
-#: inc/comment.php:49 inc/vote.php:55
+#: inc/comment.php:61 inc/vote.php:55
 msgid "Invalid vote."
 msgstr "Voto inválido."
 

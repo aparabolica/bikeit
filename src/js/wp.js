@@ -235,6 +235,27 @@ module.exports = [
 				return deferred.promise;
 
 			},
+			comment: function(postId, comment) {
+
+				var deferred = $q.defer();
+				jQuery.ajax({
+					url: url + '/' + postId + '/comment',
+					dataType: 'json',
+					type: 'POST',
+					data: {
+						'comment_content': comment
+					},
+					success: function(data, text, xhr) {
+						deferred.resolve(data);
+					},
+					error: function(xhr, text) {
+						deferred.reject(xhr.responseJSON);
+					}
+				});
+
+				return deferred.promise;
+
+			},
 			update: function(data) {
 
 				var deferred = $q.defer();

@@ -13,17 +13,19 @@ class BikeIT_Comments {
 
 	function comment_routes($routes) {
 
-		$vote_routes = array(
+		$comment_routes = array(
 			'/posts/(?P<id>\d+)/comment' => array(
 				array( array( $this, 'comment' ), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON )
 			)
 		);
 
-		return array_merge($routes, $vote_routes);
+		return array_merge($routes, $comment_routes);
 
 	}
 
 	function comment($id, $data) {
+
+		global $wp_json_posts;
 
 		if(!is_user_logged_in()) {
 			return new WP_Error( 'bikeit_user_cannot_comment', __( 'Sorry, you must be logged in to comment.', 'bikeit' ), array( 'status' => 401 ) );
@@ -33,7 +35,17 @@ class BikeIT_Comments {
 
 		$comment_content = $data['comment_content'];
 
-		
+		$comment_data = array(
+			'comment_post_ID' => $id,
+			'user_ID' => $user_id,
+			'comment_content' => $comment_content
+		);
+
+		$comment_id = wp_new_comment($comment_data);
+
+		$response = json_ensure_response($wp_json_posts->comments->get_comment($comment_id));
+		$response->set_status(201);
+		return $response;
 
 	}
 

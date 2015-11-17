@@ -30,8 +30,6 @@ angular.module('bikeit.page', [
 	'$scope',
 	function(PageData, $sce, $scope) {
 
-		console.log(PageData);
-
 		$scope.page = PageData;
 
 		$scope.getContent = function() {

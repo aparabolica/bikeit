@@ -10,7 +10,7 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 					h3 
 						a(ui-sref="user({userId: review.author.ID})") {{review.author.name}}
 				p.date
-						a(ui-sref="placesSingle.singleReview({placeId: review.place, reviewId: review.ID})") {{labels('Published')}} {{getReviewDate()}}
+						a(ui-sref="placesSingle.singleReview({placeId: review.place, reviewId: review.ID})") {{labels('Published')}} {{review.date | formatDate:'L'}}
 				p(ng-show="canDeleteReview(review)")
 					a.delete(href="javascript:void(0);" ng-click="deleteReview(review)") {{labels('Delete review')}}
 				.clear
@@ -51,9 +51,16 @@ article.list-item.review-list-item.row(id="review-{{review.ID}}")
 				.clear
 				.comments-content(ng-show="displayComments")
 					.comment-list(ng-show="comments")
-						article(ng-repeat="comment in comments")
-							h3 {{comment.author.name}}
-							div(ng-bind-html="getCommentContent(comment)")
+						article.comment-item.clearfix(ng-repeat="comment in comments")
+							header.comment-header.clearfix
+								img(ng-src="{{comment.author.avatar}}")
+								h3 {{comment.author.name}}
+								p.date {{comment.date | formatDate:'LLLL'}}
+							.comment-body(ng-bind-html="getCommentContent(comment)")
 					.reply
-						form
-							textarea(placeholder="Mensagem")
+						p(ng-hide="user") Você deve estar logado para comentar
+						form(ng-submit="publishComment(newComment)" ng-show="user")
+							p
+								label(for="comment_input") Escreve seu comentário abaixo:
+								textarea#comment_input(placeholder="Mensagem" ng-model="newComment")
+							input(type="submit" value="{{labels('Publish comment')}}")

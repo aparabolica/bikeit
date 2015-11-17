@@ -268,7 +268,6 @@ angular.module('bikeit.place')
 				}
 				$state.go('placesSingle.review', {placeId: data.ID});
 			}, function(error) {
-				console.log(error);
 			});
 		}
 

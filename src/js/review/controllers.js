@@ -120,7 +120,6 @@ angular.module('bikeit.review')
 						$scope.dialog = false;
 					}
 				}, function(error) {
-					console.log(error);
 				});
 			} else {
 				WP.post(data).then(function(data) {

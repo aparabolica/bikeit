@@ -246,11 +246,26 @@ angular.module('bikeit', [
 		});
 
 	}
+])
+
+.filter('fromNow', [
+	function() {
+		return _.memoize(function(input) {
+			return moment(input).utc().fromNow();
+		});
+	}
+])
+
+.filter('formatDate', [
+	function() {
+		return _.memoize(function(input, format) {
+			return moment(input).utc().format(format);
+		});
+	}
 ]);
 
 require('./loading');
 
 angular.element(document).ready(function() {
-	console.log(bikeit);
 	angular.bootstrap(document, ['bikeit']);
 });
