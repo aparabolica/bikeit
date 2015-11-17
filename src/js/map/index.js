@@ -29,7 +29,6 @@ angular.module('bikeit.map', [
 		$scope.mapDefaults = {
 			tileLayer: window.bikeit.map.tile,
 			scrollWheelZoom: false
-
 		};
 
 		$scope.$on('leafletDirectiveMarker.mouseover', function(event, args) {
@@ -48,6 +47,8 @@ angular.module('bikeit.map', [
 
 		$scope.$watch('markers', function(markers) {
 
+			var bounds = false;
+
 			if(markers && !_.isEmpty(markers)) {
 
 				var latLngs = [];
@@ -61,7 +62,15 @@ angular.module('bikeit.map', [
 
 				});
 
-				var bounds = L.latLngBounds(latLngs);
+				bounds = L.latLngBounds(latLngs);
+
+			} else if($scope.maxbounds) {
+
+				bounds = L.latLngBounds(L.latLng($scope.maxbounds.southWest), L.latLng($scope.maxbounds.northEast));
+
+			}
+
+			if(bounds) {
 
 				leafletData.getMap().then(function(m) {
 
