@@ -70,4 +70,35 @@
 			text-align: left;
 		}
 	}
+	#user-edit {
+		position: relative;
+		z-index: 99999;
+		background: #fff;
+		margin-top: -40px;
+		padding: 40px;
+		border: 1px solid #ddd;
+		.border-radius(4px);
+		.box-shadow(0 0 10px rgba(0,0,0,0.1));
+		p {
+			margin: 0 0 20px;
+			label {
+				font-weight: 600;
+				font-size: 18px;
+				display: block;
+				margin: 0 0 10px;
+			}
+			input {
+				.box-sizing(border-box);
+				display: block;
+				width: 100%;
+				&[type='text'] {
+					font-size: 18px;
+					padding: 10px;
+				}
+			}
+		}
+		form {
+			margin: 0;
+		}
+	}
 }

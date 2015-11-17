@@ -158,7 +158,9 @@ function bikeit_labels() {
 		'View all reviews to this place' => __('View all reviews to this place', 'bikeit'),
 		'Publish comment' => __('Publish comment', 'bikeit'),
 		'You must be logged in to comment' => __('You must be logged in to comment', 'bikeit'),
-		'Write your comment below:' => __('Write your comment below:', 'bikeit')
+		'Write your comment below:' => __('Write your comment below:', 'bikeit'),
+		'Edit profile' => __('Edit profile', 'bikeit'),
+		'Update' => __('Update', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

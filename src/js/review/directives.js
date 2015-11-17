@@ -123,7 +123,7 @@ angular.module('bikeit.review')
 
 					if(scope.user) {
 						if(scope.user.capabilities.delete_others_reviews ||
-							(scope.user.capabilities.delete_reviews && review.author.ID == user.ID))
+							(scope.user.capabilities.delete_reviews && review.author.ID == scope.user.ID))
 							return true;
 					}
 

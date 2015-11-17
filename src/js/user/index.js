@@ -43,6 +43,10 @@ angular.module('bikeit.user', [])
 						}
 					]
 				}
+			})
+			.state('user.edit', {
+				url: 'edit/',
+				templateUrl: window.bikeit.templateUri.split(window.location.origin)[1] + '/views/user/edit.html'
 			});
 	}
 ])

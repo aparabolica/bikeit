@@ -1,0 +1,11 @@
+.container
+  .six.columns.offset-by-three
+    section#user-edit.row
+      .row
+        h2.section-title {{labels('Edit profile')}}
+      form.row(ng-submit="update(user)")
+        p
+          label(for="name_input") {{labels('Name')}}
+          input#name_input(type="text" ng-model="user.name")
+        p
+          input(type="submit" value="{{labels('Update')}}")

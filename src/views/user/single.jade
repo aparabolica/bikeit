@@ -8,7 +8,7 @@ article.single-user.content-map(id="user-{{user.ID}}")
 					.main-info
 						img.user-avatar(ng-src="{{getUserAvatar()}}")
 						h1 {{user.name}}
-						p.registration {{labels('Active since')}} {{getUserRegistration()}}
+						p.registration {{labels('Active since')}} {{user.registered | formatDate:'L'}}
 					p.total {{labels('Total reviews')}}: 
 						span.count {{user.total_reviews}}
 					.ratings
@@ -18,10 +18,11 @@ article.single-user.content-map(id="user-{{user.ID}}")
 						p.downvotes
 							span.icon-thumbs-down
 							| {{user.votes.down}}
-	section#reviews
-		.container
-			.twelve.columns
-				.row
-					h2.section-title {{labels('Reviews')}}
-		.review-list(ng-show="reviews.length")
-			review-list-item(ng-repeat="review in reviews" review="review")
+	div(ui-view)
+		section#reviews
+			.container
+				.twelve.columns
+					.row
+						h2.section-title {{labels('Reviews')}}
+			.review-list(ng-show="reviews.length")
+				review-list-item(ng-repeat="review in reviews" review="review")

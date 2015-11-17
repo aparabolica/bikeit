@@ -56,8 +56,9 @@ angular.module('bikeit.user')
 	'UserData',
 	'UserPlaces',
 	'UserReviews',
+	'WPService',
 	'$scope',
-	function(UserData, UserPlaces, UserReviews, $scope) {
+	function(UserData, UserPlaces, UserReviews, WP, $scope) {
 		$scope.user = UserData;
 		$scope.places = UserPlaces.data;
 		$scope.reviews = UserReviews.data;
@@ -68,14 +69,13 @@ angular.module('bikeit.user')
 
 		});
 
-		$scope.getUserRegistration = function() {
-
-			return moment($scope.user.registered).format('L');
-
-		};
-
 		$scope.getUserAvatar = function() {
 			return $scope.user.avatar.replace('?s=96', '?s=400');
 		};
+
+		$scope.update = function(user) {
+			WP.updateUser(user.ID, user);
+		};
+
 	}
 ]);

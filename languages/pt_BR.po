@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-16 22:26-0200\n"
-"PO-Revision-Date: 2015-11-16 22:26-0300\n"
+"POT-Creation-Date: 2015-11-16 22:59-0200\n"
+"PO-Revision-Date: 2015-11-16 22:59-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -81,11 +81,11 @@ msgstr "Avaliações"
 msgid "Rating"
 msgstr "Avaliação"
 
-#: functions.php:110 functions.php:207 inc/review.php:191
+#: functions.php:110 functions.php:209 inc/review.php:191
 msgid "Approved"
 msgstr "Aprovado"
 
-#: functions.php:111 functions.php:209
+#: functions.php:111 functions.php:211
 msgid "Failed"
 msgstr "Reprovado"
 
@@ -289,7 +289,15 @@ msgstr "Você deve estar logado para comentar"
 msgid "Write your comment below:"
 msgstr "Escreva seu comentário abaixo:"
 
-#: functions.php:211 inc/place.php:207
+#: functions.php:162
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+#: functions.php:163
+msgid "Update"
+msgstr "Atualizar"
+
+#: functions.php:213 inc/place.php:207
 msgid "BikeIT Stamp"
 msgstr "Selo BikeIT"
 
