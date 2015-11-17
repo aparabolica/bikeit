@@ -2,6 +2,8 @@
 
 A WordPress theme to collect reviews on bike-friendly city spots
 
+ - [API Documentation](API.md)
+
 ---
 
 ## Installation
