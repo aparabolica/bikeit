@@ -198,10 +198,26 @@ function bikeit_get_place_labels() {
 
 	$labels = get_option('bikeit_labels');
 
+	$output = array();
+
+	foreach($labels as $key => $img) {
+			if($key == 'approved') {
+				$label = __('Approved', 'bikeit');
+			} elseif($key == 'failed') {
+				$label = __('Failed', 'bikeit');
+			} elseif($key == 'stamp') {
+				$label = __('BikeIT Stamp', 'bikeit');
+			}
+			$output[$key] = array(
+				'label' => $label,
+				'icon' => $img
+			);
+	}
+
 	if(is_multisite())
 		restore_current_blog();
 
-	return $labels;
+	return $output;
 }
 
 function bikeit_get_main_site_api() {
