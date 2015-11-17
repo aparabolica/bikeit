@@ -6,15 +6,15 @@ Most of the common API endpoints (retrieving places, reviews, categories and com
 
 ## Retrieving content
 
-## Places
+### Places
 
 **`GET api/posts?type=place`**
 
-### Parameters
+#### Parameters
 
 - `filters` [see all the acceptable filters here](http://wp-api.org/#posts_retrieve-posts_input)
 
-### Response
+#### Response
 
 Array of place objects
 
@@ -243,23 +243,23 @@ Array of place objects
 }]
 ```
 
-## Single place
+### Single place
 
 **`GET api/posts/:placeId`**
 
-## Response
+#### Response
 
 Place object
 
-## Reviews
+### Reviews
 
 **`GET api/posts?type=review`**
 
-### Parameters
+#### Parameters
 
 - `filters` [see all the acceptable filters here](http://wp-api.org/#posts_retrieve-posts_input)
 
-### Response
+#### Response
 
 Array of review objects
 
@@ -372,45 +372,45 @@ Array of review objects
 }]
 ```
 
-## Place reviews
+### Place reviews
 
 **`GET /api/posts?type=review`**
 
-### Parameters
+#### Parameters
 
 - `filters` [see all the acceptable filters here](http://wp-api.org/#posts_retrieve-posts_input)
   - `place_reviews`: place ID *(int)*
 
-### Response
+#### Response
 
 Array of review objects
 
-## User reviews
+### User reviews
 
 **`GET /api/posts?type=review`**
 
-### Parameters
+#### Parameters
 
 - `filters` [see all the acceptable filters here](http://wp-api.org/#posts_retrieve-posts_input)
   - `author`: user ID *(int)*
 
-### Response
+#### Response
 
 Array of review objects
 
-## Single review
+### Single review
 
 **`GET /api/posts/:reviewId`**
 
-### Response
+#### Response
 
 Review object
 
-## Review comments
+### Review comments
 
 **`GET /api/posts/:reviewId/comments`**
 
-### Response
+#### Response
 
 Array of comment object
 
