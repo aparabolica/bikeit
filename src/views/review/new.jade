@@ -37,6 +37,7 @@ div(ng-show="user")
 
 					input(id="input_stamp" type="checkbox" ng-model="review.rating.stampable")
 					label(for="input_stamp") {{labels('Nominate for BikeIT Stamp')}}
+						span.question-mark(tooltip="{{labels('The BikeIT stamp selects the most bike-friendly places, considering both structure and kindness rating. Serves as an example and inspiration for other places.')}}") ?
 
 				p.notify-place(ng-hide="review.ID")
 

@@ -161,7 +161,10 @@ function bikeit_labels() {
 		'Write your comment below:' => __('Write your comment below:', 'bikeit'),
 		'Edit profile' => __('Edit profile', 'bikeit'),
 		'Update' => __('Update', 'bikeit'),
-		'Loading map' => __('Loading map', 'bikeit')
+		'Loading map' => __('Loading map', 'bikeit'),
+		'Structure rating' => __('Structure rating', 'bikeit'),
+		'Kindness rating' => __('Kindness rating', 'bikeit'),
+		'The BikeIT stamp selects the most bike-friendly places, considering both structure and kindness rating. Serves as an example and inspiration for other places.' => __('The BikeIT stamp selects the most bike-friendly places, considering both structure and kindness rating. Serves as an example and inspiration for other places.', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

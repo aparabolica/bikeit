@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 15:26-0200\n"
-"PO-Revision-Date: 2015-11-17 15:26-0300\n"
+"POT-Creation-Date: 2015-11-26 14:05-0200\n"
+"PO-Revision-Date: 2015-11-26 14:06-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -81,11 +81,11 @@ msgstr "Avaliações"
 msgid "Rating"
 msgstr "Avaliação"
 
-#: functions.php:110 functions.php:210 inc/review.php:191
+#: functions.php:110 functions.php:213 inc/review.php:191
 msgid "Approved"
 msgstr "Aprovado"
 
-#: functions.php:111 functions.php:212
+#: functions.php:111 functions.php:215
 msgid "Failed"
 msgstr "Reprovado"
 
@@ -301,7 +301,25 @@ msgstr "Atualizar"
 msgid "Loading map"
 msgstr "Carregando mapa"
 
-#: functions.php:214 inc/place.php:207
+#: functions.php:165
+msgid "Structure rating"
+msgstr "Nota de Estrutura"
+
+#: functions.php:166
+msgid "Kindness rating"
+msgstr "Nota de Gentileza"
+
+#: functions.php:167
+msgid ""
+"The BikeIT stamp selects the most bike-friendly places, considering both "
+"structure and kindness rating. Serves as an example and inspiration for "
+"other places."
+msgstr ""
+"O Selo BikeIT seleciona os locais melhores avaliados, considerando suas "
+"notas de estrutura e gentileza. Serve de exemplo e inspiração para outros "
+"lugares."
+
+#: functions.php:217 inc/place.php:207
 msgid "BikeIT Stamp"
 msgstr "Selo BikeIT"
 

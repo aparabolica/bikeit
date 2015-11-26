@@ -117,11 +117,18 @@ angular.module('bikeit', [
 .directive('tooltip', function() {
 	return {
 		restrict: 'A',
+		scope: {
+			'tooltip': '@'
+		},
 		link: function(scope, element, attrs) {
-			if(attrs.tooltip) {
-				element.addClass('has-tooltip');
-				element.append('<div class="tooltip"><span>' + attrs.tooltip + '</span></div>');
-			}
+			scope.$watch('tooltip', function() {
+				element.removeClass('has-tooltip');
+				element.find('.tooltip').remove();
+				if(scope.tooltip) {
+					element.addClass('has-tooltip');
+					element.append('<span class="tooltip"><span>' + scope.tooltip + '</span></span>');
+				}
+			});
 		}
 	}
 })
@@ -245,6 +252,19 @@ angular.module('bikeit', [
 			}
 		});
 
+	}
+])
+
+.filter('rating', [
+	function() {
+		return function(input) {
+			if(isNaN(input) || !input)
+				return 0;
+			else {
+				var n = parseFloat(input).toFixed(2);
+				return n.toString().replace('.00', '');
+			}
+		}
 	}
 ])
 

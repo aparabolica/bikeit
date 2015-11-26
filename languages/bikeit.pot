@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-26 13:31-0200\n"
+"POT-Creation-Date: 2015-11-26 14:06-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,11 +81,11 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: functions.php:110 functions.php:210 inc/review.php:191
+#: functions.php:110 functions.php:213 inc/review.php:191
 msgid "Approved"
 msgstr ""
 
-#: functions.php:111 functions.php:212
+#: functions.php:111 functions.php:215
 msgid "Failed"
 msgstr ""
 
@@ -301,7 +301,22 @@ msgstr ""
 msgid "Loading map"
 msgstr ""
 
-#: functions.php:214 inc/place.php:207
+#: functions.php:165
+msgid "Structure rating"
+msgstr ""
+
+#: functions.php:166
+msgid "Kindness rating"
+msgstr ""
+
+#: functions.php:167
+msgid ""
+"The BikeIT stamp selects the most bike-friendly places, considering both "
+"structure and kindness rating. Serves as an example and inspiration for "
+"other places."
+msgstr ""
+
+#: functions.php:217 inc/place.php:207
 msgid "BikeIT Stamp"
 msgstr ""
 

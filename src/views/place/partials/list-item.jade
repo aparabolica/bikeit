@@ -6,16 +6,16 @@ article.place.list-item.clearfix(id="place-{{place.ID}}" class="{{style}}" ng-co
 			a(ui-sref="placesSingle({placeId: place.ID})") {{place.title}}
 		p.address {{place.formatted_address}}
 	section.place-rating
-		p.review-count
+		p.review-count(tooltip="{{labels('Review count')}}" ng-show="place.review_count")
 			span.label {{labels('Review count')}}
-			span.icon-pencil
+			span.icon.icon-pencil
 			span.count {{place.review_count | number:0}}
-		p.structure
+		p.structure(tooltip="{{labels('Structure rating')}}" ng-show="place.review_count")
 			span.label {{labels('Structure')}}
-			span.icon-star
-			span.count {{place.scores.structure | number:2}}
-		p.kindness
+			span.icon.icon-star
+			span.count {{place.scores.structure | rating}}/5
+		p.kindness(tooltip="{{labels('Kindness rating')}}" ng-show="place.review_count")
 			span.label {{labels('Kindness')}}
-			span.icon-heart
-			span.count {{place.scores.kindness | number:2}}
+			span.icon.icon-heart
+			span.count {{place.scores.kindness | rating}}/5
 	a.button.review(ui-sref="placesSingle.review({placeId: place.ID})") {{labels('Review')}}

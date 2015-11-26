@@ -55,7 +55,8 @@
 			.label {
 				display: none;
 			}
-			[class^="icon-"], [class*=" icon-"] {
+			.icon {
+				cursor: default;
 				display: block;
 				margin-bottom: 10px;
 				color: #666;
@@ -65,11 +66,23 @@
 				font-weight: 800;
 				color: #666;
 			}
-			&.structure [class^="icon-"], [class*=" icon-"] {
+			&.structure .icon {
 				color: @light-orange;
 			}
-			&.kindness [class^="icon-"], [class*=" icon-"] {
+			&.kindness .icon {
 				color: @dark-orange;
+			}
+			.tooltip {
+				width: 100px;
+				margin-left: -50px;
+				background: #333;
+				color: #fff;
+				border-color: #111;
+				&:after,
+				&:before {
+					background: #333;
+					border-color: #111;
+				}
 			}
 		}
 	}
@@ -126,16 +139,18 @@
 				padding: 0;
 				text-align: left;
 				line-height: 1;
-				span {
+				.icon,
+				.count {
 					display: inline-block;
-					&.label {
-						display: none;
-					}
-					&[class^="icon-"],
-					&[class*=" icon-"] {
-						margin-right: 5px;
-					}
 				}
+				.icon {
+					margin-right: 5px;
+				}
+			}
+			.tooltip {
+				left: 0;
+				margin-left: -40px;
+				text-align: center;
 			}
 		}
 		.button.review {
