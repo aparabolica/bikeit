@@ -34,20 +34,22 @@ angular.module('bikeit.map', [
 		};
 
 		$scope.$on('leafletDirectiveMap.click', _.debounce(function(ev, args) {
-			var latlng = args.leafletEvent.latlng;
-			if(latlng) {
-				$http.get('http://nominatim.openstreetmap.org/reverse', {
-					params: {
-						format: 'json',
-						lat: latlng.lat,
-						lon: latlng.lng,
-						addressdetails: 1,
-						namedetails: 1,
-						zoom: 18
-					}
-				}).success(function(data) {
-					$rootScope.$broadcast('clickedMap', data, latlng);
-				});
+			if(args.leafletEvent.target.getZoom() >= 16) {
+				var latlng = args.leafletEvent.latlng;
+				if(latlng) {
+					$http.get('http://nominatim.openstreetmap.org/reverse', {
+						params: {
+							format: 'json',
+							lat: latlng.lat,
+							lon: latlng.lng,
+							addressdetails: 1,
+							namedetails: 1,
+							zoom: 18
+						}
+					}).success(function(data) {
+						$rootScope.$broadcast('clickedMap', data, latlng);
+					});
+				}
 			}
 		}, 300));
 
