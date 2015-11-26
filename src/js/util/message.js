@@ -89,7 +89,7 @@ angular.module('bikeit.message', [])
 				return response || $q.when(response);
 			},
 			responseError: function(rejection) {
-				if(rejection.data.length && rejection.data[0].message) {
+				if(rejection.data && rejection.data.length && rejection.data[0].message) {
 					Message.add(rejection.data[0].message);
 				}
 				return $q.reject(rejection);

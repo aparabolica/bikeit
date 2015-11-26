@@ -164,7 +164,11 @@ function bikeit_labels() {
 		'Loading map' => __('Loading map', 'bikeit'),
 		'Structure rating' => __('Structure rating', 'bikeit'),
 		'Kindness rating' => __('Kindness rating', 'bikeit'),
-		'The BikeIT stamp selects the most bike-friendly places, considering both structure and kindness rating. Serves as an example and inspiration for other places.' => __('The BikeIT stamp selects the most bike-friendly places, considering both structure and kindness rating. Serves as an example and inspiration for other places.', 'bikeit')
+		'The BikeIT stamp selects the most bike-friendly places, considering both structure and kindness rating. Serves as an example and inspiration for other places.' => __('The BikeIT stamp selects the most bike-friendly places, considering both structure and kindness rating. Serves as an example and inspiration for other places.', 'bikeit'),
+		'Add' => __('Add', 'bikeit'),
+		'Review place on' => __('Review place on', 'bikeit'),
+		'New place on' => __('New place on', 'bikeit'),
+		'If this is not the desired place, register a new place on' => __('If this is not the desired place, register a new place on', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);

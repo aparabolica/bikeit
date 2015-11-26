@@ -9,8 +9,10 @@ angular.module('bikeit.map', [
 	'$state',
 	'leafletData',
 	'leafletEvents',
+	'$http',
+	'$rootScope',
 	'$scope',
-	function($state, leafletData, leafletEvents, $scope) {
+	function($state, leafletData, leafletEvents, $http, $rootScope, $scope) {
 
 		if(window.bikeit.city) {
 			var bounds = window.bikeit.city.boundingbox;
@@ -30,6 +32,24 @@ angular.module('bikeit.map', [
 			tileLayer: window.bikeit.map.tile,
 			scrollWheelZoom: false
 		};
+
+		$scope.$on('leafletDirectiveMap.click', _.debounce(function(ev, args) {
+			var latlng = args.leafletEvent.latlng;
+			if(latlng) {
+				$http.get('http://nominatim.openstreetmap.org/reverse', {
+					params: {
+						format: 'json',
+						lat: latlng.lat,
+						lon: latlng.lng,
+						addressdetails: 1,
+						namedetails: 1,
+						zoom: 18
+					}
+				}).success(function(data) {
+					$rootScope.$broadcast('clickedMap', data, latlng);
+				});
+			}
+		}, 300));
 
 		$scope.$on('leafletDirectiveMarker.mouseover', function(event, args) {
 			args.leafletEvent.target.openPopup();

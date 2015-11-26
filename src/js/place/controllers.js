@@ -92,6 +92,99 @@ angular.module('bikeit.place')
 	}
 ])
 
+.controller('MapSpyCtrl', [
+	'$scope',
+	'$state',
+	'WPService',
+	'$http',
+	'ngDialog',
+	'osmPlaceFilter',
+	function($scope, $state, WP, $http, ngDialog, osmPlaceFilter) {
+
+		$scope.clicked = false;
+		$scope.latlng = false;
+
+		$scope.$on('clickedMap', function(ev, data, latlng) {
+			$scope.clicked = data;
+			$scope.latlng = latlng;
+		});
+
+		$scope.$on('$stateChangeStart', function() {
+			if($scope.dialog)
+				$scope.dialog.close();
+		});
+
+		$scope.getAddress = function(place) {
+			return {
+				lat: $scope.latlng.lat,
+				lon: $scope.latlng.lng,
+				address: {
+					road: place.address.road,
+					district: place.address.city_district,
+					house_number: place.address.house_number
+				}
+			};
+		};
+
+		$scope.addAddress = function(data, cb) {
+
+			$scope.post = false;
+
+			// Get proper data on OSM
+
+			var bounds = window.bikeit.city ? window.bikeit.city.boundingbox : false;
+
+			$http.get('http://nominatim.openstreetmap.org/search', {
+				params: {
+					format: 'json',
+					q: data.namedetails.name + ' ' + data.address.road,
+					addressdetails: 1,
+					bounded: bounds ? 1 : '',
+					viewbox: bounds ? bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0] : ''
+				}
+			}).success(function(res) {
+
+				// Get only places
+				$scope.osmPlace = osmPlaceFilter(res);
+
+				// Found place
+				if($scope.osmPlace.length) {
+
+					$scope.osmPlace = $scope.osmPlace[0];
+
+					// Dialog for selection (use place or enter address)
+					$scope.dialog = ngDialog.open({
+						template: 'spySelection',
+						scope: $scope,
+						className: 'ngdialog-theme-default spy-dialog'
+					});
+
+				// Didnt find place, go to cb (view should send to SubmitPlaceCtrl)
+				} else {
+					if(typeof cb == 'function') {
+						cb($scope.getAddress(data), $scope.latlng);
+					}
+				}
+
+			});
+
+			// Check existance on BikeIT database
+			WP.query({
+				filter: {
+					's': data.place_id
+				},
+				type: 'place'
+			}).then(function(res) {
+				if(res.data.length) {
+					$scope.post = res.data[0];
+				}
+
+			});
+		};
+
+	}
+])
+
 .controller('SubmitPlaceCtrl', [
 	'templatePath',
 	'ngDialog',
@@ -103,7 +196,8 @@ angular.module('bikeit.place')
 	'$http',
 	'leafletData',
 	'$state',
-	function(templatePath, ngDialog, $scope, Auth, WP, $location, $timeout, $http, leafletData, $state) {
+	'osmTitleFilter',
+	function(templatePath, ngDialog, $scope, Auth, WP, $location, $timeout, $http, leafletData, $state, osmTitleFilter) {
 
 		$scope.loginTemplate = templatePath + '/views/login.html';
 
@@ -133,8 +227,8 @@ angular.module('bikeit.place')
 					params: {
 						format: 'json',
 						q: text,
-						bounded: bounds ? 1 : '',
 						addressdetails: 1,
+						bounded: bounds ? 1 : '',
 						viewbox: bounds ? bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0] : ''
 					}
 				}).success(function(data) {
@@ -145,38 +239,10 @@ angular.module('bikeit.place')
 
 		$scope.search = '';
 
-		$scope.sanitizeAddress = function(place) {
-			var address = '';
-			if(place.address.road) {
-				address += place.address.road;
-			}
-
-			if(place.address.house_number) {
-				address += ', ' + place.address.house_number;
-			}
-
-			if(place.address.suburb && place.address.suburb != place.address.city_district) {
-				if(place.address.road) {
-					address += ' - ';
-				}
-				address += place.address.suburb;
-			}
-
-			if(place.address.city_district) {
-				if(place.address.road) {
-					address += ' - ';
-				}
-				address += place.address.city_district;
-			}
-
-			return address;
-		};
-
 		$scope.clearPlace = function() {
 			$scope.place = {};
 		}
 
-		/* TODO */
 		$scope.selectAddress = function(address) {
 			$scope.place.address = address.address;
 			$scope.place.lat = address.lat;
@@ -193,8 +259,9 @@ angular.module('bikeit.place')
 			}, 300);
 		};
 
-		$scope.newPlace = function(place) {
+		$scope.newPlace = function(place, latlng) {
 			$scope.place = _.clone(place) || {};
+
 			$scope.map = {
 				center: {
 					lat: 0,
@@ -207,22 +274,36 @@ angular.module('bikeit.place')
 				},
 				controls: false
 			};
-			if($scope.place.osm_id) {
+
+			$timeout(function() {
 				$scope.map.center = {
-					lat: parseFloat($scope.place.lat),
-					lng: parseFloat($scope.place.lon),
+					lat: latlng ? latlng.lat : 0,
+					lng: latlng ? latlng.lng : 0,
 					zoom: 18
+				};
+				if($scope.place.osm_id) {
+					$scope.place.name = osmTitleFilter($scope.place);
+					if(!latlng) {
+						$scope.map.center = {
+							lat: parseFloat($scope.place.lat),
+							lng: parseFloat($scope.place.lon),
+							zoom: 18
+						}
+					}
 				}
-			};
+			}, 300);
 
 			$scope.searchResults = [];
+
+			var watchSearch;
+			var watchMapMove;
 
 			$scope.dialog = ngDialog.open({
 				template: templatePath + '/views/place/new.html',
 				scope: $scope,
 				controller: ['$scope', function(scope) {
 
-					scope.$watch('search', function(text) {
+					watchSearch = scope.$watch('search', function(text) {
 						if(!text || typeof text == 'undefined' || text.length <= 2) {
 							$scope.searchResults = [];
 						} else {
@@ -233,15 +314,22 @@ angular.module('bikeit.place')
 				}]
 			});
 
+
 			$timeout(function() {
 				leafletData.getMap('new-place-map').then(function(map) {
 					map.invalidateSize(false);
-					$scope.$on('leafletDirectiveMap.moveend', function(event) {
+					watchMapMove = $scope.$on('leafletDirectiveMap.moveend', function(event) {
 						var center = map.getCenter();
 						$scope.place.lat = center.lat;
 						$scope.place.lon = center.lng;
 					});
 				});
+
+				$scope.dialog.closePromise.then(function() {
+					watchSearch();
+					watchMapMove();
+				});
+
 			}, 300);
 		};
 
@@ -270,6 +358,11 @@ angular.module('bikeit.place')
 			}, function(error) {
 			});
 		}
+
+		$scope.$on('newPlace', function(ev, place, latlng) {
+			console.log('i heard that');
+			$scope.newPlace(place, latlng);
+		});
 
 	}
 ]);

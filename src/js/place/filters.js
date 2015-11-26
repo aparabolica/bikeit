@@ -2,6 +2,126 @@
 
 angular.module('bikeit.place')
 
+.filter('osmAddress', [
+	function() {
+		return _.memoize(function(input, type) {
+			var address = '';
+
+			if(input) {
+
+				if(input.road) {
+					address += input.road;
+				}
+
+				if(input.house_number) {
+					address += ', ' + input.house_number;
+				}
+
+				if(type != 'short') {
+
+					if(input.suburb && input.suburb != input.city_district) {
+						if(input.road) {
+							address += ' - ';
+						}
+						address += input.suburb;
+					}
+
+					if(input.city_district) {
+						if(input.road) {
+							address += ' - ';
+						}
+						address += input.city_district;
+					}
+
+				}
+
+			}
+
+			return address;
+		}, function() {
+			return JSON.stringify(arguments);
+		});
+	}
+])
+
+.filter('osmPlace', [
+	'$window',
+	function($window) {
+		return function(input) {
+			if(input && input.length) {
+				input = _.filter(input, function(item) {
+					if(item.class == 'highway' ||
+						item.class == 'place' ||
+						item.class == 'waterway' ||
+						item.class == 'landuse' ||
+						(!item.address[item.type] && !item.address.address29) ||
+						!$window.osmLabels[item.class + '/' + item.type])
+						return false;
+					else
+						return true;
+				});
+			}
+			return input;
+		}
+	}
+])
+
+.filter('osmTitle', [
+	function() {
+		return _.memoize(function(input) {
+
+			var title = '';
+
+			if(input && input.address) {
+				title = input.address[input.type] || input.address.address29;
+			}
+
+			return title;
+
+		}, function() {
+			return JSON.stringify(arguments);
+		});
+	}
+])
+
+.filter('osmLabel', [
+	'$window',
+	function($window) {
+		return _.memoize(function(input) {
+
+			var label = '';
+
+			if(input && input.type) {
+				label = $window.osmLabels[input.class + '/' + input.type].name;
+			}
+
+			return label;
+
+		}, function() {
+			return JSON.stringify(arguments);
+		})
+	}
+])
+
+.filter('osmIcon', [
+	'$window',
+	function($window) {
+		return _.memoize(function(input) {
+			var icon = '';
+
+			if(input && input.class && input.type) {
+				if($window.osmIcons[input.class + '/' + input.type])
+					icon = $window.osmIcons[input.class + '/' + input.type];
+			}
+
+			return icon;
+
+		}, function() {
+			return JSON.stringify(arguments);
+		})
+	}
+])
+
 .filter('hideFound', [
 	function() {
 		return function(input, found) {
@@ -94,7 +214,7 @@ angular.module('bikeit.place')
 					return parseInt(place.stamped);
 				} else {
 					var approval;
-					if(parseFloat(place.scores.approved) >= 0.5)
+					if(place.scores && parseFloat(place.scores.approved) >= 0.5)
 						approval = 'approved';
 					else
 						approval = 'failed';

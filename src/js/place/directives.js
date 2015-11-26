@@ -44,28 +44,6 @@ angular.module('bikeit.place')
 					return place.address[place.type] || place.address.address29;
 				}
 
-				scope.sanitizeAddress = function(place) {
-
-					var address = '';
-					if(place.address.road) {
-						address += place.address.road;
-					}
-
-					if(place.address.house_number) {
-						address += ', ' + place.address.house_number;
-					}
-
-					if(place.address.city_district) {
-						if(place.address.road) {
-							address += ' - ';
-						}
-						address += place.address.city_district;
-					}
-
-					return address;
-
-				};
-
 			}
 		}
 	}
@@ -82,21 +60,25 @@ angular.module('bikeit.place')
 
 			scope.getPlaceIcon = function(place) {
 
-				var approval = 'default';
+				if(place) {
 
-				if(parseFloat(place.scores.approved) >= 0.5)
-					approval = 'approved';
-				else
-					approval = 'failed';
+					var approval = 'default';
 
-				if(place.stamped) {
-					approval = 'stamp';
-				}
+					if(place.scores && parseFloat(place.scores.approved) >= 0.5)
+						approval = 'approved';
+					else
+						approval = 'failed';
 
-				if(place.terms['place-category']) {
+					if(place.stamped) {
+						approval = 'stamp';
+					}
 
-					return place.terms['place-category'][0].markers[approval];
+					if(place.terms && place.terms['place-category']) {
 
+						return place.terms['place-category'][0].markers[approval];
+
+					}
+					
 				}
 
 				return '';

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-26 14:13-0200\n"
+"POT-Creation-Date: 2015-11-26 18:42-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,11 +81,11 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: functions.php:110 functions.php:213 inc/review.php:191
+#: functions.php:110 functions.php:217 inc/review.php:191
 msgid "Approved"
 msgstr ""
 
-#: functions.php:111 functions.php:215
+#: functions.php:111 functions.php:219
 msgid "Failed"
 msgstr ""
 
@@ -316,7 +316,23 @@ msgid ""
 "other places."
 msgstr ""
 
-#: functions.php:217 inc/place.php:207
+#: functions.php:168
+msgid "Add"
+msgstr ""
+
+#: functions.php:169
+msgid "Review place on"
+msgstr ""
+
+#: functions.php:170
+msgid "New place on"
+msgstr ""
+
+#: functions.php:171
+msgid "If this is not the desired place, register a new place on"
+msgstr ""
+
+#: functions.php:221 inc/place.php:207
 msgid "BikeIT Stamp"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-26 14:05-0200\n"
-"PO-Revision-Date: 2015-11-26 14:06-0300\n"
+"POT-Creation-Date: 2015-11-26 17:59-0200\n"
+"PO-Revision-Date: 2015-11-26 18:01-0300\n"
 "Last-Translator: Miguel Peixe <miguel@cardume.art.br>\n"
 "Language-Team: \n"
 "Language: pt-BR\n"
@@ -81,11 +81,11 @@ msgstr "Avaliações"
 msgid "Rating"
 msgstr "Avaliação"
 
-#: functions.php:110 functions.php:213 inc/review.php:191
+#: functions.php:110 functions.php:217 inc/review.php:191
 msgid "Approved"
 msgstr "Aprovado"
 
-#: functions.php:111 functions.php:215
+#: functions.php:111 functions.php:219
 msgid "Failed"
 msgstr "Reprovado"
 
@@ -319,7 +319,23 @@ msgstr ""
 "notas de estrutura e gentileza. Serve de exemplo e inspiração para outros "
 "lugares."
 
-#: functions.php:217 inc/place.php:207
+#: functions.php:168
+msgid "Add"
+msgstr "Adicionar"
+
+#: functions.php:169
+msgid "Review place on"
+msgstr "Avaliar local em"
+
+#: functions.php:170
+msgid "New place on"
+msgstr "Novo local em"
+
+#: functions.php:171
+msgid "If this is not the desired place, register a new place on"
+msgstr "Se este não for o local desejado, registre um novo local em"
+
+#: functions.php:221 inc/place.php:207
 msgid "BikeIT Stamp"
 msgstr "Selo BikeIT"
 
@@ -678,6 +694,9 @@ msgstr "Desenvolvimento por"
 #: index.php:132
 msgid "Our source is open"
 msgstr "Nosso código é aberto"
+
+#~ msgid "Add place on"
+#~ msgstr "Adicionar local em"
 
 #~ msgid "Location"
 #~ msgstr "Localização"

@@ -215,30 +215,7 @@ angular.module('bikeit', [
 						viewbox: bounds ? bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0] : ''
 					}
 				}).success(function(data) {
-					$scope.addressResults = _.filter(data, function(item) {
-
-						// Filter places
-						if(item.class == 'highway' ||
-							item.class == 'place' ||
-							item.class == 'waterway' ||
-							item.class == 'landuse' ||
-							(!item.address[item.type] && !item.address.address29) ||
-							!window.osmLabels[item.class + '/' + item.type])
-							return false;
-
-						// Add title
-						item.name = item.address[item.type] || item.address.address29;
-
-						// Add label
-						item.label = window.osmLabels[item.class + '/' + item.type].name;
-
-						// Add icon
-						if(window.osmIcons[item.class + '/' + item.type])
-							item.icon = window.osmIcons[item.class + '/' + item.type];
-
-						return true;
-
-					});
+					$scope.addressResults = data;
 				});
 			}
 		}, 300);
