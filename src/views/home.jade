@@ -9,7 +9,7 @@ section#map.row.with-sidebar(ng-controller="MapController")
 				h2 {{labels('New place')}}
 				p Encontramos um local aqui!
 				.row
-					place-list-item(ng-repeat="p in [post]" ng-show="post" place="p" style="minimal")
+					place-list-item(ng-show="post" place="post" style="minimal")
 					div(ng-click="newPlace(osmPlace)")
 						osm-list-item(ng-hide="post" place="osmPlace")
 				p {{labels('If this is not the desired place, register a new place on')}} 
