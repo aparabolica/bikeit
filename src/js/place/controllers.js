@@ -120,7 +120,7 @@ angular.module('bikeit.place')
 				lon: $scope.latlng.lng,
 				address: {
 					road: place.address.road,
-					district: place.address.city_district,
+					city_district: place.address.city_district,
 					house_number: place.address.house_number
 				}
 			};
