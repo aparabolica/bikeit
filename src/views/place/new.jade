@@ -14,9 +14,6 @@ div(ng-show="user")
 					input(id="input_place_search" type="text" ng-model="search")
 				ul(ng-show="searchResults")
 					li(ng-repeat="address in searchResults" ng-click="selectAddress(address)") {{sanitizeAddress(address)}}
-			p.category(ng-show="place.lat && place.lon")
-				label(for="input_place_category") {{labels('Category')}}
-				select(id="input_place_category" ng-model="place.category" ng-options="category.term_id as category.name for category in categories")
 			.address-details(ng-show="place.lat && place.lon")
 				p.road
 					label(for="input_place_road") {{labels('Address')}}
@@ -27,7 +24,9 @@ div(ng-show="user")
 				p.district
 					label(for="input_place_district") {{labels('District')}}
 					input(id="input_place_district" type="text" ng-model="place.district" value="{{place.address.city_district}}" ng-disabled="place.osm_id && place.address.city_district")
-				p.
+			p.category(ng-show="place.lat && place.lon")
+				label(for="input_place_category") {{labels('Category')}}
+				select(id="input_place_category" ng-model="place.category" ng-options="category.term_id as category.name for category in categories")
 			.map(ng-show="place.lat && place.lon")
 				label {{labels('Exact location')}}
 				.map-container
