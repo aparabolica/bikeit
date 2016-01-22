@@ -334,6 +334,16 @@ angular.module('bikeit.place')
 		};
 
 		$scope.submit = function(place) {
+
+			var sendOSMNote = 0;
+
+			if(
+				(place.road && place.road != place.address.road) ||
+				(place.district && place.district != place.address.city_district) ||
+				(place.number && place.number != place.address.house_number)
+			)
+				sendOSMNote = 1;
+
 			WP.post({
 				'title': place.name,
 				'content_raw': ' ',
@@ -347,6 +357,7 @@ angular.module('bikeit.place')
 					'district': place.district || place.address.city_district,
 					'number': place.number || place.address.house_number,
 					'osm_id': place.osm_id,
+					'send_note': sendOSMNote,
 					'params': JSON.stringify(place)
 				}
 			}).then(function(data) {
