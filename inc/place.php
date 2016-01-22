@@ -621,7 +621,7 @@ class BikeIT_Places {
 			update_post_meta($post['ID'], '_params', $place_meta['params']);
 
 		// Send note to OSM
-		// TODO check changes to original OSM (if any)
+		// TODO backend check changes to original OSM (if any)
 		$osm_note = true;
 		if($osm_note && isset($place_meta['send_note']) && $place_meta['send_note']) {
 
@@ -633,14 +633,14 @@ class BikeIT_Places {
 			$location['district'] = get_post_meta($post['ID'], 'district', true);
 
 			$osm_data = array(
-				'lat' => $place_meta['location']['lat'],
-				'lon' => $place_meta['location']['lng'],
-				'text' => $data['title'] . ' ' . $this->get_formatted_address($location) . " " . $place_meta['category'] . " Submitted via BikeIT"
+				'lat' => $place_meta['lat'],
+				'lon' => $place_meta['lng'],
+				'text' => $data['title'] . ' - ' . $this->get_formatted_address($location) . " - Submitted via BikeIT"
 			);
 
 			$osm_context = stream_context_create(array(
 				'http' => array(
-					'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+					'header' => "Content-Type: multipart/form-data\r\n\r\n",
 					'method' => 'POST',
 					'content' => http_build_query($osm_data)
 				)
