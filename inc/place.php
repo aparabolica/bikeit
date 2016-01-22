@@ -622,7 +622,7 @@ class BikeIT_Places {
 
 		// Send note to OSM
 		// TODO check changes to original OSM (if any)
-		$osm_note = true;
+		$osm_note = false;
 		if($osm_note) {
 
 			$osm_url = 'http://api.openstreetmap.org/api/0.6/notes';
