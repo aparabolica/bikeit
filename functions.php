@@ -168,7 +168,8 @@ function bikeit_labels() {
 		'Add' => __('Add', 'bikeit'),
 		'Review place on' => __('Review place on', 'bikeit'),
 		'New place on' => __('New place on', 'bikeit'),
-		'If this is not the desired place, register a new place on' => __('If this is not the desired place, register a new place on', 'bikeit')
+		'If this is not the desired place, register a new place on' => __('If this is not the desired place, register a new place on', 'bikeit'),
+		"Please place the center of the map on the exact location of the place you'd like to review." => __("Please place the center of the map on the exact location of the place you'd like to review.", 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
