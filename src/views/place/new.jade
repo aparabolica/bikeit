@@ -13,7 +13,7 @@ div(ng-show="user")
 					label(for="input_place_search") {{labels('Search address')}}
 					input(id="input_place_search" type="text" ng-model="search")
 				ul(ng-show="searchResults")
-					li(ng-repeat="address in searchResults" ng-click="selectAddress(address)") {{address | osmAddress}}
+					li(ng-repeat="address in searchResults" ng-click="selectAddress(address)") {{address.address | osmAddress}}
 			.address-details(ng-show="place.lat && place.lon")
 				p.road
 					label(for="input_place_road") {{labels('Address')}}

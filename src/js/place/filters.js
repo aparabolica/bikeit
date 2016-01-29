@@ -38,6 +38,7 @@ angular.module('bikeit.place')
 			}
 
 			return address;
+
 		}, function() {
 			return JSON.stringify(arguments);
 		});
