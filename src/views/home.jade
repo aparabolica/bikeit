@@ -59,8 +59,13 @@ section#recently-reviewed(ng-show="recent.length")
 	.container
 		.twelve.columns
 			.row
-				h2.section-title
-					| {{labels('Recently reviewed')}}
+				.section-header
+					.buttons(ng-hide="featured.length")
+						a.button(ng-controller="SubmitPlaceCtrl" ng-click="newPlace()") 
+							span.icon-plus 
+							| {{labels('New place')}}
+					h2.section-title
+						| {{labels('Recently reviewed')}}
 		ul
 			li.three.columns(ng-repeat="post in recent | limitTo:8")
 				place-list-item(place="post")
