@@ -90,7 +90,7 @@
 							<ul>
 								<li><a ui-sref="user({userId: user.ID})">{{labels('My profile')}}</a></li>
 								<li><a ui-sref="user.edit({userId: user.ID})">{{labels('Edit my profile')}}</a></li>
-								<li ng-show="user.roles[0] == 'administrator'"><a href="{{adminUrl}}" target="_self">{{labels('Control panel')}}</a></li>
+								<li ng-show="user.roles[0] == 'administrator' || user.roles[0] == 'editor'"><a href="{{adminUrl}}" target="_self">{{labels('Control panel')}}</a></li>
 								<li><a href="{{logoutUrl}}">{{labels('Logout')}}</a></li>
 							</ul>
 						</div>
