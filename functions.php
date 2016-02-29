@@ -171,7 +171,8 @@ function bikeit_labels() {
 		'If this is not the desired place, register a new place on' => __('If this is not the desired place, register a new place on', 'bikeit'),
 		"Please place the center of the map on the exact location of the place you'd like to review." => __("Please place the center of the map on the exact location of the place you'd like to review.", 'bikeit'),
 		'Edit place' => __('Edit place', 'bikeit'),
-		'Editing' => __('Editing', 'bikeit')
+		'Editing' => __('Editing', 'bikeit'),
+		'Update place' => __('Update place', 'bikeit')
 	);
 
 	return apply_filters('bikeit_labels', $labels);
@@ -376,7 +377,7 @@ function bikeit_disable_default_dashboard_widgets() {
 add_action('wp_dashboard_setup', 'bikeit_disable_default_dashboard_widgets', 999);
 
 function bikeit_ms_disable_dashboard_pages() {
-	if(is_multisite() && get_current_blog_id() != 1) {
+	if(is_multisite() && get_current_blog_id() != 1 && !(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
 		?>
 		<style>
 			#menu-posts,

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 18:33-0300\n"
+"POT-Creation-Date: 2016-02-29 18:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,11 +81,11 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: functions.php:110 functions.php:220 inc/review.php:191
+#: functions.php:110 functions.php:221 inc/review.php:191
 msgid "Approved"
 msgstr ""
 
-#: functions.php:111 functions.php:222
+#: functions.php:111 functions.php:223
 msgid "Failed"
 msgstr ""
 
@@ -346,7 +346,11 @@ msgstr ""
 msgid "Editing"
 msgstr ""
 
-#: functions.php:224 inc/place.php:207
+#: functions.php:175
+msgid "Update place"
+msgstr ""
+
+#: functions.php:225 inc/place.php:207
 msgid "BikeIT Stamp"
 msgstr ""
 
