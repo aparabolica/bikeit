@@ -259,6 +259,25 @@ angular.module('bikeit.place')
 			}, 300);
 		};
 
+		$scope.editPlace = function(place) {
+
+			var parsed = {
+				ID: place.ID,
+				name: place.title,
+				lat: place.location.lat,
+				lon: place.location.lng,
+				category: place.terms['place-category'][0].ID,
+				address: {
+					road: place.location.road,
+					city_district: place.location.district,
+					house_number: place.location.number
+				}
+			};
+
+			$scope.newPlace(parsed, {lat: parsed.lat, lng: parsed.lon });
+
+		};
+
 		$scope.newPlace = function(place, latlng) {
 			$scope.place = _.clone(place) || {};
 
@@ -344,7 +363,8 @@ angular.module('bikeit.place')
 			)
 				sendOSMNote = 1;
 
-			WP.post({
+			var parsed = {
+				'ID': place.ID || null,
 				'title': place.name,
 				'content_raw': ' ',
 				'type': 'place',
@@ -357,10 +377,15 @@ angular.module('bikeit.place')
 					'district': place.district || place.address.city_district,
 					'number': place.number || place.address.house_number,
 					'osm_id': place.osm_id,
-					'send_note': sendOSMNote,
-					'params': JSON.stringify(place)
+					'send_note': sendOSMNote
 				}
-			}).then(function(data) {
+			};
+
+			if(!place.ID) {
+				parsed['place_meta'].params = JSON.stringify(place);
+			}
+
+			WP.post(parsed).then(function(data) {
 				if($scope.dialog) {
 					$scope.dialog.close();
 					$scope.dialog = false;
@@ -368,6 +393,7 @@ angular.module('bikeit.place')
 				$state.go('placesSingle.review', {placeId: data.ID});
 			}, function(error) {
 			});
+
 		}
 
 		$scope.$on('newPlace', function(ev, place, latlng) {
