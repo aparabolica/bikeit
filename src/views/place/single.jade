@@ -19,7 +19,7 @@ article.single-place.content-map(id="place-{{place.ID}}")
 					p.total
 						| {{labels('Total reviews')}}:
 						span.count {{place.review_count}}
-					p.edit-place(ng-controller="SubmitPlaceCtrl" ng-show="user.roles[0] == 'administrator' || user.roles[0] == 'editor'")
+					p.edit-place(ng-controller="SubmitPlaceCtrl" ng-show="user.roles[0] == 'administrator' || user.roles[0] == 'editor' || user.superadmin")
 						a(ng-click="editPlace(place)" href="javascript:void(0);") {{labels('Edit place')}}
 					p.submit-review(ng-controller="SubmitReviewCtrl")
 						a(href="javascript:void(0);" ng-click="newReview(place)" ng-init="onLoadReview(openReview, place)")

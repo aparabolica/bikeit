@@ -206,6 +206,7 @@ angular.module('bikeit.place')
 		}, function(data) {
 			if(data) {
 				$scope.user = data;
+				console.log($scope.user);
 				$timeout(function() {
 					leafletData.getMap('new-place-map').then(function(map) {
 						map.invalidateSize(false);
@@ -397,7 +398,6 @@ angular.module('bikeit.place')
 		}
 
 		$scope.$on('newPlace', function(ev, place, latlng) {
-			console.log('i heard that');
 			$scope.newPlace(place, latlng);
 		});
 
