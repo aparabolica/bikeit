@@ -390,7 +390,7 @@ function bikeit_ms_disable_dashboard_pages() {
 		<?php
 	}
 }
-add_action('admin_init', 'bikeit_ms_disable_dashboard_pages');
+add_action('admin_footer', 'bikeit_ms_disable_dashboard_pages');
 
 function bikeit_json_prepare_user($user_fields, $user) {
 	if(is_super_admin($user->ID)) {
