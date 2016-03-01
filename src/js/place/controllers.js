@@ -239,26 +239,6 @@ angular.module('bikeit.place')
 
 		$scope.search = '';
 
-		$scope.clearPlace = function() {
-			$scope.place = {};
-		}
-
-		$scope.selectAddress = function(address) {
-			$scope.place.address = address.address;
-			$scope.place.lat = address.lat;
-			$scope.place.lon = address.lon;
-			$scope.map.center = {
-				lat: parseFloat($scope.place.lat),
-				lng: parseFloat($scope.place.lon),
-				zoom: 18
-			}
-			$timeout(function() {
-				leafletData.getMap('new-place-map').then(function(map) {
-					map.invalidateSize(false);
-				});
-			}, 300);
-		};
-
 		$scope.editPlace = function(place) {
 
 			var parsed = {
@@ -278,8 +258,29 @@ angular.module('bikeit.place')
 
 		};
 
+		$scope.clearPlace = function() {
+			$scope.edit = {};
+		}
+
+		$scope.selectAddress = function(address) {
+			$scope.edit.address = address.address;
+			$scope.edit.lat = address.lat;
+			$scope.edit.lon = address.lon;
+			$scope.map.center = {
+				lat: parseFloat($scope.edit.lat),
+				lng: parseFloat($scope.edit.lon),
+				zoom: 18
+			}
+			$timeout(function() {
+				leafletData.getMap('new-place-map').then(function(map) {
+					map.invalidateSize(false);
+				});
+			}, 300);
+		};
+
 		$scope.newPlace = function(place, latlng) {
-			$scope.place = _.clone(place) || {};
+
+			$scope.edit = _.clone(place) || {};
 
 			$scope.map = {
 				center: {
@@ -300,12 +301,12 @@ angular.module('bikeit.place')
 					lng: latlng ? latlng.lng : 0,
 					zoom: 18
 				};
-				if($scope.place.osm_id) {
-					$scope.place.name = osmTitleFilter($scope.place);
+				if($scope.edit.osm_id) {
+					$scope.edit.name = osmTitleFilter($scope.edit);
 					if(!latlng) {
 						$scope.map.center = {
-							lat: parseFloat($scope.place.lat),
-							lng: parseFloat($scope.place.lon),
+							lat: parseFloat($scope.edit.lat),
+							lng: parseFloat($scope.edit.lon),
 							zoom: 18
 						}
 					}
@@ -339,14 +340,15 @@ angular.module('bikeit.place')
 					map.invalidateSize(false);
 					watchMapMove = $scope.$on('leafletDirectiveMap.moveend', function(event) {
 						var center = map.getCenter();
-						$scope.place.lat = center.lat;
-						$scope.place.lon = center.lng;
+						$scope.edit.lat = center.lat;
+						$scope.edit.lon = center.lng;
 					});
 				});
 
 				$scope.dialog.closePromise.then(function() {
 					watchSearch();
-					watchMapMove();
+					if(typeof watchMapMove == 'function')
+						watchMapMove();
 				});
 
 			}, 300);
@@ -376,10 +378,13 @@ angular.module('bikeit.place')
 					'road': place.road || place.address.road,
 					'district': place.district || place.address.city_district,
 					'number': place.number || place.address.house_number,
-					'osm_id': place.osm_id,
 					'send_note': sendOSMNote
 				}
 			};
+
+			if(place.osm_id) {
+				parsed['place_meta'].osm_id = place.osm_id;
+			}
 
 			if(!place.ID) {
 				parsed['place_meta'].params = JSON.stringify(place);
@@ -390,7 +395,11 @@ angular.module('bikeit.place')
 					$scope.dialog.close();
 					$scope.dialog = false;
 				}
-				$state.go('placesSingle.review', {placeId: data.ID});
+				if(!place.ID) {
+					$state.go('placesSingle.review', {placeId: data.ID});
+				} else {
+					$state.go('placesSingle', {}, {reload: true});
+				}
 			}, function(error) {
 			});
 

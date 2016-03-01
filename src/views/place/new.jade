@@ -3,38 +3,38 @@ div(ng-hide="user" ng-include="loginTemplate")
 div(ng-show="user")
 	section#new-place
 		h2 
-			span(ng-hide="place.ID") {{place.osm_id ? labels('Adding') + ' ' + place.name : labels('New place')}}
-			span(ng-show="place.ID") {{labels('Editing') + ' ' + place.name}}
-		form(ng-submit="submit(place)")
-			a(href="javascript:void(0);" ng-show="place.osm_id" ng-click="clearPlace()") {{labels('Clear data (register new place)')}}
+			span(ng-hide="edit.ID") {{edit.osm_id ? labels('Adding') + ' ' + edit.name : labels('New place')}}
+			span(ng-show="edit.ID") {{labels('Editing') + ' ' + edit.name}}
+		form(ng-submit="submit(edit)")
+			a(href="javascript:void(0);" ng-show="edit.osm_id && !edit.ID" ng-click="clearPlace()") {{labels('Clear data (register new place)')}}
 			p.name
 				label(for="input_place_name") {{labels('Name')}}
-				input(id="input_place_name" type="text" ng-model="place.name" ng-disabled="place.osm_id")
-			.address-search(ng-hide="(place.lat && place.lon) || place.ID")
+				input(id="input_place_name" type="text" ng-model="edit.name" ng-disabled="edit.osm_id")
+			.address-search(ng-hide="(edit.lat && edit.lon) || edit.ID")
 				p
 					label(for="input_place_search") {{labels('Search address')}}
 					input(id="input_place_search" type="text" ng-model="search")
 				ul(ng-show="searchResults")
 					li(ng-repeat="address in searchResults" ng-click="selectAddress(address)") {{address.address | osmAddress}}
-			.address-details(ng-show="(place.lat && place.lon) || place.ID")
+			.address-details(ng-show="(edit.lat && edit.lon) || edit.ID")
 				p.road
 					label(for="input_place_road") {{labels('Address')}}
-					input(id="input_place_road" type="text" ng-model="place.road" value="{{place.address.road}}" ng-disabled="place.osm_id && place.address.road")
+					input(id="input_place_road" type="text" ng-model="edit.road" value="{{edit.address.road}}" ng-disabled="edit.osm_id && edit.address.road")
 				p.number
 					label(for="input_place_number") {{labels('Number')}}
-					input(id="input_place_number" type="text" ng-model="place.number" value="{{place.address.house_number}}")
+					input(id="input_place_number" type="text" ng-model="edit.number" value="{{edit.address.house_number}}")
 				p.district
 					label(for="input_place_district") {{labels('District')}}
-					input(id="input_place_district" type="text" ng-model="place.district" value="{{place.address.city_district}}" ng-disabled="place.osm_id && place.address.city_district")
-			p.category(ng-show="place.lat && place.lon")
+					input(id="input_place_district" type="text" ng-model="edit.district" value="{{edit.address.city_district}}" ng-disabled="edit.osm_id && edit.address.city_district")
+			p.category(ng-show="edit.lat && edit.lon")
 				label(for="input_place_category") {{labels('Category')}}
-				select(id="input_place_category" ng-model="place.category" ng-options="category.term_id as category.name for category in categories")
-			.map(ng-show="place.lat && place.lon")
+				select(id="input_place_category" ng-model="edit.category" ng-options="category.term_id as category.name for category in categories")
+			.map(ng-show="edit.lat && edit.lon")
 				label {{labels('Exact location')}}
-				p.tip {{labels('Please place the center of the map on the exact location of the place you\'d like to review.')}}
+				p.tip {{labels('Please edit the center of the map on the exact location of the place you\'d like to review.')}}
 				.map-container
-					leaflet#new-place-map(defaults="map.defaults" center="map.center" controls="map.controls")
-					// p(ng-bind="place.lat + ' ' + place.lon")
+					leaflet#new-edit-map(defaults="map.defaults" center="map.center" controls="map.controls")
+					// p(ng-bind="edit.lat + ' ' + edit.lon")
 
-			input(type="submit" ng-show="place.lat && place.lon && !place.ID" value="{{labels('Submit place')}}")
-			input(type="submit" ng-show="place.ID" value="{{labels('Update place')}}")
+			input(type="submit" ng-show="edit.lat && edit.lon && !edit.ID" value="{{labels('Submit place')}}")
+			input(type="submit" ng-show="edit.ID" value="{{labels('Update place')}}")
