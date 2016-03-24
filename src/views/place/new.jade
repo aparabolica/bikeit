@@ -31,9 +31,9 @@ div(ng-show="user")
 				select(id="input_place_category" ng-model="edit.category" ng-options="category.term_id as category.name for category in categories")
 			.map(ng-show="edit.lat && edit.lon")
 				label {{labels('Exact location')}}
-				p.tip {{labels('Please edit the center of the map on the exact location of the place you\'d like to review.')}}
+				p.tip {{labels('Please center the map on the exact location of the place you\'d like to review.')}}
 				.map-container
-					leaflet#new-edit-map(defaults="map.defaults" center="map.center" controls="map.controls")
+					leaflet#new-place-map(defaults="map.defaults" center="map.center" controls="map.controls")
 					// p(ng-bind="edit.lat + ' ' + edit.lon")
 
 			input(type="submit" ng-show="edit.lat && edit.lon && !edit.ID" value="{{labels('Submit place')}}")

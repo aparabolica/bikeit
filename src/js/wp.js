@@ -244,18 +244,37 @@ module.exports = [
 
 				var deferred = $q.defer();
 
-				jQuery.ajax({
-					url: url,
-					dataType: 'json',
-					type: 'POST',
-					data: data,
-					success: function(data, text, xhr) {
-						deferred.resolve(data);
-					},
-					error: function(xhr, text) {
-						deferred.reject(xhr.responseJSON);
-					}
-				});
+				if(data.ID) {
+
+					jQuery.ajax({
+						url: url + '/' + data.ID,
+						dataType: 'json',
+						type: 'PUT',
+						data: data,
+						success: function(data, text, xhr) {
+							deferred.resolve(data);
+						},
+						error: function(xhr, text) {
+							deferred.reject(xhr.responseJSON);
+						}
+					});
+
+				} else {
+
+					jQuery.ajax({
+						url: url,
+						dataType: 'json',
+						type: 'POST',
+						data: data,
+						success: function(data, text, xhr) {
+							deferred.resolve(data);
+						},
+						error: function(xhr, text) {
+							deferred.reject(xhr.responseJSON);
+						}
+					});
+
+				}
 
 				return deferred.promise;
 

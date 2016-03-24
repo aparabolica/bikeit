@@ -169,7 +169,7 @@ function bikeit_labels() {
 		'Review place on' => __('Review place on', 'bikeit'),
 		'New place on' => __('New place on', 'bikeit'),
 		'If this is not the desired place, register a new place on' => __('If this is not the desired place, register a new place on', 'bikeit'),
-		"Please place the center of the map on the exact location of the place you'd like to review." => __("Please place the center of the map on the exact location of the place you'd like to review.", 'bikeit'),
+		"Please center the map on the exact location of the place you'd like to review." => __("Please center the map on the exact location of the place you'd like to review.", 'bikeit'),
 		'Edit place' => __('Edit place', 'bikeit'),
 		'Editing' => __('Editing', 'bikeit'),
 		'Update place' => __('Update place', 'bikeit')
@@ -266,7 +266,7 @@ function bikeit_scripts() {
 	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 
 	wp_register_script('moment', get_template_directory_uri() . '/js/moment.js');
-	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery', 'moment'));
+	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery', 'moment'), '1.0');
 	wp_localize_script('bikeit-main', 'bikeit', array(
 		'name' => get_bloginfo('name'),
 		'locale' => get_bloginfo('language'),

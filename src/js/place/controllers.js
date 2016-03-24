@@ -324,7 +324,7 @@ angular.module('bikeit.place')
 			var watchMapMove;
 
 			$scope.dialog = ngDialog.open({
-				template: templatePath + '/views/place/new.html',
+				template: templatePath + '/views/place/new.html?v=2',
 				scope: $scope,
 				controller: ['$scope', function(scope) {
 
