@@ -241,12 +241,17 @@ angular.module('bikeit.place')
 
 		$scope.editPlace = function(place) {
 
+			var cat = null;
+
+			if(place.terms && place.terms['place-category'] && place.terms['place-category'].length)
+				cat = place.terms['place-category'][0].ID
+
 			var parsed = {
 				ID: place.ID,
 				name: place.title,
-				lat: place.location.lat,
-				lon: place.location.lng,
-				category: place.terms['place-category'][0].ID,
+				lat: place.location ? place.location.lat : 0,
+				lon: place.location ? place.location.lng : 0,
+				category: cat,
 				address: {
 					road: place.location.road,
 					city_district: place.location.district,
