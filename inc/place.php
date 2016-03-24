@@ -517,6 +517,8 @@ class BikeIT_Places {
 
 			unset($_post['content']);
 
+			$_post['title'] = htmlspecialchars_decode($post['post_title']);
+
 			/*
 			 * Location
 			 */
