@@ -1,3 +1,12 @@
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', "UA-79265810-1"]);
+_gaq.push(['_setDomainName', 'bikeit.com.br']);
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
 /*
  * Libraries
  */
@@ -98,7 +107,7 @@ angular.module('bikeit', [
 		 * Analytics
 		 */
 		$rootScope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState, fromParams) {
-			if($window._gaq && fromState.name) {
+			if($window._gaq) {
 				$window._gaq.push(['_trackPageview', $location.path()]);
 			}
 			if(fromState.name) {
