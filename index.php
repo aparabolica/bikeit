@@ -21,6 +21,9 @@
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico" type="image/x-icon" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="fragment" content="!" />
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(get_bloginfo('language')); ?> ng-controller="SiteController">
