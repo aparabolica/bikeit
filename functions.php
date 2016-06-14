@@ -266,7 +266,7 @@ function bikeit_scripts() {
 	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 
 	wp_register_script('moment', get_template_directory_uri() . '/js/moment.js');
-	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery', 'moment'), '1.1');
+	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery', 'moment'), '1.1.1');
 	wp_localize_script('bikeit-main', 'bikeit', array(
 		'name' => get_bloginfo('name'),
 		'locale' => get_bloginfo('language'),
