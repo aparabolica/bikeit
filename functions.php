@@ -307,7 +307,7 @@ add_action('wp_head', 'bikeit_moment_locale');
 function bikeit_ga() {
 	?>
 	<script>
-		_gaq = _gaq || [];
+		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', "UA-79265810-1"]);
 		_gaq.push(['_setDomainName', 'bikeit.com.br']);
 		(function() {
