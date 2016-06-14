@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 11:05-0300\n"
+"POT-Creation-Date: 2016-06-14 13:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -634,7 +634,7 @@ msgstr ""
 msgid "Nominate for a BikeIT Stamp"
 msgstr ""
 
-#: inc/review.php:531
+#: inc/review.php:536
 msgid "Latest reviews"
 msgstr ""
 

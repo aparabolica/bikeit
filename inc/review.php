@@ -488,7 +488,12 @@ class BikeIT_Reviews {
 			update_field('place', $review_meta['place'], $post['ID']);
 		}
 
-		if(isset($data['images']) && $data['images']) {
+		if(
+			isset($data['images']) &&
+			$data['images'] &&
+			is_array($data['images']) &&
+			!empty($data['images'])
+		) {
 			foreach($data['images'] as $image) {
 				wp_update_post(array(
 					'ID' => $image,

@@ -104,6 +104,7 @@ angular.module('bikeit.review')
 				'type': 'review',
 				'status': 'publish',
 				'images': images ? images : false,
+				'author': $scope.user.ID,
 				'review_meta': {
 					'approved': review.rating.approved,
 					'kindness': review.rating.kindness,
