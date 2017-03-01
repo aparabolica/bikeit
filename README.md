@@ -19,6 +19,10 @@ A WordPress theme to collect reviews on bike-friendly city spots
  3. Activate through your dashboard (Appearance > Themes)
  4. Install required plugins (warning and installation shortcut will be placed at the top of the dashboard)
 
+## Settings to allow collaboration
+
+Go to *Settings > General*, activate **Anyone can register** membership option and set new user default role as **Contributor**.
+
 ## Development
 
 This theme turn WordPress into a [SPA](http://en.wikipedia.org/wiki/Single-page_application) built on [AngularJS](https://angularjs.org/) with [WP REST API](http://wp-api.org/) plugin.
