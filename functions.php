@@ -266,7 +266,7 @@ function bikeit_scripts() {
 	wp_enqueue_style('bikeit-responsive', get_template_directory_uri() . '/css/responsive.css', array('bikeit-main'));
 
 	wp_register_script('moment', get_template_directory_uri() . '/js/moment.js');
-	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery', 'moment'), '1.1.2');
+	wp_enqueue_script('bikeit-main', get_template_directory_uri() . '/js/main.js', array('jquery', 'moment'), '1.1.3');
 	wp_localize_script('bikeit-main', 'bikeit', array(
 		'name' => get_bloginfo('name'),
 		'locale' => get_bloginfo('language'),
@@ -330,7 +330,11 @@ function bikeit_osm_labels() {
 		$labels = file_get_contents(TEMPLATEPATH . '/osm-labels/en.json');
 	?>
 	<script type="text/javascript">
-		window.osmLabels = <?php echo $labels; ?>.presets.presets;
+		(function() {
+			var labels = <?php echo $labels; ?>;
+			window.osmLabels = labels[Object.keys(labels)[0]].presets.presets;
+			console.log(window.osmLabels);
+		})();
 	</script>
 	<?php
 }

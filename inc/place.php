@@ -407,7 +407,6 @@ class BikeIT_Places {
 
 		$place = $query->get('place_reviews');
 		if($place) {
-
 			$query->set('post_type', 'review');
 			$query->set('meta_query', array(
 				array(
@@ -415,7 +414,6 @@ class BikeIT_Places {
 					'value' => $place
 				)
 			));
-
 		}
 
 		$user_reviewed = $query->get('user_reviewed');

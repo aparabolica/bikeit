@@ -5,8 +5,9 @@
 window._ = require('underscore');
 window.angular = require('angular');
 window.osmIcons = require('./osm-icons');
+
 require('leaflet');
-require('angular-leaflet');
+require('angular-leaflet-directive');
 require('angular-ui-router');
 require('ng-dialog');
 require('ng-file-upload');
@@ -214,8 +215,8 @@ angular.module('bikeit', [
 						addressdetails: 1,
 						viewbox: bounds ? bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0] : ''
 					}
-				}).success(function(data) {
-					$scope.addressResults = data;
+				}).then(function(data) {
+					$scope.addressResults = data.data;
 				});
 			}
 		}, 300);

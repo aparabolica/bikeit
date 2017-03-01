@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the bikeit package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bikeit 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 13:08-0300\n"
+"POT-Creation-Date: 2017-03-01 17:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: functions.php:138 inc/place.php:714
+#: functions.php:138 inc/place.php:712
 msgid "Review count"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 msgid "Places"
 msgstr ""
 
-#: inc/place.php:33 inc/place.php:702 inc/review.php:177
+#: inc/place.php:33 inc/place.php:700 inc/review.php:177
 msgid "Place"
 msgstr ""
 
@@ -538,27 +538,27 @@ msgstr ""
 msgid "Bottom left"
 msgstr ""
 
-#: inc/place.php:664
+#: inc/place.php:662
 msgid "Stamp nominees"
 msgstr ""
 
-#: inc/place.php:696
+#: inc/place.php:694
 msgid "Selected nominees for a BikeIT Stamp"
 msgstr ""
 
-#: inc/place.php:705
+#: inc/place.php:703
 msgid "Stamp rate"
 msgstr ""
 
-#: inc/place.php:708
+#: inc/place.php:706
 msgid "Approval"
 msgstr ""
 
-#: inc/place.php:711
+#: inc/place.php:709
 msgid "Stamp points"
 msgstr ""
 
-#: inc/place.php:725
+#: inc/place.php:723
 msgid "edit"
 msgstr ""
 

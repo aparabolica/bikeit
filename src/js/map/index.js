@@ -46,7 +46,7 @@ angular.module('bikeit.map', [
 							namedetails: 1,
 							zoom: 18
 						}
-					}).success(function(data) {
+					}).then(function(data) {
 						$rootScope.$broadcast('clickedMap', data, latlng);
 					});
 				}

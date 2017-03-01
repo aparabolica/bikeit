@@ -178,7 +178,14 @@ class BikeIT_Votes {
 	}
 
 	function get_author_votes($user_id) {
-		$sites = wp_get_sites();
+		$sites = array(
+			array(
+				'blog_id' => 1
+			)
+		);
+		if(is_multisite()) {
+			$sites = wp_get_sites();
+		}
 
 		$up = 0;
 		$down = 0;

@@ -105,6 +105,7 @@ angular.module('bikeit.message', [])
 	function($rootScope, Message) {
 
 		jQuery(document).ajaxError(function(e, jqXHR) {
+			console.log(jqXHR);
 			if(jqXHR.responseJSON.length) {
 				jQuery.each(jqXHR.responseJSON, function(i, res) {
 					if(res.message) {

@@ -29,7 +29,8 @@ angular.module('bikeit.place', [])
 						function($stateParams, WP) {
 							return WP.query({
 								filter: {
-									'place_reviews': $stateParams.placeId
+									'place_reviews': $stateParams.placeId,
+									'order': 'DESC'
 								}
 							});
 						}

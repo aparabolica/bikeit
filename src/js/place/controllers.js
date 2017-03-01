@@ -142,10 +142,10 @@ angular.module('bikeit.place')
 					bounded: bounds ? 1 : '',
 					viewbox: bounds ? bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0] : ''
 				}
-			}).success(function(res) {
+			}).then(function(res) {
 
 				// Get only places
-				$scope.osmPlace = osmPlaceFilter(res);
+				$scope.osmPlace = osmPlaceFilter(res.data);
 
 				// Found place
 				if($scope.osmPlace.length) {
@@ -231,8 +231,8 @@ angular.module('bikeit.place')
 						bounded: bounds ? 1 : '',
 						viewbox: bounds ? bounds[2] + ',' + bounds[1] + ',' + bounds[3] + ',' + bounds[0] : ''
 					}
-				}).success(function(data) {
-					$scope.searchResults = data;
+				}).then(function(data) {
+					$scope.searchResults = data.data;
 				});
 			}
 		}, 300);

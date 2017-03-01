@@ -88,7 +88,7 @@ angular.module('bikeit.auth', [])
 			$http.post(apiUrl + 'auth', _.extend({
 				'_wp_json_nonce': Auth.getNonce()
 			}, data))
-				.success(function(data) {
+				.then(function(data) {
 					Auth.setNonce('auth');
 					WP.getUser().then(function(data) {
 						Auth.setUser(data);
@@ -102,7 +102,7 @@ angular.module('bikeit.auth', [])
 			$http.post(apiUrl + 'register', _.extend({
 				'_wp_json_nonce': Auth.getNonce()
 			}, data))
-				.success(function(data) {
+				.then(function(data) {
 					Auth.setNonce('auth');
 					Auth.setUser(data);
 					$rootScope.$broadcast('bikeit.userRegistered');

@@ -322,9 +322,9 @@ class BikeIT_Reviews {
 	function pre_get_posts($query) {
 
 		if(!is_admin() && ($query->get('post_type') == 'review' || $query->get('post_type') == array('review'))) {
-			$query->set('order', 'DESC');
-			$query->set('orderby', 'meta_value');
-			$query->set('meta_key', '_vote_ratio');
+			// $query->set('order', 'DESC');
+			// $query->set('orderby', 'meta_value');
+			// $query->set('meta_key', '_vote_ratio');
 		}
 
 	}
