@@ -19,7 +19,7 @@ A WordPress theme to collect reviews on bike-friendly city spots
  3. Activate through your dashboard (Appearance > Themes)
  4. Install required plugins (warning and installation shortcut will be placed at the top of the dashboard)
 
-## Settings to allow collaboration
+### Settings to allow collaboration
 
 Go to *Settings > General*, activate **Anyone can register** membership option and set new user default role as **Contributor**.
 
