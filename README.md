@@ -10,7 +10,7 @@ A WordPress theme to collect reviews on bike-friendly city spots
 
 ### Requirements
 
- - WordPress 3.8 (up to 4.1.1)
+ - WordPress 3.8 (up to 4.7.2)
 
 ### Installation steps
 
